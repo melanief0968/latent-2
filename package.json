@@ -1,5 +1,5 @@
 {
-  "name": "latent-2",
+  "name": "vue2-vite",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -8,6 +8,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "sass": "^1.50.0",
     "vite": "^2.9.0"
+  },
+  "dependencies": {
+    "vite-plugin-vue2": "^1.9.3",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3"
   }
 }
