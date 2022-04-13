@@ -1,14 +1,23 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router.js'
-import './styling/main.scss'
+// vue
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router.js";
+import VueRouter from "vue-router";
 
-//? https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c
+import * as FIREBASE from "./scripts/firebase.js";
 
-import VueRouter from 'vue-router';
+// css
+import "./styling/main.scss";
+
+// vuex, store
+// console.log(firebaseConfig);
 Vue.use(VueRouter);
 
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount('#app');
+FIREBASE.login(() => {
+  new Vue({
+    router,
+    render: (h) => h(App),
+  }).$mount("#app");
+});
+
+router.replace('/login')
