@@ -1,5 +1,5 @@
 <template>
-  <footer class="header">
+  <footer class="footer">
       yers
     <router-link v-if="route === 'Contacts'" to="/newcontact">Add new</router-link>
   </footer>

@@ -1,24 +1,33 @@
 <template>
   <div class="loginPage">
+    <div class="title italic">LATENT*</div>
+    <div class="login-description italic">L'espace de conversation sur mesure.</div>
+    <yellowLine></yellowLine>
     <form @submit.prevent="onSubmit">
-      <input type="text" placeholder="Author" v-model="username" />
-      <input type="password" placeholder="Secret" v-model="password" />
+      <div class="text-basic">Qui est-ce ?</div>
+      <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
+      <input type="password" placeholder="Mot de passe" v-model="password" />
       <button type="submit">→</button>
-      <div>{{ message }}</div>
+      <div class="text-basic">{{ message }}</div>
     </form>
-    <router-link to="/signin">Sign in</router-link>
+    <yellowLine></yellowLine>
+    <router-link to="/signin" class="text-basic">Créer un compte</router-link>
   </div>
 </template>
 <script>
 import * as fb from "@/scripts/firebase";
+import yellowLine from "@/components/yellowLine.vue";
 
-const USER_LOGIN_ERROR = "user or mail not found";
+const USER_LOGIN_ERROR = "nom ou mot de passe invalide";
 
 export default {
+  components: {
+    yellowLine,
+  },
   data() {
     return {
-      username: "Oscar",
-      password: "pipicaca12",
+      username: "",
+      password: "",
       message: "",
     };
   },
@@ -56,5 +65,28 @@ export default {
 .loginPage {
   width: 100%;
   height: 100%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.yellowLine {
+  height: 10%;
+}
+.title {
+  text-align: center;
+  font-size: 250%;
+  margin: $margin-5 0;
+}
+.login-description {
+  font-size: $italic-size;
+  text-align: center;
+  margin: 0 0 $margin-5 0;
+}
+.text-basic{
+    text-align: center;
 }
 </style>

@@ -3,6 +3,7 @@ import Login from "./pages/Login.vue";
 import Contacts from "./pages/Contacts.vue";
 import SignIn from "./pages/SignIn.vue";
 import NewContact from "./pages/NewContact.vue";
+import Chat from "./pages/Chat.vue";
 
 const router = new Router({
   mode: "history",
@@ -11,6 +12,7 @@ const router = new Router({
     { path: "/contacts", name: "Contacts", component: Contacts },
     { path: "/signin", name: "SignIn", component: SignIn },
     { path: "/newcontact", name: "NewContact", component: NewContact },
+    { path: "/chat", name: "Chat", component: Chat },
   ],
 });
 

@@ -10,6 +10,7 @@
       {{ person.name }}
     </ListItem>
     <button>Add new conversation</button>
+    
   </div>
 </template>
 <script>

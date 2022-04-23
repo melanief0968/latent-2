@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <header class="header">yes</header>
+    <Header v-bind:pageTitle="pageTitle"></Header>
     <main class="main">
       <router-view></router-view>
     </main>
@@ -10,18 +10,22 @@
 <script>
 // import { defineComponent } from '@vue/composition-api'
 import Bubble from "./components/Bubble.vue";
+import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
   components: {
     Bubble,
+    Header,
     Footer,
   },
 
   computed: {},
 
   data() {
-    return {};
+    return {
+      pageTitle: "Contacts"
+    };
   },
   mounted() {
     // console.log(this.$router);
@@ -53,10 +57,7 @@ export default {
   /* color: $color-dark; */
   /* background-color: black; */
 }
-.header {
-  flex: 0 0 auto;
-  background: red;
-}
+
 
 .footer {
   flex: 0 0 auto;
