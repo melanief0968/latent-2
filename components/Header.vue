@@ -1,20 +1,24 @@
 <template>
   <header class="header">
-      <h1>{{pageTitle}}</h1>
+      <h1 v-if="route === 'Contacts'">Échanges</h1>
+      <h1 v-if="route === 'Chat'">{{contactName}}</h1>
   </header>
 </template>
 <script>
 export default {
   props:{
-    pageTitle:{
-      type: String
-    }
+    // contactName:{
+    //   type: String
+    // }
   },
   computed: {
-    
+    route() {
+      return this.$route.name;
+    },
   },
   data(){
     return{
+       contactName: "Fred"
     }
   }
 };
@@ -26,6 +30,7 @@ export default {
   font-family: $font-main;
   background: $background-color;
   padding:  0 5%;
+  border-bottom: .9px solid $contrast-color;
 }
 h1{
   font-weight: normal;

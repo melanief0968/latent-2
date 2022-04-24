@@ -74,7 +74,7 @@ export default {
 }
 
 .yellowLine {
-  height: 10%;
+  height: 20%;
 }
 .title {
   text-align: center;

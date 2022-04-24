@@ -46,7 +46,7 @@ input{
   
   box-sizing: border-box;
   border: .9px solid $contrast-color;
-  background-color: $background-color;
+  background-color: white;
   text-align: center;
   border-radius: $radius5;
   appearance: none;
@@ -62,7 +62,7 @@ input:focus{
   outline: none !important;
   border:2px solid $color-main;
   border-radius: $radius5;
-  // background-color: $background-color;
+  background-color: $background-color;
 }
 select{
   box-sizing: border-box;

@@ -1,10 +1,12 @@
 <template>
   <div class="container">
-    <Header v-bind:pageTitle="pageTitle"></Header>
+    <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
+    <Header></Header>
     <main class="main">
       <router-view></router-view>
     </main>
-    <Footer></Footer>
+    <Footer v-if="route === 'Contacts'"></Footer>
+    <FooterChat v-if="route === 'Chat'"></FooterChat>
   </div>
 </template>
 <script>
@@ -12,19 +14,25 @@
 import Bubble from "./components/Bubble.vue";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import FooterChat from "./components/FooterChat.vue";
 
 export default {
   components: {
     Bubble,
     Header,
     Footer,
+    FooterChat,
   },
 
-  computed: {},
+  computed: {
+    route() {
+      return this.$route.name;
+    },
+  },
 
   data() {
     return {
-      pageTitle: "Contacts"
+      // pageTitle: "Contacts"
     };
   },
   mounted() {
@@ -59,10 +67,10 @@ export default {
 }
 
 
-.footer {
-  flex: 0 0 auto;
-  background: blue;
-}
+// .footer {
+//   flex: 0 0 auto;
+//   background: blue;
+// }
 
 .main {
   flex: 1 1 auto;
