@@ -87,6 +87,14 @@ export default {
   margin: 0 0 $margin-5 0;
 }
 .text-basic{
-    text-align: center;
+    text-align: c
+    enter;
+}
+button{
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+  // margin-bottom: 8px;
+  cursor: pointer;
 }
 </style>

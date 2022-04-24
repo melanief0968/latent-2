@@ -1,7 +1,9 @@
 <template>
   <footer class="footer">
-   lol
-    <router-link v-if="route === 'Contacts'" to="/newcontact">Add new</router-link>
+   
+    <router-link v-if="route === 'Contacts'" to="/login">Index</router-link>
+    <router-link v-if="route === 'Contacts'" to="/newcontact">Nouveau dialogue</router-link>
+    <router-link v-if="route === 'Contacts'" to="/login">Bibliothèque</router-link>
 
   </footer>
 </template>
