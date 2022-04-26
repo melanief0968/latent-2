@@ -1,9 +1,10 @@
 <template>
   <footer class="footer">
-   
-    <router-link v-if="route === 'Contacts'" to="/login">Index</router-link>
-    <router-link v-if="route === 'Contacts'" to="/newcontact">Nouveau dialogue</router-link>
+    
+    <router-link v-if="route === 'Contacts'" to="/index">Index  </router-link>
+    <router-link v-if="route === 'Contacts'" to="/newcontact">Nouveau dialogue  </router-link>
     <router-link v-if="route === 'Contacts'" to="/login">Bibliothèque</router-link>
+
 
   </footer>
 </template>
@@ -19,7 +20,8 @@ export default {
 <style lang="scss">
 .footer {
   flex: 0 0 auto;
-  text-align: left;
+  text-align: center;
+  justify-content: space-between;
   font-family: $font-main;
   background: $background-color;
   padding:  0 5%;

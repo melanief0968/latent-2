@@ -20,4 +20,4 @@ FIREBASE.login(() => {
   }).$mount("#app");
 });
 
-router.replace('/contacts')
+router.replace('/chat')

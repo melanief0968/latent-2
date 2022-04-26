@@ -4,6 +4,8 @@
         <form @submit.prevent="onSubmit">
             <div class="text-basic">Avec Qui ?</div>
             <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
+            <div class="text-basic">Pour la bibliothèque...</div>
+            <input type="text" placeholder="Titre du texte" v-model="chatname" />
             <button type="submit">→</button>
             <div class="text-basic">{{ message }}</div>
         </form>
@@ -24,6 +26,7 @@ export default {
     data() {
         return {
         username: "",
+        chatname:"",
         message: "",
         };
     },
@@ -37,9 +40,13 @@ export default {
                 const [firstResult] = Object.entries(results);
                 const [userId] = firstResult;
                 const contactId= userId;
-                const loggedId = "myaccount"
+                const loggedId = "myaccount";
+                const chatName = this.chatname;
+                // const chatDatas = {
+                //     usersId:contactId,loggedId
+                // };
     
-                const chatId = fb.createEntry("/conversation/", {usersId:contactId,loggedId});
+                const chatId = fb.createEntry("/conversation/", {usersId:contactId,loggedId, chatName});
                 console.log(chatId);
                 this.$router.push({
                     path: "/chat",
