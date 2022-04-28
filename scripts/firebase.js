@@ -43,9 +43,10 @@ const database = getDatabase();
 
 export function listen(path, callback) {
   const dbRef = ref(database, path);
-  onValue(dbRef, (snapshot) => {
+  const unsubscribe = onValue(dbRef, (snapshot) => {
     callback(snapshot.val());
   });
+  return unsubscribe
 }
 
 export function erase(path) {

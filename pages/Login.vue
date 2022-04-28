@@ -1,7 +1,9 @@
 <template>
   <div class="loginPage">
     <div class="title italic">LATENT*</div>
-    <div class="login-description italic">L'espace de conversation sur mesure.</div>
+    <div class="login-description italic">
+      L'espace de conversation sur mesure.
+    </div>
     <yellowLine></yellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Qui est-ce ?</div>
@@ -33,7 +35,7 @@ export default {
   },
   methods: {
     onSubmit(ev) {
-      fb.filterEntries("users", "name", this.username).then((results) => {
+      fb.filterEntries("users", "username", this.username).then((results) => {
         if (results === null) {
           this.message = USER_LOGIN_ERROR;
           return;
@@ -51,6 +53,9 @@ export default {
               userId,
             },
           });
+
+          console.log(this.$store);
+          this.$actions.setCurrentUserID(userId);
         } else {
           //   console.log("Wrong Password!");
           this.message = USER_LOGIN_ERROR;
@@ -86,11 +91,10 @@ export default {
   text-align: center;
   margin: 0 0 $margin-5 0;
 }
-.text-basic{
-    text-align: c
-    enter;
+.text-basic {
+  text-align: c enter;
 }
-button{
+button {
   font-size: 30px;
   border: none;
   background-color: transparent;

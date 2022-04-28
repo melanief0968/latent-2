@@ -9,6 +9,11 @@ import * as FIREBASE from "./scripts/firebase.js";
 // css
 import "./styling/main.scss";
 
+import { store, actions, getters } from "./scripts/store.js";
+
+Vue.prototype.$store = store;
+Vue.prototype.$actions = actions;
+Vue.prototype.$getters = getters;
 // vuex, store
 // console.log(firebaseConfig);
 Vue.use(VueRouter);
@@ -20,4 +25,5 @@ FIREBASE.login(() => {
   }).$mount("#app");
 });
 
-router.replace('/chat')
+actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
+router.replace("/chat");
