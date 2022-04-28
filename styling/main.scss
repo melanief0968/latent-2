@@ -44,7 +44,7 @@ form{
   margin: $margin-5 0;
 }
 input{
-  
+  outline: none;
   box-sizing: border-box;
   border: .9px solid $contrast-color;
   background-color: white;
@@ -60,7 +60,6 @@ input{
   padding: 1.5%;
 }
 input:focus{
-  outline: none !important;
   border:2px solid $color-main;
   border-radius: $radius5;
   background-color: $background-color;

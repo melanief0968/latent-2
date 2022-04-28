@@ -1,6 +1,6 @@
 <template>
     <div class="newContactPage">
-        <yellowLine></yellowLine>
+        <yellowLine :lineHeight="10"></yellowLine>
         <form @submit.prevent="onSubmit">
             <div class="text-basic">Avec Qui ?</div>
             <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
