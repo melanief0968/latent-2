@@ -40,14 +40,14 @@ export default {
                 const [firstResult] = Object.entries(results);
                 const [userId] = firstResult;
                 const contactId= userId;
-                const loggedId = "myaccount";
+                const currentUserID = this.$getters.currentUserID();
                 const chatName = this.chatname;
-                // const chatDatas = {
-                //     usersId:contactId,loggedId
-                // };
     
-                const chatId = fb.createEntry("/conversation/", {usersId:contactId,loggedId, chatName});
-                console.log(chatId);
+                const chatId = fb.createEntry("/conversations/", {contactId:contactId,currentUserID, chatName});
+
+
+                fb.setValue(`/users/${currentUserID}/conversations/${chatId}/`,{chatName});
+                fb.setValue(`/users/${contactId}/conversations/${chatId}/`,{chatName});
                 this.$router.push({
                     path: "/chat",
                     query: {

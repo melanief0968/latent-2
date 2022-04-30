@@ -50,9 +50,9 @@ export default {
       // this.$store.test = "changed";
       //check url avec chatid + usr Id
 
-      // fb.setValue("/conversation/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
+      // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
       fb.setValue(
-        "/conversation/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime,
+        "/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime,
         ""
       );
       fb.setValue("/messages/" + sentTime, messageDatas);
@@ -66,12 +66,12 @@ export default {
   beforeDestroy() {
     this.removeListener();
   },
-  
+
   mounted() {
     const currentChat = "-N0ZeNmMNFfIJbPqgcND";
     //check chat par rapport à id
     this.removeListener = fb.listen(
-      `/conversation/${currentChat}/messages/`,
+      `/conversations/${currentChat}/messages/`,
       (messageIds) => {
         // console.log(value)
         //   console.log(value);

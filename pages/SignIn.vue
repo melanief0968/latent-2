@@ -76,7 +76,7 @@ export default {
               surname:this.surname,
               gender:this.gender,
               psw:this.psw,
-              conversations:[""],
+              conversations:[],
           }
           const id = fb.createEntry("/users/", accountDatas);
           console.log(id, accountDatas);

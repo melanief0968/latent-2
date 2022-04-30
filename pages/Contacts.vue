@@ -61,7 +61,7 @@ export default {
 
     getContacts(){
       const contacts = [];
-      fb.listen("/conversation/", (value) => {
+      fb.listen("/conversations/", (value) => {
           console.log(value);
       });
     },

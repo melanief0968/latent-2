@@ -34,9 +34,9 @@ export default {
       // this.$store.test = "changed";
       //check url avec chatid + usr Id
 
-      // fb.setValue("/conversation/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
+      // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
       fb.setValue(
-        "/conversation/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime,
+        "/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime,
         ""
       );
       fb.setValue("/messages/" + sentTime, messageDatas);
