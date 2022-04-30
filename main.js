@@ -26,4 +26,4 @@ FIREBASE.login(() => {
 });
 
 actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
-router.replace("/newContact");
+router.replace("/login");

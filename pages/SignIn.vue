@@ -76,15 +76,20 @@ export default {
               surname:this.surname,
               gender:this.gender,
               psw:this.psw,
+              conversations:[""],
           }
           const id = fb.createEntry("/users/", accountDatas);
           console.log(id, accountDatas);
           this.$router.push({
             path: "/contacts",
             query: {
-            userId:id,
+              userId:id,
             },
           });
+          this.$actions.setCurrentUserID(id);
+          // console.log(this.$store);
+        
+              
       }
     },
   },

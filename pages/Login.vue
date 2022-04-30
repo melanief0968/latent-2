@@ -4,7 +4,7 @@
     <div class="login-description italic">
       L'espace de conversation sur mesure.
     </div>
-    <yellowLine></yellowLine>
+    <yellowLine :lineHeight="150"></yellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Qui est-ce ?</div>
       <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
@@ -12,7 +12,7 @@
       <button type="submit">→</button>
       <div class="text-basic">{{ message }}</div>
     </form>
-    <yellowLine></yellowLine>
+    <yellowLine :lineHeight="150"></yellowLine>
     <router-link to="/signin" class="text-basic">Créer un compte</router-link>
   </div>
 </template>

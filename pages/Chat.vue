@@ -7,6 +7,12 @@
         :messageId="id"
       ></Message>
     </div>
+    <footer class="footer">
+      <form @submit.prevent="onSubmit" class="input-container">
+        <input type="text" placeholder="Message" v-model="messageContent" />
+        <button type="submit">→</button>
+      </form>
+    </footer>
     <!-- //! footer here -->
     <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
   </div>
@@ -14,7 +20,6 @@
 <script>
 import Message from "@/components/Message.vue";
 import * as fb from "@/scripts/firebase.js";
-import * as FIREBASE from "firebase/database";
 
 export default {
   components: {
@@ -24,12 +29,44 @@ export default {
     return {
       messageIds: {},
       removeListener: () => {},
+      messageContent: "",
     };
   },
-  methods: {},
+  methods: {
+    onSubmit(ev) {
+      const sentTime = this.getTime();
+      const messageDatas = {
+        text: this.messageContent,
+        messageId: sentTime,
+        sendingUser: this.$getters.currentUserID(),
+        sentTime: "",
+        charAmount: "",
+        eraseAmount: "",
+        typingSpeed: "",
+        coordinates: "",
+      };
+      console.log(this.messageContent);
+
+      // this.$store.test = "changed";
+      //check url avec chatid + usr Id
+
+      // fb.setValue("/conversation/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
+      fb.setValue(
+        "/conversation/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime,
+        ""
+      );
+      fb.setValue("/messages/" + sentTime, messageDatas);
+      //générer messages fb
+    },
+    getTime() {
+      return new Date().getTime();
+    },
+  },
+
   beforeDestroy() {
     this.removeListener();
   },
+  
   mounted() {
     const currentChat = "-N0ZeNmMNFfIJbPqgcND";
     //check chat par rapport à id
@@ -70,5 +107,18 @@ export default {
   overflow-x: hidden;
   position: relative;
   margin: auto;
+}
+.input-container {
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+.footer{
+  bottom: 0;
+  left: 0;
+  // position: fixed;
 }
 </style>

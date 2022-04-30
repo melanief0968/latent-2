@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         onSubmit(ev) {
-            fb.filterEntries("users", "name", this.username).then((results) => {
+            fb.filterEntries("users", "username", this.username).then((results) => {
                 if (results === null) {
                     this.message = USER_ERROR;
                     return;

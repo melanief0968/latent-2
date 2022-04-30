@@ -6,7 +6,7 @@
       <router-view></router-view>
     </main>
     <Footer v-if="route === 'Contacts'"></Footer>
-    <FooterChat v-if="route === 'Chat'"></FooterChat>
+    <!-- <FooterChat v-if="route === 'Chat'"></FooterChat> -->
   </div>
 </template>
 <script>

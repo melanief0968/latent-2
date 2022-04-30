@@ -22,7 +22,7 @@ export default {
       const messageDatas = {
         text: this.messageContent,
         messageId: sentTime,
-        sendingUser: this.$getters.currentUserID(),
+        currentUserID: this.$getters.currentUserID(),
         sentTime: "",
         charAmount: "",
         eraseAmount: "",
