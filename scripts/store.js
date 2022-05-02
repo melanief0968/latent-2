@@ -7,7 +7,9 @@ export const store = Vue.observable({
   messages: {},
   fbListeners: {},
   currentUserID: null, // user id of the person who is connected
+  currentContactID: null,
   currentChatID: null,
+  currentUserName: null,
 });
 
 // this.$store.newVariable = 'yejbhskj'
@@ -15,6 +17,12 @@ export const store = Vue.observable({
 export const getters = {
   currentUserID() {
     return store.currentUserID;
+  },
+  currentUserName() {
+    return store.currentUserName;
+  },
+  currentContactId() {
+    return store.currentContactID;
   },
   getMessage(id) {
     const message = store.messages[id];
@@ -39,7 +47,12 @@ export const actions = {
   setCurrentUserID(id) {
     store.currentUserID = id;
   },
-
+  setCurrentUserName(name) {
+    store.currentUserName = name;
+  },
+  setContactId(id){
+    store.currentContactID = id;
+  },
   setMessage(id, value) {
     Vue.set(store.messages, id, value);
   },

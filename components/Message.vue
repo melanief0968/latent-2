@@ -27,7 +27,7 @@ export default {
   computed: {
     cssClasses() {
       const userID = this.$getters.currentUserID();
-      console.log(this.message.sendingUser);
+      //console.log(this.message.sendingUser);
       return {
         toRight: this.message.sendingUser === userID,
       };

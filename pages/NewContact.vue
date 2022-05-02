@@ -33,21 +33,24 @@ export default {
     methods: {
         onSubmit(ev) {
             fb.filterEntries("users", "username", this.username).then((results) => {
+                console.log(this.username)
+                console.log(results)
                 if (results === null) {
                     this.message = USER_ERROR;
                     return;
                 }
                 const [firstResult] = Object.entries(results);
-                const [userId] = firstResult;
+                const [userId,props] = firstResult;
                 const contactId= userId;
+                const contactName = props.name;
                 const currentUserID = this.$getters.currentUserID();
+                const userName = this.$getters.currentUserName();
                 const chatName = this.chatname;
-    
+
                 const chatId = fb.createEntry("/conversations/", {contactId:contactId,currentUserID, chatName});
 
-
-                fb.setValue(`/users/${currentUserID}/conversations/${chatId}/`,{chatName});
-                fb.setValue(`/users/${contactId}/conversations/${chatId}/`,{chatName});
+                fb.setValue(`/users/${currentUserID}/conversations/${chatId}/`,{chatName, contactId, contactName});
+                fb.setValue(`/users/${contactId}/conversations/${chatId}/`,{chatName,currentUserID, userName});
                 this.$router.push({
                     path: "/chat",
                     query: {

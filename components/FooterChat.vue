@@ -40,7 +40,7 @@ export default {
         ""
       );
       fb.setValue("/messages/" + sentTime, messageDatas);
-      //générer messages fb
+
     },
     getTime() {
       return new Date().getTime();

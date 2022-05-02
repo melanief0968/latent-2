@@ -56,6 +56,7 @@ export default {
 
           console.log(this.$store);
           this.$actions.setCurrentUserID(userId);
+          this.$actions.setCurrentUserName(props.name);
         } else {
           //   console.log("Wrong Password!");
           this.message = USER_LOGIN_ERROR;
