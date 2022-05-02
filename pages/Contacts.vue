@@ -1,128 +1,78 @@
 <template>
   <div class="contactPage">
-    <!-- <ListItem
-      v-for="(person, index) in people"
-      :text="person.name"
-      :unread="person.unread"
-      :key="index"
+    <ListItem
+      v-for="{ conversation, id } in conversations"
+      :title="itemTitle(conversation)"
+      :key="id"
+      @click.native="onItemClick(id)"
     >
-      {{ person.name }}
-    </ListItem> -->
-    <ListItem v-for="(person, index) in people"
-      :text="person.name"
-      :unread="person.unread"
-      :key="index"
-    >
-      {{ person.name }}
+      <div class="unread"></div>
     </ListItem>
-    
-    <button @click="onClick">add something</button>
-    <button >Add new conversation</button>
-    
+
+    <!-- <button>Add new conversation</button> -->
   </div>
 </template>
 <script>
 import ListItem from "@/components/ListItem.vue";
-import * as fb from "@/scripts/firebase.js";
 
 export default {
   components: {
     ListItem,
-    conversationsList:{},
-    removeListener: () => {},
   },
 
   data() {
     return {
       people: [],
+      conversations: [],
+      removeListener: () => {},
     };
   },
 
-   beforeDestroy() {
-    // this.removeListener();
+  beforeDestroy() {
+    this.removeListener();
   },
+
+  computed: {},
 
   mounted() {
-    //
-    // fb.listen("/", (value) => {
-    //   console.log(value);
-    // });
-    this.displayContactsList()
+    const currentUserID = this.$getters.currentUserID();
 
-    // this.removeListener = fb.listen(
-    //   `/users/${currentUserID}/conversations`,
-    //   (conversationsList) => {
-    //     this.conversationsList = conversationsList;
-    //     console.log(value);
-    //           // console.log(value["text"]);
-    //   }
-    // );
+    const userProps = this.$getters.user(currentUserID);
 
-    // setValue("/ecal/test/fun", null);
-    // fb.erase("/tests/");
-    // setTimeout(() => {
-      //     setValue("/ecal/test/fun", 'wtf');
-    // }, 2000)
-
-    // const id = fb.createEntry("/tests/", { name: "mélanieclones" });
-    // console.log(id);
-
-    // // const result = await fb.getEntryByValue("/tests/", "name", "mélanie")
-    // fb.filterEntries("/tests/", "name", "mélanie").then((results) => {
-      //   if (results === null) fb.createEntry("/tests/", { name: "mélanie" });
-    // });
+    if (userProps.conversations) {
+      this.conversations = Object.values(userProps.conversations).map(
+        (conversationId) => {
+          const conversation = this.$getters.listenConversation(conversationId);
+          return { conversation, id: conversationId };
+        }
+      );
+    }
   },
   methods: {
+    onItemClick(chatId) {
+      this.$router.push({
+        path: "/chat",
+        query: {
+          // chatId,
+        },
+      });
+      this.$actions.setCurrentChatId(chatId);
+    },
     randomBoolean() {
       return Boolean(Math.round(Math.random()));
     },
 
-    onClick() {
-      this.people.push({
-        name: "Mélanie",
-        unread: this.randomBoolean(),
-      });
-    },
+    itemTitle(conversation) {
+      if (!conversation.users) return;
 
-    refreshContacts(){
-
-    },
-
-    displayContactsList(){
-      const currentUserID = this.$getters.currentUserID();
-      console.log(currentUserID)
-      fb.listen(`/users/${currentUserID}/conversations/`, (value) => {
-          const keys = Object.keys(value);
-          const update = value;
-          console.log(update)
-            // console.log(test)
-          if(update){
-            // this.refreshContacts(update)
-            // console.log(contacts)
-          }
-
-
-            // const test = Object.assign(value)
-          // const messageID = keys[keys.length-1];
-          // const text = value[messageID]["text"];
-          // console.log(keys.contactName)
-          
-          // const [firstResult] = Object.entries(value);
-
-          // const [conversation, props] = firstResult;
-          // console.log(conversation, props.contactName)
-
+      const otherUserID = Object.values(conversation.users).find((userID) => {
+        return userID !== this.$getters.currentUserID();
       });
 
+      return this.$getters.listenUser(otherUserID).name;
+      // $getters.user(conversation.users);
     },
-
-    displayContacts(){
-      this.people.push({
-        name:"define",
-      })
-    }
   },
-
 };
 </script>
 <style lang="scss">

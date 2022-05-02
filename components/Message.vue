@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      message: this.$getters.getMessage(this.messageId),
+      message: this.$getters.listenMessage(this.messageId),
     };
   },
   computed: {

@@ -3,8 +3,8 @@ export const didascalies = {
     fait: {
       neutral: {
         case1: {
-          m: ["${this.name} condense ses dires en 3 lettres."],
-          f: ["${this.name} condense ses dires en 3 lettres."],
+          m: ["${this.name} condense ses dires en ${result} lettres."],
+          f: ["${this.name} condense ses diresff en ${result} lettres."],
           n: ["${this.name} condense ses dires en 3 lettres."],
         },
       },

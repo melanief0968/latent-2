@@ -7,8 +7,8 @@
     <yellowLine :lineHeight="150"></yellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Qui est-ce ?</div>
-      <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
-      <input type="password" placeholder="Mot de passe" v-model="password" />
+      <input type="text" autocomplete="username" placeholder="Nom d'auteur·ice·x" v-model="username" />
+      <input type="password" autocomplete="current-password" placeholder="Mot de passe" v-model="password" />
       <button type="submit">→</button>
       <div class="text-basic">{{ message }}</div>
     </form>
@@ -57,6 +57,8 @@ export default {
           console.log(this.$store);
           this.$actions.setCurrentUserID(userId);
           this.$actions.setCurrentUserName(props.name);
+          this.$actions.setUser(userId, props);
+          // console.log(firstResult);
         } else {
           //   console.log("Wrong Password!");
           this.message = USER_LOGIN_ERROR;

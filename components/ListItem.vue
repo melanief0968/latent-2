@@ -1,22 +1,26 @@
 <template>
   <div class="contactContent">
-    <div class="contactName">
-      {{textShown}}
-      <!-- <slot></slot> -->
-    </div>
-    <div class="description italic">{{description}}</div>
+    <div class="contactName">{{ textShown }}</div>
+    <div class="description italic">{{ subtitle }}</div>
     <!-- <button :disabled="unread">{{textShown}}
         </button> -->
     <div :class="iconClasses"></div>
+    <slot></slot>
     <!-- <hr /> -->
   </div>
 </template>
 <script>
 export default {
   props: {
-    text: {
+    title: {
       type: String,
-      required: true,
+      required: false,
+      default: 'Loading...'
+    },
+    subtitle: {
+      type: String,
+      required: false,
+      default: "Acte I, scène II",
     },
     unread: {
       type: Boolean,
@@ -26,8 +30,6 @@ export default {
   data() {
     return {
       color: "blue",
-      yes: true,
-      description: "Acte I, scène II",
     };
   },
   computed: {
@@ -35,29 +37,29 @@ export default {
       return { "status-icon": true, unread: this.unread };
     },
     textShown() {
-        return `${this.text}`
-    }
+      return `${this.title}`;
+    },
   },
 };
 </script>
 <style lang="scss">
-  .contactContent {
-    width:90%;
-    margin: auto;
-    box-sizing: border-box;
-    position: relative;
-    padding-top: 2%;
-    padding-bottom: 4%;
-    border-bottom: 2px solid $color-main;
-  }
-  .contactName{
-    font-family: $font-main;
-    font-size: $title-size;
-  }
-  .lastItalic {
-      font-size: $msg-size;
-      padding-top: 1vh;
-    }
+.contactContent {
+  width: 90%;
+  margin: auto;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 2%;
+  padding-bottom: 4%;
+  border-bottom: 2px solid $color-main;
+}
+.contactName {
+  font-family: $font-main;
+  font-size: $title-size;
+}
+.lastItalic {
+  font-size: $msg-size;
+  padding-top: 1vh;
+}
 
 .status-icon {
   // width: 1em;

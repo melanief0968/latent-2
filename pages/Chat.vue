@@ -1,15 +1,22 @@
 <template>
   <div class="chat-container">
     <div class="message-container">
-      <Message
-        v-for="(value, id) in messageIds"
-        :key="id"
-        :messageId="id"
-      ></Message>
+      <template v-for="{ message, id } in messages">
+        <Message v-if="true" :key="id" :messageId="id"></Message>
+        <Didascalies
+          v-else-if="message.type === 'didascalie'"
+          :key="id"
+        ></Didascalies>
+      </template>
     </div>
     <footer class="footer">
       <form @submit.prevent="onSubmit" class="input-container">
-        <input type="text" placeholder="Message" v-model="messageContent" />
+        <input
+          type="text"
+          placeholder="Message"
+          v-model="messageContent"
+          @keydown="keysCount"
+        />
         <button type="submit">→</button>
       </form>
     </footer>
@@ -20,21 +27,58 @@
 <script>
 import Message from "@/components/Message.vue";
 import * as fb from "@/scripts/firebase.js";
+import Didascalies from "../components/Didascalies.vue";
 
 export default {
   components: {
     Message,
+    Didascalies,
   },
   data() {
     return {
-      messageIds: {},
+      // messageIds: {},
+      conversation: null,
       removeListener: () => {},
       messageContent: "",
+      firstKeyTime: "0",
+      keyDownCounter: "0",
+      spaceKeyCounter: "0",
+      composingTime: "0",
     };
   },
+  computed: {
+    messages() {
+      const messages = [];
+      if (this.conversation && this.conversation.messages) {
+        Object.keys(this.conversation.messages).forEach((messageId) => {
+          const message = this.$getters.listenMessage(messageId);
+          messages.push({ id: messageId, message });
+        });
+      }
+
+      return messages;
+    },
+  },
   methods: {
+    keysCount(ev) {
+      this.firstKeyTime = this.getTime();
+      //seulement au first
+      this.keyDownCounter++;
+      console.log(this.keyDownCounter);
+
+      if (ev.space) {
+        console.log("SPACE");
+      }
+      //add delete
+      // add is writing
+    },
+
     onSubmit(ev) {
+      this.keyDownCounter = 0;
+
       const sentTime = this.getTime();
+      this.composingTime = sentTime - this.firstKeyTime;
+      console.log(sentTime, this.firstKeyTime, this.composingTime);
       const messageDatas = {
         text: this.messageContent,
         messageId: sentTime,
@@ -52,10 +96,10 @@ export default {
 
       // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
       fb.setValue(
-        "/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime,
+        `/conversations/${this.$getters.currentChatID()}/messages/${sentTime}`,
         ""
       );
-      fb.setValue("/messages/" + sentTime, messageDatas);
+      fb.setValue(`/messages/${sentTime}`, messageDatas);
       //générer messages fb
     },
     getTime() {
@@ -68,24 +112,11 @@ export default {
   },
 
   mounted() {
-    const currentChat = "-N0ZeNmMNFfIJbPqgcND";
+    // this.onKeyDown()
+    const currentChat = this.$getters.currentChatID();
     //check chat par rapport à id
-    this.removeListener = fb.listen(
-      `/conversations/${currentChat}/messages/`,
-      (messageIds) => {
-        // console.log(value)
-        //   console.log(value);
-        this.messageIds = messageIds;
-
-        // console.log(value["text"]);
-        //   console.log('yes');
-        //   unsub()
-        // const keys = Object.keys(value);
-        // const messageID = keys[keys.length-1];
-        // const text = value[messageID]["text"];
-        // console.log(text)
-      }
-    );
+    this.conversation = this.$getters.listenConversation(currentChat);
+    console.log(this.conversation);
 
     // fb.listen("/messages/"+currentChat+"/messages/", (value) => {
     //     // console.log(value)
@@ -116,7 +147,7 @@ export default {
   flex-direction: row;
   align-items: center;
 }
-.footer{
+.footer {
   bottom: 0;
   left: 0;
   // position: fixed;
