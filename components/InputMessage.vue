@@ -104,20 +104,37 @@ export default {
 };
 </script>
 <style lang="scss">
+
 .inputMsg {
-  bottom: 0;
-  left: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
-  align-items: center;
+  width: 90%;
+  margin-left: 5%;
 
   &__btn {
   }
 
   // BEM syntax css
   &__editor {
-
+    width:100%;
   }
+}
+.ProseMirror{
+border: .9px solid $contrast-color;
+border-radius: 7px;
+width: 90%;
+background-color: white; 
+padding-left: 10px;
+
+
+}
+.ProseMirror:focus{
+/* height: fit-content;*/
+outline: none !important; 
+border:2px solid $color-main;
+}
+.contenteditable{
+
 }
 </style>

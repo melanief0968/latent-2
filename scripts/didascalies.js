@@ -1,18 +1,34 @@
+// // https://stackoverflow.com/questions/19075461/generate-one-random-index-from-an-array-but-exclude-one-javascript
+// const SEXE = "m";
+// const TYPE = "char";
+// const ACTION = "fait";
+// const RESULT = "neutral";
+// const INDEX = 0;
+// const OPTIONS = {
+//   name: "Mélanie",
+// };
+
+// didascalies[TYPE][ACTION][RESULT][INDEX][SEXE](OPTIONS);
+
+export function chooseDidascalies({ type, action, result }) {
+  return didascalies[type][action][result];
+}
+
 export const didascalies = {
   char: {
     fait: {
-      neutral: {
-        case1: {
+      neutral: [
+        {
           m: ["${this.name} condense ses dires en ${result} lettres."],
           f: ["${this.name} condense ses diresff en ${result} lettres."],
           n: ["${this.name} condense ses dires en 3 lettres."],
         },
-      },
-      case2: {
-        m: {},
-        f: {},
-        n: {},
-      },
+        {
+          m: {},
+          f: {},
+          n: {},
+        },
+      ],
     },
   },
   constat: {
@@ -47,7 +63,7 @@ export const didascalies = {
     },
     negative: {
       case2: {
-        m: ["${this.name} n’a pas l’air d’avoir la langue dans sa poche."],
+        m: [(e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`],
         f: ["${this.name} n’a pas l’air d’avoir la langue dans sa poche."],
         n: ["${this.name} n’a pas l’air d’avoir la langue dans sa poche."],
       },

@@ -83,7 +83,7 @@ export default {
           this.$router.push({
             path: "/contacts",
             query: {
-              userId:id,
+              // userId:id,
             },
           });
           this.$actions.setCurrentUserID(id);

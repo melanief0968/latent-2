@@ -63,7 +63,7 @@ export default {
         this.$router.push({
           path: "/chat",
           query: {
-            chatId: chatId,
+            // chatId: chatId,
           },
         });
       });

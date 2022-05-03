@@ -50,7 +50,7 @@ export default {
           this.$router.push({
             path: "/contacts",
             query: {
-              userId,
+              // userId,
             },
           });
 

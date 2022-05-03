@@ -9,7 +9,7 @@
         ></Didascalies>
       </template>
     </div>
-    <footer class="footer">
+    <footer class="footerChat">
       <InputMessage
         ref="editor"
         @submit="onSubmit"
@@ -55,7 +55,7 @@ export default {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
           // console.log(message);
-          //     messages.push({ id: messageId, message });
+           messages.push({ id: messageId, message });
         });
       }
 
@@ -92,6 +92,7 @@ export default {
     onSubmit(event) {
       // console.log(ev);
       const chatVersion = event.value;
+
       const bookVersion = event.value.replace(/[•|\*]+/g, (string) => {
         const { "*": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
@@ -111,7 +112,16 @@ export default {
       });
 
       console.log(bookVersion, chatVersion);
-
+      // const messageDatas = {
+      //   text: this.chatVersion,
+      //   bookText: bookVersion,
+      //   sendingUser: this.$getters.currentUserID(),
+      //   sentTime: this.sentTime,
+      //   charAmount: this.keyDownCounter,
+      //   eraseAmount: "",
+      //   typingSpeed: "",
+      //   coordinates: "",
+      // };
       return;
 
       this.sentTime = this.getTime();
@@ -239,17 +249,24 @@ export default {
 </script>
 <style lang="scss">
 .chat-container {
-  // height: 80%;
+  height: 100%;
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
   margin: auto;
 }
 
-.footer {
+.footerChat {
+  width: 100vw;
+  position: fixed;
   bottom: 0;
   left: 0;
-  // position: fixed;
+  font-family: $font-main;
+  background: $background-color;
+  position: fixed;
 }
 </style>
