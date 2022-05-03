@@ -1,7 +1,7 @@
 <template>
   <div class="messageBox" :class="cssClasses">
     <div class="message" v-if="message">
-      {{ message.text }}
+      {{ text }}
     </div>
     <div>{{ $store.test }}</div>
   </div>
@@ -25,6 +25,14 @@ export default {
     };
   },
   computed: {
+    text() {
+      if (!this.message.text) return "";
+
+      return this.message.text.replace(/[•|\*]/g, (char) => {
+        if (char === "•") return '<span class="elapse">•</span>';
+        else if (char === "*") return '<span class="erase">*</span>';
+      });
+    },
     cssClasses() {
       const userID = this.$getters.currentUserID();
       //console.log(this.message.sendingUser);

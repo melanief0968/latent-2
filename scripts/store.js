@@ -38,6 +38,7 @@ export const getters = {
       const conversation = {};
       actions.setConversation(id, conversation);
       const fbListener = fb.listen(`/conversations/${id}/`, (value) => {
+        if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
           Vue.set(store.conversations[id], key, value);
@@ -55,6 +56,7 @@ export const getters = {
       const user = {};
       actions.setUser(id, user);
       const fbListener = fb.listen(`/users/${id}/`, (value) => {
+        if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
           Vue.set(store.users[id], key, value);
@@ -72,6 +74,7 @@ export const getters = {
       const message = {};
       actions.setMessage(id, message);
       const fbListener = fb.listen(`/messages/${id}/`, (value) => {
+        if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
           Vue.set(store.messages[id], key, value);
