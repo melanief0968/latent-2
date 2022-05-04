@@ -91,6 +91,7 @@ export default {
     },
 
     insertElapsedTime() {
+      console.log("OK")
       this.insertText(this.elapsedTimeChar);
     },
 

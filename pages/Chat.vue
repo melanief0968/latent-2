@@ -1,7 +1,7 @@
 <template>
   <div class="chat-container">
     <div class="message-container">
-      <template v-for="{ message, id } in messages">
+      <template v-for="{ message, id } in messages" v-chat-scroll>
         <Message v-if="true" :key="id" :messageId="id"></Message>
         <Didascalies
           v-else-if="message.type === 'didascalie'"
@@ -64,6 +64,7 @@ export default {
   },
   methods: {
     keysCount(ev) {
+      this.startElapsedTime();
       return;
 
       this.firstKeyTime = this.getTime();
@@ -91,16 +92,19 @@ export default {
 
     onSubmit(event) {
       // console.log(ev);
+      this.stopElapsedTime();
+      this.sentTime = this.getTime();
       const chatVersion = event.value;
-
+      console.log(chatVersion)
       const bookVersion = event.value.replace(/[•|\*]+/g, (string) => {
         const { "*": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
 
-        console.log(eraseNumber, elapseNumber);
+        // console.log(eraseNumber, elapseNumber);
 
-        if (eraseNumber === 0 && elapseNumber > 2) {
-          return "<i>(wtf)</i>";
+        if (eraseNumber === 1 && elapseNumber < 1) {
+          return "<i>(hésite)</i>";
+        
         }
         // if (eraseNumber === 0 && elapseNumber > 2) {
         //   return "(wtf)";
@@ -108,28 +112,16 @@ export default {
         // if (eraseNumber === 0 && elapseNumber > 2) {
         //   return "(wtf)";
         // }
-        return "<i>(it works)</i>";
+        else{
+
+          return "<i>(it works)</i>";
+        }
       });
 
       console.log(bookVersion, chatVersion);
-      // const messageDatas = {
-      //   text: this.chatVersion,
-      //   bookText: bookVersion,
-      //   sendingUser: this.$getters.currentUserID(),
-      //   sentTime: this.sentTime,
-      //   charAmount: this.keyDownCounter,
-      //   eraseAmount: "",
-      //   typingSpeed: "",
-      //   coordinates: "",
-      // };
-      return;
-
-      this.sentTime = this.getTime();
-      this.composingTime = this.sentTime - this.firstKeyTime;
-      console.log(this.sentTime, this.firstKeyTime, this.composingTime);
-
       const messageDatas = {
-        text: this.messageContent,
+        text: chatVersion,
+        bookText: bookVersion,
         sendingUser: this.$getters.currentUserID(),
         sentTime: this.sentTime,
         charAmount: this.keyDownCounter,
@@ -137,26 +129,61 @@ export default {
         typingSpeed: "",
         coordinates: "",
       };
-      console.log(this.messageContent);
+        console.log(messageDatas,chatVersion);
+        // console.log(this.$getters.currentChatID)
+        fb.setValue(
+          `/conversations/${this.$getters.currentChatID()}/messages/${
+            this.sentTime
+          }`,
+          ""
+        );
+        fb.setValue(`/messages/${this.sentTime}`, messageDatas);
+
+      return;
+
+      this.composingTime = this.sentTime - this.firstKeyTime;
+      console.log(this.sentTime, this.firstKeyTime, this.composingTime);
+
+      // const messageDatas = {
+      //   text: this.messageContent,
+      //   sendingUser: this.$getters.currentUserID(),
+      //   sentTime: this.sentTime,
+      //   charAmount: this.keyDownCounter,
+      //   eraseAmount: "",
+      //   typingSpeed: "",
+      //   coordinates: "",
+      // };
       this.keyDownCounter = 0;
 
       // this.$store.test = "changed";
       //check url avec chatid + usr Id
 
       // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
-      fb.setValue(
-        `/conversations/${this.$getters.currentChatID()}/messages/${
-          this.sentTime
-        }`,
-        ""
-      );
-      fb.setValue(`/messages/${this.sentTime}`, messageDatas);
       //générer messages fb
     },
+    
     getTime() {
       return new Date().getTime();
     },
+    startElapsedTime() {
+    this.requestElapsedTime(2000);
+  },
 
+    requestElapsedTime(millis) {
+      this.stopElapsedTime();
+      this.timeout = window.setTimeout(() => {
+        this.onElapsedTime();
+      }, millis);
+    },
+
+    onElapsedTime() {
+      this.$refs.editor.insertElapsedTime();
+      this.requestElapsedTime(800); // ms
+    },
+
+    stopElapsedTime() {
+      window.clearTimeout(this.timeout);
+    },
     getCharAmount() {},
     getWritingTime() {},
     getWritingSpeed() {},
@@ -230,10 +257,11 @@ export default {
 
   mounted() {
     this.$refs.editor.insertElapsedTime();
+    console.log(this.$refs.editor.insertElapsedTime())
     // this.getTimeBetweenMessages();
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-    console.log(this.conversation);
+    // console.log(this.conversation);
 
     // fb.listen("/messages/"+currentChat+"/messages/", (value) => {
     //     // console.log(value)
@@ -249,7 +277,7 @@ export default {
 </script>
 <style lang="scss">
 .chat-container {
-  height: 100%;
+  height: 90%;
   width: 90%;
   display: flex;
   flex-direction: column;

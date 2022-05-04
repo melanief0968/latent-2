@@ -46,7 +46,7 @@ export default {
         const [userId, props] = firstResult;
 
         if (props.psw === this.password) {
-          console.log("MATCH");
+          // console.log("MATCH");
           this.$router.push({
             path: "/contacts",
             query: {
@@ -54,7 +54,7 @@ export default {
             },
           });
 
-          console.log(this.$store);
+          // console.log(this.$store);
           this.$actions.setCurrentUserID(userId);
           this.$actions.setCurrentUserName(props.name);
           this.$actions.setUser(userId, props);

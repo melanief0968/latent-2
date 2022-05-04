@@ -28,10 +28,12 @@ export default {
     text() {
       if (!this.message.text) return "";
 
-      return this.message.text.replace(/[•|\*]/g, (char) => {
-        if (char === "•") return '<span class="elapse">•</span>';
-        else if (char === "*") return '<span class="erase">*</span>';
-      });
+      return this.message.text
+      //WTF IS THAT
+      // return this.message.text.replace(/[•|\*]/g, (char) => {
+      //   if (char === "•") return '<span class="elapse">•</span>';
+      //   else if (char === "*") return '<span class="erase">*</span>';
+      // });
     },
     cssClasses() {
       const userID = this.$getters.currentUserID();
