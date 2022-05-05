@@ -7,7 +7,7 @@
         <div>Nouveau dialogue</div>
       </router-link>
       <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1>
-      <h1 v-if="route === 'Chat'">{{contactName}}</h1>
+      <!-- <h1 v-if="route === 'Chat'">{{contactName}}</h1> -->
   </header>
 </template>
 <script>
@@ -24,7 +24,7 @@ export default {
   },
   data(){
     return{
-       contactName: "Fred"
+      //  contactName: "Fred"
     }
   },
   methods: {
