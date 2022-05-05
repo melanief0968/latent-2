@@ -1,8 +1,8 @@
 <template>
   <header class="header">
       <!-- <h1 v-if="route === 'Index'">Index</h1>
-      <h1 v-if="route === 'Contacts'">Échanges</h1>
-      <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
+      <h1 v-if="route === 'Contacts'">Échanges</h1> -->
+      <!-- <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
       <h1 v-if="route === 'Chat'">{{contactName}}</h1>
       <h1 v-if="route === 'Book'">{{chatName}}</h1>
       <router-link v-if="route === 'Chat'" to="/book">Book</router-link>

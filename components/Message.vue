@@ -1,6 +1,6 @@
 <template>
   <div class="messageBox" :class="cssClasses">
-    <div v-if="route === 'Book'">{{userName}} </div>
+    <div class="messageName" v-if="route === 'Book'">{{userName}} </div>
     <div class="message" v-if="message">
       {{ text }}
     </div>
@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      userName: "NAME",
+      userName: "Name –",
       message: this.$getters.listenMessage(this.messageId),
     };
   },
@@ -57,7 +57,7 @@ export default {
     },
   },
   mounted() {
-    // this.getSendingUser()
+    this.getSendingUser()
   },
   beforeDestroy() {
     // this.removeListener();
@@ -119,4 +119,9 @@ export default {
 //     font-family: $font-main;
 //   }
 // }
+//   .messageName {
+//     font-size: $msg-size;
+//     font-family: $font-main;
+//     text-transform: uppercase;
+//   }
 </style>

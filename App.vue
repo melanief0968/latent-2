@@ -2,6 +2,7 @@
   <div class="container">
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
+    <Header v-if="route === 'NewContact'"></Header>
     <HeaderChat v-if="route === 'Chat'"></HeaderChat>
     <HeaderChat v-else-if="route === 'Book'"></HeaderChat>
     <main class="main">

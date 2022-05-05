@@ -2,6 +2,10 @@
   <header class="header">
       <h1 v-if="route === 'Index'">Index</h1>
       <h1 v-if="route === 'Contacts'">Échanges</h1>
+      <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
+        <img class="icone" src="/static/img/people.png"></img>
+        <div>Nouveau dialogue</div>
+      </router-link>
       <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1>
       <h1 v-if="route === 'Chat'">{{contactName}}</h1>
   </header>
@@ -39,6 +43,13 @@ export default {
   background: $background-color;
   padding:  0 5%;
   border-bottom: .9px solid $contrast-color;
+}
+.buttonIcone{
+  // display: flex;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 h1{
   font-weight: normal;

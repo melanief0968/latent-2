@@ -353,12 +353,13 @@ export default {
 
     let child = this.$refs.didascalies;
     console.log(child);
-    let name = "gael";
+    let name = "Elodie";
     let _case = "case2";
     
     child.test(name,_case);
   // 
   
+
 
   },
 };
