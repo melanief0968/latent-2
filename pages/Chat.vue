@@ -13,7 +13,7 @@
       <InputMessage
         ref="editor"
         @submit="onSubmit"
-        @delete="deleteCount"
+        @delete="getEraseAmount"
         @keydown="keysCount"
         @focus="firstTime"
       ></InputMessage>
@@ -46,8 +46,8 @@ export default {
       keyDownCounter: 0,
       deleteKeyCounter: 0,
       spaceKeyCounter: 0,
-      currentUserID: this.$getters.currentUserID()
-      
+      currentUserID: this.$getters.currentUserID(),
+      name: "",      
     };
   },
   computed: {
@@ -73,7 +73,7 @@ export default {
       if(this.keyDownCounter === 1){
         return this.firstKeyTime = this.getTime();
       }
-      if (ev.keySpace) {
+      if (ev.key.space) {
         console.log("SPACE");
       }
       return;
@@ -103,13 +103,16 @@ export default {
       // console.log(this.getCharAmount());
       // console.log(this.getWritingSpeed())
       // console.log(this.getTimeBetweenMessages())
+      console.log(this.getEraseAmount())
+      // console.log(this.name)
+
 
 
       const chatVersion = event.value;
       if(chatVersion == ""){
         return
       }
-      console.log(chatVersion)
+      // console.log(chatVersion)
       const bookVersion = event.value.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
@@ -154,6 +157,7 @@ export default {
         fb.setValue(`/messages/${this.sentTime}`, messageDatas);
 
       this.keyDownCounter = 0;
+      this.deleteKeyCounter = 0;
 
       return;
     },
@@ -169,7 +173,7 @@ export default {
     },
     startElapsedTime() {
     this.requestElapsedTime(2000);
-  },
+    },
 
     requestElapsedTime(millis) {
       this.stopElapsedTime();
@@ -204,6 +208,24 @@ export default {
       }
       return RESULT;
     },
+    getEraseAmount(){
+      // this.$refs.editor.onErase();
+      this.deleteKeyCounter++;
+      const RESULT = {
+        result: "",
+        deleteKeyCounter :this.deleteKeyCounter
+      }
+      console.log(this.deleteKeyCounter);
+      if (this.deleteKeyCounter <= 4 && this.deleteKeyCounter >= 1) {
+        RESULT.result = "positive";
+        RESULT.deleteKeyCounter = this.deleteKeyCounter;
+      } else if (this.deleteKeyCounter >= 10) {
+        RESULT.result = "negative";
+        RESULT.deleteKeyCounter = this.deleteKeyCounter;
+      }
+      return RESULT
+
+    },
     getWritingTime() {
       let writingTime = this.sentTime - this.firstKeyTime;
       return writingTime;
@@ -236,7 +258,7 @@ export default {
         result: "",
         timeBetweenMessages :timeBetweenMessages
       }
-
+      //REECRIRE AU PROPRE AVEC STORE
       fb.listen(
         `/conversations/${this.$getters.currentChatID()}/messages/`,
         (value) => {
@@ -315,9 +337,8 @@ export default {
   },
 
   mounted() {
-
+    this.name = this.$getters.user(this.currentUserID).name;
     this.$refs.editor.insertElapsedTime();
-    // this.getTimeBetweenMessages();
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
 
