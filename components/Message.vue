@@ -27,9 +27,7 @@ export default {
     };
   },
   computed: {
-    getSendingUser(){
-      
-    },
+   
     route() {
       return this.$route.name;
     },
@@ -45,7 +43,6 @@ export default {
     },
     cssClasses() {
       const userID = this.$getters.currentUserID();
-      this.userName = "NAME";
       //console.log(this.message.sendingUser);
       return {
         toRight: this.message.sendingUser === userID,
@@ -53,8 +50,15 @@ export default {
     },
   },
 
-  methods: {},
-  mounted() {},
+  methods: {
+     getSendingUser(){
+       const userID2 = this.$getters.user(this.message.sendingUser);
+       this.userName = userID2.name;
+    },
+  },
+  mounted() {
+    // this.getSendingUser()
+  },
   beforeDestroy() {
     // this.removeListener();
     // console.log('im dead');

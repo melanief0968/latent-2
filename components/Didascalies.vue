@@ -5,25 +5,36 @@
 </template>
 <script>
 import * as fb from "@/scripts/firebase.js";
-import did from "@/scripts/didascalies.js";
+import didascalies from "@/scripts/didascalies.js";
 
 export default {
   components: {
-  did
+  didascalies
   },
   props: {
 
   },
   data() {
     return {
-      text: did,
+      text: "",
     };
   },
   computed: {
   },
 
-  methods: {},
-  mounted() {},
+  methods: {
+    test(name,_case){
+
+      /**
+       * 
+       */
+
+      this.text = didascalies["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"12h"});
+    }
+  },
+  mounted() {
+    // this.test();
+  },
   beforeDestroy() {
   },
 

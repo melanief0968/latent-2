@@ -3,13 +3,13 @@
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
         <Message v-if="true" :key="id" :messageId="id"></Message>
-        <!-- <Didascalies
+        <Didascalies
           v-else-if="message.type === 'didascalie'"
           :key="id"
-        ></Didascalies> -->
-        <Didascalies></Didascalies>
-        <YellowLine></YellowLine>
+        ></Didascalies>
+        <!-- <YellowLine></YellowLine> -->
       </template>
+      <Didascalies ref="didascalies"></Didascalies>
     </div>
     <footer class="footerChat">
       <InputMessage
@@ -70,6 +70,8 @@ export default {
 
       return messages;
     },
+
+    
     
   },
   methods: {
@@ -349,6 +351,14 @@ export default {
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
 
+    let child = this.$refs.didascalies;
+    console.log(child);
+    let name = "gael";
+    let _case = "case2";
+    
+    child.test(name,_case);
+  // 
+  
 
   },
 };

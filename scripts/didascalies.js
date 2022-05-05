@@ -9,29 +9,28 @@
 // };
 
 // didascalies[TYPE][ACTION][RESULT][INDEX][SEXE](OPTIONS);
-const did = "hi didascalie";
-export default did;
+// const did = "hi didascalie";
+// export default did;
 
 // export function chooseDidascalies({ type, action, result }) {
 //   return didascalies[type][action][result];
 // }
 
-export const didascalies = {
+ const didascalies = {
   char: {
     supposition: {
       positive: {
         case1: [{
-          m: [(e) => `${e.name} est peut être timide ${e.time}.`],
-          f: [(e) => `${e.name} est peut être timide ${e.time}.`],
-          n: [(e) => `${e.name} est peut être timide ${e.time}.`],
-        }]
-        [{
+          m: (e) => `${e.name} est peut être timide ${e.time}.`,
+          f: (e) => `${e.name} est peut être timide ${e.time}.`,
+          n:(e) => `${e.name} est peut être timide ${e.time}.`,
+        },{
           m: [(e) => `${e.name} est peut être malade.`],
           f: [(e) => `${e.name} est peut être malade.`],
           n: [(e) => `${e.name} est peut être malade.`],
         }],
         case2: [{
-          m: [(e) => `${e.name} semble être fatigué`],
+          m: (e) => `${e.name} semble être fatigué`,
           f: [(e) => `${e.name} semble être fatiguée`],
           n: [(e) => `${e.name} semble être fatiguéx`],
         }],
@@ -117,3 +116,4 @@ export const didascalies = {
   },
   // erase: {},
 };
+export default didascalies;
