@@ -21,7 +21,7 @@ export default {
 .footer {
   flex: 0 0 auto;
   text-align: center;
-  justify-content: space-between;
+  justify-content: space-around;
   font-family: $font-main;
   background: $background-color;
   padding:  0 5%;

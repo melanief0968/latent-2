@@ -15,7 +15,6 @@
         @submit="onSubmit"
         @delete="deleteCount"
         @keydown="keysCount"
-        @focus="firstTime"
       ></InputMessage>
     </footer>
     <!-- //! footer here -->
@@ -46,6 +45,7 @@ export default {
       keyDownCounter: 0,
       deleteKeyCounter: 0,
       spaceKeyCounter: 0,
+      composingTime: 0,
       currentUserID: this.$getters.currentUserID()
       
     };
@@ -63,25 +63,22 @@ export default {
 
       return messages;
     },
-    
   },
   methods: {
     keysCount(ev) {
       this.startElapsedTime();
-      //seulement au first + enlever autres touches que les lettres et chiffres
-      this.keyDownCounter++;
-      if(this.keyDownCounter === 1){
-        return this.firstKeyTime = this.getTime();
-      }
-      if (ev.keySpace) {
-        console.log("SPACE");
-      }
       return;
 
+      this.firstKeyTime = this.getTime();
+      //seulement au first + enlever autres touches que les lettres et chiffres
+      this.keyDownCounter++;
+      console.log(this.keyDownCounter);
 
+      if (ev.space) {
+        console.log("SPACE");
+      }
       //add delete
       // add is writing
-
     },
     deleteCount(ev) {
       return;
@@ -97,21 +94,12 @@ export default {
 
     onSubmit(event) {
       // console.log(ev);
-      // console.log(Didascalies)
       this.stopElapsedTime();
       this.sentTime = this.getTime();
-      // console.log(this.getCharAmount());
-      // console.log(this.getWritingSpeed())
-      // console.log(this.getTimeBetweenMessages())
-
-
       const chatVersion = event.value;
-      if(chatVersion == ""){
-        return
-      }
       console.log(chatVersion)
-      const bookVersion = event.value.replace(/[•|\–]+/g, (string) => {
-        const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
+      const bookVersion = event.value.replace(/[•|\*]+/g, (string) => {
+        const { "*": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
 
         // console.log(eraseNumber, elapseNumber);
@@ -132,7 +120,7 @@ export default {
         }
       });
 
-      // console.log(bookVersion, chatVersion);
+      console.log(bookVersion, chatVersion);
       const messageDatas = {
         text: chatVersion,
         bookText: bookVersion,
@@ -143,7 +131,7 @@ export default {
         typingSpeed: "",
         coordinates: "",
       };
-        // console.log(messageDatas,chatVersion);
+        console.log(messageDatas,chatVersion);
         // console.log(this.$getters.currentChatID)
         fb.setValue(
           `/conversations/${this.$getters.currentChatID()}/messages/${
@@ -153,19 +141,31 @@ export default {
         );
         fb.setValue(`/messages/${this.sentTime}`, messageDatas);
 
+      return;
+
+      this.composingTime = this.sentTime - this.firstKeyTime;
+      console.log(this.sentTime, this.firstKeyTime, this.composingTime);
+
+      // const messageDatas = {
+      //   text: this.messageContent,
+      //   sendingUser: this.$getters.currentUserID(),
+      //   sentTime: this.sentTime,
+      //   charAmount: this.keyDownCounter,
+      //   eraseAmount: "",
+      //   typingSpeed: "",
+      //   coordinates: "",
+      // };
       this.keyDownCounter = 0;
 
-      return;
+      // this.$store.test = "changed";
+      //check url avec chatid + usr Id
+
+      // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
+      //générer messages fb
     },
     
     getTime() {
       return new Date().getTime();
-    },
-    firstTime(){
-      // this.$ref.editor.focus()
-      let startWriting = this.getTime();
-      console.log("CLICK")
-      return startWriting;
     },
     startElapsedTime() {
     this.requestElapsedTime(2000);
@@ -186,75 +186,24 @@ export default {
     stopElapsedTime() {
       window.clearTimeout(this.timeout);
     },
-    getCharAmount() {
-      //comment compter uniquement les chars ?
-      let keydownNumber = this.keyDownCounter;
-
-      const RESULT = {
-        result: "",
-        keydownNumber :keydownNumber
-      }
-      if (keydownNumber <= 5 && keydownNumber >= 0 ) {
-        RESULT.result = "positive";
-        RESULT.keydownNumber = keydownNumber;
-      } else if (keydownNumber >= 90) {
-        RESULT.result = "negative";
-        RESULT.keydownNumber = keydownNumber;
-      } else {
-      }
-      return RESULT;
-    },
-    getWritingTime() {
-      let writingTime = this.sentTime - this.firstKeyTime;
-      return writingTime;
-    },
-    getWritingSpeed() {
-      let writingTime = this.getWritingTime();
-      //prettier-ignore
-      let wordsPerMin = Math.floor(this.keyDownCounter * 60 / writingTime * 1000 / 5);
-      const RESULT = {
-        result: "",
-        wordsPerMin :wordsPerMin
-      }
-      if (wordsPerMin <= 28) {
-        RESULT.result = "negative";
-        RESULT.wordsPerMin = wordsPerMin;
-      } else if (wordsPerMin >= 90) {
-        RESULT.result = "positive";
-        RESULT.wordsPerMin = wordsPerMin;
-      } else {
-      }
-      return RESULT;
-    },
-
+    getCharAmount() {},
+    getWritingTime() {},
+    getWritingSpeed() {},
     getTimeBetweenMessages() {
-      let lastMessageID;
-      let beforeLastMessageID;
-      let timeBetweenMessages;
-
-      const RESULT = {
-        result: "",
-        timeBetweenMessages :timeBetweenMessages
-      }
-
-      fb.listen(
-        `/conversations/${this.$getters.currentChatID()}/messages/`,
-        (value) => {
-          const keys = Object.keys(value);
-          lastMessageID = keys[keys.length - 1];
-          beforeLastMessageID = keys[keys.length - 2];
-          timeBetweenMessages = lastMessageID - beforeLastMessageID;
-          let TIME = this.getTimeDatas(timeBetweenMessages)
-          if (timeBetweenMessages <= 30000) {
-            RESULT.result = "positive";
-            RESULT.timeBetweenMessages = TIME;
-          } else if (timeBetweenMessages >= 1000 * 60 * 60) {
-            RESULT.result = "negative";
-            RESULT.timeBetweenMessages = TIME;
-          }else{}
-        }
-      );
-      return RESULT
+      // fb.listen(
+      //   `/conversations/${this.$getters.currentChatID()}/messages/`,
+      //   (value) => {
+      //     const keys = Object.keys(value);
+      //     const lastMessageID = keys[keys.length - 1];
+      //     const beforeLastMessageID = keys[keys.length - 2];
+      //     const timeBetweenMessages = lastMessageID - beforeLastMessageID;
+      //     if (timeBetweenMessages <= 30000) {
+      //       return "positive";
+      //     } else if (timeBetweenMessages >= 1000 * 60 * 60) {
+      //       return "negative";
+      //     }
+      //   }
+      // );
     },
     pushCoeur() {},
     chooseCase() {
@@ -276,12 +225,12 @@ export default {
       } else {
       }
     },
-    getTimeDatas(time) {
+    getTimeDatas() {
       //hr, min, sec, day, daytime, weekday, month, year, period
-      const calcSeconds = Math.floor((time / 1000) % 60);
-      const calcMinutes = Math.floor((time / (1000 * 60)) % 60);
-      const calcHours = Math.floor((time / (1000 * 60 * 60)) % 24);
-      const calcDays = Math.floor(time / (1000 * 60 * 60 * 24));
+      const calcSeconds = Math.floor((this.sentTime / 1000) % 60);
+      const calcMinutes = Math.floor((this.sentTime / (1000 * 60)) % 60);
+      const calcHours = Math.floor((this.sentTime / (1000 * 60 * 60)) % 24);
+      const calcDays = Math.floor(this.sentTime / (1000 * 60 * 60 * 24));
 
       let seconds = calcSeconds + " secondes";
       let minutes = calcMinutes + " minutes";
@@ -300,13 +249,7 @@ export default {
       if (calcDays < 1) {
         days = "";
       }
-      const TIME = {
-        seconds,
-        minutes,
-        hours, 
-        days
-      }
-      return TIME;
+      return seconds, minutes, hours;
     },
   },
 
@@ -315,13 +258,27 @@ export default {
   },
 
   mounted() {
-
     this.$refs.editor.insertElapsedTime();
+    const userKK = this.$getters.currentUserID();
+    const userKKK = this.$getters.user(userKK);
+
+    console.log(userKKK.name)
+    // userkk: this.$getters(currentUserID)
+    // console.log(this.userkk)
     // this.getTimeBetweenMessages();
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
+    // console.log(this.conversation);
 
-
+    // fb.listen("/messages/"+currentChat+"/messages/", (value) => {
+    //     // console.log(value)
+    //     console.log(value);
+    //     // console.log(value["text"]);
+    //     // const keys = Object.keys(value);
+    //     // const messageID = keys[keys.length-1];
+    //     // const text = value[messageID]["text"];
+    //     // console.log(text)
+    // });
   },
 };
 </script>

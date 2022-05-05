@@ -31,7 +31,7 @@ export default {
     },
     eraseOutputString: {
       type: String,
-      default: `*`,
+      default: `–`,
     },
     elapsedTimeOutputString: {
       type: String,
@@ -77,8 +77,9 @@ export default {
     onKeyDown(event) {
       this.$emit("keydown", event);
     },
-    focus() {
+    focus(event) {
       this.editor.commands.focus(); //
+      this.$emit("focus",event);
     },
 
     blur() {
@@ -91,7 +92,6 @@ export default {
     },
 
     insertElapsedTime() {
-      console.log("OK")
       this.insertText(this.elapsedTimeChar);
     },
 

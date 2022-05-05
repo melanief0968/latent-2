@@ -1,9 +1,12 @@
 <template>
   <header class="header">
-      <h1 v-if="route === 'Index'">Index</h1>
+      <!-- <h1 v-if="route === 'Index'">Index</h1>
       <h1 v-if="route === 'Contacts'">Échanges</h1>
-      <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1>
+      <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
       <h1 v-if="route === 'Chat'">{{contactName}}</h1>
+      <h1 v-if="route === 'Book'">{{chatName}}</h1>
+      <router-link v-if="route === 'Chat'" to="/book">Book</router-link>
+      <router-link v-if="route === 'Book'" to="/chat">Chat</router-link>
   </header>
 </template>
 <script>
@@ -20,15 +23,18 @@ export default {
   },
   data(){
     return{
-       contactName: "Fred"
+       contactName: "FRED",
+       chatName: "FREDDIIE",
     }
   },
   methods: {
+    
  
   },
   mounted(){
-  }
 
+  }
+  
 };
 </script>
 <style lang="scss">
@@ -39,6 +45,7 @@ export default {
   background: $background-color;
   padding:  0 5%;
   border-bottom: .9px solid $contrast-color;
+  justify-content: space-between;
 }
 h1{
   font-weight: normal;

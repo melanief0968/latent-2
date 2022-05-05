@@ -57,6 +57,8 @@ export default {
         },
       });
       this.$actions.setCurrentChatId(chatId);
+
+
     },
     randomBoolean() {
       return Boolean(Math.round(Math.random()));
@@ -68,7 +70,6 @@ export default {
       const otherUserID = Object.values(conversation.users).find((userID) => {
         return userID !== this.$getters.currentUserID();
       });
-
       return this.$getters.listenUser(otherUserID).name;
       // $getters.user(conversation.users);
     },

@@ -7,6 +7,7 @@ export const store = Vue.observable({
   messages: {},
   conversations: {},
   users: {},
+  otherUser: {},
   fbListeners: {},
   currentUserID: null, // user id of the person who is connected
   currentContactID: null,
@@ -19,6 +20,9 @@ export const store = Vue.observable({
 export const getters = {
   user(userID) {
     return store.users[userID];
+  },
+  otherUser() {
+    return store.otherUser;
   },
   currentUserID() {
     return store.currentUserID;
@@ -94,6 +98,9 @@ export const actions = {
   },
   setUser(userId, userInfo) {
     Vue.set(store.users, userId, userInfo);
+  },
+  setOtherUserName(name) {
+    store.otherUser = name;
   },
   setCurrentUserName(name) {
     store.currentUserName = name;
