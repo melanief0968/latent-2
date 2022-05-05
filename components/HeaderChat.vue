@@ -23,23 +23,36 @@ export default {
   },
   data(){
     return{
-       contactName: "FRED",
-       chatName: "FREDDIIE",
+       contactName: "Loading...",
+       chatName: "Loading...",
     }
   },
   methods: {
-    
- 
-  },
-  mounted(){
+    getContactName(){
+      const chatID = this.$getters.listenConversation(this.$getters.currentChatID())
+      const user = chatID.users
+      const otherUser = Object.values(user).find((userID) => {
+        return userID !== this.$getters.currentUserID();
+      });
+      const contactName = this.$getters.listenUser(otherUser).name;
+      this.contactName = contactName;
+      this.chatName = chatID.chatName;
 
+    }
+    
+    
+    },
+  mounted(){
+    this.getContactName();
   }
   
 };
 </script>
 <style lang="scss">
 .header {
+  display: flex;
   flex: 0 0 auto;
+  flex-direction: row;
   text-align: left;
   font-family: $font-main;
   background: $background-color;

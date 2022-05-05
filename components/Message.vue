@@ -1,5 +1,6 @@
 <template>
   <div class="messageBox" :class="cssClasses">
+    <div v-if="route === 'Book'">{{userName}} </div>
     <div class="message" v-if="message">
       {{ text }}
     </div>
@@ -21,10 +22,17 @@ export default {
   },
   data() {
     return {
+      userName: "NAME",
       message: this.$getters.listenMessage(this.messageId),
     };
   },
   computed: {
+    getSendingUser(){
+      
+    },
+    route() {
+      return this.$route.name;
+    },
     text() {
       if (!this.message.text) return "";
 
@@ -37,6 +45,7 @@ export default {
     },
     cssClasses() {
       const userID = this.$getters.currentUserID();
+      this.userName = "NAME";
       //console.log(this.message.sendingUser);
       return {
         toRight: this.message.sendingUser === userID,
@@ -90,12 +99,20 @@ export default {
   }
 }
 
-// .rightBox {
-//   width: 100%;
-//   margin-left: 35%;
-// }
-// .leftBox {
+// .messageBox {
+//   margin-top: 1.5vh;
+//   margin-bottom: 1.5vh;
 //   display: flex;
-//   justify-content: start;
+//   width: 100%;
+
+//   .message {
+//     padding: 10px;
+//     width: 90%;
+//     max-width: 70%;
+//     word-break: break-word;
+//     color: black;
+//     font-size: $msg-size;
+//     font-family: $font-main;
+//   }
 // }
 </style>

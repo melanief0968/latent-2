@@ -9,7 +9,8 @@
 // };
 
 // didascalies[TYPE][ACTION][RESULT][INDEX][SEXE](OPTIONS);
-export const did = "hi didascalie";
+const did = "hi didascalie";
+export default did;
 
 // export function chooseDidascalies({ type, action, result }) {
 //   return didascalies[type][action][result];

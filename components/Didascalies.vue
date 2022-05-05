@@ -5,17 +5,18 @@
 </template>
 <script>
 import * as fb from "@/scripts/firebase.js";
+import did from "@/scripts/didascalies.js";
 
 export default {
   components: {
-
+  did
   },
   props: {
 
   },
   data() {
     return {
-      text: "ma didascalie",
+      text: did,
     };
   },
   computed: {

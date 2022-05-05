@@ -3,10 +3,12 @@
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
         <Message v-if="true" :key="id" :messageId="id"></Message>
-        <Didascalies
+        <!-- <Didascalies
           v-else-if="message.type === 'didascalie'"
           :key="id"
-        ></Didascalies>
+        ></Didascalies> -->
+        <Didascalies></Didascalies>
+        <YellowLine></YellowLine>
       </template>
     </div>
     <footer class="footerChat">
@@ -26,6 +28,8 @@
 import Message from "@/components/Message.vue";
 import * as fb from "@/scripts/firebase.js";
 import Didascalies from "../components/Didascalies.vue";
+import YellowLine from "../components/YellowLine.vue";
+import did from "@/scripts/didascalies.js";
 import InputMessage from "../components/InputMessage.vue";
 import { countCharOccurance } from "@/utils/string.js";
 
@@ -34,6 +38,8 @@ export default {
     Message,
     Didascalies,
     InputMessage,
+    did,
+    YellowLine
   },
   data() {
     return {
@@ -47,7 +53,8 @@ export default {
       deleteKeyCounter: 0,
       spaceKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
-      name: "",      
+      name: "",    
+      did:did  
     };
   },
   computed: {
