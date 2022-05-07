@@ -92,17 +92,6 @@ export default {
       // add is writing
 
     },
-    deleteCount(ev) {
-      return;
-
-      this.deleteKeyCounter++;
-      console.log(this.deleteKeyCounter);
-      if (this.deleteKeyCounter <= 4 && this.deleteKeyCounter >= 1) {
-        return "positive";
-      } else if (this.deleteKeyCounter >= 10) {
-        return "negative";
-      }
-    },
 
     onSubmit(event) {
       // console.log(ev);

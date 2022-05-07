@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      text: "",
+      text: "salut",
     };
   },
   computed: {
@@ -29,7 +29,7 @@ export default {
        * 
        */
 
-      this.text = didascalies["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"12h"});
+      this.text = didascalies["msg"]["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"12h"});
     }
   },
   mounted() {

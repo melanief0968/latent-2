@@ -4,7 +4,7 @@
     <div class="login-description italic">
       L'espace de conversation sur mesure.
     </div>
-    <yellowLine :lineHeight="150"></yellowLine>
+    <YellowLine :lineHeight="150"></YellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Qui est-ce ?</div>
       <input type="text" autocomplete="username" placeholder="Nom d'auteur·ice·x" v-model="username" />
@@ -12,19 +12,19 @@
       <button type="submit">→</button>
       <div class="text-basic">{{ message }}</div>
     </form>
-    <yellowLine :lineHeight="150"></yellowLine>
+    <YellowLine :lineHeight="150"></YellowLine>
     <router-link to="/signin" class="text-basic">Créer un compte</router-link>
   </div>
 </template>
 <script>
 import * as fb from "@/scripts/firebase";
-import yellowLine from "@/components/yellowLine.vue";
+import YellowLine from "@/components/YellowLine.vue";
 
 const USER_LOGIN_ERROR = "nom ou mot de passe invalide";
 
 export default {
   components: {
-    yellowLine,
+    YellowLine,
   },
   data() {
     return {

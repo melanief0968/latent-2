@@ -43,7 +43,7 @@ export default {
     
     },
   mounted(){
-    // this.getContactName();
+    this.getContactName();
   }
   
 };

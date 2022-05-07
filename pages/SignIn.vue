@@ -4,7 +4,7 @@
     <div class="login-description italic">
       L'espace de conversation sur mesure.
     </div>
-    <yellowLine></yellowLine>
+    <YellowLine></YellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Créer un compte</div>
       <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
@@ -26,20 +26,20 @@
       <button type="submit">→</button>
       <div class="text-basic">{{ message }}</div>
     </form>
-    <yellowLine></yellowLine>
+    <YellowLine></YellowLine>
     <router-link to="/login" class="text-basic">Se connecter</router-link>
   </div>
 </template>
 <script>
 import * as fb from "@/scripts/firebase";
-import yellowLine from "@/components/yellowLine.vue";
+import YellowLine from "@/components/YellowLine.vue";
 
 const USER_NAME_ERROR = "Le nom d'auteur existe déjà";
 const USER_PSW_ERROR = "Les mots de passe ne correspondent pas";
 const USER_EMPTY_ERROR = "Il faut remplir tous les champs";
 export default {
   components: {
-    yellowLine,
+    YellowLine,
   },
   data() {
     return {

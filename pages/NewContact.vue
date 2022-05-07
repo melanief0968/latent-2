@@ -1,6 +1,6 @@
 <template>
   <div class="newContactPage">
-    <yellowLine :lineHeight="10"></yellowLine>
+    <YellowLine :lineHeight="10"></YellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Avec Qui ?</div>
       <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
@@ -9,18 +9,18 @@
       <button type="submit">→</button>
       <div class="text-basic">{{ message }}</div>
     </form>
-    <yellowLine></yellowLine>
+    <YellowLine></YellowLine>
   </div>
   <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
 </template>
 <script>
 import * as fb from "@/scripts/firebase";
-import yellowLine from "@/components/yellowLine.vue";
+import YellowLine from "@/components/YellowLine.vue";
 
 const USER_ERROR = "Le nom d'auteur·ice·x n'existe pas.";
 export default {
   components: {
-    yellowLine,
+    YellowLine,
   },
   data() {
     return {

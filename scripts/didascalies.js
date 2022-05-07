@@ -17,37 +17,39 @@
 // }
 
  const didascalies = {
-  char: {
-    supposition: {
-      positive: {
-        case1: [{
-          m: (e) => `${e.name} est peut être timide ${e.time}.`,
-          f: (e) => `${e.name} est peut être timide ${e.time}.`,
-          n:(e) => `${e.name} est peut être timide ${e.time}.`,
-        },{
-          m: [(e) => `${e.name} est peut être malade.`],
-          f: [(e) => `${e.name} est peut être malade.`],
-          n: [(e) => `${e.name} est peut être malade.`],
-        }],
-        case2: [{
-          m: (e) => `${e.name} semble être fatigué`,
-          f: [(e) => `${e.name} semble être fatiguée`],
-          n: [(e) => `${e.name} semble être fatiguéx`],
-        }],
+  msg:{
+    char: {
+      supposition: {
+        positive: {
+          case1: [{
+            m: (e) => `${e.name} est peut être timide ${e.time}.`,
+            f: (e) => `${e.name} est peut être timide ${e.time}.`,
+            n:(e) => `${e.name} est peut être timide ${e.time}.`,
+          },{
+            m: (e) => `${e.name} est peut être malade.`,
+            f: (e) => `${e.name} est peut être malade.`,
+            n: (e) => `${e.name} est peut être malade.`,
+          }],
+          case2: [{
+            m: (e) => `${e.name} semble être fatigué`,
+            f: (e) => `${e.name} semble être fatiguée`,
+            n: (e) => `${e.name} semble être fatiguéx`,
+          }],
+        },
+        negative: {
+          case1: [{
+            m: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
+            f: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
+            n: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
+          }],
+          case2: [{
+            m: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
+            f: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
+            n: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
+          }],
+        },
       },
-      negative: {
-        case1: [{
-          m: [(e) => `${e.name} semble vouloir partager ses profondes pensées.`],
-          f: [(e) => `${e.name} semble vouloir partager ses profondes pensées.`],
-          n: [(e) => `${e.name} semble vouloir partager ses profondes pensées.`],
-        }],
-        case2: [{
-          m: [(e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`],
-          f: [(e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`],
-          n: [(e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`],
-        }],
-      },
-    },
+  }
       // fait: {
       //   neutral: [
       //     {
