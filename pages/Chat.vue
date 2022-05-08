@@ -3,7 +3,8 @@
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
         <!--On passe le name de l'auteur dans la didascalie -->
-        <Didascalies :name="message.userName" :_case="caseExample()"></Didascalies>
+<!--    TODO v-if est workaround temporaire-->
+        <Didascalies v-if="message.userName !== undefined" :name="message.userName" :_case="caseExample()"></Didascalies>
         <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
 
 <!--         <YellowLine></YellowLine>-->
@@ -39,6 +40,9 @@ export default {
     InputMessage,
     did,
     YellowLine
+  },
+  watch() {
+
   },
   data() {
     return {
@@ -354,7 +358,7 @@ export default {
     // let _case = "case2";
     //
     // child.test(name, _case)
-  },
+  }
 };
 </script>
 <style lang="scss">

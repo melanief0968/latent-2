@@ -14,7 +14,7 @@ export default {
   props: ['name', '_case'],
   data() {
     return {
-      text: "toto",
+      text: "no text",
     };
   },
   computed: {
