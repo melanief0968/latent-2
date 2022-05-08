@@ -11,7 +11,11 @@
 </template>
 <script>
 export default {
-  props:['contactName'],
+  props: {
+    contactName: {
+      default: "Loading...",
+    }
+  },
   computed: {
     route() {
       return this.$route.name;
@@ -19,7 +23,6 @@ export default {
   },
   data(){
     return{
-       contactName: "Loading...",
        chatName: "Loading...",
     }
   },
