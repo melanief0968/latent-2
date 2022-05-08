@@ -7,7 +7,7 @@
 export default {
   props: {
     lineHeight: {
-      type: Number,
+      type: String,
     },
   },
   computed: {
@@ -27,6 +27,6 @@ export default {
   background-color: $color-main;
   height: 50px;
   width: 2px;
-  margin: $margin-5 0;
+
 }
 </style>

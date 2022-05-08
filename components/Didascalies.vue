@@ -11,29 +11,23 @@ export default {
   components: {
   didascalies
   },
-  props: {
-
-  },
+  props: ['name', '_case'],
   data() {
     return {
-      text: "salut",
+      text: "toto",
     };
   },
   computed: {
+
   },
 
   methods: {
     test(name,_case){
-
-      /**
-       * 
-       */
-
-      this.text = didascalies["msg"]["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"12h"});
+      this.text = didascalies["msg"]["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});
     }
   },
   mounted() {
-    // this.test();
+    this.test(this.name, this._case)
   },
   beforeDestroy() {
   },
