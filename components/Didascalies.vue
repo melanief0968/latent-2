@@ -11,6 +11,7 @@ export default {
   components: {
   didascalies
   },
+  // On passe le name et le case en props pour les définir dans la boucle de chat
   props: ['name', '_case'],
   data() {
     return {
@@ -20,7 +21,6 @@ export default {
   computed: {
 
   },
-
   methods: {
     test(name,_case){
       this.text = didascalies["msg"]["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});

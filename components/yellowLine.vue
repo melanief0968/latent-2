@@ -7,7 +7,7 @@
 export default {
   props: {
     lineHeight: {
-      type: String,
+      type: Number,
     },
   },
   computed: {

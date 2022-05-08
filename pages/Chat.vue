@@ -2,14 +2,13 @@
   <div class="chat-container">
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
-        <!--On passe le name de l'auteur dans la didascalie -->
-<!--    TODO v-if est workaround temporaire-->
-        <Didascalies v-if="message.userName !== undefined" :name="message.userName" :_case="caseExample()"></Didascalies>
-        <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
 
-<!--         <YellowLine></YellowLine>-->
+        <!--TODO v-if est workaround en attendant le watch-->
+        <!--On passe le name de l'auteur dans la didascalie -->
+        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="caseExample()"></Didascalies>
+        <!--<YellowLine></YellowLine>-->
+        <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
       </template>
-<!--      <Didascalies ref="didascalies"></Didascalies>-->
     </div>
     <footer class="footerChat">
       <InputMessage
@@ -41,9 +40,6 @@ export default {
     did,
     YellowLine
   },
-  watch() {
-
-  },
   data() {
     return {
       // messageIds: {},
@@ -57,6 +53,7 @@ export default {
       spaceKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
       name: "",
+      userName: '',
       did:did
     };
   },
