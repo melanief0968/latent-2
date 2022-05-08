@@ -2,14 +2,13 @@
   <div class="chat-container">
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
-        <Message v-if="true" :key="id" :messageId="id"></Message>
-        <Didascalies
-          v-else-if="message.type === 'didascalie'"
-          :key="id"
-        ></Didascalies>
-        <!-- <YellowLine></YellowLine> -->
+
+        <!--TODO v-if est workaround en attendant le watch-->
+        <!--On passe le name de l'auteur dans la didascalie -->
+        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="caseExample()"></Didascalies>
+        <!--<YellowLine></YellowLine>-->
+        <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
       </template>
-      <Didascalies ref="didascalies"></Didascalies>
     </div>
     <footer class="footerChat">
       <InputMessage
@@ -53,8 +52,9 @@ export default {
       deleteKeyCounter: 0,
       spaceKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
-      name: "",    
-      did:did  
+      name: "",
+      userName: '',
+      did:did
     };
   },
   computed: {
@@ -71,10 +71,19 @@ export default {
       return messages;
     },
 
-    
-    
+
+
   },
   methods: {
+
+    caseExample() {
+      // example de retour de string qui détérmine le case
+      let cases = ['case1','case2']
+      let random = Math.floor(Math.random() * cases.length);
+      return cases[random]
+
+    },
+
     keysCount(ev) {
       this.startElapsedTime();
       //seulement au first + enlever autres touches que les lettres et chiffres
@@ -92,6 +101,7 @@ export default {
       // add is writing
 
     },
+
 
     onSubmit(event) {
       // console.log(ev);
@@ -119,7 +129,7 @@ export default {
 
         if (eraseNumber === 1 && elapseNumber < 1) {
           return "<i>(hésite)</i>";
-        
+
         }
         // if (eraseNumber === 0 && elapseNumber > 2) {
         //   return "(wtf)";
@@ -138,6 +148,7 @@ export default {
         text: chatVersion,
         bookText: bookVersion,
         sendingUser: this.currentUserID,
+        userName:  this.$getters.user(this.currentUserID).name,
         sentTime: this.sentTime,
         charAmount: this.keyDownCounter,
         eraseAmount: "",
@@ -153,13 +164,11 @@ export default {
           ""
         );
         fb.setValue(`/messages/${this.sentTime}`, messageDatas);
-
       this.keyDownCounter = 0;
       this.deleteKeyCounter = 0;
-
       return;
     },
-    
+
     getTime() {
       return new Date().getTime();
     },
@@ -323,7 +332,7 @@ export default {
       const TIME = {
         seconds,
         minutes,
-        hours, 
+        hours,
         days
       }
       return TIME;
@@ -340,17 +349,13 @@ export default {
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
 
-    let child = this.$refs.didascalies;
-    console.log(child);
-    let name = "Elodie";
-    let _case = "case2";
-    
-    child.test(name,_case);
-  // 
-  
-
-
-  },
+    // let child = this.$refs.didascalies;
+    // console.log(child);
+    // let name = "Elodie";
+    // let _case = "case2";
+    //
+    // child.test(name, _case)
+  }
 };
 </script>
 <style lang="scss">

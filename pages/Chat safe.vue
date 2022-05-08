@@ -47,7 +47,7 @@ export default {
       spaceKeyCounter: 0,
       composingTime: 0,
       currentUserID: this.$getters.currentUserID()
-      
+
     };
   },
   computed: {
@@ -106,7 +106,7 @@ export default {
 
         if (eraseNumber === 1 && elapseNumber < 1) {
           return "<i>(hésite)</i>";
-        
+
         }
         // if (eraseNumber === 0 && elapseNumber > 2) {
         //   return "(wtf)";
@@ -163,7 +163,7 @@ export default {
       // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);
       //générer messages fb
     },
-    
+
     getTime() {
       return new Date().getTime();
     },

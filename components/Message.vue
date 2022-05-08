@@ -12,11 +12,7 @@
 
 export default {
   components: {},
-  props: {
-    messageId: {
-      type: String,
-    },
-  },
+  props: ['messageId'],
   data() {
     return {
       userName: "Name –",
@@ -26,7 +22,7 @@ export default {
     };
   },
   computed: {
-  
+
     route() {
       return this.$route.name;
     },
@@ -73,8 +69,10 @@ export default {
       }
     },
      getSendingUser(){
-       const userID2 = this.$getters.user(this.message.sendingUser);
+       const userID2 = this.$getters.user(this.message.sendingUser).name;
       //  this.userName =`${userID2.name} –` ;
+       this.userName = this.$getters.user(this.message.sendingUser).name;
+
     },
   },
   mounted() {

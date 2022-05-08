@@ -11,10 +11,10 @@
 </template>
 <script>
 export default {
-  props:{
-    // contactName:{
-    //   type: String
-    // }
+  props: {
+    contactName: {
+      default: "Loading...",
+    }
   },
   computed: {
     route() {
@@ -23,7 +23,6 @@ export default {
   },
   data(){
     return{
-       contactName: "Loading...",
        chatName: "Loading...",
     }
   },
@@ -39,13 +38,13 @@ export default {
       this.chatName = chatID.chatName;
 
     }
-    
-    
+
+
     },
   mounted(){
     this.getContactName();
   }
-  
+
 };
 </script>
 <style lang="scss">
