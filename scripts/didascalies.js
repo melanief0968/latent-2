@@ -75,9 +75,9 @@
       level3: {
         positive: {
           case1: [{
-            m: (e) => `${e.name} est peut être timide ${e.time}.`,
-            f: (e) => `${e.name} est peut être timide ${e.time}.`,
-            n:(e) => `${e.name} est peut être timidex ${e.time}.`,
+            m: (e) => `${e.name} est peut être timide ${e.outputValue}.`,
+            f: (e) => `${e.name} est peut être timide ${e.outputValue}.`,
+            n:(e) => `${e.name} est peut être timidex ${e.outputValue}.`,
           },{
             m: (e) => `${e.name} est peut être malade.`,
             f: (e) => `${e.name} est peut être malade.`,
@@ -93,9 +93,9 @@
         },
         negative: {
           case1: [{
-            m: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
-            f: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
-            n: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
+            m: (e) => `${e.name} semble vouloir partager ses profondes pensées${e.outputValue}.`,
+            f: (e) => `${e.name} semble vouloir partager ses profondes pensées${e.outputValue}.`,
+            n: (e) => `${e.name} semble vouloir partager ses profondes pensées${e.outputValue}.`,
           }],
           case2: [{
             m: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
