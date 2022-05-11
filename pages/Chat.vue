@@ -5,7 +5,7 @@
 
         <!--TODO v-if est workaround en attendant le watch-->
         <!--On passe le name de l'auteur dans la didascalie -->
-        <!-- <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="randomCase()"></Didascalies> -->
+        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="randomCase()"></Didascalies>
         <!--<YellowLine></YellowLine>-->
         <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
       </template>
