@@ -19,21 +19,76 @@
  const didascalies = {
   msg:{
     char: {
-      supposition: {
+      level1: {
+        positive: {
+          case1: [{
+            m: (e) => `${e.name} condense ses dires en ${e.result} lettres.`,
+            f: (e) => `${e.name} condense ses dires en ${e.result} lettres.`,
+            n:(e) => `${e.name} condense ses dires en ${e.result} lettres.`,
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          //jamais de negative
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level2: {
+        positive: {
+          case1: [{
+            m: (e) => `${e.name} est peu bavard.`,
+            f: (e) => `${e.name} est peu bavarde.`,
+            n:(e) => `${e.name} est peu bavardx.`,
+          }],
+          case2: [{
+            m: (e) => `${e.name} est peu causant.`,
+            f: (e) => `${e.name} est peu causante.`,
+            n: (e) => `${e.name} est peu causantx.`,
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+            m: (e) => `${e.name} est très bavard.`,
+            f: (e) => `${e.name} est très bavarde.`,
+            n: (e) => `${e.name} est très bavardx.`,
+          },{ 
+            m: (e) => `${e.name} est très causant.`,
+            f: (e) => `${e.name} est très causante.`,
+            n: (e) => `${e.name} est très causantx.`,
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level3: {
         positive: {
           case1: [{
             m: (e) => `${e.name} est peut être timide ${e.time}.`,
             f: (e) => `${e.name} est peut être timide ${e.time}.`,
-            n:(e) => `${e.name} est peut être timide ${e.time}.`,
+            n:(e) => `${e.name} est peut être timidex ${e.time}.`,
           },{
             m: (e) => `${e.name} est peut être malade.`,
             f: (e) => `${e.name} est peut être malade.`,
-            n: (e) => `${e.name} est peut être malade.`,
+            n: (e) => `${e.name} est peut être maladex.`,
           }],
           case2: [{
             m: (e) => `${e.name} semble être fatigué`,
             f: (e) => `${e.name} semble être fatiguée`,
             n: (e) => `${e.name} semble être fatiguéx`,
+          }],
+          case3: [{
           }],
         },
         negative: {
@@ -47,75 +102,261 @@
             f: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
             n: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
           }],
+          case3: [{
+          }],
         },
       },
-  }
-      // fait: {
-      //   neutral: [
-      //     {
-      //       m: ["${this.name} condense ses dires en ${result} lettres."],
-      //       f: ["${this.name} condense ses diresff en ${result} lettres."],
-      //       n: ["${this.name} condense ses dires en 3 lettres."],
-      //     },
-      //     {
-      //       m: {},
-      //       f: {},
-      //       n: {},
-      //     },
-      //   ],
-      // },
-  
-    // constat: {
-    //   positive: {
-    //     case1: {
-    //       m: ["${this.name} est peu bavard.", "${this.name} est peu causant."],
-    //       f: ["${this.name} est peu bavarde.", "${this.name} est peu causante."],
-    //       n: ["${this.name} est peu bavardx.", "${this.name} est peu causantx."],
-    //     },
-    //   },
-    //   negative: {
-    //     case1: {
-    //       m: ["${this.name} est très bavard.", "${this.name} est très causant."],
-    //       f: [
-    //         "${this.name} est très bavarde.",
-    //         "${this.name} est très causante.",
-    //       ],
-    //       n: [
-    //         "${this.name} est très bavardx.",
-    //         "${this.name} est très causantx.",
-    //       ],
-    //     },
-    //   },
-    // },
-    // interpretation: {
-    //   positive: {
-    //     case1: {
-    //       m: [
-    //         "La conversation n’ayant pas grand intérêt, ${this.name} se contente de s’exprimer de manière synthétique.",
-    //       ],
-    //       f: [
-    //         "La conversation n’ayant pas grand intérêt, ${this.name} se contente de s’exprimer de manière synthétique.",
-    //       ],
-    //       n: [
-    //         "La conversation n’ayant pas grand intérêt, ${this.name} se contente de s’exprimer de manière synthétique.",
-    //       ],
-    //     },
-    //   },
-    //   negative: {
-    //     case1: {
-    //       m: [
-    //         "D’excellente humeur, ${this.name} s’emballe pour décrire sa journée.",
-    //       ],
-    //       f: [
-    //         "D’excellente humeur, ${this.name} s’emballe pour décrire sa journée.",
-    //       ],
-    //       n: [
-    //         "D’excellente humeur, ${this.name} s’emballe pour décrire sa journée.",
-    //       ],
-    //     },
-    //   },
-    // },
+      level4: {
+        positive: {
+          case1: [{
+            m: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
+            f: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
+            n:(e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+            m: (e) => `D’excellente humeur, ${e.name} s’emballe pour décrire sa journée.`,
+            f: (e) => `D’excellente humeur, ${e.name} s’emballe pour décrire sa journée.`,
+            n:(e) => `D’excellente humeur, ${e.name} s’emballe pour décrire sa journée.`,
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+    },
+    erase:{
+      level1: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          //jamais de negative
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level2: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level3: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level4: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+    },
+    time:{
+      level1: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          //jamais de negative
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level2: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level3: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level4: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+    },
+    speed:{
+      level1: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          //jamais de negative
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level2: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level3: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+      level4: {
+        positive: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+        negative: {
+          case1: [{
+          }],
+          case2: [{
+          }],
+          case3: [{
+          }],
+        },
+      },
+    }
   },
-  // erase: {},
+
 };
 export default didascalies;

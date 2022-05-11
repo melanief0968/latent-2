@@ -70,6 +70,13 @@ export default {
       }else if(this.psw != this.psw2){
             this.message = USER_PSW_ERROR;
       }else{
+          if (this.gender === "Femme"){
+            this.gender = "f";
+          }else if(this.gender === "Homme"){
+            this.gender = "m";
+          }else if(this.gender === "Non binaire"){
+            this.gender = "n";
+          }
           const accountDatas = {
               username:this.username, 
               name:this.name,
@@ -78,6 +85,7 @@ export default {
               psw:this.psw,
               conversations:[],
           }
+
           const id = fb.createEntry("/users/", accountDatas);
           console.log(id, accountDatas);
           this.$router.push({

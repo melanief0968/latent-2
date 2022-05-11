@@ -69,9 +69,9 @@ export default {
       }
     },
      getSendingUser(){
-       const userID2 = this.$getters.user(this.message.sendingUser).name;
+      //  const userID2 = this.$getters.user(this.message.sendingUser).name;
       //  this.userName =`${userID2.name} –` ;
-       this.userName = this.$getters.user(this.message.sendingUser).name;
+      //  this.userName = this.$getters.user(this.message.sendingUser).name;
 
     },
   },

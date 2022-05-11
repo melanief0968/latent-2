@@ -3,7 +3,7 @@
       <h1 v-if="route === 'Index'">Index</h1>
       <h1 v-if="route === 'Contacts'">Échanges</h1>
       <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
-        <img class="icone" src="/static/img/people.png"></img>
+        <img class="icone" src="/static/img/people.png">
         <div>Nouveau dialogue</div>
       </router-link>
       <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1>

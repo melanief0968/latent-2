@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     test(name,_case){
-      this.text = didascalies["msg"]["char"]["supposition"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});
+      this.text = didascalies["msg"]["char"]["level3"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});
     }
   },
   mounted() {

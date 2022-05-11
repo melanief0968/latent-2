@@ -6,6 +6,7 @@ import * as fb from "./firebase.js";
 export const store = Vue.observable({
   messages: {},
   conversations: {},
+  didascalies: {},
   users: {},
   otherUser: {},
   fbListeners: {},
@@ -90,6 +91,24 @@ export const getters = {
 
     return store.messages[id];
   },
+  listenDidascalie(id) {
+    const didascalie = store.didascalies[id];
+    if (!didascalie) {
+      const didascalie = {};
+      actions.setDidascalie(id, didascalie);
+      const fbListener = fb.listen(`/didascalies/${id}/`, (value) => {
+        if (!value) return;
+        // store.messages[id].text = value.text;
+        Object.entries(value).forEach(([key, value]) => {
+          Vue.set(store.didascalies[id], key, value);
+        });
+      });
+
+      Vue.set(store.fbListeners, id, fbListener);
+    }
+
+    return store.didascalies[id];
+  },
 };
 
 export const actions = {
@@ -114,6 +133,9 @@ export const actions = {
   setMessage(id, value) {
     Vue.set(store.messages, id, value);
   },
+  setDidascalie(id, value) {
+    Vue.set(store.didascalies, id, value);
+  },
   setConversation(id, value) {
     Vue.set(store.conversations, id, value);
   },
@@ -122,6 +144,14 @@ export const actions = {
     if (listener) {
       listener();
       Vue.delete(store.messages, id);
+      Vue.delete(store.fbListeners, id);
+    } // removes the listener
+  },
+  unloadDidascalie(id) {
+    const listener = store.fbListeners[id];
+    if (listener) {
+      listener();
+      Vue.delete(store.didascalies, id);
       Vue.delete(store.fbListeners, id);
     } // removes the listener
   },
