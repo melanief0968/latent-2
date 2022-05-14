@@ -12,6 +12,7 @@
   --color-main: #FFBC57;
   --contrast-color: rgb(231, 231, 231);
   --background-color: #f5f4f4;
+  --dot-color: #000;
   --font-italic: Suisse Ecal Neue;
   --font-main: Inter;
   --margin-5: 5%;
@@ -73,7 +74,7 @@ select{
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-  
+
   font-family: $font-main;
   font-size: $msg-size;
   width: 50%;
@@ -92,7 +93,7 @@ button:hover, button:active{
 
 .italic{
   font-family: $font-italic;
-  
+
   font-style: italic;
 }
 

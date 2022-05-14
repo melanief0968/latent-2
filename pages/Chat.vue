@@ -1,13 +1,13 @@
 <template>
   <div class="chat-container">
     <div class="message-container">
-      <template v-for="{ message, id } in messages" v-chat-scroll>
-
+      <template v-for="{ message, id, index } in messages" v-chat-scroll>
         <!--TODO v-if est workaround en attendant le watch-->
         <!--On passe le name de l'auteur dans la didascalie -->
         <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="randomCase()"></Didascalies>
-        <!--<YellowLine></YellowLine>-->
+        <YellowLine line-height="25"></YellowLine>
         <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
+        <YellowLine v-if="index != Object.keys(messages).length - 1" :line-height="yellowLineHeight()"></YellowLine>
       </template>
     </div>
     <footer class="footerChat">
@@ -297,6 +297,10 @@ export default {
           //   const dot = document.createElement("div");
           //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
           // }
+      let height = [100, 150, 200, 50, 20, 10]
+      let random = Math.floor(Math.random() * height.length);
+      return height[random]
+
     },
     pushCoeur() {},
 
@@ -323,23 +327,23 @@ export default {
       if(this.randomLoop >=4){
         console.log("STOP")
         this.randomLoop = 0;
-        return 
+        return
       }else if(this.randomLoop <=3){
         if(char.outputSignal||erase.outputSignal||time.outputSignal||speed.outputSignal === "msg"){
           let r = this.getRandom() * 4;
           this.lastRandom = r / 4;
             if (r < 1) {
               this.chooseChar()
-            } 
+            }
             else if (r < 2) {
               this.chooseTime()
-            } 
+            }
             else if (r < 3) {
               this.chooseErase()
-            } 
+            }
             else if (r < 4) {
               this.chooseSpeed()
-            } 
+            }
             console.log(this.isChosen)
             if(this.isChosen == true){
               this.sentTime = this.getTime()
@@ -361,9 +365,9 @@ export default {
             }
 
         }else if(result.outputSignal == "change"){
-    
+
         }else if(result.outputSignal == "ratio"){
-    
+
         }else{
           return
         }
