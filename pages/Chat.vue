@@ -1,13 +1,12 @@
 <template>
   <div class="chat-container">
     <div class="message-container">
-      <template v-for="{ message, id, index } in messages" v-chat-scroll>
-        <!--TODO v-if est workaround en attendant le watch-->
+      <template v-for="{ message, id } in messages" v-chat-scroll>
         <!--On passe le name de l'auteur dans la didascalie -->
-        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="randomCase()"></Didascalies>
+        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
         <YellowLine line-height="25"></YellowLine>
         <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
-        <YellowLine v-if="index != Object.keys(messages).length - 1" :line-height="yellowLineHeight()"></YellowLine>
+        <YellowLine :line-height="yellowLineHeight()"></YellowLine>
       </template>
     </div>
     <footer class="footerChat">
@@ -86,6 +85,7 @@ export default {
   },
   methods: {
 
+
     randomCase() {
       // example de retour de string qui détérmine le case
       let cases = ['case1','case2','case3']
@@ -158,7 +158,9 @@ export default {
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
         messageType:"msg",
+        didascalie: this.chooseOutput()
       };
+        console.log(this.chooseOutput())
         // console.log(messageDatas,chatVersion);
         // console.log(this.$getters.currentChatID)
         fb.setValue(
@@ -181,6 +183,9 @@ export default {
       // this.$ref.editor.focus()
       let startWriting = this.getTime();
       console.log("CLICK")
+
+
+
       return startWriting;
     },
     startElapsedTime() {
@@ -297,7 +302,7 @@ export default {
           //   const dot = document.createElement("div");
           //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
           // }
-      let height = [100, 150, 200, 50, 20, 10]
+      let height = [100, 160, 200, 50, 20, 10]
       let random = Math.floor(Math.random() * height.length);
       return height[random]
 
@@ -344,24 +349,19 @@ export default {
             else if (r < 4) {
               this.chooseSpeed()
             }
-            console.log(this.isChosen)
+            // console.log(this.isChosen)
             if(this.isChosen == true){
               this.sentTime = this.getTime()
               console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
               //C'EST SUREMENT PAS AU BON ENDROIT QUE JE FAIS CA HELP
-              const didascaliesDatas = {
-                text: "fill with console au dessus",
-                bookText: "same",
-                messageType:"didascalie",
-                userName:  this.$getters.user(this.currentUserID).name,
-              }
-              fb.setValue(
-                `/conversations/${this.$getters.currentChatID()}/didascalies/${
-                  this.sentTime
-                }`,
-                ""
-              );
-              fb.setValue(`/didascalies/${this.sentTime}`, didascaliesDatas);
+              return "Youpi ça fonctionne!!!"
+              // fb.setValue(
+              //   `/conversations/${this.$getters.currentChatID()}/didascalies/${
+              //     this.sentTime
+              //   }`,
+              //   ""
+              // );
+              // fb.setValue(`/didascalies/${this.sentTime}`, didascaliesDatas);
             }
 
         }else if(result.outputSignal == "change"){

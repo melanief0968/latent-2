@@ -5,6 +5,7 @@
   </div>
 </template>
 <script>
+
 export default {
   props: {
     lineHeight: {
@@ -13,15 +14,9 @@ export default {
   },
   computed: {
     cssStyle() {
-      if (this.lineHeight >= 150) {
-        this.isDot = true
-      } else {
-        this.isDot = false
-      }
+      this.lineHeight > 150 ?  this.isDot = true : this.isDot = false;
+
       return { height: this.lineHeight + "px" };
-    },
-    dotDisplay() {
-      this.lineHeight >= 200 ? this.isDot = true : this.isDot = false
     },
 
   },
@@ -52,8 +47,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  height: 10px;
-  width: 10px;
+  height: 5px;
+  width: 5px;
   border-radius: 50%;
 }
 </style>
