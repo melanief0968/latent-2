@@ -7,11 +7,7 @@
 <script>
 
 export default {
-  props: {
-    lineHeight: {
-      type: Number,
-    },
-  },
+  props: ['lineHeight'],
   computed: {
     cssStyle() {
       this.lineHeight > 150 ?  this.isDot = true : this.isDot = false;

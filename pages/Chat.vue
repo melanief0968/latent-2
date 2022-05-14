@@ -84,8 +84,6 @@ export default {
 
   },
   methods: {
-
-
     randomCase() {
       // example de retour de string qui détérmine le case
       let cases = ['case1','case2','case3']
@@ -160,7 +158,6 @@ export default {
         messageType:"msg",
         didascalie: this.chooseOutput()
       };
-        console.log(this.chooseOutput())
         // console.log(messageDatas,chatVersion);
         // console.log(this.$getters.currentChatID)
         fb.setValue(
@@ -332,28 +329,32 @@ export default {
       if(this.randomLoop >=4){
         console.log("STOP")
         this.randomLoop = 0;
-        return
+        return "jsp"
       }else if(this.randomLoop <=3){
         if(char.outputSignal||erase.outputSignal||time.outputSignal||speed.outputSignal === "msg"){
           let r = this.getRandom() * 4;
           this.lastRandom = r / 4;
             if (r < 1) {
               this.chooseChar()
+              console.log("bug")
             }
             else if (r < 2) {
               this.chooseTime()
+              console.log("bug2")
             }
             else if (r < 3) {
               this.chooseErase()
+              console.log("bug4")
             }
             else if (r < 4) {
               this.chooseSpeed()
+              console.log("bug5")
             }
             // console.log(this.isChosen)
             if(this.isChosen == true){
               this.sentTime = this.getTime()
               console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-              //C'EST SUREMENT PAS AU BON ENDROIT QUE JE FAIS CA HELP
+              // return juste la value dans une data du message -> la didascalie est associée au message sans devoir créer de table fb
               return "Youpi ça fonctionne!!!"
               // fb.setValue(
               //   `/conversations/${this.$getters.currentChatID()}/didascalies/${
@@ -366,10 +367,14 @@ export default {
 
         }else if(result.outputSignal == "change"){
 
+          return "autre cas"
+
         }else if(result.outputSignal == "ratio"){
 
+          return "encore autre cas"
+
         }else{
-          return
+          return "Dernier cas"
         }
       }
     },
