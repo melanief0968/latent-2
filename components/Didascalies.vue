@@ -12,24 +12,19 @@ export default {
   didascalies
   },
   // On passe le name et le case en props pour les définir dans la boucle de chat
-  props: ['name', '_case'],
-  data() {
-    return {
-      text: "no text",
-    };
-  },
+  props: ['name', 'text'],
   computed: {
 
   },
   methods: {
-    test(name,_case){
-      this.text = didascalies["msg"]["char"]["level3"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});
-      // this.text = didascalies[outputSignal][inputType][level][result][_case][0][gender]({"name":name,outputValue:outputValue});
-
-    }
+    // test(name,_case){
+    //   // this.text = didascalies["msg"]["char"]["level3"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});
+    //   // this.text = didascalies[outputSignal][inputType][level][result][_case][0][gender]({"name":name,outputValue:outputValue});
+    //
+    // }
   },
   mounted() {
-    this.test(this.name, this._case)
+    // this.test(this.name, this._case)
   },
   beforeDestroy() {
   },

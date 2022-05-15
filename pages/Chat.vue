@@ -2,12 +2,11 @@
   <div class="chat-container">
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
-
-        <!--TODO v-if est workaround en attendant le watch-->
         <!--On passe le name de l'auteur dans la didascalie -->
-        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :_case="randomCase()"></Didascalies>
-        <!--<YellowLine></YellowLine>-->
+        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
+        <YellowLine line-height="25"></YellowLine>
         <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
+        <YellowLine :line-height="yellowLineHeight()"></YellowLine>
       </template>
     </div>
     <footer class="footerChat">
@@ -85,7 +84,6 @@ export default {
 
   },
   methods: {
-
     randomCase() {
       // example de retour de string qui détérmine le case
       let cases = ['case1','case2','case3']
@@ -160,6 +158,7 @@ export default {
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
         messageType:"msg",
+        didascalie: this.chooseOutput()
       };
         // console.log(messageDatas,chatVersion);
         // console.log(this.$getters.currentChatID)
@@ -189,6 +188,9 @@ export default {
       // this.$ref.editor.focus()
       let startWriting = this.getTime();
       console.log("CLICK")
+
+
+
       return startWriting;
     },
     startElapsedTime() {
@@ -337,6 +339,10 @@ export default {
           //   const dot = document.createElement("div");
           //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
           // }
+      let height = [100, 160, 200, 50, 20, 10]
+      let random = Math.floor(Math.random() * height.length);
+      return height[random]
+
     },
     pushDidascalie(){
       this.chooseOutput();
@@ -378,35 +384,52 @@ export default {
       if(this.randomLoop >=4){
         console.log("STOP")
         this.randomLoop = 0;
-        return 
+        return "jsp"
       }else if(this.randomLoop <=3){
         if(char.outputSignal||erase.outputSignal||time.outputSignal||speed.outputSignal === "msg"){
           let r = this.getRandom() * 4;
           this.lastRandom = r / 4;
             if (r < 1) {
               this.chooseChar()
-            } 
+              console.log("bug")
+            }
             else if (r < 2) {
               this.chooseTime()
-            } 
+              console.log("bug2")
+            }
             else if (r < 3) {
               this.chooseErase()
-            } 
+              console.log("bug4")
+            }
             else if (r < 4) {
               this.chooseSpeed()
-            } 
-            console.log(this.isChosen)
+              console.log("bug5")
+            }
+            // console.log(this.isChosen)
             if(this.isChosen == true){
               this.sentTime = this.getTime()
               console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
+              // return juste la value dans une data du message -> la didascalie est associée au message sans devoir créer de table fb
+              return "Youpi ça fonctionne!!!"
+              // fb.setValue(
+              //   `/conversations/${this.$getters.currentChatID()}/didascalies/${
+              //     this.sentTime
+              //   }`,
+              //   ""
+              // );
+              // fb.setValue(`/didascalies/${this.sentTime}`, didascaliesDatas);
             }
 
         }else if(result.outputSignal == "change"){
-    
+
+          return "autre cas"
+
         }else if(result.outputSignal == "ratio"){
-    
+
+          return "encore autre cas"
+
         }else{
-          return
+          return "Dernier cas"
         }
       }
     },

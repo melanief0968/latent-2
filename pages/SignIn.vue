@@ -78,7 +78,7 @@ export default {
             this.gender = "n";
           }
           const accountDatas = {
-              username:this.username, 
+              username:this.username,
               name:this.name,
               surname:this.surname,
               gender:this.gender,
@@ -96,14 +96,14 @@ export default {
           });
           this.$actions.setCurrentUserID(id);
           // console.log(this.$store);
-        
-              
+
+
       }
     },
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .signInPage {
   width: 100%;
   height: 100%;
