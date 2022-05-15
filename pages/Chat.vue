@@ -108,6 +108,8 @@ export default {
 
 
     onSubmit(event) {
+      this.onSignal()
+      this.getTimelaps()
       // console.log(ev);
       // console.log(Didascalies)
       this.stopElapsedTime();
@@ -172,9 +174,15 @@ export default {
       this.isChosen = false;
       return;
     },
-
+    onSignal(){
+      console.log(this.getDate())
+      // if(this.getDate ==)
+    },
     getTime() {
       return new Date().getTime();
+    },
+    getDate() {
+      return new Date();
     },
     firstTime(){
       // this.$ref.editor.focus()
@@ -260,7 +268,39 @@ export default {
       }
       return RESULT;
     },
+    getTimelaps(){
+      //if 10 didascalies
+      //random
+        let day = this.getDate().getDay();
+        let days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+        //debut de semaine, weekend, 
+        //saison
 
+        let monthName=  this.getDate().toLocaleString('default', { month: 'long' })
+
+        let dayName = days[day-1];
+        let hour = this.getDate().getHours();
+        let min = this.getDate().getMinutes();
+        let sec = this.getDate().getSeconds();
+        let month = this.getDate().getMonth()+1;
+        let year = this.getDate().getFullYear();
+
+      const DATE= {
+        hour,
+        min,
+        sec,
+        dayName,
+        monthName,
+        day,
+        month,
+        year
+      }
+      this.outputValue = {dayName,day,monthName}
+      console.log(DATE);
+
+      
+
+    },
     getTimeBetweenMessages() {
       let lastMessageID;
       let beforeLastMessageID;
@@ -304,7 +344,22 @@ export default {
       return height[random]
 
     },
-    pushCoeur() {},
+    pushDidascalie(){
+      this.chooseOutput();
+      const didascaliesDatas = {
+        text: "créer une phrase et fill with console in chooseOutput",
+        bookText: "same",
+        messageType:"didascalie",
+        userName:  this.$getters.user(this.currentUserID).name,
+      }
+      fb.setValue(
+        `/conversations/${this.$getters.currentChatID()}/didascalies/${
+          this.sentTime
+        }`,
+        ""
+      );
+      fb.setValue(`/didascalies/${this.sentTime}`, didascaliesDatas);
+    },
 
     intimacyLevel(){
       //!faire vrai calcul
@@ -389,6 +444,7 @@ export default {
         }
       }
     },
+
     chooseChar(){
       let char = this.getCharAmount();
       console.log("I WAS IN CHAR")

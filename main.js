@@ -25,5 +25,4 @@ FIREBASE.login(() => {
   }).$mount("#app");
 });
 
-// actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
 router.replace("/login");
