@@ -19,7 +19,7 @@ export default {
   methods: {
     // test(name,_case){
     //   // this.text = didascalies["msg"]["char"]["level3"]["positive"][_case][0]["m"]({"name":name,"time":"6h"});
-    //   // this.text = didascalies[outputSignal][inputType][level][result][_case][0][gender]({"name":name,outputValue:outputValue});
+      // this.text = didascalies[outputSignal][inputType][level][result][_case][0][gender]({"name":name,outputValue:outputValue});
     //
     // }
   },
