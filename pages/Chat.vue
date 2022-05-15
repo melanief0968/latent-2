@@ -1,7 +1,7 @@
 <template>
   <div class="chat-container">
-    <div class="message-container">
-      <template v-for="{ message, id } in messages" v-chat-scroll>
+    <div class="message-container" v-chat-scroll>
+      <template v-for="{ message, id } in messages">
         <!--On passe le name de l'auteur dans la didascalie -->
         <Didascalies v-if="message.userName !==undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
         <YellowLine line-height="25"></YellowLine>
@@ -310,11 +310,11 @@ export default {
       //!faire vrai calcul
     //  console.log(this.getTimeBetweenMessages().result)
       if(this.getTimeBetweenMessages().result === "positive"){
-        this.level = 2;
+        this.level = "level2";
       }else if (this.getTimeBetweenMessages().result === "negative"){
-        this.level = 1;
+        this.level = "level1";
       }else{
-        this.level = 3;
+        this.level = "level3";
       }
       // console.log("level:"+this.level)
       return this.level
@@ -355,7 +355,18 @@ export default {
               this.sentTime = this.getTime()
               console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
               // return juste la value dans une data du message -> la didascalie est associée au message sans devoir créer de table fb
-              return "Youpi ça fonctionne!!!"
+              // return "Youpi ça fonctionne!!!"
+              const pushDid = did[this.outputSignal][this.inputType][this.level][this.posNegResult][this.randomCase()][0][this.gender]({"name":this.name,outputValue: this.outputValue});
+              //[this.inputType][this.level][this.result][this.randomCase()][0][this.gender]({"name":this.name,outputValue: this.outputValue})
+              //[inputType][level][result][_case][0][gender]({"name":this.name,outputValue:outputValue});
+              if(pushDid === undefined){
+                console.log("LOL YA R")
+                return
+              }else{
+                console.log(pushDid)
+                return pushDid
+
+              }
               // fb.setValue(
               //   `/conversations/${this.$getters.currentChatID()}/didascalies/${
               //     this.sentTime
