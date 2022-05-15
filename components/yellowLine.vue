@@ -1,6 +1,8 @@
 <template>
   <div class="line-container">
-    <div class="dot" v-if="isDot"></div>
+    <div v-if="this.$route" v-for="dot in dots">
+      <div class="dot"></div>
+    </div>
     <div class="yellowLine" :style="cssStyle"></div>
   </div>
 </template>
@@ -14,12 +16,17 @@ export default {
 
       return { height: this.lineHeight + "px" };
     },
+    addDot() {
+      // 24h +
+      this.dots = [0, 1]
+    }
 
   },
 
   data() {
     return {
       isDot: false,
+      dots: []
     };
   },
 };

@@ -1,5 +1,4 @@
 // vue
-import Vue from "vue";
 import App from "./App.vue";
 import router from "./router.js";
 import VueRouter from "vue-router";
@@ -19,7 +18,7 @@ Vue.prototype.$getters = getters;
 // vuex, store
 // console.log(firebaseConfig);
 Vue.use(VueRouter);
-// Vue.use(VueChatScroll);
+Vue.use(VueChatScroll);
 
 FIREBASE.login(() => {
   new Vue({

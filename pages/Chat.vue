@@ -273,7 +273,7 @@ export default {
       //random
         let day = this.getDate().getDay();
         let days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
-        //debut de semaine, weekend, 
+        //debut de semaine, weekend,
         //saison
 
         let monthName=  this.getDate().toLocaleString('default', { month: 'long' })
@@ -298,7 +298,7 @@ export default {
       this.outputValue = {dayName,day,monthName}
       console.log(DATE);
 
-      
+
 
     },
     getTimeBetweenMessages() {
@@ -620,10 +620,12 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
   margin: auto;
+}
+.message-container {
+  overflow: scroll;
 }
 
 .footerChat {
