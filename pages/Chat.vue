@@ -54,18 +54,11 @@ export default {
       name: "",
       userName: '',
       did,
-      level: 1,
-      lastRandom: -1,
       inputType:"",
       gender:"",
-      posNegResult:"",
       outputSignal:"",
       outputValue:"",
-      randomLoop:0,
-      isChosen: false,
       timeBetweenMessages:0,
-      index:0,
-      case:"case1",
     };
   },
   computed: {
@@ -82,12 +75,9 @@ export default {
       return messages;
     },
 
-
-
   },
   methods: {
     randomCase() {
-      // example de retour de string qui détérmine le case
       let cases = ['case1','case2','case3']
       let random = Math.floor(Math.random() * cases.length);
       const _case = cases[random];
@@ -121,7 +111,6 @@ export default {
     onSubmit(event) {
       this.onSignal()
       this.getTimelaps()
-      // console.log(ev);
       // console.log(Didascalies)
       this.stopElapsedTime();
       this.sentTime = this.getTime();
@@ -254,8 +243,8 @@ export default {
         outputValue :this.deleteKeyCounter,
         inputType: "erase"
       }
-      // console.log(this.deleteKeyCounter);
-      if (this.deleteKeyCounter <= 4 && this.deleteKeyCounter >= 1) {
+      console.log(this.deleteKeyCounter);
+      if (this.deleteKeyCounter <= 6 && this.deleteKeyCounter >= 4) {
         RESULT.result = "positive";
       } else if (this.deleteKeyCounter >= 10) {
         RESULT.result = "negative";
@@ -473,13 +462,6 @@ export default {
     this.$refs.editor.insertElapsedTime();
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-
-    // let child = this.$refs.didascalies;
-    // console.log(child);
-    // let name = "Elodie";
-    // let _case = "case2";
-    //
-    // child.test(name, _case)
   }
 };
 </script>
