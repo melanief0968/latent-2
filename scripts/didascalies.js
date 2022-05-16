@@ -42,19 +42,14 @@
             f: (e) => `Le message de ${e.name} mesure ${e.outputValue} signes.`,
             n: (e) => `Le message de ${e.name} mesure ${e.outputValue} signes.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
         negative: {
           //jamais de negative
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level2: {
@@ -69,8 +64,7 @@
             f: (e) => `${e.name} est peu causante.`,
             n: (e) => `${e.name} est peu causantx.`,
           }],
-          case3: [{
-          }],
+          case3: [],
         },
         negative: {
           case1: [{
@@ -82,18 +76,16 @@
             f: (e) => `${e.name} est très causante.`,
             n: (e) => `${e.name} est très causantx.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
       },
       level3: {
         positive: {
           case1: [{
-            m: (e) => `${e.name} est peut être timide ${e.outputValue}.`,
-            f: (e) => `${e.name} est peut être timide ${e.outputValue}.`,
-            n:(e) => `${e.name} est peut être timidex ${e.outputValue}.`,
+            m: (e) => `${e.name} est peut être timide`,
+            f: (e) => `${e.name} est peut être timide`,
+            n:(e) => `${e.name} est peut être timidex`,
           },{
             m: (e) => `${e.name} est peut être malade.`,
             f: (e) => `${e.name} est peut être malade.`,
@@ -112,8 +104,7 @@
             f: (e) => `L’attention sans cesse accaparée, ${e.name} semble distraite par la scène qui se déroule devant ses yeux et répond abruptement`,
             n: (e) => `L’attention sans cesse accaparée, ${e.name} semble distraitx par la scène qui se déroule devant ses yeux et répond abruptement`,
           }],
-          case3: [{
-          }],
+          case3: [],
         },
         negative: {
           case1: [{
@@ -126,8 +117,7 @@
             f: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
             n: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
           }],
-          case3: [{
-          }],
+          case3: [],
         },
       },
       level4: {
@@ -137,10 +127,8 @@
             f: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
             n:(e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
         negative: {
           case1: [{
@@ -152,10 +140,8 @@
             f: (e) => `Plus que concentrée, ${e.name} prend le temps de rédiger des messages consistants.`,
             n:(e) => `Plus que concentréx, ${e.name} prend le temps de rédiger des messages consistants.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
       },
     },
@@ -167,148 +153,101 @@
             f: (e) => `${e.name} semble vouloir partager ses profondes pensées${e.outputValue}.`,
             n: (e) => `${e.name} semble vouloir partager ses profondes pensées${e.outputValue}.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
         negative: {
           //jamais de negative
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level2: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level3: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level4: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
     },
     time:{
       level1: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
           //jamais de negative
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level2: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level3: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level4: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
     },
@@ -324,29 +263,21 @@
             f: (e) => `${e.name} rédige son message à une allure de ${e.outputValue} mots par minute.`,
             n:(e) => `${e.name} rédige son message à une allure de ${e.outputValue} mots par minute.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
         negative: {
           //jamais de negative
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level2: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
           case1: [{
@@ -354,10 +285,8 @@
             f: (e) => `${e.name} prend soin de choisir ses mots, cette discussion doit lui tenir à coeur.`,
             n:(e) => `${e.name} prend soin de choisir ses mots, cette discussion doit lui tenir à coeur.`,
           }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case2: [],
+          case3: [],
         },
       },
       level3: {
@@ -372,34 +301,24 @@
             f: (e) => `Plus rien autour n’a l’air d’importer, ${e.name} a l’air tout emoustillé par la conversation.`,
             n:(e) => `Plus rien autour n’a l’air d’importer, ${e.name} a l’air tout emoustillé par la conversation.`,
           }],
-          case3: [{
-          }],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
       level4: {
         positive: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
         negative: {
-          case1: [{
-          }],
-          case2: [{
-          }],
-          case3: [{
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
         },
       },
     }

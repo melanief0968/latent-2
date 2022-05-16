@@ -53,7 +53,7 @@ export default {
       currentUserID: this.$getters.currentUserID(),
       name: "",
       userName: '',
-      did:did,
+      did,
       level: 1,
       lastRandom: -1,
       inputType:"",
@@ -64,6 +64,8 @@ export default {
       randomLoop:0,
       isChosen: false,
       timeBetweenMessages:0,
+      index:0,
+      case:"case1",
     };
   },
   computed: {
@@ -88,7 +90,16 @@ export default {
       // example de retour de string qui détérmine le case
       let cases = ['case1','case2','case3']
       let random = Math.floor(Math.random() * cases.length);
-      return cases[random]
+      const _case = cases[random];
+      //console.log(_case)
+      return _case;
+
+    },
+    randomIndex() {
+      let indexes = [0,1,2,3,4,5]
+      let random = Math.floor(Math.random() * indexes.length);
+      this.index = indexes[random];
+      return this.index
 
     },
 
@@ -99,7 +110,7 @@ export default {
       if(this.keyDownCounter === 1){
         return this.firstKeyTime = this.getTime();
       }
-      if (ev.key.space) {
+      if (ev.keyCode == 32) {
         console.log("SPACE");
       }
       return;
@@ -130,7 +141,6 @@ export default {
       const bookVersion = event.value.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
-
         if (eraseNumber === 1 && elapseNumber < 1) {
           return "<i>(hésite)</i>";
 
@@ -160,7 +170,7 @@ export default {
         messageType:"msg",
         didascalie: this.chooseOutput()
       };
-        // console.log(messageDatas,chatVersion);
+        console.log(messageDatas,chatVersion);
         // console.log(this.$getters.currentChatID)
         fb.setValue(
           `/conversations/${this.$getters.currentChatID()}/messages/${
@@ -175,8 +185,16 @@ export default {
       return;
     },
     onSignal(){
-      console.log(this.getDate())
-      // if(this.getDate ==)
+      console.log (this.getTimelaps().dayName)
+      if(this.getTimelaps().day === 1){
+          //didascalie
+          this.outputSignal = "ratio"
+         const DATA = {
+            outputSignal : this.outputSignal
+          }
+          return DATA
+      }
+
     },
     getTime() {
       return new Date().getTime();
@@ -187,10 +205,6 @@ export default {
     firstTime(){
       // this.$ref.editor.focus()
       let startWriting = this.getTime();
-      console.log("CLICK")
-
-
-
       return startWriting;
     },
     startElapsedTime() {
@@ -219,7 +233,8 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :keydownNumber
+        outputValue :keydownNumber,
+        inputType: "char"
       }
       if (keydownNumber <= 5 && keydownNumber >= 0 ) {
         RESULT.result = "positive";
@@ -236,7 +251,8 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :this.deleteKeyCounter
+        outputValue :this.deleteKeyCounter,
+        inputType: "erase"
       }
       // console.log(this.deleteKeyCounter);
       if (this.deleteKeyCounter <= 4 && this.deleteKeyCounter >= 1) {
@@ -258,7 +274,8 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :wordsPerMin
+        outputValue :wordsPerMin,
+        inputType: "speed"
       }
       if (wordsPerMin <= 28) {
         RESULT.result = "negative";
@@ -271,19 +288,19 @@ export default {
     getTimelaps(){
       //if 10 didascalies
       //random
-        let day = this.getDate().getDay();
-        let days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+      let day = this.getDate().getDay();
+      let days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
         //debut de semaine, weekend,
         //saison
 
-        let monthName=  this.getDate().toLocaleString('default', { month: 'long' })
+      let monthName=  this.getDate().toLocaleString('default', { month: 'long' })
 
-        let dayName = days[day-1];
-        let hour = this.getDate().getHours();
-        let min = this.getDate().getMinutes();
-        let sec = this.getDate().getSeconds();
-        let month = this.getDate().getMonth()+1;
-        let year = this.getDate().getFullYear();
+      let dayName = days[day-1];
+      let hour = this.getDate().getHours();
+      let min = this.getDate().getMinutes();
+      let sec = this.getDate().getSeconds();
+      let month = this.getDate().getMonth()+1;
+      let year = this.getDate().getFullYear();
 
       const DATE= {
         hour,
@@ -296,8 +313,8 @@ export default {
         year
       }
       this.outputValue = {dayName,day,monthName}
-      console.log(DATE);
-
+      // console.log(DATE);
+      return DATE
 
 
     },
@@ -309,7 +326,8 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :""
+        outputValue :"",
+        inputType: "time"
       }
       //REECRIRE AU PROPRE AVEC STORE
       fb.listen(
@@ -364,188 +382,54 @@ export default {
     intimacyLevel(){
       //!faire vrai calcul
     //  console.log(this.getTimeBetweenMessages().result)
+      let level = "level1";
       if(this.getTimeBetweenMessages().result === "positive"){
-        this.level = "level2";
+        level = "level2";
       }else if (this.getTimeBetweenMessages().result === "negative"){
-        this.level = "level1";
+        level = "level1";
       }else{
-        this.level = "level3";
+        level = "level3";
       }
       // console.log("level:"+this.level)
-      return this.level
+      return level
     },
-    chooseOutput() {
-      this.intimacyLevel()
-      let char = this.getCharAmount();
-      let erase = this.getEraseAmount();
-      let time = this.getTimeBetweenMessages();
-      let speed = this.getWritingSpeed();
 
-      if(this.randomLoop >=4){
-        console.log("STOP")
-        this.randomLoop = 0;
-        return "jsp"
-      }else if(this.randomLoop <=3){
-        if(char.outputSignal||erase.outputSignal||time.outputSignal||speed.outputSignal === "msg"){
-          let r = this.getRandom() * 4;
-          this.lastRandom = r / 4;
-            if (r < 1) {
-              this.chooseChar()
-              console.log("bug")
-            }
-            else if (r < 2) {
-              this.chooseTime()
-              console.log("bug2")
-            }
-            else if (r < 3) {
-              this.chooseErase()
-              console.log("bug4")
-            }
-            else if (r < 4) {
-              this.chooseSpeed()
-              console.log("bug5")
-            }
-            // console.log(this.isChosen)
-            if(this.isChosen == true){
-              this.sentTime = this.getTime()
-              console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-              // return juste la value dans une data du message -> la didascalie est associée au message sans devoir créer de table fb
-              // return "Youpi ça fonctionne!!!"
-              const pushDid = did[this.outputSignal][this.inputType][this.level][this.posNegResult][this.randomCase()][0][this.gender]({"name":this.name,outputValue: this.outputValue});
-              //[this.inputType][this.level][this.result][this.randomCase()][0][this.gender]({"name":this.name,outputValue: this.outputValue})
-              //[inputType][level][result][_case][0][gender]({"name":this.name,outputValue:outputValue});
-              if(pushDid === undefined){
-                console.log("LOL YA R")
-                return
-              }else{
-                console.log(pushDid)
-                return pushDid
-
-              }
-              // fb.setValue(
-              //   `/conversations/${this.$getters.currentChatID()}/didascalies/${
-              //     this.sentTime
-              //   }`,
-              //   ""
-              // );
-              // fb.setValue(`/didascalies/${this.sentTime}`, didascaliesDatas);
-            }
-
-        }else if(result.outputSignal == "change"){
-
-          return "autre cas"
-
-        }else if(result.outputSignal == "ratio"){
-
-          return "encore autre cas"
-
+    getResult(_array,level,_case){
+        if(_array.length>0){
+          let pushDid = null;
+          const shuffledArr = _array.sort(() => 0.5 - Math.random());
+          console.log(_array,shuffledArr);
+          const output = shuffledArr[0];
+          console.log(output);
+          //--> 'positif', 'negatif', ''
+          if(output.result == ''){
+            shuffledArr.shift();
+            this.getResult(shuffledArr,level,_case);
+          }else{
+            const indexNbr = did[output.outputSignal][output.inputType][level][output.result][_case].length;
+            const index = Math.floor(Math.random()*indexNbr);
+            console.log("Didascalie : ",output.inputType,level,output.result,_case);
+            pushDid = did[output.outputSignal][output.inputType][level][output.result][_case][index][this.gender]({"name":this.name,"outputValue": output.outputValue});
+            return pushDid;
+          }
         }else{
-          return "Dernier cas"
+          return null;
         }
-      }
     },
 
-    chooseChar(){
+    chooseOutput() {
+      const level = this.intimacyLevel();
+      const _case = this.randomCase();
       let char = this.getCharAmount();
-      console.log("I WAS IN CHAR")
-      // console.log ("char result:"+ char.result)
-      if(char.result ==="positive"){
-        console.log("I WAS IN POS-CHAR")
-        this.posNegResult = "positive"
-        this.outputSignal = char.outputSignal;
-        this.inputType = "char";
-        this.outputValue = char.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else if(char.result ==="negative"){
-        console.log("I WAS IN NEG-CHAR")
-        this.posNegResult = "negative"
-        this.outputSignal = char.outputSignal;
-        this.inputType = "char";
-        this.outputValue = char.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else{
-        console.log("NO CHAR RESULT")
-        this.randomLoop ++
-        this.chooseOutput();
-      }
-    },
-    chooseTime(){
-      let time = this.getTimeBetweenMessages();
-      console.log("I WAS IN TIME")
-      if(time.result ==="positive"){
-        console.log("I WAS IN POS-TIME")
-        this.posNegResult = "positive"
-        this.outputSignal = time.outputSignal;
-        this.inputType = "time";
-        this.outputValue = time.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else if(time.result ==="negative"){
-        console.log("I WAS IN NEG-TIME")
-        this.posNegResult = "negative"
-        this.outputSignal = time.outputSignal;
-        this.inputType = "time";
-        this.outputValue = time.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else{
-        console.log("NO TIME RESULT")
-        this.randomLoop ++
-        this.chooseOutput();
-      }
-    },
-    chooseErase(){
       let erase = this.getEraseAmount();
-      console.log("I WAS IN erase")
-      if(erase.result ==="positive"){
-        console.log("I WAS IN POS-ERASE")
-        this.posNegResult = "positive"
-        this.outputSignal = erase.outputSignal;
-        this.inputType = "erase";
-        this.outputValue = erase.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else if(erase.result ==="negative"){
-        console.log("I WAS IN NEG-ERASE")
-        this.posNegResult = "negative"
-        this.outputSignal = erase.outputSignal;
-        this.inputType = "erase";
-        this.outputValue = erase.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else{
-        console.log("NO ERASE RESULT")
-        this.randomLoop ++
-        this.chooseOutput();
-      }
-    },
-    chooseSpeed(){
+      let time = this.getTimeBetweenMessages();
       let speed = this.getWritingSpeed();
-      console.log("I WAS IN speed")
-      if(speed.result ==="positive"){
-        console.log("I WAS IN POS-SPEED")
-        this.posNegResult = "positive"
-        this.outputSignal = speed.outputSignal;
-        this.inputType = "speed";
-        this.outputValue = speed.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else if(speed.result ==="negative"){
-        console.log("I WAS IN NEG-SPEED")
-        this.posNegResult = "negative"
-        this.outputSignal = speed.outputSignal;
-        this.inputType = "speed";
-        this.outputValue = speed.outputValue;
-        this.isChosen = true;
-        // console.log("msg:"+this.outputSignal, " calcul:"+this.inputType, " level:"+this.level, " result:"+this.posNegResult, " case:"+this.randomCase()," index :?",this.gender, " value:"+this.outputValue)
-      }else{
-        console.log("NO speed RESULT")
-        this.randomLoop ++
-        this.chooseOutput();
-      }
+
+      const allOutputs = [char,erase,time,speed];
+      return this.getResult(allOutputs,level, _case);
+        
     },
+
     getTimeDatas(time) {
       //hr, min, sec, day, daytime, weekday, month, year, period
       const calcSeconds = Math.floor((time / 1000) % 60);
@@ -577,20 +461,6 @@ export default {
         days
       }
       return TIME;
-    },
-    getRandom(){
-      let threshold = 0.25;
-      let random = Math.random();
-      if (Math.abs(random - this.lastRandom) < threshold) {
-        // console.log("swap");
-        if (random < 0.5) {
-          random += 0.5;
-        } else {
-          random -= 0.5;
-        }
-      }
-      // console.log(random);
-      return random;
     },
   },
 

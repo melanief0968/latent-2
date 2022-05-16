@@ -68,15 +68,15 @@ export default {
       }else{
       }
     },
-     getSendingUser(){
-       const userID2 = this.$getters.user(this.message.sendingUser).name;
-       this.userName =`${userID2} –` ;
-      //  this.userName = this.$getters.user(this.message.sendingUser).name;
+    //  getSendingUser(){
+    //    const userID2 = this.$getters.user(this.message.sendingUser).name;
+    //    this.userName =`${userID2} –` ;
+    //   //  this.userName = this.$getters.user(this.message.sendingUser).name;
 
-    },
+    // },
   },
   mounted() {
-    this.getSendingUser()
+    // this.getSendingUser()
     this.changeDisplay();
   },
   beforeDestroy() {
