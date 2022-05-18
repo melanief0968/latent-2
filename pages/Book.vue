@@ -2,11 +2,13 @@
   <div class="book-container">
     <div class="message-container">
       <template v-for="{ message, id } in messages" v-chat-scroll>
+        <Didascalies v-if="message.userName !==undefined || message.didascalie !=undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
         <Message v-if="true" :key="id" :messageId="id"></Message>
-        <Didascalies
+
+        <!-- <Didascalies
           v-else-if="message.type === 'didascalie'"
           :key="id"
-        ></Didascalies>
+        ></Didascalies> -->
       </template>
     </div>
     <!-- <footer class="footerChat">
@@ -50,7 +52,7 @@ export default {
       if (this.conversation && this.conversation.messages) {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
-          // console.log(message);
+          // console.log(message.bookText);
            messages.push({ id: messageId, message });
         });
       }
@@ -66,7 +68,7 @@ export default {
 
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-
+    
 
   },
 };

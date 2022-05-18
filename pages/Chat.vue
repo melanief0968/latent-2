@@ -2,8 +2,7 @@
   <div class="chat-container">
     <div class="message-container" v-chat-scroll>
       <template v-for="{ message, id } in messages">
-        <!--On passe le name de l'auteur dans la didascalie -->
-        <Didascalies v-if="message.userName !==undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
+        <Didascalies v-if="message.userName !==undefined || message.didascalie !=undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
         <YellowLine line-height="25"></YellowLine>
         <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
         <YellowLine :line-height="yellowLineHeight()"></YellowLine>
@@ -134,15 +133,15 @@ export default {
           return "<i>(hésite)</i>";
 
         }
-        // if (eraseNumber === 0 && elapseNumber > 2) {
-        //   return "(wtf)";
-        // }
+        if (eraseNumber === 3) {
+          return "(wtf)";
+        }
         // if (eraseNumber === 0 && elapseNumber > 2) {
         //   return "(wtf)";
         // }
         else{
 
-          return "<i>(it works)</i>";
+          // return "<i>(it works)</i>";
         }
       });
 
@@ -218,7 +217,6 @@ export default {
     getCharAmount() {
       //comment compter uniquement les chars ?
       let keydownNumber = this.keyDownCounter;
-
       const RESULT = {
         result: "",
         outputSignal: "msg",
@@ -351,23 +349,7 @@ export default {
       return height[random]
 
     },
-    pushDidascalie(){
-      this.chooseOutput();
-      const didascaliesDatas = {
-        text: "créer une phrase et fill with console in chooseOutput",
-        bookText: "same",
-        messageType:"didascalie",
-        userName:  this.$getters.user(this.currentUserID).name,
-      }
-      fb.setValue(
-        `/conversations/${this.$getters.currentChatID()}/didascalies/${
-          this.sentTime
-        }`,
-        ""
-      );
-      fb.setValue(`/didascalies/${this.sentTime}`, didascaliesDatas);
-    },
-
+   
     intimacyLevel(){
       //!faire vrai calcul
     //  console.log(this.getTimeBetweenMessages().result)
@@ -407,8 +389,11 @@ export default {
     },
 
     chooseOutput() {
+      let _case = this.randomCase();
       const level = this.intimacyLevel();
-      const _case = this.randomCase();
+      if(level == "level1"){
+        _case = "case3";
+      }
       let char = this.getCharAmount();
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
@@ -417,6 +402,37 @@ export default {
       const allOutputs = [char,erase,time,speed];
       return this.getResult(allOutputs,level, _case);
         
+    },
+
+    setTimeRatio(){
+      if(this.getTimelaps().min == "58"){
+        this.sentTime = this.getTime();
+        console.log("its happening")
+        //!OK IM LOSTTTTTTTTTTTTTTTTTTTTTTTTTTT
+        const messageDatas = {
+        // text: undefined,
+        // bookText: undefined,
+        sendingUser: this.currentUserID,
+        userName:  this.$getters.user(this.currentUserID).name,
+        sentTime: this.sentTime,
+        // charAmount: this.keyDownCounter,
+        // eraseAmount: this.deleteKeyCounter,
+        // typingSpeed: this.getWritingSpeed().outputValue,
+        // coordinates: "",
+        // messageType:"msg",
+        didascalie: this.chooseOutput()
+      };
+        console.log(messageDatas);
+        // console.log(this.$getters.currentChatID)
+      //   fb.setValue(
+      //     `/conversations/${this.$getters.currentChatID()}/messages/${
+      //       this.sentTime
+      //     }`,
+      //     ""
+      //   );
+      //   fb.setValue(`/messages/${this.sentTime}`, messageDatas);
+      // }else{
+       }
     },
 
     getTimeDatas(time) {
@@ -443,12 +459,13 @@ export default {
       if (calcDays < 1) {
         days = "";
       }
-      const TIME = {
-        seconds,
-        minutes,
-        hours,
-        days
-      }
+      // const TIME = {
+      //   seconds,
+      //   minutes,
+      //   hours,
+      //   days
+      // }
+      const TIME = minutes
       return TIME;
     },
   },
@@ -462,6 +479,10 @@ export default {
     this.$refs.editor.insertElapsedTime();
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
+    setTimeout(() => {
+        this.setTimeRatio()
+      },5000);
+
   }
 };
 </script>
