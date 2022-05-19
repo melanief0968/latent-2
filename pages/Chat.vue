@@ -2,10 +2,26 @@
   <div class="chat-container">
     <div class="message-container" v-chat-scroll>
       <template v-for="{ message, id } in messages">
-        <Didascalies v-if="message.userName !==undefined || message.didascalie !=undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
-        <YellowLine line-height="25"></YellowLine>
-        <Message v-if="true" :key="id" :author="userName" :messageId="id"></Message>
-        <YellowLine :line-height="yellowLineHeight()"></YellowLine>
+        <YellowLine
+          v-if="message.messageType === 'msg'"
+          line-height="25"
+        ></YellowLine>
+
+        <Didascalies
+          v-if="message.messageType === 'did'"
+          :name="message.userName"
+          :text="message.didascalie"
+        ></Didascalies>
+        <Message
+          v-else-if="message.messageType === 'msg'"
+          :key="id"
+          :author="userName"
+          :messageId="id"
+        ></Message>
+        <YellowLine
+          v-else-if="message.messageType === 'time'"
+          :line-height="yellowLineHeight()"
+        ></YellowLine>
       </template>
     </div>
     <footer class="footerChat">
@@ -29,6 +45,7 @@ import YellowLine from "../components/YellowLine.vue";
 import did from "@/scripts/didascalies.js";
 import InputMessage from "../components/InputMessage.vue";
 import { countCharOccurance } from "@/utils/string.js";
+import { getAttributes } from "@tiptap/core";
 
 export default {
   components: {
@@ -36,7 +53,7 @@ export default {
     Didascalies,
     InputMessage,
     did,
-    YellowLine
+    YellowLine,
   },
   data() {
     return {
@@ -51,13 +68,13 @@ export default {
       spaceKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
       name: "",
-      userName: '',
+      userName: "",
       did,
-      inputType:"",
-      gender:"",
-      outputSignal:"",
-      outputValue:"",
-      timeBetweenMessages:0,
+      inputType: "",
+      gender: "",
+      outputSignal: "",
+      outputValue: "",
+      timeBetweenMessages: 0,
     };
   },
   computed: {
@@ -67,71 +84,93 @@ export default {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
           // console.log(message);
-           messages.push({ id: messageId, message });
+          // console.log(message.messageType);
+          messages.push({ id: messageId, message });
         });
       }
 
       return messages;
     },
-
   },
   methods: {
+    getBaseMsg() {
+      return {
+        sendingUser: this.currentUserID,
+        userName: this.$getters.user(this.currentUserID).name,
+        // sentTime: this.sentTime,
+      };
+    },
     randomCase() {
-      let cases = ['case1','case2','case3']
+      let cases = ["case1", "case2", "case3"];
       let random = Math.floor(Math.random() * cases.length);
       const _case = cases[random];
       //console.log(_case)
       return _case;
-
     },
     randomIndex() {
-      let indexes = [0,1,2,3,4,5]
+      let indexes = [0, 1, 2, 3, 4, 5];
       let random = Math.floor(Math.random() * indexes.length);
       this.index = indexes[random];
-      return this.index
-
+      return this.index;
     },
 
     keysCount(ev) {
       this.startElapsedTime();
       //seulement au first + enlever autres touches que les lettres et chiffres
       this.keyDownCounter++;
-      if(this.keyDownCounter === 1){
-        return this.firstKeyTime = this.getTime();
+      if (this.keyDownCounter === 1) {
+        return (this.firstKeyTime = this.getTime());
       }
       if (ev.keyCode == 32) {
         console.log("SPACE");
       }
       return;
-
     },
 
+    sendDidascalie(time) {
+      const didascalie = this.chooseDidascalie();
+
+      if (!didascalie) return;
+
+      const base = this.getBaseMsg()
+      const didMessage = {
+        ...base,
+        messageType: "did",
+        sentTime: time,
+        didascalie,
+      };
+
+      this.sendMessage(didMessage);
+    },
 
     onSubmit(event) {
-      this.onSignal()
-      this.getTimelaps()
+      this.onSignal();
+      this.getTimelaps();
       // console.log(Didascalies)
       this.stopElapsedTime();
       this.sentTime = this.getTime();
       // console.log(this.getCharAmount());
-      this.chooseOutput()
+      // this.chooseOutput();
       // console.log(this.getWritingSpeed())
       // console.log(this.getTimeBetweenMessages())
       // console.log(this.getEraseAmount())
       // console.log(this.name)
 
-
-
-      const chatVersion = event.value;
-      if(chatVersion == ""){
-        return
+      const text = event.value;
+      const chatVersion = text;
+      if (chatVersion == "") {
+        return;
       }
-      const bookVersion = event.value.replace(/[•|\–]+/g, (string) => {
+
+      const numChars = text
+        .replace(/[•|\–]+/g, "") // remove special chars
+        .replace(/\s/g, "").length; // remove all spaces
+
+      const bookVersion = text.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
         if (eraseNumber === 1 && elapseNumber < 1) {
           return "<i>(hésite)</i>";
-
         }
         if (eraseNumber === 3) {
           return "(wtf)";
@@ -139,50 +178,67 @@ export default {
         // if (eraseNumber === 0 && elapseNumber > 2) {
         //   return "(wtf)";
         // }
-        else{
-
+        else {
           // return "<i>(it works)</i>";
         }
       });
 
-      const messageDatas = {
+      const baseMessage = this.getBaseMsg()
+      const timeMessage = {
+        ...baseMessage,
+        messageType: "time",
+        sentTime: this.sentTime++, //! to have unique id, even if same time
+      };
+
+      // ++this.sentTime;
+      // this.sentTime++;
+      // this.sentTime+1
+      // this.sentTime+=1
+      // this.sentTime=this.sentTime+1
+
+      const textMessage = {
+        ...baseMessage,
+        sentTime: this.sentTime++,
         text: chatVersion,
         bookText: bookVersion,
-        sendingUser: this.currentUserID,
-        userName:  this.$getters.user(this.currentUserID).name,
-        sentTime: this.sentTime,
         charAmount: this.keyDownCounter,
         eraseAmount: this.deleteKeyCounter,
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
-        messageType:"msg",
-        didascalie: this.chooseOutput()
+        messageType: "msg",
       };
-        console.log(messageDatas,chatVersion);
-        // console.log(this.$getters.currentChatID)
-        fb.setValue(
-          `/conversations/${this.$getters.currentChatID()}/messages/${
-            this.sentTime
-          }`,
-          ""
-        );
-        fb.setValue(`/messages/${this.sentTime}`, messageDatas);
+
+      // console.log(message, chatVersion);
+
+      if (true) this.sendMessage(timeMessage);
+      this.sendDidascalie(this.sentTime++);
+      this.sendMessage(textMessage);
+      // console.log(this.$getters.currentChatID)
+
       this.keyDownCounter = 0;
       this.deleteKeyCounter = 0;
       this.isChosen = false;
       return;
     },
-    onSignal(){
-      console.log (this.getTimelaps().dayName)
-      if(this.getTimelaps().day === 1){
-          //didascalie
-          this.outputSignal = "ratio"
-         const DATA = {
-            outputSignal : this.outputSignal
-          }
-          return DATA
-      }
+    sendMessage(message) {
+      const messageId = message.sentTime;
 
+      fb.setValue(
+        `/conversations/${this.$getters.currentChatID()}/messages/${messageId}`,
+        ""
+      );
+      fb.setValue(`/messages/${messageId}`, message);
+    },
+    onSignal() {
+      console.log(this.getTimelaps().dayName);
+      if (this.getTimelaps().day === 1) {
+        //didascalie
+        this.outputSignal = "ratio";
+        const DATA = {
+          outputSignal: this.outputSignal,
+        };
+        return DATA;
+      }
     },
     getTime() {
       return new Date().getTime();
@@ -190,13 +246,13 @@ export default {
     getDate() {
       return new Date();
     },
-    firstTime(){
+    firstTime() {
       // this.$ref.editor.focus()
       let startWriting = this.getTime();
       return startWriting;
     },
     startElapsedTime() {
-    this.requestElapsedTime(2500);
+      this.requestElapsedTime(2500);
     },
 
     requestElapsedTime(millis) {
@@ -207,7 +263,7 @@ export default {
     },
 
     onElapsedTime() {
-      this.$refs.editor.insertElapsedTime();
+      // this.$refs.editor.insertElapsedTime();
       this.requestElapsedTime(800); // ms
     },
 
@@ -220,10 +276,10 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :keydownNumber,
-        inputType: "char"
-      }
-      if (keydownNumber <= 5 && keydownNumber >= 0 ) {
+        outputValue: keydownNumber,
+        inputType: "char",
+      };
+      if (keydownNumber <= 5 && keydownNumber >= 0) {
         RESULT.result = "positive";
       } else if (keydownNumber >= 90) {
         RESULT.result = "negative";
@@ -231,24 +287,22 @@ export default {
       }
       return RESULT;
     },
-    getEraseAmount(){
-      // this.$refs.editor.onErase();
+    getEraseAmount() {
       this.deleteKeyCounter++;
-      console.log("JEFFACE")
+      console.log("JEFFACE");
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :this.deleteKeyCounter,
-        inputType: "erase"
-      }
+        outputValue: this.deleteKeyCounter,
+        inputType: "erase",
+      };
       console.log(this.deleteKeyCounter);
       if (this.deleteKeyCounter <= 6 && this.deleteKeyCounter >= 4) {
         RESULT.result = "positive";
       } else if (this.deleteKeyCounter >= 10) {
         RESULT.result = "negative";
       }
-      return RESULT
-
+      return RESULT;
     },
     getWritingTime() {
       let writingTime = this.sentTime - this.firstKeyTime;
@@ -261,9 +315,9 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :wordsPerMin,
-        inputType: "speed"
-      }
+        outputValue: wordsPerMin,
+        inputType: "speed",
+      };
       if (wordsPerMin <= 28) {
         RESULT.result = "negative";
       } else if (wordsPerMin >= 90) {
@@ -272,24 +326,34 @@ export default {
       }
       return RESULT;
     },
-    getTimelaps(){
+    getTimelaps() {
       //if 10 didascalies
       //random
       let day = this.getDate().getDay();
-      let days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
-        //debut de semaine, weekend,
-        //saison
+      let days = [
+        "lundi",
+        "mardi",
+        "mercredi",
+        "jeudi",
+        "vendredi",
+        "samedi",
+        "dimanche",
+      ];
+      //debut de semaine, weekend,
+      //saison
 
-      let monthName=  this.getDate().toLocaleString('default', { month: 'long' })
+      let monthName = this.getDate().toLocaleString("default", {
+        month: "long",
+      });
 
-      let dayName = days[day-1];
+      let dayName = days[day - 1];
       let hour = this.getDate().getHours();
       let min = this.getDate().getMinutes();
       let sec = this.getDate().getSeconds();
-      let month = this.getDate().getMonth()+1;
+      let month = this.getDate().getMonth() + 1;
       let year = this.getDate().getFullYear();
 
-      const DATE= {
+      const DATE = {
         hour,
         min,
         sec,
@@ -297,13 +361,11 @@ export default {
         monthName,
         day,
         month,
-        year
-      }
-      this.outputValue = {dayName,day,monthName}
+        year,
+      };
+      this.outputValue = { dayName, day, monthName };
       // console.log(DATE);
-      return DATE
-
-
+      return DATE;
     },
     getTimeBetweenMessages() {
       let lastMessageID;
@@ -313,9 +375,9 @@ export default {
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue :"",
-        inputType: "time"
-      }
+        outputValue: "",
+        inputType: "time",
+      };
       //REECRIRE AU PROPRE AVEC STORE
       fb.listen(
         `/conversations/${this.$getters.currentChatID()}/messages/`,
@@ -324,74 +386,88 @@ export default {
           lastMessageID = keys[keys.length - 1];
           beforeLastMessageID = keys[keys.length - 2];
           this.timeBetweenMessages = lastMessageID - beforeLastMessageID;
-          let TIME = this.getTimeDatas(this.timeBetweenMessages)
+          let TIME = this.getTimeDatas(this.timeBetweenMessages);
           if (this.timeBetweenMessages <= 3000) {
             RESULT.result = "positive";
             RESULT.outputValue = TIME;
           } else if (this.timeBetweenMessages >= 1000 * 60 * 60) {
             RESULT.result = "negative";
             RESULT.outputValue = TIME;
-          }else{}
+          } else {
+          }
         }
       );
-      return RESULT
+      return RESULT;
     },
-    yellowLineHeight(){
-          // let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
-          // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
-          // for (let i = 0; i < days; i++) {
-          //   const dotContainer = document.createElement("div");
-          //   const dot = document.createElement("div");
-          //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
-          // }
-      let height = [100, 160, 200, 50, 20, 10]
+    yellowLineHeight() {
+      // let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
+      // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
+      // for (let i = 0; i < days; i++) {
+      //   const dotContainer = document.createElement("div");
+      //   const dot = document.createElement("div");
+      //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
+      // }
+      let height = [100, 160, 200, 50, 20, 10];
       let random = Math.floor(Math.random() * height.length);
-      return height[random]
-
+      return height[random];
     },
-   
-    intimacyLevel(){
+
+    intimacyLevel() {
       //!faire vrai calcul
-    //  console.log(this.getTimeBetweenMessages().result)
+      //  console.log(this.getTimeBetweenMessages().result)
       let level = "level1";
-      if(this.getTimeBetweenMessages().result === "positive"){
+      if (this.getTimeBetweenMessages().result === "positive") {
         level = "level2";
-      }else if (this.getTimeBetweenMessages().result === "negative"){
+      } else if (this.getTimeBetweenMessages().result === "negative") {
         level = "level1";
-      }else{
+      } else {
         level = "level3";
       }
       // console.log("level:"+this.level)
-      return level
+      return level;
     },
 
-    getResult(_array,level,_case){
-        if(_array.length>0){
-          let pushDid = null;
-          const shuffledArr = _array.sort(() => 0.5 - Math.random());
-          console.log(_array,shuffledArr);
-          const output = shuffledArr[0];
-          console.log(output);
-          //--> 'positif', 'negatif', ''
-          if(output.result == ''){
-            shuffledArr.shift();
-            this.getResult(shuffledArr,level,_case);
-          }else{
-            const indexNbr = did[output.outputSignal][output.inputType][level][output.result][_case].length;
-            const index = Math.floor(Math.random()*indexNbr);
-            console.log("Didascalie : ",output.inputType,level,output.result,_case);
-            pushDid = did[output.outputSignal][output.inputType][level][output.result][_case][index][this.gender]({"name":this.name,"outputValue": output.outputValue});
-            return pushDid;
-          }
-        }else{
-          return null;
+    getResult(_array, level, _case) {
+      if (_array.length > 0) {
+        let pushDid = null;
+        const shuffledArr = _array.sort(() => 0.5 - Math.random());
+        console.log(_array, shuffledArr);
+        const output = shuffledArr[0];
+        console.log(output);
+        //--> 'positif', 'negatif', ''
+        if (output.result == "") {
+          shuffledArr.shift();
+          this.getResult(shuffledArr, level, _case);
+        } else {
+          const indexNbr =
+            did[output.outputSignal][output.inputType][level][output.result][
+              _case
+            ].length;
+          const index = Math.floor(Math.random() * indexNbr);
+          console.log(
+            "Didascalie : ",
+            output.inputType,
+            level,
+            output.result,
+            _case
+          );
+          pushDid = did[output.outputSignal][output.inputType][level][
+            output.result
+          ][_case][index][this.gender]({
+            name: this.name,
+            outputValue: output.outputValue,
+          });
+          return pushDid;
         }
+      } else {
+        return null;
+      }
     },
 
-    chooseOutput() {
+    chooseDidascalie() {
       let _case = this.randomCase();
       const level = this.intimacyLevel();
-      if(level == "level1"){
+      if (level == "level1") {
         _case = "case3";
       }
       let char = this.getCharAmount();
@@ -399,40 +475,39 @@ export default {
       let time = this.getTimeBetweenMessages();
       let speed = this.getWritingSpeed();
 
-      const allOutputs = [char,erase,time,speed];
-      return this.getResult(allOutputs,level, _case);
-        
+      const allOutputs = [char, erase, time, speed];
+      return this.getResult(allOutputs, level, _case);
     },
 
-    setTimeRatio(){
-      if(this.getTimelaps().min == "58"){
+    setTimeRatio() {
+      if (this.getTimelaps().min == "58") {
         this.sentTime = this.getTime();
-        console.log("its happening")
+        console.log("its happening");
         //!OK IM LOSTTTTTTTTTTTTTTTTTTTTTTTTTTT
         const messageDatas = {
-        // text: undefined,
-        // bookText: undefined,
-        sendingUser: this.currentUserID,
-        userName:  this.$getters.user(this.currentUserID).name,
-        sentTime: this.sentTime,
-        // charAmount: this.keyDownCounter,
-        // eraseAmount: this.deleteKeyCounter,
-        // typingSpeed: this.getWritingSpeed().outputValue,
-        // coordinates: "",
-        // messageType:"msg",
-        didascalie: this.chooseOutput()
-      };
+          // text: undefined,
+          // bookText: undefined,
+          sendingUser: this.currentUserID,
+          userName: this.$getters.user(this.currentUserID).name,
+          sentTime: this.sentTime,
+          // charAmount: this.keyDownCounter,
+          // eraseAmount: this.deleteKeyCounter,
+          // typingSpeed: this.getWritingSpeed().outputValue,
+          // coordinates: "",
+          // messageType:"msg",
+          didascalie: this.chooseDidascalie(),
+        };
         console.log(messageDatas);
         // console.log(this.$getters.currentChatID)
-      //   fb.setValue(
-      //     `/conversations/${this.$getters.currentChatID()}/messages/${
-      //       this.sentTime
-      //     }`,
-      //     ""
-      //   );
-      //   fb.setValue(`/messages/${this.sentTime}`, messageDatas);
-      // }else{
-       }
+        //   fb.setValue(
+        //     `/conversations/${this.$getters.currentChatID()}/messages/${
+        //       this.sentTime
+        //     }`,
+        //     ""
+        //   );
+        //   fb.setValue(`/messages/${this.sentTime}`, messageDatas);
+        // }else{
+      }
     },
 
     getTimeDatas(time) {
@@ -465,7 +540,7 @@ export default {
       //   hours,
       //   days
       // }
-      const TIME = minutes
+      const TIME = minutes;
       return TIME;
     },
   },
@@ -476,14 +551,13 @@ export default {
   mounted() {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
-    this.$refs.editor.insertElapsedTime();
+    // this.$refs.editor.insertElapsedTime();
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
     setTimeout(() => {
-        this.setTimeRatio()
-      },5000);
-
-  }
+      this.setTimeRatio();
+    }, 5000);
+  },
 };
 </script>
 <style lang="scss">

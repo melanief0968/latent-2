@@ -11,11 +11,11 @@
 </template>
 <script>
 export default {
-  props: {
-    contactName: {
-      default: "Loading...",
-    }
-  },
+  // props: {
+  //   contactName: {
+  //     default: "Loading...",
+  //   }
+  // },
   computed: {
     route() {
       return this.$route.name;
@@ -24,6 +24,7 @@ export default {
   data(){
     return{
        chatName: "Loading...",
+       contactName: "Loading...",
     }
   },
   methods: {

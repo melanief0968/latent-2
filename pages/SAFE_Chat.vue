@@ -179,7 +179,7 @@ export default {
     },
 
     onElapsedTime() {
-      this.$refs.editor.insertElapsedTime();
+      // this.$refs.editor.insertElapsedTime();
       this.requestElapsedTime(800); // ms
     },
 
@@ -258,7 +258,7 @@ export default {
   },
 
   mounted() {
-    this.$refs.editor.insertElapsedTime();
+    // this.$refs.editor.insertElapsedTime();
     const userKK = this.$getters.currentUserID();
     const userKKK = this.$getters.user(userKK);
 

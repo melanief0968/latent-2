@@ -1,6 +1,6 @@
 <template>
   <div class="messageBox" :class="cssClasses">
-    <div class="messageName" v-if="route === 'Book'">{{userName}} </div>
+    <div class="messageName" v-if="route === 'Book'">{{ user.name }} –</div>
     <div :class="switchDisplay" v-if="message">
       {{ text }}
     </div>
@@ -12,28 +12,32 @@
 
 export default {
   components: {},
-  props: ['messageId'],
+  props: ["messageId"],
   data() {
     return {
-      userName: "Name –",
       message: this.$getters.listenMessage(this.messageId),
       isBook: false,
-      isChat:true,
+      isChat: true,
     };
   },
   computed: {
-
     route() {
       return this.$route.name;
     },
+    user() {
+      return this.$getters.user(this.message.sendingUser) || {}
+    },
+    // username() {
+    //   return this.user?.name;
+    // },
     text() {
       if (!this.message.text) return "";
-       if(this.$route.name === "Chat"){
-         return this.message.text  
-        };
-       if(this.$route.name === "Book"){
-         return this.message.bookText  
-        };
+      if (this.$route.name === "Chat") {
+        return this.message.text;
+      }
+      if (this.$route.name === "Book") {
+        return this.message.bookText;
+      }
 
       //WTF IS THAT
       // return this.message.text.replace(/[•|\*]/g, (char) => {
@@ -44,44 +48,42 @@ export default {
     cssClasses() {
       const userID = this.$getters.currentUserID();
       //console.log(this.message.sendingUser);
-      if(this.$route.name === "Chat"){
+      if (this.$route.name === "Chat") {
         return {
           toRight: this.message.sendingUser === userID,
         };
-
       }
     },
-    switchDisplay(){
-        if (this.$route.name === "Book"){
-          return{
-            sentence: this.isBook = true,
-            message: this.isChat = false
-          }
-        }else{
-           return{
-            sentence: this.isBook = false,
-            message: this.isChat = true
-          }
-        }
+    switchDisplay() {
+      if (this.$route.name === "Book") {
+        return {
+          sentence: (this.isBook = true),
+          message: (this.isChat = false),
+        };
+      } else {
+        return {
+          sentence: (this.isBook = false),
+          message: (this.isChat = true),
+        };
+      }
     },
   },
 
   methods: {
-      changeDisplay(){
-      if (this.$route.name === "Book"){
+    changeDisplay() {
+      if (this.$route.name === "Book") {
         this.isBook = true;
-      }else{
+      } else {
       }
     },
-    //  getSendingUser(){
-    //    const userID2 = this.$getters.user(this.message.sendingUser).name;
-    //    this.userName =`${userID2} –` ;
+    // getSendingUser() {
+    //   return ;
     //   //  this.userName = this.$getters.user(this.message.sendingUser).name;
-
     // },
   },
   mounted() {
-    // this.getSendingUser()
+    // console.log(this.getSendingUser());
+    // this.user = this.getSendingUser();
     this.changeDisplay();
   },
   beforeDestroy() {
@@ -134,20 +136,20 @@ export default {
 //   display: flex;
 //   width: 100%;
 
-  .sentence {
-    padding: 10px;
-    width: 90%;
-    max-width: 70%;
-    word-break: break-word;
-    color: black;
-    font-size: $msg-size;
-    font-family: $font-main;
-  }
+.sentence {
+  padding: 10px;
+  width: 90%;
+  max-width: 70%;
+  word-break: break-word;
+  color: black;
+  font-size: $msg-size;
+  font-family: $font-main;
+}
 // }
-  .messageName {
-    padding: 10px 0 10px 10px;
-    font-size: $msg-size;
-    font-family: $font-main;
-    text-transform: uppercase;
-  }
+.messageName {
+  padding: 10px 0 10px 10px;
+  font-size: $msg-size;
+  font-family: $font-main;
+  text-transform: uppercase;
+}
 </style>
