@@ -1,5 +1,5 @@
 <template>
-  <span v-touch:swipe.right="swipeHandler">
+  <div v-touch:swipe.right="swipeHandler">
     <div class="book-container">
       <div class="message-container">
         <template v-for="{ message, id } in messages" v-chat-scroll>
@@ -21,7 +21,7 @@
         ></InputMessage>
       </footer> -->
    </div>
-  </span>
+  </div>
 </template>
 <script>
 import Message from "@/components/Message.vue";
@@ -88,6 +88,30 @@ export default {
   overflow-x: hidden;
   position: relative;
   margin: auto;
+}
+
+.right-enter-active, .right-leave-active {
+  transition: transform 0.2s;
+}
+
+.right-enter, .right-leave-to {
+  transform: translateX(100%);
+}
+
+.right-enter-to, .right-leave {
+  transform: translateX(0);
+}
+
+.left-enter-active, .left-leave-active {
+  transition: transform 0.2s;
+}
+
+.left-enter, .left-leave-to {
+  transform: translateX(-100%);
+}
+
+.left-enter-to, .left-leave {
+  transform: translateY(0);
 }
 
 .footerBook {

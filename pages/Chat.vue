@@ -1,5 +1,5 @@
 <template>
-  <span v-touch:swipe.left="swipeHandler">
+  <div v-touch:swipe.left="swipeHandler">
   <div class="chat-container">
     <div class="message-container" v-chat-scroll>
       <template v-for="{ message, id } in messages">
@@ -38,7 +38,7 @@
     <!-- //! footer here -->
     <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
   </div>
-    </span>
+    </div>
 </template>
 <script>
 import Message from "@/components/Message.vue";

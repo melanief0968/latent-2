@@ -9,6 +9,9 @@ import Book from "./pages/Book.vue";
 
 const router = new Router({
   mode: "history",
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  },
   routes: [
     { path: "/login", name: "Login", component: Login },
     { path: "/contacts", name: "Contacts", component: Contacts },

@@ -6,7 +6,9 @@
     <HeaderChat v-if="route === 'Chat'"></HeaderChat>
     <HeaderChat v-else-if="route === 'Book'"></HeaderChat>
     <main class="main">
-      <router-view></router-view>
+      <transition :name="transitionName">
+        <router-view></router-view>
+      </transition>
     </main>
     <Footer v-if="route === 'Contacts'"></Footer>
     <!-- <FooterChat v-if="route === 'Chat'"></FooterChat> -->
@@ -37,6 +39,7 @@ export default {
 
   data() {
     return {
+      transitionName: '',
       // pageTitle: "Contacts"
     };
   },
@@ -51,9 +54,21 @@ export default {
       //     this.update();
       //   });
     },
+
     buttonClick() {
       // console.log('hello');
     },
+  },
+  watch: {
+    '$route' (to, from) {
+      if (to.path === '/chat' && from.path === '/book') {
+        this.transitionName = 'right';
+      } else if (to.path === '/book' && from.path === '/chat') {
+        this.transitionName = 'left';
+      } else {
+        this.transitionName = '';
+      }
+    }
   },
 };
 </script>
