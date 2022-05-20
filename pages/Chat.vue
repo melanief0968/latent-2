@@ -1,4 +1,5 @@
 <template>
+  <span v-touch:swipe.left="swipeHandler">
   <div class="chat-container">
     <div class="message-container" v-chat-scroll>
       <template v-for="{ message, id } in messages">
@@ -37,6 +38,7 @@
     <!-- //! footer here -->
     <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
   </div>
+    </span>
 </template>
 <script>
 import Message from "@/components/Message.vue";
@@ -94,6 +96,9 @@ export default {
     },
   },
   methods: {
+    swipeHandler() {
+      this.$router.replace({ path: '/book' })
+    },
     getBaseMsg() {
       return {
         sendingUser: this.currentUserID,
