@@ -3,7 +3,7 @@
     <div class="message-container" v-chat-scroll>
       <template v-for="{ message, id } in messages">
         <YellowLine
-          v-if="message.messageType === 'msg'"
+          v-if="message.messageType === 'did'"
           line-height="25"
         ></YellowLine>
 
@@ -21,6 +21,7 @@
         <YellowLine
           v-else-if="message.messageType === 'time'"
           :line-height="yellowLineHeight()"
+          :nbDots="getNbDots()"
         ></YellowLine>
       </template>
     </div>
@@ -400,16 +401,25 @@ export default {
       return RESULT;
     },
     yellowLineHeight() {
+      //manque le calcul, actuellement renvoie timeBetweenMessages avec une valeur de 0, surement plus haut que ça coince
       // let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
-      // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
+      // console.log(height)
+
+
       // for (let i = 0; i < days; i++) {
       //   const dotContainer = document.createElement("div");
       //   const dot = document.createElement("div");
       //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
       // }
-      let height = [100, 160, 200, 50, 20, 10];
-      let random = Math.floor(Math.random() * height.length);
-      return height[random];
+      // let rHeight = [100, 160, 200, 50, 20, 10];
+      // let random = Math.floor(Math.random() * rHeight.length);
+      return 300;
+    },
+    getNbDots() {
+      //manque le calcul renvoie valeure nulle
+      // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
+      // console.log(days)
+      return 4
     },
 
     intimacyLevel() {
