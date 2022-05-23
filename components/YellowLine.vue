@@ -1,7 +1,7 @@
 <template>
   <div class="line-container">
-    <div v-if="this.$route" v-for="dot in dots">
-      <div class="dot"></div>
+    <div v-if="nbDots && this.$route.name === 'Chat' " class="dotContainer">
+      <div v-for="dot in nbDots" class="dot"></div>
     </div>
     <div class="yellowLine" :style="cssStyle"></div>
   </div>
@@ -9,25 +9,14 @@
 <script>
 
 export default {
-  props: ['lineHeight'],
+  props: ['lineHeight', 'nbDots'],
   computed: {
     cssStyle() {
-      this.lineHeight > 150 ?  this.isDot = true : this.isDot = false;
-
       return { height: this.lineHeight + "px" };
     },
-    addDot() {
-      // 24h +
-      this.dots = [0, 1]
-    }
-
-  },
-
-  data() {
-    return {
-      isDot: false,
-      dots: []
-    };
+    route() {
+      return this.$route.name;
+    },
   },
 };
 </script>
@@ -43,13 +32,18 @@ export default {
   height: 50px;
   width: 2px;
 }
+.dotContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .dot {
   background: var(--dot-color);
   display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   height: 5px;
   width: 5px;
   border-radius: 50%;

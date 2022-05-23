@@ -4,6 +4,9 @@ import router from "./router.js";
 import VueRouter from "vue-router";
 import Vue from 'vue';
 import VueChatScroll from 'vue-chat-scroll'
+//doc https://www.npmjs.com/package/vue2-touch-events
+import Vue2TouchEvents from 'vue2-touch-events'
+
 
 import * as FIREBASE from "./scripts/firebase.js";
 
@@ -19,6 +22,7 @@ Vue.prototype.$getters = getters;
 // console.log(firebaseConfig);
 Vue.use(VueRouter);
 Vue.use(VueChatScroll);
+Vue.use(Vue2TouchEvents);
 
 FIREBASE.login(() => {
   new Vue({
