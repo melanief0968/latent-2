@@ -263,7 +263,7 @@ export default {
     },
 
     onElapsedTime() {
-      // this.$refs.editor.insertElapsedTime();
+      this.$refs.editor.insertElapsedTime();
       this.requestElapsedTime(800); // ms
     },
 

@@ -1,20 +1,3 @@
-// // https://stackoverflow.com/questions/19075461/generate-one-random-index-from-an-array-but-exclude-one-javascript
-// const SEXE = "m";
-// const TYPE = "char";
-// const ACTION = "fait";
-// const RESULT = "neutral";
-// const INDEX = 0;
-// const OPTIONS = {
-//   name: "Mélanie",
-// };
-
-// didascalies[TYPE][ACTION][RESULT][INDEX][SEXE](OPTIONS);
-// const did = "hi didascalie";
-// export default did;
-
-// export function chooseDidascalies({ type, action, result }) {
-//   return didascalies[type][action][result];
-// }
 
  const didascalies = {
   msg:{
