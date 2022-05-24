@@ -406,9 +406,10 @@ export default {
       return RESULT;
     },
     yellowLineHeight() {
+      this.getTimeBetweenMessages()
       //manque le calcul, actuellement renvoie timeBetweenMessages avec une valeur de 0, surement plus haut que ça coince
-      // let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
-      // console.log(height)
+      let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
+      console.log(height)
 
 
       // for (let i = 0; i < days; i++) {

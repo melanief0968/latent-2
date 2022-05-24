@@ -39,6 +39,9 @@ export default {
     textShown() {
       return `${this.title}`;
     },
+    subTextShown(){
+      //acte, scène, persos
+    }
   },
 };
 </script>

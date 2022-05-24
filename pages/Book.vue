@@ -2,6 +2,7 @@
   <!-- <div v-touch:swipe.right="swipeHandler"> -->
     <div class="book-container slider">
       <section class="message-book-container slider__content">
+          <div class="description-container">Page de descrption personnage</div>
         <template v-for="{ message, id } in messages" v-chat-scroll>
           <Didascalies v-if="message.userName !==undefined || message.didascalie !=undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
           <Message v-if="true" :key="id" :messageId="id"></Message>
@@ -124,6 +125,9 @@ export default {
   columns: 2;
   column-gap: 0;
   column-width: 100%;
+}
+.description-container{
+  height: 100%;
 }
 .right-enter-active, .right-leave-active {
   transition: transform 0.2s;
