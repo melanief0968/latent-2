@@ -8,10 +8,10 @@
       <img class="icone" src="/static/img/people.png">
       <div>Profil</div> 
     </router-link>
-    <router-link buttonIcone v-if="route === 'Contacts'" to="/login">
+    <!-- <router-link buttonIcone v-if="route === 'Contacts'" to="/login">
       <img class="icone" src="/static/img/library.png">
       <div>Bibliothèque</div>
-    </router-link>
+    </router-link> -->
 
 
   </footer>

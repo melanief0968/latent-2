@@ -1,7 +1,7 @@
 <template>
-  <div v-touch:swipe.right="swipeHandler">
-    <div class="book-container">
-      <div class="message-container">
+  <!-- <div v-touch:swipe.right="swipeHandler"> -->
+    <div class="book-container slider">
+      <section class="message-book-container slider__content">
         <template v-for="{ message, id } in messages" v-chat-scroll>
           <Didascalies v-if="message.userName !==undefined || message.didascalie !=undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
           <Message v-if="true" :key="id" :messageId="id"></Message>
@@ -11,27 +11,33 @@
             :key="id"
           ></Didascalies> -->
         </template>
-      </div>
-      <!-- <footer class="footerChat">
-        <InputMessage
-          ref="editor"
-          @submit="onSubmit"
-          @delete="deleteCount"
-          @keydown="keysCount"
-        ></InputMessage>
-      </footer> -->
+      </section>
+      <!-- <div v-for="slider in sliders" class="slider__snap"></div> -->
+      <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+      <footer class="footerBook">
+        <FooterBook></FooterBook>
+    </footer>
    </div>
-  </div>
+  <!-- </div> -->
 </template>
 <script>
 import Message from "@/components/Message.vue";
 import * as fb from "@/scripts/firebase.js";
 import Didascalies from "../components/Didascalies.vue";
+import FooterBook from "../components/FooterBook.vue";
 
 export default {
   components: {
     Message,
     Didascalies,
+    FooterBook
   },
   data() {
     return {
@@ -61,12 +67,22 @@ export default {
 
       return messages;
     },
+    // sliders(){
+    //   const sliders = [];
 
+    // }
   },
   methods: {
     swipeHandler() {
       this.$router.replace({ path: '/chat' })
     },
+    swipePage(){
+      let items = document.querySelectorAll('section');
+	    for (let i = 0; i < items.length; i++){
+		  items[i].style.background = randomColor({luminosity: 'light'});
+	}
+	  cssScrollSnapPolyfill()
+    }
   },
   mounted() {
 
@@ -79,17 +95,36 @@ export default {
 </script>
 <style lang="scss">
 .book-container {
-  height: 100%;
+  height: 95%;
   width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  position: relative;
-  margin: auto;
+  background-color: #F8F6F2;
 }
-
+.slider {
+  margin: 5% 5% 5% 5%;
+  position: relative;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  overflow-x: scroll;
+}
+.slider__snap {
+  // box-shadow: inset 0px 0px 0 1px black;
+  min-width: 100%;
+  height: 100%;
+  // padding: 2em;
+  scroll-snap-align: start;
+  text-align: center;
+  position: relative;
+}
+.slider__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% * 2);
+  height: 100%;
+  columns: 2;
+  column-gap: 0;
+  column-width: 100%;
+}
 .right-enter-active, .right-leave-active {
   transition: transform 0.2s;
 }
@@ -115,6 +150,13 @@ export default {
 }
 
 .footerBook {
-
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-family: $font-main;
+  background: $background-color;
+  position: fixed;
 }
+
 </style>

@@ -11,7 +11,11 @@
   </header>
 </template>
 <script>
+
 export default {
+  components:{
+
+  },
   props:{
     // contactName:{
     //   type: String

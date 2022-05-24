@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <GoBack v-if="route != 'Login'"></GoBack>
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
     <Header v-if="route === 'NewContact'"></Header>
@@ -11,11 +12,13 @@
       </transition>
     </main>
     <Footer v-if="route === 'Contacts'"></Footer>
+
     <!-- <FooterChat v-if="route === 'Chat'"></FooterChat> -->
   </div>
 </template>
 <script>
 // import { defineComponent } from '@vue/composition-api'
+import GoBack from "@/components/GoBack.vue";   
 import Bubble from "./components/Bubble.vue";
 import HeaderChat from "./components/HeaderChat.vue";
 import Header from "./components/Header.vue";
@@ -28,7 +31,8 @@ export default {
     HeaderChat,
     Header,
     Footer,
-    FooterChat,
+    GoBack
+    // FooterChat,
   },
 
   computed: {

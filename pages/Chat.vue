@@ -1,44 +1,44 @@
 <template>
   <div v-touch:swipe.left="swipeHandler">
-  <div class="chat-container">
-    <div class="message-container" v-chat-scroll>
-      <template v-for="{ message, id } in messages">
-        <YellowLine
-          v-if="message.messageType === 'did'"
-          line-height="25"
-        ></YellowLine>
+      <div class="chat-container">
+        <div class="message-container" v-chat-scroll>
+          <template v-for="{ message, id } in messages">
+            <YellowLine
+              v-if="message.messageType === 'did'"
+              line-height="25"
+            ></YellowLine>
 
-        <Didascalies
-          v-if="message.messageType === 'did'"
-          :name="message.userName"
-          :text="message.didascalie"
-        ></Didascalies>
-        <Message
-          v-else-if="message.messageType === 'msg'"
-          :key="id"
-          :author="userName"
-          :messageId="id"
-        ></Message>
-        <YellowLine
-          v-else-if="message.messageType === 'time'"
-          :line-height="yellowLineHeight()"
-          :nbDots="getNbDots()"
-        ></YellowLine>
-      </template>
-    </div>
-    <footer class="footerChat">
-      <InputMessage
-        ref="editor"
-        @submit="onSubmit"
-        @delete="getEraseAmount"
-        @keydown="keysCount"
-        @focus="firstTime"
-      ></InputMessage>
-    </footer>
-    <!-- //! footer here -->
-    <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
+            <Didascalies
+              v-if="message.messageType === 'did'"
+              :name="message.userName"
+              :text="message.didascalie"
+            ></Didascalies>
+            <Message
+              v-else-if="message.messageType === 'msg'"
+              :key="id"
+              :author="userName"
+              :messageId="id"
+            ></Message>
+            <YellowLine
+              v-else-if="message.messageType === 'time'"
+              :line-height="yellowLineHeight()"
+              :nbDots="getNbDots()"
+            ></YellowLine>
+          </template>
+        </div>
+        <footer class="footerChat">
+          <InputMessage
+            ref="editor"
+            @submit="onSubmit"
+            @delete="getEraseAmount"
+            @keydown="keysCount"
+            @focus="firstTime"
+          ></InputMessage>
+        </footer>
+        <!-- //! footer here -->
+        <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
+      </div>
   </div>
-    </div>
 </template>
 <script>
 import Message from "@/components/Message.vue";
