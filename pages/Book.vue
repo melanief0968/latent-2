@@ -22,6 +22,8 @@
 	    </div>
 	    <div class="slider__snap">
 	    </div>
+	    <div class="slider__snap">
+	    </div>
       <footer class="footerBook">
         <FooterBook></FooterBook>
     </footer>

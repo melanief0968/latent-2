@@ -39,7 +39,7 @@ export default {
         return this.message.bookText;
       }
 
-      //WTF IS THAT
+
       // return this.message.text.replace(/[•|\*]/g, (char) => {
       //   if (char === "•") return '<span class="elapse">•</span>';
       //   else if (char === "*") return '<span class="erase">*</span>';

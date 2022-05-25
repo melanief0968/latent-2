@@ -189,7 +189,7 @@ export default {
         //   return "(wtf)";
         // }
         else {
-          // return "<i>(it works)</i>";
+          return "<i>(it works)</i>";
         }
       });
 
@@ -229,6 +229,9 @@ export default {
       this.deleteKeyCounter = 0;
       this.isChosen = false;
       return;
+    },
+    sendLine(){
+      
     },
     sendMessage(message) {
       const messageId = message.sentTime;
@@ -377,6 +380,26 @@ export default {
       // console.log(DATE);
       return DATE;
     },
+    getEllapseTime(){
+      // fb.listen(
+      //   `/conversations/${this.$getters.currentChatID()}/messages/`,
+      //   (value) => {
+      //     const keys = Object.keys(value);
+      //     lastMessageID = keys[keys.length - 1];
+      //     beforeLastMessageID = keys[keys.length - 2];
+      //     this.timeBetweenMessages = lastMessageID - beforeLastMessageID;
+      //     let TIME = this.getTimeDatas(this.timeBetweenMessages);
+      //     if (this.timeBetweenMessages <= 3000) {
+      //       RESULT.result = "positive";
+      //       RESULT.outputValue = TIME;
+      //     } else if (this.timeBetweenMessages >= 1000 * 60 * 60) {
+      //       RESULT.result = "negative";
+      //       RESULT.outputValue = TIME;
+      //     } else {
+      //     }
+      //   }
+      // );
+    },
     getTimeBetweenMessages() {
       let lastMessageID;
       let beforeLastMessageID;
@@ -428,8 +451,7 @@ export default {
       return RESULT
     },
     yellowLineHeight() {
-      this.getTimeBetweenMessages()
-      //manque le calcul, actuellement renvoie timeBetweenMessages avec une valeur de 0, surement plus haut que ça coince
+      
       let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
       console.log(height)
 
@@ -444,7 +466,6 @@ export default {
       return 300;
     },
     getNbDots() {
-      //manque le calcul renvoie valeure nulle
       // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
       // console.log(days)
       return 4
