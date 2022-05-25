@@ -33,4 +33,5 @@ FIREBASE.login(() => {
 });
 
 // actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
+//if logged in
 router.replace("/login");

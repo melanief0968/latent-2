@@ -1,11 +1,11 @@
 <template>
   <footer class="footer">
     <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/index">
-      <img class="icone" src="/static/img/index.png">
+      <img class="icone" src="../static/img/index.png">
       <div>Index</div>
     </router-link>
     <router-link buttonIcone v-if="route === 'Contacts'" to="/newcontact">
-      <img class="icone" src="/static/img/people.png">
+      <img class="icone" src="../static/img/people.png">
       <div>Profil</div> 
     </router-link>
     <!-- <router-link buttonIcone v-if="route === 'Contacts'" to="/login">

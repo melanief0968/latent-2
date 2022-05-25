@@ -18,7 +18,7 @@
 </template>
 <script>
 // import { defineComponent } from '@vue/composition-api'
-import GoBack from "@/components/GoBack.vue";   
+import GoBack from "./components/GoBack.vue";   
 import Bubble from "./components/Bubble.vue";
 import HeaderChat from "./components/HeaderChat.vue";
 import Header from "./components/Header.vue";

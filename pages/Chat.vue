@@ -153,6 +153,7 @@ export default {
     },
 
     onSubmit(event) {
+      this.outputSignal = "msg"
       this.onSignal();
       this.getTimelaps();
       // console.log(Didascalies)
@@ -408,6 +409,24 @@ export default {
       );
       return RESULT;
     },
+    getTimeTrigger(){
+      const RESULT = {
+        result: "positive",
+        outputSignal: "ratio",
+        outputValue: "test time",
+        inputType: "timeTrigger",
+      };
+      return RESULT
+    },
+    getLocationTrigger(){
+      const RESULT = {
+        result: "positive",
+        outputSignal: "ratio",
+        outputValue: "test loca",
+        inputType: "timeTrigger",
+      };
+      return RESULT
+    },
     yellowLineHeight() {
       this.getTimeBetweenMessages()
       //manque le calcul, actuellement renvoie timeBetweenMessages avec une valeur de 0, surement plus haut que ça coince
@@ -493,39 +512,27 @@ export default {
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
       let speed = this.getWritingSpeed();
-
-      const allOutputs = [char, erase, time, speed];
-      return this.getResult(allOutputs, level, _case);
+      
+      let timeTrigger = this.getTimeTrigger();
+      let locationTrigger = this.getLocationTrigger();
+      if(this.outputSignal=="msg"){
+        console.log("ITS A MESSAGE")
+        const allOutputs = [char, erase, time, speed];
+        return this.getResult(allOutputs, level, _case);
+      }else if (this.outputSignal=="ratio"){
+        console.log("ITS A RATIO")
+        const allOutputs = [timeTrigger,locationTrigger]
+        return this.getResult(allOutputs, level, _case);
+      }
     },
 
     setTimeRatio() {
-      if (this.getTimelaps().min == "58") {
+      if (this.getTimelaps().min == "18") {
         this.sentTime = this.getTime();
         console.log("its happening");
+        this.outputSignal="ratio";
         //!OK IM LOSTTTTTTTTTTTTTTTTTTTTTTTTTTT
-        const messageDatas = {
-          // text: undefined,
-          // bookText: undefined,
-          sendingUser: this.currentUserID,
-          userName: this.$getters.user(this.currentUserID).name,
-          sentTime: this.sentTime,
-          // charAmount: this.keyDownCounter,
-          // eraseAmount: this.deleteKeyCounter,
-          // typingSpeed: this.getWritingSpeed().outputValue,
-          // coordinates: "",
-          // messageType:"msg",
-          didascalie: this.chooseDidascalie(),
-        };
-        console.log(messageDatas);
-        // console.log(this.$getters.currentChatID)
-        //   fb.setValue(
-        //     `/conversations/${this.$getters.currentChatID()}/messages/${
-        //       this.sentTime
-        //     }`,
-        //     ""
-        //   );
-        //   fb.setValue(`/messages/${this.sentTime}`, messageDatas);
-        // }else{
+        this.sendDidascalie(this.sentTime)
       }
     },
 

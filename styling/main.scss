@@ -90,7 +90,17 @@ button{
 button:hover, button:active{
   color: $color-main;
 }
-
+a{
+  &:visited{
+    color: black;
+  }
+  &:hover {
+    color: $color-main;
+  }
+  &:link{
+    text-decoration: none;
+  }
+}
 .italic{
   font-family: $font-italic;
 
