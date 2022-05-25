@@ -3,22 +3,25 @@
       <div class="chat-container">
         <div class="message-container" v-chat-scroll>
           <template v-for="{ message, id } in messages">
-            <YellowLine
-              v-if="message.messageType === 'did'"
-              line-height="25"
-            ></YellowLine>
 
             <Didascalies
               v-if="message.messageType === 'did'"
               :name="message.userName"
               :text="message.didascalie"
             ></Didascalies>
+
+            <YellowLine
+              v-if="message.messageType === 'did'"
+              line-height="25"
+            ></YellowLine>
+
             <Message
               v-else-if="message.messageType === 'msg'"
               :key="id"
               :author="userName"
               :messageId="id"
             ></Message>
+
             <YellowLine
               v-else-if="message.messageType === 'time'"
               :line-height="yellowLineHeight()"
@@ -202,6 +205,8 @@ export default {
       // this.sentTime+=1
       // this.sentTime=this.sentTime+1
 
+
+      // console.log(message, chatVersion);
       const textMessage = {
         ...baseMessage,
         sentTime: this.sentTime++,
@@ -213,8 +218,6 @@ export default {
         coordinates: "",
         messageType: "msg",
       };
-
-      // console.log(message, chatVersion);
 
       if (true) this.sendMessage(timeMessage);
       this.sendDidascalie(this.sentTime++);

@@ -1081,8 +1081,8 @@
           }],
           case3: [{
             m: (e) => `${e.name} paraît constamment dérangé par le brouhaha autour et peine à se concentrer pour écrire.`,
-            f: (e) => `${e.name} paraît constamment dérangé par le brouhaha autour et peine à se concentrer pour écrire.`,
-            n: (e) => `${e.name} paraît constamment dérangé par le brouhaha autour et peine à se concentrer pour écrire.`,
+            f: (e) => `${e.name} paraît constamment dérangée par le brouhaha autour et peine à se concentrer pour écrire.`,
+            n: (e) => `${e.name} paraît constamment dérangéx par le brouhaha autour et peine à se concentrer pour écrire.`,
           },{
             m: (e) => `Déconcentrée par le brouhaha qui l’entoure, ${e.name} semble avoir de la peine à aligner ses mots.`,
             f: (e) => `Déconcentrée par le brouhaha qui l’entoure, ${e.name} semble avoir de la peine à aligner ses mots.`,
