@@ -31,7 +31,7 @@ export default {
       };
       console.log(this.messageContent);
 
-      // this.$store.test = "changed";
+      // this.$state.test = "changed";
       //check url avec chatid + usr Id
 
       // fb.setValue("/conversations/-N0ZeNmMNFfIJbPqgcND/messages/" + sentTime, messageDatas);

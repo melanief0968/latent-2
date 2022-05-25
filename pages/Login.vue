@@ -54,10 +54,11 @@ export default {
             },
           });
 
-          // console.log(this.$store);
+          // console.log(this.$state);
           this.$actions.setCurrentUserID(userId);
           this.$actions.setCurrentUserName(props.name);
           this.$actions.setUser(userId, props);
+          this.$actions.setLogin(true);
           // console.log(firstResult);
         } else {
           //   console.log("Wrong Password!");

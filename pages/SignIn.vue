@@ -95,7 +95,7 @@ export default {
             },
           });
           this.$actions.setCurrentUserID(id);
-          // console.log(this.$store);
+          // console.log(this.$state);
 
 
       }

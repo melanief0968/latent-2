@@ -4,7 +4,7 @@
     <div :class="switchDisplay" v-if="message">
       {{ text }}
     </div>
-    <div>{{ $store.test }}</div>
+    <div>{{ $state.test }}</div>
   </div>
 </template>
 <script>

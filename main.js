@@ -13,9 +13,9 @@ import * as FIREBASE from "./scripts/firebase.js";
 // css
 import "./styling/main.scss";
 
-import { store, actions, getters } from "./scripts/store.js";
+import { state, actions, getters } from "./scripts/store.js";
 
-Vue.prototype.$store = store;
+Vue.prototype.$state = state;
 Vue.prototype.$actions = actions;
 Vue.prototype.$getters = getters;
 // vuex, store
@@ -34,4 +34,10 @@ FIREBASE.login(() => {
 
 // actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
 //if logged in
-router.replace("/login");
+console.log(state);
+
+if(!state.isLoggedIn) {
+  router.replace("/login");
+} else {
+  router.replace("/contacts");
+}

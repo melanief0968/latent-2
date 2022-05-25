@@ -1,47 +1,46 @@
 <template>
-  <div v-touch:swipe.left="swipeHandler">
-      <div class="chat-container">
-        <div class="message-container" v-chat-scroll>
-          <template v-for="{ message, id } in messages">
+  <!-- <div v-touch:swipe.left="swipeHandler"> -->
+    <div class="chat-container">
+      <div class="message-container" v-chat-scroll>
+        <template v-for="{ message, id } in messages">
+          <Didascalies
+            v-if="message.messageType === 'did'"
+            :name="message.userName"
+            :text="message.didascalie"
+          ></Didascalies>
 
-            <Didascalies
-              v-if="message.messageType === 'did'"
-              :name="message.userName"
-              :text="message.didascalie"
-            ></Didascalies>
+          <YellowLine
+            v-if="message.messageType === 'did'"
+            line-height="25"
+          ></YellowLine>
 
-            <YellowLine
-              v-if="message.messageType === 'did'"
-              line-height="25"
-            ></YellowLine>
+          <Message
+            v-else-if="message.messageType === 'msg'"
+            :key="id"
+            :author="userName"
+            :messageId="id"
+          ></Message>
 
-            <Message
-              v-else-if="message.messageType === 'msg'"
-              :key="id"
-              :author="userName"
-              :messageId="id"
-            ></Message>
-
-            <YellowLine
-              v-else-if="message.messageType === 'time'"
-              :line-height="yellowLineHeight()"
-              :nbDots="getNbDots()"
-            ></YellowLine>
-          </template>
-        </div>
-        <footer class="footerChat">
-          <InputMessage
-            ref="editor"
-            @submit="onSubmit"
-            @delete="getEraseAmount"
-            @keydown="keysCount"
-            @focus="firstTime"
-          ></InputMessage>
-        </footer>
-        <!-- //! footer here -->
-        <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
+          <YellowLine
+            v-else-if="message.messageType === 'time'"
+            :line-height="yellowLineHeight()"
+            :nbDots="getNbDots()"
+          ></YellowLine>
+        </template>
       </div>
-  </div>
+      <footer class="footerChat">
+        <InputMessage
+          ref="editor"
+          @submit="onSubmit"
+          @delete="getEraseAmount"
+          @keydown="keysCount"
+          @focus="firstTime"
+        ></InputMessage>
+      </footer>
+      <!-- //! footer here -->
+      <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
+    </div>
+  <!-- </div> -->
 </template>
 <script>
 import Message from "@/components/Message.vue";
@@ -100,7 +99,7 @@ export default {
   },
   methods: {
     swipeHandler() {
-      this.$router.replace({ path: '/book' })
+      this.$router.replace({ path: "/book" });
     },
     getBaseMsg() {
       return {
@@ -141,7 +140,7 @@ export default {
 
       if (!didascalie) return;
 
-      const base = this.getBaseMsg()
+      const base = this.getBaseMsg();
       const didMessage = {
         ...base,
         messageType: "did",
@@ -153,7 +152,7 @@ export default {
     },
 
     onSubmit(event) {
-      this.outputSignal = "msg"
+      this.outputSignal = "msg";
       this.onSignal();
       this.getTimelaps();
       // console.log(Didascalies)
@@ -193,7 +192,7 @@ export default {
         }
       });
 
-      const baseMessage = this.getBaseMsg()
+      const baseMessage = this.getBaseMsg();
       const timeMessage = {
         ...baseMessage,
         messageType: "time",
@@ -206,7 +205,7 @@ export default {
       // this.sentTime+=1
       // this.sentTime=this.sentTime+1
 
-
+      const didascalieTime = this.sentTime++;
       // console.log(message, chatVersion);
       const textMessage = {
         ...baseMessage,
@@ -220,8 +219,11 @@ export default {
         messageType: "msg",
       };
 
+
+
       if (true) this.sendMessage(timeMessage);
-      this.sendDidascalie(this.sentTime++);
+
+      this.sendDidascalie(didascalieTime);
       this.sendMessage(textMessage);
       // console.log(this.$getters.currentChatID)
 
@@ -230,9 +232,7 @@ export default {
       this.isChosen = false;
       return;
     },
-    sendLine(){
-      
-    },
+    sendLine() {},
     sendMessage(message) {
       const messageId = message.sentTime;
 
@@ -380,7 +380,7 @@ export default {
       // console.log(DATE);
       return DATE;
     },
-    getEllapseTime(){
+    getEllapseTime() {
       // fb.listen(
       //   `/conversations/${this.$getters.currentChatID()}/messages/`,
       //   (value) => {
@@ -432,29 +432,27 @@ export default {
       );
       return RESULT;
     },
-    getTimeTrigger(){
+    getTimeTrigger() {
       const RESULT = {
         result: "positive",
         outputSignal: "ratio",
         outputValue: "test time",
         inputType: "timeTrigger",
       };
-      return RESULT
+      return RESULT;
     },
-    getLocationTrigger(){
+    getLocationTrigger() {
       const RESULT = {
         result: "positive",
         outputSignal: "ratio",
         outputValue: "test loca",
         inputType: "timeTrigger",
       };
-      return RESULT
+      return RESULT;
     },
     yellowLineHeight() {
-      
       let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
-      console.log(height)
-
+      // console.log(height);
 
       // for (let i = 0; i < days; i++) {
       //   const dotContainer = document.createElement("div");
@@ -468,7 +466,7 @@ export default {
     getNbDots() {
       // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
       // console.log(days)
-      return 4
+      return 4;
     },
 
     intimacyLevel() {
@@ -533,16 +531,16 @@ export default {
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
       let speed = this.getWritingSpeed();
-      
+
       let timeTrigger = this.getTimeTrigger();
       let locationTrigger = this.getLocationTrigger();
-      if(this.outputSignal=="msg"){
-        console.log("ITS A MESSAGE")
+      if (this.outputSignal == "msg") {
+        console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
         return this.getResult(allOutputs, level, _case);
-      }else if (this.outputSignal=="ratio"){
-        console.log("ITS A RATIO")
-        const allOutputs = [timeTrigger,locationTrigger]
+      } else if (this.outputSignal == "ratio") {
+        console.log("ITS A RATIO");
+        const allOutputs = [timeTrigger, locationTrigger];
         return this.getResult(allOutputs, level, _case);
       }
     },
@@ -551,9 +549,9 @@ export default {
       if (this.getTimelaps().min == "18") {
         this.sentTime = this.getTime();
         console.log("its happening");
-        this.outputSignal="ratio";
+        this.outputSignal = "ratio";
         //!OK IM LOSTTTTTTTTTTTTTTTTTTTTTTTTTTT
-        this.sendDidascalie(this.sentTime)
+        this.sendDidascalie(this.sentTime);
       }
     },
 

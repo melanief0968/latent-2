@@ -1,44 +1,58 @@
 // https://simplygoodwork.com/blog/creating-a-global-store-in-vue
 
 import Vue from "vue";
+import persist from "vue-observable-persist";
+
 import * as fb from "./firebase.js";
 
-export const store = Vue.observable({
-  messages: {},
-  conversations: {},
-  didascalies: {},
-  users: {},
-  otherUser: {},
-  fbListeners: {},
-  currentUserID: null, // user id of the person who is connected
-  currentContactID: null,
-  currentChatID: null,
-  currentUserName: null,
-});
-
-// this.$store.newVariable = 'yejbhskj'
+export const state = persist(
+  Vue.observable({
+    messages: {},
+    conversations: {},
+    didascalies: {},
+    users: {},
+    otherUser: {},
+    fbListeners: {},
+    isLoggedIn: false,
+    currentUserID: null, // user id of the person who is connected
+    currentContactID: null,
+    currentChatID: null,
+    currentUserName: null,
+  }),
+  {
+    fields: [
+      'users',
+      "isLoggedIn",
+      "currentUserID",
+      "currentContactID",
+      "currentChatID",
+      "currentUserName",
+    ],
+  }
+);
+// this.$state.newVariable = 'yejbhskj'
 
 export const getters = {
   user(userID) {
-    return store.users[userID];
+    return state.users[userID];
   },
   otherUser() {
-    return store.otherUser;
+    return state.otherUser;
   },
   currentUserID() {
-    return store.currentUserID;
+    return state.currentUserID;
   },
   currentChatID() {
-    return store.currentChatID;
+    return state.currentChatID;
   },
   currentUserName() {
-    return store.currentUserName;
+    return state.currentUserName;
   },
   currentContactId() {
-    return store.currentContactID;
+    return state.currentContactID;
   },
   listenConversation(id) {
-    const conversation = store.conversations[id];
+    const conversation = state.conversations[id];
     if (!conversation) {
       const conversation = {};
       actions.setConversation(id, conversation);
@@ -46,17 +60,17 @@ export const getters = {
         if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
-          Vue.set(store.conversations[id], key, value);
+          Vue.set(state.conversations[id], key, value);
         });
       });
 
-      Vue.set(store.fbListeners, id, fbListener);
+      Vue.set(state.fbListeners, id, fbListener);
     }
 
-    return store.conversations[id];
+    return state.conversations[id];
   },
   listenUser(id) {
-    const user = store.users[id];
+    const user = state.users[id];
     if (!user) {
       const user = {};
       actions.setUser(id, user);
@@ -64,17 +78,17 @@ export const getters = {
         if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
-          Vue.set(store.users[id], key, value);
+          Vue.set(state.users[id], key, value);
         });
       });
 
-      Vue.set(store.fbListeners, id, fbListener);
+      Vue.set(state.fbListeners, id, fbListener);
     }
 
-    return store.users[id];
+    return state.users[id];
   },
   listenMessage(id) {
-    const message = store.messages[id];
+    const message = state.messages[id];
     if (!message) {
       const message = {};
       actions.setMessage(id, message);
@@ -82,17 +96,17 @@ export const getters = {
         if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
-          Vue.set(store.messages[id], key, value);
+          Vue.set(state.messages[id], key, value);
         });
       });
 
-      Vue.set(store.fbListeners, id, fbListener);
+      Vue.set(state.fbListeners, id, fbListener);
     }
 
-    return store.messages[id];
+    return state.messages[id];
   },
   listenDidascalie(id) {
-    const didascalie = store.didascalies[id];
+    const didascalie = state.didascalies[id];
     if (!didascalie) {
       const didascalie = {};
       actions.setDidascalie(id, didascalie);
@@ -100,59 +114,62 @@ export const getters = {
         if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
-          Vue.set(store.didascalies[id], key, value);
+          Vue.set(state.didascalies[id], key, value);
         });
       });
 
-      Vue.set(store.fbListeners, id, fbListener);
+      Vue.set(state.fbListeners, id, fbListener);
     }
 
-    return store.didascalies[id];
+    return state.didascalies[id];
   },
 };
 
 export const actions = {
+  setLogin(isLoggedIn) {
+    state.isLoggedIn = isLoggedIn;
+  },
   setCurrentUserID(id) {
-    store.currentUserID = id;
+    state.currentUserID = id;
   },
   setUser(userId, userInfo) {
-    Vue.set(store.users, userId, userInfo);
+    Vue.set(state.users, userId, userInfo);
   },
   setOtherUserName(name) {
-    store.otherUser = name;
+    state.otherUser = name;
   },
   setCurrentUserName(name) {
-    store.currentUserName = name;
+    state.currentUserName = name;
   },
   setContactId(id) {
-    store.currentContactID = id;
+    state.currentContactID = id;
   },
   setCurrentChatId(id) {
-    store.currentChatID = id;
+    state.currentChatID = id;
   },
   setMessage(id, value) {
-    Vue.set(store.messages, id, value);
+    Vue.set(state.messages, id, value);
   },
   setDidascalie(id, value) {
-    Vue.set(store.didascalies, id, value);
+    Vue.set(state.didascalies, id, value);
   },
   setConversation(id, value) {
-    Vue.set(store.conversations, id, value);
+    Vue.set(state.conversations, id, value);
   },
   unloadMessage(id) {
-    const listener = store.fbListeners[id];
+    const listener = state.fbListeners[id];
     if (listener) {
       listener();
-      Vue.delete(store.messages, id);
-      Vue.delete(store.fbListeners, id);
+      Vue.delete(state.messages, id);
+      Vue.delete(state.fbListeners, id);
     } // removes the listener
   },
   unloadDidascalie(id) {
-    const listener = store.fbListeners[id];
+    const listener = state.fbListeners[id];
     if (listener) {
       listener();
-      Vue.delete(store.didascalies, id);
-      Vue.delete(store.fbListeners, id);
+      Vue.delete(state.didascalies, id);
+      Vue.delete(state.fbListeners, id);
     } // removes the listener
   },
 };

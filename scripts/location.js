@@ -16,6 +16,18 @@
 //     // "<br>Longitude: " + position.coords.longitude;
 // }
 
+// function getPosition() {
+//   // Simple wrapper
+//   return new Promise((res, rej) => {
+//       navigator.geolocation.getCurrentPosition(res, rej);
+//   });
+// }
+
+// function main() {
+//   getPosition().then(console.log); // wait for getPosition to complete
+// }
+
+
 // getLocation();
 export default {
     // ...
