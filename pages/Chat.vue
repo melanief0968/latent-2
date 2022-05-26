@@ -82,6 +82,7 @@ export default {
       outputSignal: "",
       outputValue: "",
       timeBetweenMessages: 0,
+      didType: ""
     };
   },
   computed: {
@@ -136,13 +137,11 @@ export default {
       }
       return;
     },
-    // chooseIcone(){
-    //   console.log(message.didT)
-    //   // if(message.did)
-    // },
+    chooseIcone(){
+
+    },
     sendDidascalie(time) {
       const didascalie = this.chooseDidascalie();
-
       if (!didascalie) return;
 
       const base = this.getBaseMsg();
@@ -151,7 +150,7 @@ export default {
         messageType: "did",
         sentTime: time,
         didascalie,
-        didType:this.outputSignal
+        didType:this.didType
       };
 
       this.sendMessage(didMessage);
@@ -321,6 +320,7 @@ export default {
         outputSignal: "msg",
         outputValue: keydownNumber,
         inputType: "char",
+        didType:"msg"
       };
       if (keydownNumber <= 5 && keydownNumber >= 0) {
         RESULT.result = "positive";
@@ -338,6 +338,7 @@ export default {
         outputSignal: "msg",
         outputValue: this.deleteKeyCounter,
         inputType: "erase",
+        didType:"msg"
       };
       console.log(this.deleteKeyCounter);
       if (this.deleteKeyCounter <= 6 && this.deleteKeyCounter >= 4) {
@@ -360,6 +361,7 @@ export default {
         outputSignal: "msg",
         outputValue: wordsPerMin,
         inputType: "speed",
+        didType:"time"
       };
       if (wordsPerMin <= 28) {
         RESULT.result = "negative";
@@ -436,6 +438,7 @@ export default {
         outputSignal: "msg",
         outputValue: "",
         inputType: "time",
+        didType:"time"
       };
       let TIME = this.getTimeDatas(timeBetweenMessages);
           if (timeBetweenMessages <= 3000) {
@@ -455,6 +458,7 @@ export default {
         outputSignal: "ratio",
         outputValue: "test time",
         inputType: "timeTrigger",
+        didType:"time"
       };
       return RESULT;
     },
@@ -464,6 +468,7 @@ export default {
         outputSignal: "ratio",
         outputValue: "test loca",
         inputType: "timeTrigger",
+        didType:"loca"
       };
       return RESULT;
     },
@@ -508,6 +513,7 @@ export default {
             output.result,
             _case
           );
+          this.didType = output.didType
           pushDid = did[output.outputSignal][output.inputType][level][
             output.result
           ][_case][index][this.gender]({
