@@ -35,7 +35,6 @@
           ref="editor"
           @submit="onSubmit"
           @delete="getEraseAmount"
-          @keydown="keysCount"
           @focus="firstTime"
         ></InputMessage>
       </footer>
@@ -82,7 +81,8 @@ export default {
       outputSignal: "",
       outputValue: "",
       timeBetweenMessages: 0,
-      didType: ""
+      didType: "",
+      charAmount:0
     };
   },
   computed: {
@@ -125,18 +125,6 @@ export default {
       return this.index;
     },
 
-    keysCount(ev) {
-      this.startElapsedTime();
-      //seulement au first + enlever autres touches que les lettres et chiffres
-      this.keyDownCounter++;
-      if (this.keyDownCounter === 1) {
-        return (this.firstKeyTime = this.getTime());
-      }
-      if (ev.keyCode == 32) {
-        console.log("SPACE");
-      }
-      return;
-    },
     chooseIcone(){
 
     },
@@ -176,9 +164,11 @@ export default {
         return;
       }
 
-      const numChars = text
+      // const numChars = text
+      this.charAmount = text
         .replace(/[•|\–]+/g, "") // remove special chars
         .replace(/\s/g, "").length; // remove all spaces
+
 
       const bookVersion = text.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
@@ -213,7 +203,7 @@ export default {
         sentTime: this.sentTime++,
         text: chatVersion,
         bookText: bookVersion,
-        charAmount: this.keyDownCounter,
+        charAmount: this.charAmount,
         eraseAmount: this.deleteKeyCounter,
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
@@ -314,17 +304,17 @@ export default {
     },
     getCharAmount() {
       //comment compter uniquement les chars ?
-      let keydownNumber = this.keyDownCounter;
+      let charAmount = this.charAmount;
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue: keydownNumber,
+        outputValue: charAmount,
         inputType: "char",
         didType:"msg"
       };
-      if (keydownNumber <= 5 && keydownNumber >= 0) {
+      if (charAmount <= 5 && charAmount >= 0) {
         RESULT.result = "positive";
-      } else if (keydownNumber >= 90) {
+      } else if (charAmount >= 90) {
         RESULT.result = "negative";
       } else {
       }
