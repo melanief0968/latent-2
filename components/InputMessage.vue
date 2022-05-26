@@ -8,7 +8,7 @@
           @keydown.delete="deleteCount"
         /> -->
     <editor-content class="inputMsg__editor" :editor="editor" />
-    <button type="submit" class="inputMsg__btn">→</button>
+    <button type="submit" @click="onSubmit(submit)" class="inputMsg__btn">→</button>
   </form>
 </template>
 <script>
