@@ -6,6 +6,8 @@
 export default {
   methods: {
     goBack() {
+
+        
     //   this.$actions.setLogin(false);
 
     //   this.$router.push({

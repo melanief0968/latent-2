@@ -122,7 +122,7 @@ export default {
   }
 
   &.toRight {
-    justify-content: end;
+    justify-content: flex-end;
 
     .message {
       border-radius: 10px 0px 10px 10px;
