@@ -69,9 +69,7 @@ export default {
       messageContent: "",
       sentTime: 0,
       firstKeyTime: 0,
-      keyDownCounter: 0,
       deleteKeyCounter: 0,
-      spaceKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
       name: "",
       userName: "",
@@ -82,7 +80,9 @@ export default {
       outputValue: "",
       timeBetweenMessages: 0,
       didType: "",
-      charAmount:0
+      charAmount:0,
+      eraseAmount:0,
+      totalErase:0
     };
   },
   computed: {
@@ -217,7 +217,6 @@ export default {
       this.sendMessage(textMessage);
       // console.log(this.$getters.currentChatID)
 
-      this.keyDownCounter = 0;
       this.deleteKeyCounter = 0;
       this.isChosen = false;
       return;
@@ -322,18 +321,19 @@ export default {
     },
     getEraseAmount() {
       this.deleteKeyCounter++;
+      this.totalErase = this.deleteKeyCounter-1;
       console.log("JEFFACE");
       const RESULT = {
         result: "",
         outputSignal: "msg",
-        outputValue: this.deleteKeyCounter,
+        outputValue: this.totalErase,
         inputType: "erase",
         didType:"msg"
       };
-      console.log(this.deleteKeyCounter);
-      if (this.deleteKeyCounter <= 6 && this.deleteKeyCounter >= 4) {
+      console.log(this.totalErase);
+      if (this.totalErase <= 6 && this.totalErase >= 4) {
         RESULT.result = "positive";
-      } else if (this.deleteKeyCounter >= 10) {
+      } else if (this.totalErase >= 10) {
         RESULT.result = "negative";
       }
       return RESULT;
@@ -345,7 +345,7 @@ export default {
     getWritingSpeed() {
       let writingTime = this.getWritingTime();
       //prettier-ignore
-      let wordsPerMin = Math.floor(this.keyDownCounter * 60 / writingTime * 1000 / 5);
+      let wordsPerMin = Math.floor(this.charAmount * 60 / writingTime * 1000 / 5);
       const RESULT = {
         result: "",
         outputSignal: "msg",
