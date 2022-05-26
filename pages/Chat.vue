@@ -5,13 +5,14 @@
         <template v-for="{ message, id } in messages">
           <Didascalies
             v-if="message.messageType === 'did'"
+            :key="message.sentTime"
             :name="message.userName"
             :text="message.didascalie"
           ></Didascalies>
 
           <YellowLine
             v-if="message.messageType === 'did'"
-            line-height="25"
+            line-height="3"
           ></YellowLine>
 
           <Message
@@ -23,7 +24,8 @@
 
           <YellowLine
             v-else-if="message.messageType === 'time'"
-            :line-height="yellowLineHeight()"
+            :key="message.sentTime"
+            :line-height="message.lineHeight"
             :nbDots="getNbDots()"
           ></YellowLine>
         </template>
@@ -134,7 +136,10 @@ export default {
       }
       return;
     },
-
+    // chooseIcone(){
+    //   console.log(message.didT)
+    //   // if(message.did)
+    // },
     sendDidascalie(time) {
       const didascalie = this.chooseDidascalie();
 
@@ -146,6 +151,7 @@ export default {
         messageType: "did",
         sentTime: time,
         didascalie,
+        didType:this.outputSignal
       };
 
       this.sendMessage(didMessage);
@@ -195,15 +201,11 @@ export default {
       const baseMessage = this.getBaseMsg();
       const timeMessage = {
         ...baseMessage,
-        messageType: "time",
+        messageType: "time", 
         sentTime: this.sentTime++, //! to have unique id, even if same time
+        lineHeight: this.yellowLineHeight().height,
+        dotsNum:this.yellowLineHeight().days
       };
-
-      // ++this.sentTime;
-      // this.sentTime++;
-      // this.sentTime+1
-      // this.sentTime+=1
-      // this.sentTime=this.sentTime+1
 
       const didascalieTime = this.sentTime++;
       // console.log(message, chatVersion);
@@ -220,7 +222,6 @@ export default {
       };
 
 
-
       if (true) this.sendMessage(timeMessage);
 
       this.sendDidascalie(didascalieTime);
@@ -232,10 +233,39 @@ export default {
       this.isChosen = false;
       return;
     },
-    sendLine() {},
+   
+    yellowLineHeight() {
+      let timeBetweenMessages = this.getEllapseTime()
+      const calcDays = Math.floor(timeBetweenMessages / (1000 * 60 * 60 * 24));
+      let days = calcDays
+      if(days<1){
+        days = 0;
+      }
+      // console.log(days)
+      let height = Math.sqrt(timeBetweenMessages) * 0.015;
+      console.log(height)
+      const LINE_DATAS = {
+        height,
+        days
+      }
+      return LINE_DATAS;
+      // console.log(height);
+
+      // for (let i = 0; i < days; i++) {
+      //   const dotContainer = document.createElement("div");
+      //   const dot = document.createElement("div");
+      //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
+      // }
+      // let rHeight = [100, 160, 200, 50, 20, 10];
+      // let random = Math.floor(Math.random() * rHeight.length);
+    },
+    getNbDots() {
+      // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
+      // console.log(days)
+      return 4;
+    },
     sendMessage(message) {
       const messageId = message.sentTime;
-
       fb.setValue(
         `/conversations/${this.$getters.currentChatID()}/messages/${messageId}`,
         ""
@@ -381,56 +411,43 @@ export default {
       return DATE;
     },
     getEllapseTime() {
-      // fb.listen(
-      //   `/conversations/${this.$getters.currentChatID()}/messages/`,
-      //   (value) => {
-      //     const keys = Object.keys(value);
-      //     lastMessageID = keys[keys.length - 1];
-      //     beforeLastMessageID = keys[keys.length - 2];
-      //     this.timeBetweenMessages = lastMessageID - beforeLastMessageID;
-      //     let TIME = this.getTimeDatas(this.timeBetweenMessages);
-      //     if (this.timeBetweenMessages <= 3000) {
-      //       RESULT.result = "positive";
-      //       RESULT.outputValue = TIME;
-      //     } else if (this.timeBetweenMessages >= 1000 * 60 * 60) {
-      //       RESULT.result = "negative";
-      //       RESULT.outputValue = TIME;
-      //     } else {
-      //     }
-      //   }
-      // );
+     if (this.conversation && this.conversation.messages) {
+        const messageArray = [];
+        Object.keys(this.conversation.messages).forEach((messageId) => {
+          const message = this.$getters.listenMessage(messageId);
+          if(message.messageType == "msg"){
+            let messagesTime = message.sentTime
+            messageArray.push(messagesTime)
+          }
+        });
+        let lastMsgID = messageArray[messageArray.length - 1];
+        let beforeLastMsgID = messageArray[messageArray.length - 2];
+
+        let timeBetweenMessages = lastMsgID-beforeLastMsgID
+        // console.log(timeBetweenMessages)
+        return timeBetweenMessages
+      }
     },
     getTimeBetweenMessages() {
-      let lastMessageID;
-      let beforeLastMessageID;
-      this.timeBetweenMessages;
-
+      // console.log(this.getEllapseTime())
+      let timeBetweenMessages= this.getEllapseTime();
       const RESULT = {
         result: "",
         outputSignal: "msg",
         outputValue: "",
         inputType: "time",
       };
-      //REECRIRE AU PROPRE AVEC STORE
-      fb.listen(
-        `/conversations/${this.$getters.currentChatID()}/messages/`,
-        (value) => {
-          const keys = Object.keys(value);
-          lastMessageID = keys[keys.length - 1];
-          beforeLastMessageID = keys[keys.length - 2];
-          this.timeBetweenMessages = lastMessageID - beforeLastMessageID;
-          let TIME = this.getTimeDatas(this.timeBetweenMessages);
-          if (this.timeBetweenMessages <= 3000) {
+      let TIME = this.getTimeDatas(timeBetweenMessages);
+          if (timeBetweenMessages <= 3000) {
             RESULT.result = "positive";
             RESULT.outputValue = TIME;
-          } else if (this.timeBetweenMessages >= 1000 * 60 * 60) {
+          } else if (timeBetweenMessages >= 1000 * 60 * 60) {
             RESULT.result = "negative";
             RESULT.outputValue = TIME;
           } else {
           }
-        }
-      );
-      return RESULT;
+          console.log(RESULT)
+          return RESULT;
     },
     getTimeTrigger() {
       const RESULT = {
@@ -450,24 +467,7 @@ export default {
       };
       return RESULT;
     },
-    yellowLineHeight() {
-      let height = Math.sqrt(this.timeBetweenMessages) * 0.15;
-      // console.log(height);
-
-      // for (let i = 0; i < days; i++) {
-      //   const dotContainer = document.createElement("div");
-      //   const dot = document.createElement("div");
-      //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
-      // }
-      // let rHeight = [100, 160, 200, 50, 20, 10];
-      // let random = Math.floor(Math.random() * rHeight.length);
-      return 300;
-    },
-    getNbDots() {
-      // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
-      // console.log(days)
-      return 4;
-    },
+    
 
     intimacyLevel() {
       //!faire vrai calcul
@@ -546,7 +546,7 @@ export default {
     },
 
     setTimeRatio() {
-      if (this.getTimelaps().min == "18") {
+      if (this.getTimelaps().min == "58") {
         this.sentTime = this.getTime();
         console.log("its happening");
         this.outputSignal = "ratio";
@@ -579,13 +579,13 @@ export default {
       if (calcDays < 1) {
         days = "";
       }
-      // const TIME = {
-      //   seconds,
-      //   minutes,
-      //   hours,
-      //   days
-      // }
-      const TIME = minutes;
+      const TIME = {
+        seconds,
+        minutes,
+        hours,
+        days
+      }
+      // const TIME = minutes;
       return TIME;
     },
   },
@@ -600,6 +600,7 @@ export default {
     // https://gist.github.com/viktorbezdek/3957601
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
+  
     setTimeout(() => {
       this.setTimeRatio();
     }, 5000);
