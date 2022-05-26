@@ -23,11 +23,13 @@ export default {
   props: {
     eraseChar: {
       type: String,
-      default: '–' || ZERO_WIDTH_SPACE,
+      // default: '–' || ZERO_WIDTH_SPACE,
+      default: ZERO_WIDTH_SPACE,
     },
     elapsedTimeChar: {
       type: String,
-      default: '•' || ZERO_WIDTH_NO_BREAK_SPACE,
+      // default: '•' || ZERO_WIDTH_NO_BREAK_SPACE,
+      default: ZERO_WIDTH_NO_BREAK_SPACE,
     },
     eraseOutputString: {
       type: String,
@@ -66,6 +68,7 @@ export default {
         }),
       ],
     });
+
   },
   methods: {
     onSubmit(event) {

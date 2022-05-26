@@ -6,13 +6,13 @@
 export default {
   methods: {
     goBack() {
-      this.$actions.setLogin(false);
-      
-      this.$router.push({
-        path: "/login",
-      });
+    //   this.$actions.setLogin(false);
 
-      return;
+    //   this.$router.push({
+    //     path: "/login",
+    //   });
+
+    //   return;
 
       if (this.$route.name === "Chat") {
         this.$router.push({
@@ -32,8 +32,11 @@ export default {
 </script>
 <style scoped>
 .go-back {
-  display: flex;
+      top: 5vh;
+    left: 4vw;
+    position: absolute;
   cursor: pointer;
+  z-index:100
 }
 button {
   border: 0;

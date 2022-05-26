@@ -12,7 +12,7 @@ export default {
   props: ['lineHeight', 'nbDots'],
   computed: {
     cssStyle() {
-      return { height: this.lineHeight + "px" };
+      return { height: this.lineHeight + "vh" };
     },
     route() {
       return this.$route.name;
@@ -29,7 +29,7 @@ export default {
   display: block;
   margin: auto;
   background-color: var(--color-main);
-  height: 50px;
+  /* height: 50px; */
   width: 2px;
 }
 .dotContainer {

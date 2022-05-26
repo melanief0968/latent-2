@@ -4,7 +4,7 @@
     <div class="login-description italic">
       L'espace de conversation sur mesure.
     </div>
-    <YellowLine :lineHeight="150"></YellowLine>
+    <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     <form @submit.prevent="onSubmit">
       <div class="text-basic">Qui est-ce ?</div>
       <input type="text" autocomplete="username" placeholder="Nom d'auteur·ice·x" v-model="username" />
@@ -12,7 +12,7 @@
       <button type="submit">→</button>
       <div class="text-basic">{{ message }}</div>
     </form>
-    <YellowLine :lineHeight="150"></YellowLine>
+    <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     <router-link to="/signin" class="text-basic">Créer un compte</router-link>
   </div>
 </template>
@@ -34,6 +34,10 @@ export default {
     };
   },
   methods: {
+    yellowLineHeight(){
+      let height = 12
+      return height;
+    },
     onSubmit(ev) {
       fb.filterEntries("users", "username", this.username).then((results) => {
         if (results === null) {
@@ -80,15 +84,18 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+ 
 }
 
 .yellowLine {
   height: 20%;
+  min-height: 10%;
 }
 .title {
   text-align: center;
   font-size: 250%;
   margin: $margin-5 0;
+   padding: 5% 0 5%  0;
 }
 .login-description {
   font-size: $italic-size;
@@ -96,7 +103,8 @@ export default {
   margin: 0 0 $margin-5 0;
 }
 .text-basic {
-  text-align: c enter;
+  text-align: center;
+   padding: 5% 0 5%  0;
 }
 button {
   font-size: 30px;

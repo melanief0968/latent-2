@@ -265,7 +265,7 @@ export default {
       return startWriting;
     },
     startElapsedTime() {
-      this.requestElapsedTime(2500);
+      this.requestElapsedTime(3000);
     },
 
     requestElapsedTime(millis) {
@@ -277,7 +277,7 @@ export default {
 
     onElapsedTime() {
       this.$refs.editor.insertElapsedTime();
-      this.requestElapsedTime(800); // ms
+      this.requestElapsedTime(2000); // ms
     },
 
     stopElapsedTime() {
@@ -596,7 +596,8 @@ export default {
   mounted() {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
-    // this.$refs.editor.insertElapsedTime();
+    // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
+    // https://gist.github.com/viktorbezdek/3957601
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
     setTimeout(() => {
@@ -607,7 +608,7 @@ export default {
 </script>
 <style lang="scss">
 .chat-container {
-  height: 90%;
+  height: 88%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -622,6 +623,7 @@ export default {
 
 .footerChat {
   width: 100vw;
+  height:13%;
   position: fixed;
   bottom: 0;
   left: 0;

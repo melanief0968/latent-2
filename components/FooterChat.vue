@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <form @submit.prevent="onSubmit" class="input-container">
-      <input type="text" placeholder="Message" v-model="messageContent" />
+      <input class="txt_input" type="text" placeholder="Message" v-model="messageContent" />
       <button  type="submit">→</button>
     </form>
   </footer>
@@ -46,6 +46,9 @@ export default {
       return new Date().getTime();
     },
   },
+  mounted:{
+    
+  }
 };
 </script>
 <style lang="scss">
@@ -57,4 +60,5 @@ export default {
   flex-direction: row;
   align-items: center;
 }
+
 </style>

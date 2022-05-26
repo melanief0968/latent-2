@@ -1,9 +1,10 @@
 <template>
-  <footer class="footer">
-      <button>≤</button>
+  <footer class="footer book">
+    <div class="navigation-container">
+      <a class="navigation">≤</a>
       <div>{{pageNumber}}</div>
-      <button>≥</button>
-    <div class="navigation-container"></div>
+      <a class="navigation">≥</a>
+    </div>
   </footer>
 </template>
 <script>
@@ -19,12 +20,23 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .navigation-container {
   bottom: 0;
   display: flex;
-  justify-content: space-around;
+  width: 100%;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
+}
+.book{
+  height: 100%;
+}
+
+.navigation > span, p {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
 }
 </style>

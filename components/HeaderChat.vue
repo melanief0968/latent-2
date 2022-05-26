@@ -62,5 +62,6 @@ export default {
 }
 h1{
   font-weight: normal;
+  margin-left: 10%;
 }
 </style>
