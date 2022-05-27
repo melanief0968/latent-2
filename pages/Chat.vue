@@ -26,7 +26,7 @@
             v-else-if="message.messageType === 'time'"
             :key="message.sentTime"
             :line-height="message.lineHeight"
-            :nbDots="getNbDots()"
+            :nbDots="message.dotsNum"
           ></YellowLine>
         </template>
       </div>
@@ -51,6 +51,7 @@ import YellowLine from "../components/YellowLine.vue";
 import did from "@/scripts/didascalies.js";
 import InputMessage from "../components/InputMessage.vue";
 import { countCharOccurance } from "@/utils/string.js";
+import * as location from "@/scripts/location.js";
 import { getAttributes } from "@tiptap/core";
 
 export default {
@@ -60,6 +61,7 @@ export default {
     InputMessage,
     did,
     YellowLine,
+    
   },
   data() {
     return {
@@ -221,23 +223,35 @@ export default {
       this.isChosen = false;
       return;
     },
-   
+  
     yellowLineHeight() {
       let timeBetweenMessages = this.getEllapseTime()
+      let timeLineData = Math.floor(timeBetweenMessages / (1000 * 60))
+      let textTime =""
+      if (timeLineData <= 100){
+        textTime =`${timeLineData}m`
+      }else if(timeLineData > 100){
+        textTime =`${Math.floor(timeLineData/60)}h`
+      }else if(timeLineData > 6000){
+        textTime =`${Math.floor(timeLineData/(60*24))}j`
+      }
+      console.log(timeLineData)
+      console.log(timeBetweenMessages)
       const calcDays = Math.floor(timeBetweenMessages / (1000 * 60 * 60 * 24));
       let days = calcDays
       if(days<1){
         days = 0;
       }
       // console.log(days)
-      let height = Math.sqrt(timeBetweenMessages) * 0.015;
+      let height = Math.sqrt(timeBetweenMessages) * 0.025;
       console.log(height)
       const LINE_DATAS = {
         height,
-        days
+        days,
+        textTime
       }
+      console.log(LINE_DATAS);
       return LINE_DATAS;
-      // console.log(height);
 
       // for (let i = 0; i < days; i++) {
       //   const dotContainer = document.createElement("div");
@@ -408,6 +422,7 @@ export default {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
           if(message.messageType == "msg"){
+            // console.log(message)
             let messagesTime = message.sentTime
             messageArray.push(messagesTime)
           }
@@ -420,6 +435,7 @@ export default {
         return timeBetweenMessages
       }
     },
+    
     getTimeBetweenMessages() {
       // console.log(this.getEllapseTime())
       let timeBetweenMessages= this.getEllapseTime();
@@ -550,7 +566,10 @@ export default {
         this.sendDidascalie(this.sentTime);
       }
     },
-
+    sendLocation(){
+      console.log(location.getLocation())
+      // console.log(location.getLocation().latitude,location.getLocation().longitude)
+    },
     getTimeDatas(time) {
       //hr, min, sec, day, daytime, weekday, month, year, period
       const calcSeconds = Math.floor((time / 1000) % 60);
@@ -558,28 +577,42 @@ export default {
       const calcHours = Math.floor((time / (1000 * 60 * 60)) % 24);
       const calcDays = Math.floor(time / (1000 * 60 * 60 * 24));
 
-      let seconds = calcSeconds + " secondes";
-      let minutes = calcMinutes + " minutes";
-      let hours = calcHours + " heures";
-      let days = calcDays + " jours";
+      let seconds = calcSeconds;
+      let minutes = calcMinutes;
+      let hours = calcHours;
+      let days = calcDays;
+      let s = " secondes";
+      let m = " minutes";
+      let h = " heures";
+      let d = " jours";
 
       if (calcMinutes < 1 && calcHours < 1 && calcDays < 1) {
         minutes = "";
         hours = "";
         days = "";
+        m = "";
+        h = "";
+        d = "";
       }
       if (calcHours < 1 && calcDays < 1) {
         hours = "";
         days = "";
+        h = "";
+        d = "";
       }
       if (calcDays < 1) {
         days = "";
+        d = "";
       }
       const TIME = {
         seconds,
+        s,
         minutes,
+        m,
         hours,
-        days
+        h,
+        days,
+        d
       }
       // const TIME = minutes;
       return TIME;
@@ -592,6 +625,13 @@ export default {
   mounted() {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
+
+  // this.sendLocation()
+    // console.log(location.getLocation())
+    
+    // console.log(location.city)
+    // console.log(location.inRange())
+    // console.log(location.watchPos())
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
     // https://gist.github.com/viktorbezdek/3957601
     const currentChat = this.$getters.currentChatID();
