@@ -8,8 +8,8 @@
       <toggle-button
           :value="false"
           @change="swipeHandler"
-          width="50"
-          height="30"
+          :width="toggleWidth"
+          :height="toggleHeight"
           :color="{checked: 'var(--color-main)', unchecked: 'lightgrey'}"
       />
 <!--      <router-link v-if="route === 'Chat'" to="/book">Book</router-link>-->
@@ -32,6 +32,8 @@ export default {
   },
   data(){
     return{
+      toggleWidth: 50,
+      toggleHeight: 30,
        chatName: "Loading...",
        contactName: "Loading...",
     }
