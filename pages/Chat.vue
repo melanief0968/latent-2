@@ -4,6 +4,7 @@
       <div class="message-container" v-chat-scroll>
         <template v-for="{ message, id } in messages">
           <Didascalies
+            :icon="message.didType"
             v-if="message.messageType === 'did'"
             :key="message.sentTime"
             :name="message.userName"
@@ -190,7 +191,7 @@ export default {
       const baseMessage = this.getBaseMsg();
       const timeMessage = {
         ...baseMessage,
-        messageType: "time", 
+        messageType: "time",
         sentTime: this.sentTime++, //! to have unique id, even if same time
         lineHeight: this.yellowLineHeight().height,
         dotsNum:this.yellowLineHeight().days
@@ -221,7 +222,7 @@ export default {
       this.isChosen = false;
       return;
     },
-   
+
     yellowLineHeight() {
       let timeBetweenMessages = this.getEllapseTime()
       const calcDays = Math.floor(timeBetweenMessages / (1000 * 60 * 60 * 24));
@@ -462,7 +463,7 @@ export default {
       };
       return RESULT;
     },
-    
+
 
     intimacyLevel() {
       //!faire vrai calcul
@@ -596,7 +597,7 @@ export default {
     // https://gist.github.com/viktorbezdek/3957601
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-  
+
     setTimeout(() => {
       this.setTimeRatio();
     }, 5000);
