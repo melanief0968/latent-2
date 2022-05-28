@@ -7,6 +7,9 @@ import VueChatScroll from 'vue-chat-scroll'
 //doc https://www.npmjs.com/package/vue2-touch-events
 import Vue2TouchEvents from 'vue2-touch-events'
 
+import VueGeolocationApi from 'vue-geolocation-api'
+import ToggleButton from 'vue-js-toggle-button'
+
 
 import * as FIREBASE from "./scripts/firebase.js";
 
@@ -23,7 +26,8 @@ Vue.prototype.$getters = getters;
 Vue.use(VueRouter);
 Vue.use(VueChatScroll);
 Vue.use(Vue2TouchEvents);
-
+Vue.use(VueGeolocationApi/*, { ...options } */)
+Vue.use(ToggleButton)
 
 FIREBASE.login(() => {
   new Vue({

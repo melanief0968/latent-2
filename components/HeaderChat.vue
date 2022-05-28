@@ -5,11 +5,20 @@
       <!-- <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
       <h1 v-if="route === 'Chat'">{{contactName}}</h1>
       <h1 v-if="route === 'Book'">{{chatName}}</h1>
-      <router-link v-if="route === 'Chat'" to="/book">Book</router-link>
-      <router-link v-if="route === 'Book'" to="/chat">Chat</router-link>
+      <toggle-button
+          :value="false"
+          @change="swipeHandler"
+          :width="toggleWidth"
+          :height="toggleHeight"
+          :color="{checked: 'var(--color-main)', unchecked: 'lightgrey'}"
+      />
+<!--      <router-link v-if="route === 'Chat'" to="/book">Book</router-link>-->
+<!--      <router-link v-if="route === 'Book'" to="/chat">Chat</router-link>-->
   </header>
 </template>
 <script>
+
+
 export default {
   // props: {
   //   contactName: {
@@ -23,11 +32,21 @@ export default {
   },
   data(){
     return{
+      toggleWidth: 50,
+      toggleHeight: 30,
        chatName: "Loading...",
        contactName: "Loading...",
     }
   },
   methods: {
+    swipeHandler() {
+      if (this.$route.name === "Book") {
+        this.$router.replace({ path: '/chat' })
+      } else {
+        this.$router.replace({ path: '/book' })
+      }
+
+    },
     getContactName(){
       const chatID = this.$getters.listenConversation(this.$getters.currentChatID())
       const user = chatID.users

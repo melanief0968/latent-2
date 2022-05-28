@@ -1,5 +1,6 @@
 <template>
   <div class="didascalieBox">
+    <img v-if="this.icon !== undefined " :src="iconType" class="didIcon"></img>
     <div class="didascalie italic">{{text}}</div>
   </div>
 </template>
@@ -12,9 +13,15 @@ export default {
   didascalies
   },
   // On passe le name et le case en props pour les définir dans la boucle de chat
-  props: ['name', 'text'],
+  props: ['name', 'text', 'icon'],
   computed: {
-
+    iconType() {
+      if (this.icon === undefined) {
+        return ""
+      } else {
+        return "./../static/img/" + this.icon + ".png"
+      }
+    }
   },
   methods: {
     // test(name,_case){
@@ -37,6 +44,9 @@ export default {
   margin-bottom: 1.5vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   width: 100%;
 
   .didascalie {
@@ -47,7 +57,13 @@ export default {
     text-align: center;
     color: black;
     font-size: $italic-size;
+    position: relative;
   }
+  .didIcon {
+    display: block;
+    width: 15px;
+  }
+
 
 }
 

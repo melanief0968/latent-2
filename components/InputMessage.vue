@@ -8,7 +8,7 @@
           @keydown.delete="deleteCount"
         /> -->
     <editor-content class="inputMsg__editor" :editor="editor" />
-    <button type="submit" @click="onSubmit(submit)" class="inputMsg__btn">→</button>
+    <button type="submit" @click="submit" class="inputMsg__btn">→</button>
   </form>
 </template>
 <script>
@@ -128,14 +128,14 @@ export default {
 border: .9px solid $contrast-color;
 border-radius: 7px;
 width: 90%;
-background-color: white; 
+background-color: white;
 padding-left: 10px;
 
 
 }
 .ProseMirror:focus{
 /* height: fit-content;*/
-outline: none !important; 
+outline: none !important;
 border:2px solid $color-main;
 }
 .contenteditable{

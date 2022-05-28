@@ -20,7 +20,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .line-container {
   position: relative;
 }
@@ -42,8 +42,20 @@ export default {
   align-items: center;
 }
 .dot {
+  background: white;
+  display: block;
+  height: 5vw;
+  width: 5vw;
+  position: relative;
+}
+.dot::before {
+  content: "";
   background: var(--dot-color);
   display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 5px;
   width: 5px;
   border-radius: 50%;

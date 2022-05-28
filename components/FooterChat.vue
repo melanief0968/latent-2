@@ -2,7 +2,7 @@
   <footer class="footer">
     <form @submit.prevent="onSubmit" class="input-container">
       <input class="txt_input" type="text" placeholder="Message" v-model="messageContent" />
-      <button  type="submit">→</button>
+      <button type="submit">→</button>
     </form>
   </footer>
 </template>
@@ -47,7 +47,7 @@ export default {
     },
   },
   mounted:{
-    
+
   }
 };
 </script>
