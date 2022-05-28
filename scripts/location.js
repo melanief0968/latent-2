@@ -17,6 +17,7 @@ export function getLocation() {
     console.log("Geolocation is not supported by this browser.");
   }
   console.log("get location");
+  // return (data.results[0].formatted)
 }
 
 export function showPosition(position) {
@@ -25,7 +26,8 @@ export function showPosition(position) {
   lng = position.coords.longitude;
 
   console.log("Latitude: " + lat + " Longitude: " + lng);
-
+  getCity(lat,lng)
+  return lat +lng
   // if(city == true){
   //   getCity(lat,lng)
   // }
@@ -41,7 +43,7 @@ export function getPosition() {
 export function locationData() {
   getPosition().then(console.log);
 }
-function getCity(lat,lng){
+export function getCity(lat,lng){
   let request_url =
     api_url +
     "?" +
@@ -66,7 +68,7 @@ function getCity(lat,lng){
       let data = JSON.parse(request.responseText);
       //alert(data.results[0].formatted); // print the location
       console.log(data);
-      console.log(data.results[0].formatted);
+      console.log(data.results[0].components.city);
       // document.getElementById("localisation").innerHTML =
       //   data.results[0].formatted;
     } else if (request.status <= 500) {

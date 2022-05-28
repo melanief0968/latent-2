@@ -24,6 +24,8 @@
 	    </div>
 	    <div class="slider__snap">
 	    </div>
+	    <div class="slider__snap">
+	    </div>
       <footer class="footerBook">
         <FooterBook></FooterBook>
     </footer>
@@ -164,6 +166,10 @@ export default {
   font-family: $font-main;
   background: $background-color;
   position: fixed;
+}
+
+.book-background{
+  background-color: #F8F6F2;
 }
 
 </style>

@@ -22,6 +22,7 @@
             :key="id"
             :author="userName"
             :messageId="id"
+            :sentTime="message.textTime"
           ></Message>
 
           <YellowLine
@@ -165,6 +166,7 @@ export default {
       this.onSignal();
       this.getTimelaps();
       // console.log(Didascalies)
+      this.setScenes()
       this.stopElapsedTime();
       this.sentTime = this.getTime();
       // console.log(this.getCharAmount());
@@ -209,7 +211,7 @@ export default {
         messageType: "time",
         sentTime: this.sentTime++, //! to have unique id, even if same time
         lineHeight: this.yellowLineHeight().height,
-        dotsNum:this.yellowLineHeight().days
+        dotsNum:this.yellowLineHeight().days,
       };
 
       const didascalieTime = this.sentTime++;
@@ -224,6 +226,7 @@ export default {
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
         messageType: "msg",
+        textTime: this.yellowLineHeight().textTime
       };
 
 
@@ -259,22 +262,24 @@ export default {
       let actes = ["acte I", "acte II", "acte III", "acte IV","acte V","acte VI","acte VII","acte VIII","acte IX", "acte X"]
       let acte;
       let scene;
-        if(this.getEllapseTime() >= 2000 && nbMessages >=50){
-            scene = [0]
-            acte = actes[i+1]
-            return acte + scene
-        }else if (this.getEllapseTime() >=10000){
-          scene = [0]
-            acte = actes[i+1]
-            return acte + scene
-        }if(this.getEllapseTime() >= 2000){
-          if(scene[i] == 9){
-            scene = [0]
-            acte = actes[i+1]
-            return acte + scene
-          }
-          acte = //last act;
-          scene = scenes[i+1];
+        // if(this.getEllapseTime() >= 2000 && nbMessages >=50){
+        //     scene = [0]
+        //     acte = actes[i+1]
+        //     return acte + scene
+        // }else if (this.getEllapseTime() >=10000){
+        //   scene = [0]
+        //     acte = actes[i+1]
+        //     return acte + scene
+        // }
+        if(this.getEllapseTime() >= 2000){
+          // if(scene[i] == 9){
+          //   scene = [0]
+          //   acte = actes[i+1]
+          //   return acte + scene
+          // }
+          acte = actes[0];
+          scene = scenes[1];
+          console.log(acte, scene)
           return acte + scene
         }
     },
@@ -498,11 +503,11 @@ export default {
             messageArray.push(messagesTime)
           }
         });
-        let lastMsgID = messageArray[messageArray.length - 1];
+        let lastMsgID = messageArray[messageArray.length-1];
         let beforeLastMsgID = messageArray[messageArray.length - 2];
 
         let timeBetweenMessages = lastMsgID-beforeLastMsgID
-        // console.log(timeBetweenMessages)
+        console.log(timeBetweenMessages)
         return timeBetweenMessages
       }
     },
@@ -725,6 +730,10 @@ export default {
       const contactName = this.$getters.listenUser(otherUser).name;
       this.contactName = contactName;
       return this.contactName
+    },
+    setLocationData(){
+      return location.getLocation()
+
     }
   },
 
@@ -736,7 +745,8 @@ export default {
     this.gender = this.$getters.user(this.currentUserID).gender;
     this.setFirstScene()
   // this.sendLocation()
-    // console.log(location.getLocation())
+    console.log(location.getLocation())
+
     
     // console.log(location.city)
     // console.log(location.inRange())

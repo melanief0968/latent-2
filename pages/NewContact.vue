@@ -46,10 +46,12 @@ export default {
         const currentUserID = this.$getters.currentUserID();
         const userName = this.$getters.currentUserName();
         const chatName = this.chatname;
+        const sceneStage = "Acte I, scène I"
 
         const chatId = fb.createEntry("/conversations/", {
-          chatName,
+          chatName, sceneStage
         });
+       
         this.$actions.setCurrentChatId(chatId);
         // console.log(this.$getters.currentChatID())
         fb.createEntry(`/conversations/${chatId}/users`, currentUserID);

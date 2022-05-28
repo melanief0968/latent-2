@@ -1,5 +1,6 @@
 <template>
   <div class="messageBox" :class="cssClasses">
+    <div class="sentTime">{{sentTime}}</div>
     <div class="messageName" v-if="route === 'Book'">{{ user.name }} –</div>
     <div :class="switchDisplay" v-if="message">
       {{ text }}
@@ -12,7 +13,7 @@
 
 export default {
   components: {},
-  props: ["messageId"],
+  props: ["messageId", "sentTime"],
   data() {
     return {
       message: this.$getters.listenMessage(this.messageId),

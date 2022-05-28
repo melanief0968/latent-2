@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{'white-header': route==='Book'}">
       <!-- <h1 v-if="route === 'Index'">Index</h1>
       <h1 v-if="route === 'Contacts'">Échanges</h1> -->
       <!-- <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
@@ -72,5 +72,7 @@ h1{
   font-weight: normal;
   margin-left: 7%;
 }
-
+.white-header{
+  background: white !important;
+}
 </style>

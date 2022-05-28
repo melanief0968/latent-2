@@ -31,6 +31,7 @@ export default {
 }
 .book{
   height: 100%;
+  background-color: white
 }
 
 .navigation > span, p {
@@ -39,4 +40,6 @@ export default {
     justify-content: center;
     text-align: left;
 }
+
+
 </style>

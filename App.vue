@@ -2,11 +2,14 @@
   <div class="container">
     <GoBack v-if="route != 'Login'"></GoBack>
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
-    <Header v-if="route === 'Contacts'||'NewContacts'"></Header>
+    <Header v-if="route === 'Contacts'"></Header>
+    <Header v-if="route === 'NewContact'"></Header>
+    <Header v-if="route === 'Index'"></Header>
+    <Header v-if="route === 'Account'"></Header>
     <!-- <Header v-if="route === 'NewContact'"></Header> -->
     <HeaderChat v-if="route === 'Chat'"></HeaderChat>
     <HeaderChat v-else-if="route === 'Book'"></HeaderChat>
-    <main class="main">
+    <main class="main" :class="{'book-background': route ==='Book'}" >
       <transition :name="transitionName">
         <router-view></router-view>
       </transition>
