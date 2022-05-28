@@ -18,6 +18,7 @@ import * as fb from "@/scripts/firebase";
 import YellowLine from "@/components/YellowLine.vue";
 
 const USER_ERROR = "Le nom d'auteur·ice·x n'existe pas.";
+const CONV_ERROR = "Vous avez déjà une conversation en cours avec cette personne.";
 export default {
   components: {
     YellowLine,
@@ -49,27 +50,33 @@ export default {
         const chatId = fb.createEntry("/conversations/", {
           chatName,
         });
-
+        this.$actions.setCurrentChatId(chatId);
+        // console.log(this.$getters.currentChatID())
         fb.createEntry(`/conversations/${chatId}/users`, currentUserID);
         fb.createEntry(`/conversations/${chatId}/users`, contactId);
+          // console.log(currentUserID,contactId)
 
         fb.createEntry(`/users/${currentUserID}/conversations/`, chatId);
         fb.createEntry(`/users/${contactId}/conversations/`, chatId);
-        // fb.setValue(`/users/${contactId}/conversations/${chatId}/`, {
-        //   chatName,
-        //   currentUserID,
-        //   userName,
-        // });
+
+
         this.$router.push({
           path: "/chat",
           query: {
             // chatId: chatId,
           },
         });
+
+      // this.$actions.setCurrentChatId(chatId);
+      // console.log(currentUserID,contactId)
       });
       //   console.log(this.username, this.password);
     },
   },
+  mounted(){
+    
+    // console.log(this.$getters.user(currentUserID));
+  }
 };
 </script>
 <style lang="scss" scoped>

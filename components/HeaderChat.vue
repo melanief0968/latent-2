@@ -49,19 +49,9 @@ export default {
 };
 </script>
 <style lang="scss">
-.header {
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: row;
-  text-align: left;
-  font-family: $font-main;
-  background: $background-color;
-  padding:  0 5%;
-  border-bottom: .9px solid $contrast-color;
-  justify-content: space-between;
-}
 h1{
   font-weight: normal;
-  margin-left: 10%;
+  margin-left: 7%;
 }
+
 </style>

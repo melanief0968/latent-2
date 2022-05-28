@@ -20,7 +20,7 @@ export default {
     subtitle: {
       type: String,
       required: false,
-      default: "Acte I, scène II",
+      default: "Acte I, scène I",
     },
     unread: {
       type: Boolean,

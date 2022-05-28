@@ -3,6 +3,7 @@
     <ListMenus  v-for="(menu, index) in menus"
       :text="menu.name"
       :key="index"
+      @click.native="onItemClick(menus.name)"
     >
       {{ menu.name }}
     </ListMenus>
@@ -22,18 +23,27 @@ export default {
   data() {
     return {
       menus:[
-      {name:'Échanges', link:'to define'},
-      {name:'Bibliothèque', link:'to define'},
-      {name:'Profil', link:'to define'},
-      {name:'Aide', link:'to define'},
+      {name:'Échanges', link:'Contacts'},
+      {name:'Bibliothèque', link:'Contacts'},
+      {name:'Profil', link:'Account'},
+      {name:'Aide', link:'Account'},
     ]
     };
   },
   mounted() {
+    let menuItem = this.menus;
   },
   methods: {
-    
+    onItemClick(menuItem) {
+      console.log(this.menus.link)
+      // this.$router.push({
+      //   path: `/${this.menus.link}`,
+      //   query: {
+      //     // chatId,
+      //   },
+      // });
   },
+  }
 };
 </script>
 <style lang="scss">

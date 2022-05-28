@@ -4,7 +4,7 @@
       <h1 v-if="route === 'Contacts'">Échanges</h1>
       <h1 v-if="route === 'Account'">Profil</h1>
       <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
-        <img class="icone" src="../static/img/people.png">
+        <img class="icone" src="../static/img/add.png">
         <!-- <div>Nouveau dialogue</div> -->
       </router-link>
       <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1>
@@ -42,13 +42,16 @@ export default {
 </script>
 <style lang="scss">
 .header {
+  display: flex;
+   height: 10%;
   flex: 0 0 auto;
+  flex-direction: row;
   text-align: left;
   font-family: $font-main;
   background: $background-color;
   padding:  0 5%;
   border-bottom: .9px solid $contrast-color;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 .buttonIcone{
@@ -57,12 +60,10 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 50%;
+  height: 30%;
 }
 .icone{
   height: 100%;
 }
-h1{
-  font-weight: normal;
-}
+
 </style>

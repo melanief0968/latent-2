@@ -158,6 +158,7 @@ export default {
 .footerBook {
   width: 100vw;
   position: fixed;
+  height: 11%;
   bottom: 0;
   left: 0;
   font-family: $font-main;

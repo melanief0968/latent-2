@@ -37,11 +37,7 @@
         negative: {
           case1: [],
           case2: [],
-          case3: [{
-            m: (e) => `il faut ajouter des phrases ou supprimer le cas`,
-            f: (e) => `il faut ajouter des phrases ou supprimer le cas`,
-            n: (e) => `il faut ajouter des phrases ou supprimer le cas`,
-          }],
+          case3: [],
           case4: [],
           case5: [],
         },
@@ -396,11 +392,7 @@
         negative: {
           case1: [],
           case2: [],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case3: [],
           case4: [],
           case5: [],
         },
@@ -461,8 +453,16 @@
             f: (e) => `${e.name} prend la peine de bien choisir ses mots et n’hésite pas à revenir plusieurs fois sur ses dires.`,
             n: (e) => `${e.name} prend la peine de bien choisir ses mots et n’hésite pas à revenir plusieurs fois sur ses dires.`,
           }],
-          case4: [],
-          case5: [],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
         },
       },
       level3: {
@@ -498,8 +498,16 @@
             f: (e) => `Une flemme assez probable habite ${e.name}, qui ne revient pas sur son message avant de l'envoyer.`,
             n: (e) => `Une flemme assez probable habite ${e.name}, qui ne revient pas sur son message avant de l'envoyer.`,
           }],
-          case4: [],
-          case5: [],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
         },
         negative: {
           case1: [{
@@ -549,8 +557,16 @@
             f: (e) => `${e.name} ne paraît par vraiment concentrée, elle est sûrement en train de s'activer à une autre tâche plus importante.`,
             n: (e) => `${e.name} ne paraît par vraiment concentréx, iel est sûrement en train de s'activer à une autre tâche plus importante.`,
           }],
-          case4: [],
-          case5: [],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
         },
       },
       level4: {
@@ -570,8 +586,16 @@
             f: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
             n: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
           }],
-          case4: [],
-          case5: [],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
         },
         negative: {
           case1: [{
@@ -589,24 +613,24 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case4: [],
-          case5: [],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
         },
       },
     },
     time:{
       level1: {
         positive: {
-          case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case1: [],
+          case2: [],
           case3: [{
             m: (e) => `${e.name} répond en ${e.outputValue}.`,
             f: (e) => `${e.name} répond en ${e.outputValue}.`,
@@ -660,24 +684,14 @@
             f: (e) => `Au bout de ${e.outputValue}, ${e.name} renvoie un nouveau propos.`,
             n: (e) => `Au bout de ${e.outputValue}, ${e.name} renvoie un nouveau propos.`,
           }],
+          case4:[],
+          case5:[]
         },
         negative: {
           //jamais de negative
-          case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
           case4: [],
           case5: []
         },
@@ -699,8 +713,16 @@
             f: (e) => `L’attention de ${e.name} semble entièrement focalisée sur l’échange, elle répond hâtivement.`,
             n: (e) => `L’attention de ${e.name} semble entièrement focaliséx sur l’échange, iel répond hâtivement.`,
           }],
-          case4: [],
-          case5: [],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
         },
         negative: {
           case1: [{
@@ -742,8 +764,16 @@
             f: (e) => `${e.name} prend son temps pour répondre. Y a-t-il un message entre les lignes à faire passer à ${e.contact} ?`,
             n: (e) => `${e.name} prend son temps pour répondre. Y a-t-il un message entre les lignes à faire passer à ${e.contact} ?`,
           }],
-          case4: [],
-          case5: []
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
       level3: {
@@ -816,7 +846,11 @@
             f: (e) => `${e.name} se réjouit de l'échange, elle attend probablement une réponse croustillante !`,
             n: (e) => `${e.name} se réjouit de l'échange, iel attend probablement une réponse croustillante !`,
           }],
-          case5:[]
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -838,6 +872,16 @@
             f: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Elle a probablement enfin terminé la dernière saison de Game of Thrones.`,
             n: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Iel a probablement enfin terminé la dernière saison de Game of Thrones.`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
       level4: {
@@ -862,7 +906,11 @@
             f: (e) => `${e.name} se synchronise à l’échange, y a-t-il des sentiments dans l’air?`,
             n: (e) => `${e.name} se synchronise à l’échange, y a-t-il des sentiments dans l’air?`,
           }],
-          case5: []
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -880,6 +928,16 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
     },
@@ -887,11 +945,7 @@
       level1: {
         positive: {
           case1: [],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case2: [],
           case3: [{
             m: (e) => `${e.name} écrit à une vitesse de ${e.outputValue} mots par minute.`,
             f: (e) => `${e.name} écrit à une vitesse de ${e.outputValue} mots par minute.`,
@@ -913,24 +967,16 @@
             f: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
             n: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
           }],
+          case4:[],
+          case5:[]
         },
         negative: {
           //jamais de negative
-          case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
+          case4: [],
+          case5: []
         },
       },
       level2: {
@@ -967,6 +1013,11 @@
             f: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’ensemble des personnages se demande d’ou provient cette dextérité.`,
             n: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’ensemble des personnages se demande d’ou provient cette dextérité.`,
           }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -1058,7 +1109,11 @@
             f: (e) => `${e.name} a bien besoin d’une sieste, mais l’excitation de la conversation semble la garder alerte.`,
             n: (e) => `${e.name} a bien besoin d’une sieste, mais l’excitation de la conversation semble iel garder alerte.`,
           }],
-          case5: []
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -1184,6 +1239,16 @@
             f: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Elle ne peut plus d’écrire à la vitesse qu’elle souhaite.`,
             n: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Elle ne peut plus d’écrire à la vitesse qu’elle souhaite.`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
     }
@@ -1192,16 +1257,8 @@
     timeTrigger:{
       level1: {
         positive: {
-          case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case1: [],
+          case2: [],
           case3: [{
             m: (e) => `À ${e.outputValue} ${e.name} répond.`,
             f: (e) => `À ${e.outputValue} ${e.name} répond.`,
@@ -1220,21 +1277,11 @@
         },
         negative: {
           //jamais de negative
-          case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
+          case1: [],
+          case2: [],
+          case3: [],
+          case4: [],
+          case5:[]
         },
       },
       level2: {
@@ -1254,6 +1301,16 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -1271,6 +1328,16 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
       level3: {
@@ -1318,8 +1385,16 @@
             f: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
             n: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
           }],
-          case4: [],
-          case5: []
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -1337,6 +1412,11 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
       level4: {
@@ -1356,6 +1436,16 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
         negative: {
           case1: [{
@@ -1373,6 +1463,16 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case5:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
     },

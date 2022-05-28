@@ -22,7 +22,8 @@
        <div class="text-basic">Description</div>
        <div class="italic userProps">{{userProps.name}} est ....</div>
      </div>
-     <a class="text-basic" @click="disconnect">Se déconnecter</a>
+     <a class="text-basic deco" @click="disconnect">
+       <img class="icone-deco" src="../static/img/deco.png"> Se déconnecter</a>
      
      
 
@@ -114,6 +115,9 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.icone-deco{
+  height: 4vh;
 }
 .userprops-container{
   border-bottom: 2px solid var(--color-main);

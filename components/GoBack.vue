@@ -1,5 +1,6 @@
 <template>
-  <button class="go-back" @click="goBack">back</button>
+  <button class="go-back" @click="goBack">
+    <img class="icone-back" src="../static/img/back.png"></button>
 </template>
 
 <script>
@@ -34,13 +35,17 @@ export default {
 </script>
 <style scoped>
 .go-back {
-      top: 5vh;
-    left: 4vw;
+    top: 3.7vh;
+    left: .5vw;
     position: absolute;
   cursor: pointer;
-  z-index:100
+  z-index:100;
+  height:25px
 }
 button {
   border: 0;
+}
+.icone-back{
+  height:100%;
 }
 </style>

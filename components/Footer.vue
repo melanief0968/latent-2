@@ -5,7 +5,7 @@
       <div>Index</div>
     </router-link>
     <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/account">
-      <img class="icone" src="../static/img/people.png">
+      <img class="icone" src="../static/img/profil.png">
       <div>Profil</div> 
     </router-link>
     <!-- <router-link buttonIcone v-if="route === 'Contacts'" to="/login">
@@ -28,7 +28,7 @@ export default {
 <style lang="scss">
 .footer {
   flex: 0 0 auto;
-  height: 8%;
+  height: 11%;
   display: flex;
   text-align: center;
   justify-content: space-between;

@@ -8,6 +8,7 @@
             :key="message.sentTime"
             :name="message.userName"
             :text="message.didascalie"
+            :contact="getContactName()"
           ></Didascalies>
 
           <YellowLine
@@ -35,6 +36,7 @@
           ref="editor"
           @submit="onSubmit"
           @delete="getEraseAmount"
+          @keydown="keysCount"
           @focus="firstTime"
         ></InputMessage>
       </footer>
@@ -71,6 +73,7 @@ export default {
       messageContent: "",
       sentTime: 0,
       firstKeyTime: 0,
+      keyDownCounter:0,
       deleteKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
       name: "",
@@ -84,7 +87,8 @@ export default {
       didType: "",
       charAmount:0,
       eraseAmount:0,
-      totalErase:0
+      totalErase:0,
+      contactName:""
     };
   },
   computed: {
@@ -114,7 +118,7 @@ export default {
       };
     },
     randomCase() {
-      let cases = ["case1", "case2", "case3"];
+      let cases = ["case1", "case2", "case3", "case4","case5"];
       let random = Math.floor(Math.random() * cases.length);
       const _case = cases[random];
       //console.log(_case)
@@ -132,7 +136,9 @@ export default {
     },
     sendDidascalie(time) {
       const didascalie = this.chooseDidascalie();
-      if (!didascalie) return;
+      if (!didascalie) {
+        return;
+      }
 
       const base = this.getBaseMsg();
       const didMessage = {
@@ -145,7 +151,14 @@ export default {
 
       this.sendMessage(didMessage);
     },
-
+    keysCount(ev) {
+      this.startElapsedTime();
+      //seulement au first + enlever autres touches que les lettres et chiffres
+      this.keyDownCounter++;
+      if (this.keyDownCounter === 1) {
+        return (this.firstKeyTime = this.getTime());
+      }
+    },
     onSubmit(event) {
       this.outputSignal = "msg";
       this.onSignal();
@@ -220,13 +233,54 @@ export default {
       // console.log(this.$getters.currentChatID)
 
       this.deleteKeyCounter = 0;
+      this.keyDownCounter = 0;
       this.isChosen = false;
       return;
     },
-  
+    setFirstScene(){
+        let chatID = this.$getters.currentChatID()
+        let conversation = this.$getters.listenConversation(chatID)
+        const messages = [];
+        if (conversation && conversation.messages) {
+        Object.keys(conversation.messages).forEach((messageId) => {
+         const message = this.$getters.listenMessage(messageId);
+          if(message.messageType == "msg"){
+           return
+          }
+        });
+      }else{
+        //send didascalie Acte I scene I
+      }
+    },
+    setScenes(){
+      let scenes = ["scène I", "scène II", "scène III", "scène IV","scène V","scène VI","scène VII","scène VIII","scène IX", "scène X"]
+      let actes = ["acte I", "acte II", "acte III", "acte IV","acte V","acte VI","acte VII","acte VIII","acte IX", "acte X"]
+      let acte;
+      let scene;
+        if(this.getEllapseTime() >= 2000 && nbMessages >=50){
+            scene = [0]
+            acte = actes[i+1]
+            return acte + scene
+        }else if (this.getEllapseTime() >=10000){
+          scene = [0]
+            acte = actes[i+1]
+            return acte + scene
+        }if(this.getEllapseTime() >= 2000){
+          if(scene[i] == 9){
+            scene = [0]
+            acte = actes[i+1]
+            return acte + scene
+          }
+          acte = //last act;
+          scene = scenes[i+1];
+          return acte + scene
+        }
+    },
     yellowLineHeight() {
       let timeBetweenMessages = this.getEllapseTime()
-      let timeLineData = Math.floor(timeBetweenMessages / (1000 * 60))
+      
+      if(timeBetweenMessages){
+        let timeLineData = Math.floor(timeBetweenMessages / (1000 * 60))
       let textTime =""
       if (timeLineData <= 100){
         textTime =`${timeLineData}m`
@@ -235,23 +289,34 @@ export default {
       }else if(timeLineData > 6000){
         textTime =`${Math.floor(timeLineData/(60*24))}j`
       }
-      console.log(timeLineData)
-      console.log(timeBetweenMessages)
-      const calcDays = Math.floor(timeBetweenMessages / (1000 * 60 * 60 * 24));
-      let days = calcDays
-      if(days<1){
-        days = 0;
-      }
-      // console.log(days)
-      let height = Math.sqrt(timeBetweenMessages) * 0.025;
-      console.log(height)
-      const LINE_DATAS = {
-        height,
-        days,
-        textTime
-      }
-      console.log(LINE_DATAS);
+      // console.log(timeLineData)
+      // console.log(timeBetweenMessages)
+
+        const calcDays = Math.floor(timeBetweenMessages / (1000 * 60 * 60 * 24));
+        let days = calcDays
+        if(days<1){
+          days = 0;
+        }
+        // console.log(days)
+        let height = Math.sqrt(timeBetweenMessages) * 0.025;
+       
+        const LINE_DATAS = {
+          height,
+          days,
+          textTime
+        }
+        return LINE_DATAS;
+
+      }else{
+        const LINE_DATAS = {
+          height:2,
+          days:0,
+          textTime:""
+        }
+
+          console.log(LINE_DATAS);
       return LINE_DATAS;
+      }
 
       // for (let i = 0; i < days; i++) {
       //   const dotContainer = document.createElement("div");
@@ -309,6 +374,7 @@ export default {
 
     onElapsedTime() {
       this.$refs.editor.insertElapsedTime();
+      console.log("ELLAPPSSE")
       this.requestElapsedTime(2000); // ms
     },
 
@@ -325,7 +391,7 @@ export default {
         inputType: "char",
         didType:"msg"
       };
-      if (charAmount <= 5 && charAmount >= 0) {
+      if (charAmount <= 5 && charAmount >= 1) {
         RESULT.result = "positive";
       } else if (charAmount >= 90) {
         RESULT.result = "negative";
@@ -336,7 +402,7 @@ export default {
     getEraseAmount() {
       this.deleteKeyCounter++;
       this.totalErase = this.deleteKeyCounter-1;
-      console.log("JEFFACE");
+      // console.log("JEFFACE");
       const RESULT = {
         result: "",
         outputSignal: "msg",
@@ -344,12 +410,13 @@ export default {
         inputType: "erase",
         didType:"msg"
       };
-      console.log(this.totalErase);
-      if (this.totalErase <= 6 && this.totalErase >= 4) {
+      // console.log(this.totalErase);
+      if (this.totalErase <= 3 && this.totalErase >= 1) {
         RESULT.result = "positive";
       } else if (this.totalErase >= 10) {
         RESULT.result = "negative";
       }
+      console.log(RESULT)
       return RESULT;
     },
     getWritingTime() {
@@ -367,7 +434,7 @@ export default {
         inputType: "speed",
         didType:"time"
       };
-      if (wordsPerMin <= 28) {
+      if (wordsPerMin <= 28 && wordsPerMin>= 1) {
         RESULT.result = "negative";
       } else if (wordsPerMin >= 90) {
         RESULT.result = "positive";
@@ -417,6 +484,7 @@ export default {
       return DATE;
     },
     getEllapseTime() {
+    
      if (this.conversation && this.conversation.messages) {
         const messageArray = [];
         Object.keys(this.conversation.messages).forEach((messageId) => {
@@ -447,7 +515,10 @@ export default {
         didType:"time"
       };
       let TIME = this.getTimeDatas(timeBetweenMessages);
-          if (timeBetweenMessages <= 3000) {
+          if(timeBetweenMessages <= 1000){
+            RESULT.result ="positive";
+            RESULT.outputValue = "quelques instants"
+          }else if (timeBetweenMessages <= 3000 && timeBetweenMessages >=1001) {
             RESULT.result = "positive";
             RESULT.outputValue = TIME;
           } else if (timeBetweenMessages >= 1000 * 60 * 60) {
@@ -455,7 +526,7 @@ export default {
             RESULT.outputValue = TIME;
           } else {
           }
-          console.log(RESULT)
+          // console.log(RESULT)
           return RESULT;
     },
     getTimeTrigger() {
@@ -481,17 +552,21 @@ export default {
     
 
     intimacyLevel() {
-      //!faire vrai calcul
-      //  console.log(this.getTimeBetweenMessages().result)
+      // possibilité de passer d'un level à l'autre avec Time between MSG
       let level = "level1";
-      if (this.getTimeBetweenMessages().result === "positive") {
-        level = "level2";
-      } else if (this.getTimeBetweenMessages().result === "negative") {
-        level = "level1";
-      } else {
+      if(this.name == "Mélanie"&& this.getContactName()== "Jamy"){
         level = "level3";
+        return level
+      } else if(this.name == "Mélanie"&& this.getContactName()== "Sébastien"){
+        level = "level2";
+      }else if(this.name == "Mélanie"&& this.getContactName()== "Mathilde"){
+        level = "level4";
+      }else if(this.name == "Mélanie"&& this.getContactName()== "Elodie"){
+        level = "level1";
       }
-      // console.log("level:"+this.level)
+       else {
+         level = "level3";
+      }
       return level;
     },
 
@@ -499,10 +574,16 @@ export default {
       if (_array.length > 0) {
         let pushDid = null;
         const shuffledArr = _array.sort(() => 0.5 - Math.random());
-        console.log(_array, shuffledArr);
+        // console.log(_array, shuffledArr);
         const output = shuffledArr[0];
         console.log(output);
         //--> 'positif', 'negatif', ''
+        if (level== "level1"){
+          if(output.result != ""){
+
+            output.result = "positive"
+          }
+        }
         if (output.result == "") {
           shuffledArr.shift();
           this.getResult(shuffledArr, level, _case);
@@ -524,6 +605,7 @@ export default {
             output.result
           ][_case][index][this.gender]({
             name: this.name,
+            contact:this.contactName,
             outputValue: output.outputValue,
           });
           return pushDid;
@@ -539,6 +621,7 @@ export default {
       if (level == "level1") {
         _case = "case3";
       }
+    
       let char = this.getCharAmount();
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
@@ -576,17 +659,22 @@ export default {
       const calcMinutes = Math.floor((time / (1000 * 60)) % 60);
       const calcHours = Math.floor((time / (1000 * 60 * 60)) % 24);
       const calcDays = Math.floor(time / (1000 * 60 * 60 * 24));
+      const calcWeeks = Math.floor(time / (1000 * 60 * 60 * 24*7));
+      const calcMonths = Math.floor(time / (1000 * 60 * 60 * 24*30));
 
       let seconds = calcSeconds;
       let minutes = calcMinutes;
       let hours = calcHours;
       let days = calcDays;
+      let weeks = calcWeeks;
+      let months = calcMonths;
       let s = " secondes";
       let m = " minutes";
       let h = " heures";
       let d = " jours";
 
       if (calcMinutes < 1 && calcHours < 1 && calcDays < 1) {
+        return `${seconds} secondes`
         minutes = "";
         hours = "";
         days = "";
@@ -595,14 +683,22 @@ export default {
         d = "";
       }
       if (calcHours < 1 && calcDays < 1) {
+        return `${minutes} minutes et ${seconds} secondes`
         hours = "";
         days = "";
         h = "";
         d = "";
       }
       if (calcDays < 1) {
+        return ` ${hours} heures et ${minutes} minutes`
         days = "";
         d = "";
+      }
+      if (calcWeeks < 1) {
+        return `${days} jours et ${hours} heures`
+      }
+      if (calcMonths < 1) {
+        return `${weeks} semaines et ${days} jours`
       }
       const TIME = {
         seconds,
@@ -617,6 +713,16 @@ export default {
       // const TIME = minutes;
       return TIME;
     },
+    getContactName(){
+      const chatID = this.$getters.listenConversation(this.$getters.currentChatID())
+      const user = chatID.users
+      const otherUser = Object.values(user).find((userID) => {
+        return userID !== this.$getters.currentUserID();
+      });
+      const contactName = this.$getters.listenUser(otherUser).name;
+      this.contactName = contactName;
+      return this.contactName
+    }
   },
 
   beforeDestroy() {
@@ -625,7 +731,7 @@ export default {
   mounted() {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
-
+    this.setFirstScene()
   // this.sendLocation()
     // console.log(location.getLocation())
     
