@@ -3,6 +3,7 @@
     <ListItem
       v-for="{ conversation, id } in conversations"
       :title="itemTitle(conversation)"
+      :subtitle="setSubtitle(conversation)"
       :key="id"
       @click.native="onItemClick(id)"
     >
@@ -73,6 +74,18 @@ export default {
       return this.$getters.listenUser(otherUserID).name;
       // $getters.user(conversation.users);
     },
+    setSubtitle(conversation){
+      if (!conversation.sceneStage) return;
+      if (!conversation.actStage) return;
+      let scenes = ["scène I", "scène II", "scène III", "scène IV","scène V","scène VI","scène VII","scène VIII","scène IX", "scène X"]
+      let acts = ["Acte I", "Acte II", "Acte III", "Acte IV","Acte V","Acte VI","Acte VII","Acte VIII","Acte IX", "Acte X"]
+      let act = acts[conversation.actStage]
+      let scene= scenes[conversation.sceneStage]
+      let otherUser = this.itemTitle(conversation)
+      let user = this.$getters.currentUserName()
+      const subtitle = `${act}, ${scene}, ${otherUser} et ${user}`
+      return subtitle
+    }
   },
 };
 </script>
