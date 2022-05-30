@@ -65,13 +65,22 @@ export default {
       return Boolean(Math.round(Math.random()));
     },
 
-    itemTitle(conversation) {
+    itemTitlePerso(conversation) {
+      
       if (!conversation.users) return;
 
       const otherUserID = Object.values(conversation.users).find((userID) => {
         return userID !== this.$getters.currentUserID();
       });
       return this.$getters.listenUser(otherUserID).name;
+
+      // $getters.user(conversation.users);
+    },
+    itemTitle(conversation) {
+      if (!conversation.users) return;
+      console.log(conversation)
+      const TITLE = conversation.chatName
+      return TITLE
       // $getters.user(conversation.users);
     },
     setSubtitle(conversation){
