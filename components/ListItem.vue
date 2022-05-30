@@ -59,6 +59,9 @@ export default {
   flex-direction: column;
   
 }
+.description{
+  font-size: 15px;
+}
 .contactName {
   font-family: $font-main;
   font-size: $title-size;

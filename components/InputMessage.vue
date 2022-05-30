@@ -8,7 +8,9 @@
           @keydown.delete="deleteCount"
         /> -->
     <editor-content class="inputMsg__editor" :editor="editor" />
-    <button type="submit" @click="submit" class="inputMsg__btn">→</button>
+    <button type="submit" @click="submit" class="inputMsg__btn">
+      <img class="icone send" src="../static/img/send.png">
+    </button>
   </form>
 </template>
 <script>
@@ -140,5 +142,8 @@ border:2px solid $color-main;
 }
 .contenteditable{
 
+}
+.send{
+  height: 35px;
 }
 </style>

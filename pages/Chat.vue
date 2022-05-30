@@ -90,7 +90,8 @@ export default {
       charAmount:0,
       eraseAmount:0,
       totalErase:0,
-      contactName:""
+      contactName:"",
+      afterDelay:false
     };
   },
   computed: {
@@ -106,19 +107,24 @@ export default {
           //   //   messages.push({ id: messageId, message });
           //   // }
           // }else{
-
+           
             messages.push({ id: messageId, message });
+      
           // }
         });
 
       }
-      setTimeout(() => {
-        if(messages.length === 0){
-          // console.log("no msg")
-          // console.log(messages.length)
-          // this.setFirstScene()
+    
+      // setTimeout(() => {
+        if(this.afterDelay === true){
+
+          if(messages.length === 0){
+            console.log("no msg")
+            // console.log(messages.length)
+            this.setFirstScene()
+          }
         }
-      }, 2000);
+      // }, 2000);
 
 
       
@@ -252,7 +258,7 @@ export default {
       this.isChosen = false;
       return;
     },
-
+    
     setFirstScene(){
           this.sentTime = this.getTime();
           const didascalie = `Acte I, scène I`;
@@ -291,32 +297,44 @@ export default {
       let setScene = scenes[newSceneIndex];
       let setAct = acts[newActIndex];
       let hasChanged = false
+      let SCENES_DATA 
         //*CHANGE SCENE
-       if(this.getEllapseTime() >= (1000)){//1000 * 60 * 60 *12
-          hasChanged=true
-          newSceneIndex = currentSceneIndex + 1       
-          if(newSceneIndex == 10){
-            newSceneIndex = 0
-            newActIndex = currentActIndex + 1
-          }else{
-
-          }
-        } else if (this.getEllapseTime() >= (1000 * 60 * 60 *24)){//
-          hasChanged=true
-          newSceneIndex = 0
-          newActIndex = currentActIndex + 1
-        }
-          setScene =scenes[newSceneIndex]
-          setAct =acts[newActIndex]
-          const SCENES_DATA = {
-            setScene, 
-            newSceneIndex, 
-            setAct, 
-            newActIndex,
-            hasChanged
-          }
-
+        let sceneExist = this.$getters.listenConversation(chatID).sceneStage
+        // console.log(this.$getters.listenConversation(chatID).sceneStage)
+      if(sceneExist){
+          console.log("THERE IS SCENES")
+          if(this.getEllapseTime() >= (1000 * 60 * 60 *12)){//1000 * 60 * 60 *12
+             hasChanged=true
+             newSceneIndex = currentSceneIndex + 1       
+             if(newSceneIndex == 10){
+               newSceneIndex = 0
+               newActIndex = currentActIndex + 1
+             }else{
+               
+               }
+           } else if (this.getEllapseTime() >= (1000 * 60 * 60 *24)){//
+             hasChanged=true
+             newSceneIndex = 0
+             newActIndex = currentActIndex + 1
+           }
+             setScene =scenes[newSceneIndex]
+             setAct =acts[newActIndex]
+             SCENES_DATA = {
+               setScene, 
+               newSceneIndex, 
+               setAct, 
+               newActIndex,
+               hasChanged
+             }
+          console.log(SCENES_DATA)
           return SCENES_DATA
+        }else if (!sceneExist){
+          console.log("NO SCENEC")
+          return SCENES_DATA = {
+               hasChanged: false
+             }
+          return
+        }
       
         
         // (`/messages/${messageId}`, message)
@@ -345,7 +363,7 @@ export default {
           const didMessage = {
             ...base,
             messageType: "did",
-            sentTime: this.sentTime,
+            sentTime: this.sentTime++,
             didascalie,
             // didType:this.didType
           };
@@ -837,7 +855,10 @@ export default {
     // https://gist.github.com/viktorbezdek/3957601
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-
+    
+    setTimeout(() => {
+      this.afterDelay = true
+    }, 2000);
     setTimeout(() => {
       this.setTimeRatio();
     }, 5000);
