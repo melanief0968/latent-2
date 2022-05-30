@@ -3,18 +3,77 @@
     <div class="book-container slider">
       <section class="message-book-container slider__content">
           <div class="description-container">Page de descrption personnage</div>
-        <template v-for="{ message, id } in messages" v-chat-scroll>
-          <Didascalies v-if="message.userName !==undefined || message.didascalie !=undefined" :name="message.userName" :text="message.didascalie"></Didascalies>
-          <Message v-if="true" :key="id" :messageId="id"></Message>
-
-          <!-- <Didascalies
-            v-else-if="message.type === 'didascalie'"
+        <template v-for="{ message, id } in messages">
+      
+           <Didascalies
+            v-if="message.messageType === 'did'"
+            :key="message.sentTime"
+            :text="message.didascalie"
+            
+          ></Didascalies>
+           <Didascalies
+            v-if="message.messageType === 'didTime'"
+            :key="message.sentTime"
+            :text="message.didascalieTime"
+            
+          ></Didascalies>
+ 
+          <Message
+            v-else-if="message.messageType === 'msg'"
             :key="id"
-          ></Didascalies> -->
+            :messageId="id"
+          ></Message>
+
         </template>
       </section>
       <!-- <div v-for="slider in sliders" class="slider__snap"></div> -->
       <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
+	    </div>
+	    <div class="slider__snap">
 	    </div>
 	    <div class="slider__snap">
 	    </div>
@@ -65,17 +124,14 @@ export default {
       if (this.conversation && this.conversation.messages) {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
-          // console.log(message.bookText);
-           messages.push({ id: messageId, message });
+          
+          messages.push({ id: messageId, message });
+          
         });
       }
-
       return messages;
     },
-    // sliders(){
-    //   const sliders = [];
-
-    // }
+    
   },
   methods: {
     swipeHandler() {
@@ -93,7 +149,7 @@ export default {
 
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-
+    console.log(currentChat)
 
   },
 };
@@ -104,6 +160,7 @@ export default {
   width: 90%;
   background-color: #F8F6F2;
 }
+
 .slider {
   margin: 5% 5% 5% 5%;
   position: relative;

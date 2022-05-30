@@ -24,7 +24,7 @@ export default {
     },
     unread: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data() {
@@ -40,6 +40,7 @@ export default {
       return `${this.title}`;
     },
     subTextShown(){
+      return `${this.subtitle}`;
       //acte, scène, persos
     }
   },
@@ -54,6 +55,9 @@ export default {
   padding-top: 2%;
   padding-bottom: 4%;
   border-bottom: 2px solid $color-main;
+  display: flex;
+  flex-direction: column;
+  
 }
 .contactName {
   font-family: $font-main;
@@ -67,10 +71,10 @@ export default {
 .status-icon {
   // width: 1em;
   // height: 1em;
-  right: 0;
+  right: 8%;
   top: 20%;
-  height: 20px;
-  width: 20px;
+  height: 14px;
+  width: 14px;
   border-radius: 200%;
   position: absolute;
 

@@ -69,6 +69,8 @@ export default {
             // chatId: chatId,
           },
         });
+            
+  
 
       // this.$actions.setCurrentChatId(chatId);
       // console.log(currentUserID,contactId)

@@ -101,21 +101,28 @@ export default {
           const message = this.$getters.listenMessage(messageId);
           // console.log(message);
           // console.log(message.messageType);
-          messages.push({ id: messageId, message });
+          // if (this.$route.name === "Book") {
+          //   // if(message.messageType == "msg" || message.messageType == "did"){
+          //   //   messages.push({ id: messageId, message });
+          //   // }
+          // }else{
+
+            messages.push({ id: messageId, message });
+          // }
         });
 
       }
       setTimeout(() => {
         if(messages.length === 0){
-          console.log("no msg")
-          console.log(messages.length)
-          this.setFirstScene()
+          // console.log("no msg")
+          // console.log(messages.length)
+          // this.setFirstScene()
         }
       }, 2000);
 
 
       
-      console.log(messages.length)
+      // console.log(messages.length)
 
       return messages;
     },
@@ -285,7 +292,7 @@ export default {
       let setAct = acts[newActIndex];
       let hasChanged = false
         //*CHANGE SCENE
-       if(this.getEllapseTime() >= (1000 * 60 * 60 *12)){
+       if(this.getEllapseTime() >= (1000)){//1000 * 60 * 60 *12
           hasChanged=true
           newSceneIndex = currentSceneIndex + 1       
           if(newSceneIndex == 10){
@@ -331,6 +338,9 @@ export default {
         fb.setValue(`/conversations/${chatID}/actStage/`,this.setScenes().newActIndex);
         this.sentTime = this.getTime();
           const didascalie = `${this.setScenes().setAct}, ${this.setScenes().setScene}`;
+          let timeBetweenMessages = this.getEllapseTime()
+          let timeData = this.getTimeDatas(timeBetweenMessages)
+          const didascalieTime =`${timeData} passent.`
           const base = this.getBaseMsg();
           const didMessage = {
             ...base,
@@ -339,8 +349,16 @@ export default {
             didascalie,
             // didType:this.didType
           };
+          const didTimeMessage = {
+            ...base,
+            messageType: "didTime",
+            sentTime: this.sentTime++,
+            didascalieTime,
+            // didType:this.didType
+          };
 
           this.sendMessage(didMessage);
+          this.sendMessage(didTimeMessage);
         
         console.log(this.$getters.listenConversation(chatID).sceneStage,
         this.$getters.listenConversation(chatID).actStage)
@@ -807,7 +825,7 @@ export default {
   mounted() {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
-    // this.setScenes()
+    this.setScenes()
   // this.sendLocation()
     // console.log(location.getLocation())
 

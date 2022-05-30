@@ -1,7 +1,7 @@
 <template>
-  <div class="didascalieBox">
+  <div class="didascalieBox" :class="{'didBox-book': route ==='Book'}">
     <img v-if="this.icon !== undefined " :src="iconType" class="didIcon"></img>
-    <div class="didascalie italic">{{text}}</div>
+    <div class="didascalie italic" :class="{'did-book': route ==='Book'}">{{text}}</div>
   </div>
 </template>
 <script>
@@ -15,6 +15,9 @@ export default {
   // On passe le name et le case en props pour les définir dans la boucle de chat
   props: ['name', 'text', 'icon'],
   computed: {
+    route() {
+      return this.$route.name;
+    },
     iconType() {
       if (this.icon === undefined) {
         return ""
@@ -65,6 +68,12 @@ export default {
   }
 
 
+  .did-book{
+    text-align: left;
+  }
+}
+.didBox-book{
+  align-items: left ;
 }
 
 </style>
