@@ -4,18 +4,35 @@ import * as fb from "./firebase.js";
 let lat;
 let lng;
 
-
 let api_key = "8ccfb399b373416981422103bf030e78";
 let api_url = "https://api.opencagedata.com/geocode/v1/json";
 
 // export default{
-  
-  
+
 // }
 
-export function getLocation() {
+//? callback
+getLocation((currentCoordinates) => {
+  //
+});
+
+//? async / await
+// const currentCoordinates = await getLocation()
+
+// getLocation().then((currentCoordinates) => {
+
+// })
+
+export function getLocation(callback) {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition((position) => {
+      let currentPos = position.coords;
+      lat = position.coords.latitude;
+      lng = position.coords.longitude;
+      let currentCoordinates = `Latitude : ${lat}, longitude : ${lng}`;
+      // console.log(currentCoordinates);
+      callback(currentCoordinates);
+    });
   } else {
     console.log("Geolocation is not supported by this browser.");
   }
@@ -24,25 +41,20 @@ export function getLocation() {
   // return (data.results[0].formatted)
 }
 
-export function showPosition(position) {
-  // console.log(position.coords);
-  let currentPos = position.coords
-  lat = position.coords.latitude;
-  lng = position.coords.longitude;
-  let currentCoordinates = `Latitude : ${lat}, longitude : ${lng}`
-  console.log(currentCoordinates)
-  // console.log("Latitude: " + lat + " Longitude: " + lng);
-  // getCity(lat,lng)
- return currentCoordinates
-  // const GEO_DATA = {
-  //   currentPos,
-  //   currentCoordinates
-  // }
-  // return GEO_DATA
-  // if(city == true){
-  //   getCity(lat,lng)
-  // }
-}
+// export function showPosition(position) {
+//   // console.log(position.coords);
+//   // console.log("Latitude: " + lat + " Longitude: " + lng);
+//   // getCity(lat,lng)
+//   //  return currentCoordinates
+//   // const GEO_DATA = {
+//   //   currentPos,
+//   //   currentCoordinates
+//   // }
+//   // return GEO_DATA
+//   // if(city == true){
+//   //   getCity(lat,lng)
+//   // }
+// }
 
 export function getPosition() {
   // Simple wrapper
@@ -51,10 +63,27 @@ export function getPosition() {
   });
 }
 
-export function locationData() {
-  getPosition().then(console.log);
+export async function getCity() {
+  const position = await getPosition();
+
+  const { latitude, longitude } = position.coords;
+
+  const data = await getCityFromCoordsPromise(latitude, longitude);
+
+  return { city: data.results[0].components.town, position };
 }
-function getCity(lat,lng){
+
+function getCityFromCoordsPromise(latitude, longitude) {
+  return new Promise((resolve, reject) => {
+    getCityFromCoords(latitude, longitude, (data) => {
+      resolve(data);
+      // console.log(data);
+      // console.log(data.results[0].components.city);
+    });
+  });
+}
+
+function getCityFromCoords(lat, lng, callback) {
   let request_url =
     api_url +
     "?" +
@@ -78,8 +107,8 @@ function getCity(lat,lng){
       // Success!
       let data = JSON.parse(request.responseText);
       //alert(data.results[0].formatted); // print the location
-      console.log(data);
-      console.log(data.results[0].components.city);
+
+      callback(data);
       // document.getElementById("localisation").innerHTML =
       //   data.results[0].formatted;
     } else if (request.status <= 500) {
@@ -132,25 +161,25 @@ function getCity(lat,lng){
 
 //   id = navigator.geolocation.watchPosition(success, error, options);
 // }
-export function calcDist(coords1,coords2){
+export function calcDist(coords1, coords2) {
   // earth
   var R = 6371, // km
-  lat1 = parseFloat(coords1.lat),
-  lat2 = parseFloat(coords2.lat),
-  lon1 = parseFloat(coords1.lng),
-  lon2 = parseFloat(coords2.lng);
+    lat1 = parseFloat(coords1.lat),
+    lat2 = parseFloat(coords2.lat),
+    lon1 = parseFloat(coords1.lng),
+    lon2 = parseFloat(coords2.lng);
 
-// deg2rad
+  // deg2rad
   lat1 = (lat1 / 180) * Math.PI;
   lat2 = (lat2 / 180) * Math.PI;
   lon1 = (lon1 / 180) * Math.PI;
   lon2 = (lon2 / 180) * Math.PI;
-  
+
   // Equirectangular approximation
   // lower accuracy, higher performance
-  var x = (lon2-lon1) * Math.cos((lat1+lat2)/2);
-  var y = (lat2-lat1);
-  var d = Math.sqrt(x*x + y*y) * R;
+  var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+  var y = lat2 - lat1;
+  var d = Math.sqrt(x * x + y * y) * R;
   return Math.round(d * 1000);
 }
 export function inRange() {
@@ -159,4 +188,27 @@ export function inRange() {
   console.log(coords);
   if (!coords) return "?";
   return distanceFrom(coords, this.destination) > 150;
+}
+
+var ID;
+
+export function watchPos(callback) {
+  stopWatch();
+  ID = navigator.geolocation.watchPosition(
+    (pos) => {
+      callback(pos);
+    },
+    (err) => {
+      console.warn("ERROR(" + err.code + "): " + err.message);
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    }
+  );
+}
+
+export function stopWatch() {
+  navigator.geolocation.clearWatch(ID);
 }

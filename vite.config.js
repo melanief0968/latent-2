@@ -1,8 +1,12 @@
-const path = require('path')
+const path = require("path");
 const { createVuePlugin } = require("vite-plugin-vue2");
+const mkcert = require("vite-plugin-mkcert");
 
 module.exports = {
-  plugins: [createVuePlugin()],
+  plugins: [createVuePlugin(), mkcert.default()],
+  server: {
+    https: true,
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -12,7 +16,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, ''),
-    }
+      "@": path.resolve(__dirname, ""),
+    },
   },
 };

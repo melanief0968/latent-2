@@ -2,13 +2,12 @@
 import App from "./App.vue";
 import router from "./router.js";
 import VueRouter from "vue-router";
-import Vue from 'vue';
-import VueChatScroll from 'vue-chat-scroll'
+import Vue from "vue";
+import VueChatScroll from "vue-chat-scroll";
 //doc https://www.npmjs.com/package/vue2-touch-events
-import Vue2TouchEvents from 'vue2-touch-events'
+import Vue2TouchEvents from "vue2-touch-events";
 
-import ToggleButton from 'vue-js-toggle-button'
-
+import ToggleButton from "vue-js-toggle-button";
 
 import * as FIREBASE from "./scripts/firebase.js";
 
@@ -16,6 +15,8 @@ import * as FIREBASE from "./scripts/firebase.js";
 import "./styling/main.scss";
 
 import { state, actions, getters } from "./scripts/store.js";
+import { Bus } from "./scripts/eventBus";
+import { getCity, stopWatch, watchPos } from "./scripts/location";
 
 Vue.prototype.$state = state;
 Vue.prototype.$actions = actions;
@@ -25,7 +26,7 @@ Vue.prototype.$getters = getters;
 Vue.use(VueRouter);
 Vue.use(VueChatScroll);
 Vue.use(Vue2TouchEvents);
-Vue.use(ToggleButton)
+Vue.use(ToggleButton);
 
 FIREBASE.login(() => {
   new Vue({
@@ -34,11 +35,39 @@ FIREBASE.login(() => {
   }).$mount("#app");
 });
 
+watchPos(onPose);
+
+document.addEventListener("visibilitychange", () => {
+  // console.log(document.visibilityState);
+  if (document.visibilityState === "visible") {
+    watchPos(onPose);
+
+    getCity().then(({ city }) => {
+      Bus.$emit("location:citychange", city);
+    });
+  } else {
+    stopWatch();
+  }
+});
+
+function onPose(event) {
+  actions.setLocation(event.coords);
+}
+
+Bus.$on("location:citychange", (event) => {
+  // console.log("Current City: ", event);
+  actions.setUserCity(event);
+});
+
+// document.onvisibilitychange = function() {
+//  console.log('dy');
+// };
+
 // actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
 //if logged in
 console.log(state);
 
-if(!state.isLoggedIn) {
+if (!state.isLoggedIn) {
   router.replace("/login");
 } else {
   router.replace("/contacts");

@@ -11,6 +11,7 @@ export const state = persist(
     conversations: {},
     didascalies: {},
     users: {},
+    currentCity: "",
     otherUser: {},
     fbListeners: {},
     isLoggedIn: false,
@@ -19,10 +20,11 @@ export const state = persist(
     currentChatID: null,
     currentUserName: null,
     lastLocation: {},
+    currentLocation: {},
   }),
   {
     fields: [
-      'users',
+      "users",
       "isLoggedIn",
       "currentUserID",
       "currentContactID",
@@ -36,6 +38,12 @@ export const state = persist(
 export const getters = {
   user(userID) {
     return state.users[userID];
+  },
+  currentLocation() {
+    return state.currentLocation;
+  },
+  currentCity() {
+    return state.currentCity;
   },
   otherUser() {
     return state.otherUser;
@@ -58,6 +66,9 @@ export const getters = {
       const conversation = {};
       actions.setConversation(id, conversation);
       const fbListener = fb.listen(`/conversations/${id}/`, (value) => {
+
+        // console.log
+
         if (!value) return;
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
@@ -75,8 +86,11 @@ export const getters = {
     if (!user) {
       const user = {};
       actions.setUser(id, user);
+      console.log('user changed!');
       const fbListener = fb.listen(`/users/${id}/`, (value) => {
         if (!value) return;
+
+        console.log('user changed!');
         // store.messages[id].text = value.text;
         Object.entries(value).forEach(([key, value]) => {
           Vue.set(state.users[id], key, value);
@@ -127,6 +141,12 @@ export const getters = {
 };
 
 export const actions = {
+  setLocation(location) {
+    state.currentLocation = location;
+  },
+  setUserCity(cityName) {
+    state.currentCity = cityName;
+  },
   setLogin(isLoggedIn) {
     state.isLoggedIn = isLoggedIn;
   },

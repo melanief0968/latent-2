@@ -1,51 +1,58 @@
 <template>
   <!-- <div v-touch:swipe.left="swipeHandler"> -->
-    <div class="chat-container">
-      <div class="message-container" v-chat-scroll="{smooth: true, notSmoothOnInit: true, scrollonremoved:true}">
-        <template v-for="{ message, id } in messages">
-          <Didascalies
-            :icon="message.didType"
-            v-if="message.messageType === 'did'"
-            :key="message.sentTime"
-            :name="message.userName"
-            :text="message.didascalie"
-            :contact="getContactName()"
-          ></Didascalies>
+  <div class="chat-container">
+    <div
+      class="message-container"
+      v-chat-scroll="{
+        smooth: true,
+        notSmoothOnInit: true,
+        scrollonremoved: true,
+      }"
+    >
+      <template v-for="{ message, id } in messages">
+        <Didascalies
+          :icon="message.didType"
+          v-if="message.messageType === 'did'"
+          :key="message.sentTime"
+          :name="message.userName"
+          :text="message.didascalie"
+          :contact="getContactName()"
+        ></Didascalies>
 
-          <YellowLine
-            v-if="message.messageType === 'did'"
-            line-height="3"
-          ></YellowLine>
+        <YellowLine
+          v-if="message.messageType === 'did'"
+          line-height="3"
+        ></YellowLine>
 
-          <Message
-            v-else-if="message.messageType === 'msg'"
-            :key="id"
-            :author="userName"
-            :messageId="id"
-            :sentTime="message.textTime"
-          ></Message>
+        <Message
+          v-else-if="message.messageType === 'msg'"
+          :key="id"
+          :author="userName"
+          :messageId="id"
+          :sentTime="message.textTime"
+        ></Message>
 
-          <YellowLine
-            v-else-if="message.messageType === 'time'"
-            :key="message.sentTime"
-            :line-height="message.lineHeight"
-            :nbDots="message.dotsNum"
-          ></YellowLine>
-        </template>
-      </div>
-
-      <footer class="footerChat">
-        <InputMessage
-          ref="editor"
-          @submit="onSubmit"
-          @delete="getEraseAmount"
-          @keydown="keysCount"
-          @focus="firstTime"
-        ></InputMessage>
-      </footer>
-      <!-- //! footer here -->
-      <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
+        <YellowLine
+          v-else-if="message.messageType === 'time'"
+          :key="message.sentTime"
+          :line-height="message.lineHeight"
+          :nbDots="message.dotsNum"
+        ></YellowLine>
+      </template>
     </div>
+
+    <footer class="footerChat">
+      <InputMessage
+        ref="editor"
+        @submit="onSubmit"
+        @delete="getEraseAmount"
+        @keydown="keysCount"
+        @focus="firstTime"
+      ></InputMessage>
+    </footer>
+    <!-- //! footer here -->
+    <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
+  </div>
   <!-- </div> -->
 </template>
 <script>
@@ -66,7 +73,6 @@ export default {
     InputMessage,
     did,
     YellowLine,
-    
   },
   data() {
     return {
@@ -76,7 +82,7 @@ export default {
       messageContent: "",
       sentTime: 0,
       firstKeyTime: 0,
-      keyDownCounter:0,
+      keyDownCounter: 0,
       deleteKeyCounter: 0,
       currentUserID: this.$getters.currentUserID(),
       name: "",
@@ -88,13 +94,14 @@ export default {
       outputValue: "",
       timeBetweenMessages: 0,
       didType: "",
-      charAmount:0,
-      eraseAmount:0,
-      totalErase:0,
-      contactName:"",
-      afterDelay:false,
+      charAmount: 0,
+      eraseAmount: 0,
+      totalErase: 0,
+      contactName: "",
+      afterDelay: false,
       lat: 0,
-      lng: 0
+      lng: 0,
+      cityHasChanged: false,
     };
   },
   computed: {
@@ -112,26 +119,22 @@ export default {
           //   // }
           // }else{
 
-            messages.push({ id: messageId, message });
-     
+          messages.push({ id: messageId, message });
+
           // }
         });
-
       }
-    
-      // setTimeout(() => {
-        if(this.afterDelay === true){
 
-          if(messages.length === 0){
-            console.log("no msg")
-            // console.log(messages.length)
-            this.setFirstScene()
-          }
+      // setTimeout(() => {
+      if (this.afterDelay === true) {
+        if (messages.length === 0) {
+          console.log("no msg");
+          // console.log(messages.length)
+          this.setFirstScene();
         }
+      }
       // }, 2000);
 
-
-      
       // console.log(messages.length)
 
       return messages;
@@ -149,7 +152,7 @@ export default {
       };
     },
     randomCase() {
-      let cases = ["case1", "case2", "case3", "case4","case5"];
+      let cases = ["case1", "case2", "case3", "case4", "case5"];
       let random = Math.floor(Math.random() * cases.length);
       const _case = cases[random];
       //console.log(_case)
@@ -174,7 +177,7 @@ export default {
         messageType: "did",
         sentTime: time,
         didascalie,
-        didType:this.didType
+        didType: this.didType,
       };
 
       this.sendMessage(didMessage);
@@ -188,6 +191,12 @@ export default {
       }
     },
     onSubmit(event) {
+      // console.log('City has changed', value);
+      if (this.cityHasChanged) {
+        // send message didascalie
+        this.cityHasChanged = false;
+      }
+
       this.outputSignal = "msg";
       this.onSignal();
       this.getTimelaps();
@@ -195,7 +204,6 @@ export default {
       this.changeScene();
       this.stopElapsedTime();
       this.sentTime = this.getTime();
-
 
       const text = event.value;
       const chatVersion = text;
@@ -207,7 +215,6 @@ export default {
       this.charAmount = text
         .replace(/[•|\–]+/g, "") // remove special chars
         .replace(/\s/g, "").length; // remove all spaces
-
 
       const bookVersion = text.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
@@ -233,7 +240,7 @@ export default {
         if (eraseNumber === 9) {
           return " <i>(hésite un instant)<i> ";
         }
-        if (eraseNumber >10) {
+        if (eraseNumber > 10) {
           return " <i>(revient sur ses propos)<i> ";
         }
         if (elapseNumber === 3) {
@@ -257,22 +264,18 @@ export default {
         if (elapseNumber === 9) {
           return " <i>(est embarrasé)<i> ";
         }
-        if (elapseNumber >10) {
+        if (elapseNumber > 10) {
           return " <i>(fait une longue pause)<i> ";
         }
         if (eraseNumber === 3 && elapseNumber < 1) {
-            
           return " <i>(marmone puis continue)</i> ";
         }
         if (eraseNumber === 5 && elapseNumber < 2) {
           return "(décontenancé)";
-        }
-        else if (eraseNumber <1 && elapseNumber < 1) {
-    
+        } else if (eraseNumber < 1 && elapseNumber < 1) {
           return " <i>(it works)</i> ";
-        }
-        else{
-          return ""
+        } else {
+          return "";
         }
       });
 
@@ -282,7 +285,7 @@ export default {
         messageType: "time",
         sentTime: this.sentTime++, //! to have unique id, even if same time
         lineHeight: this.yellowLineHeight().height,
-        dotsNum:this.yellowLineHeight().days,
+        dotsNum: this.yellowLineHeight().days,
       };
 
       const didascalieTime = this.sentTime++;
@@ -297,9 +300,8 @@ export default {
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
         messageType: "msg",
-        textTime: this.yellowLineHeight().textTime
+        textTime: this.yellowLineHeight().textTime,
       };
-
 
       if (true) this.sendMessage(timeMessage);
 
@@ -312,20 +314,20 @@ export default {
       this.isChosen = false;
       return;
     },
-    
-    setFirstScene(){
-          this.sentTime = this.getTime();
-          const didascalie = `Acte I, scène I`;
-          const base = this.getBaseMsg();
-          const didMessage = {
-            ...base,
-            messageType: "did",
-            sentTime: this.sentTime,
-            didascalie,
-            // didType:this.didType
-          };
 
-          this.sendMessage(didMessage);
+    setFirstScene() {
+      this.sentTime = this.getTime();
+      const didascalie = `Acte I, scène I`;
+      const base = this.getBaseMsg();
+      const didMessage = {
+        ...base,
+        messageType: "did",
+        sentTime: this.sentTime,
+        didascalie,
+        // didType:this.didType
+      };
+
+      this.sendMessage(didMessage);
       //   let chatID = this.$getters.currentChatID()
       //   let conversation = this.$getters.listenConversation(chatID)
       //   const messages = [];
@@ -340,145 +342,179 @@ export default {
       //   //send didascalie Acte I scene I
       // }
     },
-    setScenes(){
-      let scenes = ["scène I", "scène II", "scène III", "scène IV","scène V","scène VI","scène VII","scène VIII","scène IX", "scène X"]
-      let acts = ["Acte I", "Acte II", "Acte III", "Acte IV","Acte V","Acte VI","Acte VII","Acte VIII","Acte IX", "Acte X"]
-      let chatID = this.$getters.currentChatID()
-      let currentSceneIndex = this.$getters.listenConversation(chatID).sceneStage
-      let currentActIndex = this.$getters.listenConversation(chatID).actStage
-      let newSceneIndex = currentSceneIndex
-      let newActIndex = currentActIndex
+    setScenes() {
+      let scenes = [
+        "scène I",
+        "scène II",
+        "scène III",
+        "scène IV",
+        "scène V",
+        "scène VI",
+        "scène VII",
+        "scène VIII",
+        "scène IX",
+        "scène X",
+      ];
+      let acts = [
+        "Acte I",
+        "Acte II",
+        "Acte III",
+        "Acte IV",
+        "Acte V",
+        "Acte VI",
+        "Acte VII",
+        "Acte VIII",
+        "Acte IX",
+        "Acte X",
+      ];
+      let chatID = this.$getters.currentChatID();
+      let currentSceneIndex =
+        this.$getters.listenConversation(chatID).sceneStage;
+      let currentActIndex = this.$getters.listenConversation(chatID).actStage;
+      let newSceneIndex = currentSceneIndex;
+      let newActIndex = currentActIndex;
       let setScene = scenes[newSceneIndex];
       let setAct = acts[newActIndex];
-      let hasChanged = false
-      let SCENES_DATA 
-        //*CHANGE SCENE
-        let sceneExist = this.$getters.listenConversation(chatID).sceneStage
-        console.log(this.$getters.listenConversation(chatID).sceneStage)
-      if(sceneExist != undefined){
-          console.log("THERE IS SCENES")
-          if(this.getEllapseTime() >= (1000)){//1000 * 60 * 60 *12
-             hasChanged=true
-             newSceneIndex = currentSceneIndex + 1       
-             if(newSceneIndex == 10){
-               newSceneIndex = 0
-               newActIndex = currentActIndex + 1
-             }else{
-               
-               }
-           } else if (this.getEllapseTime() >= (1000 * 60 * 60 *24)){//
-             hasChanged=true
-             newSceneIndex = 0
-             newActIndex = currentActIndex + 1
-           }
-             setScene =scenes[newSceneIndex]
-             setAct =acts[newActIndex]
-             SCENES_DATA = {
-               setScene, 
-               newSceneIndex, 
-               setAct, 
-               newActIndex,
-               hasChanged
-             }
-          console.log(SCENES_DATA)
-          return SCENES_DATA
-        }else if (!sceneExist){
-          console.log("NO SCENEC")
-          return SCENES_DATA = {
-               hasChanged: false
-             }
-          return
+      let hasChanged = false;
+      let SCENES_DATA;
+      //*CHANGE SCENE
+      let sceneExist = this.$getters.listenConversation(chatID).sceneStage;
+      console.log(this.$getters.listenConversation(chatID).sceneStage);
+      if (sceneExist != undefined) {
+        console.log("THERE IS SCENES");
+        if (this.getEllapseTime() >= 1000 * 60 * 60 * 12) {
+          //1000 * 60 * 60 *12
+          hasChanged = true;
+          newSceneIndex = currentSceneIndex + 1;
+          if (newSceneIndex == 10) {
+            newSceneIndex = 0;
+            newActIndex = currentActIndex + 1;
+          } else {
+          }
+        } else if (this.getEllapseTime() >= 1000 * 60 * 60 * 24) {
+          //
+          hasChanged = true;
+          newSceneIndex = 0;
+          newActIndex = currentActIndex + 1;
         }
-      
-        
-        // (`/messages/${messageId}`, message)
-        
-            // if(this.getEllapseTime() >= 2000 && nbMessages >=50){
-              //     scene = [0]
-            //     acte = actes[i+1]
-            //     return acte + scene
-            // }else if (this.getEllapseTime() >=10000){
-              //   scene = [0]
-            //     acte = actes[i+1]
-            //     return acte + scene
-            // }
-    },
-    changeScene(){
-      if(this.setScenes().hasChanged == true){
-        console.log("it was true")
-        let chatID = this.$getters.currentChatID()
-        fb.setValue(`/conversations/${chatID}/sceneStage/`,this.setScenes().newSceneIndex);
-        fb.setValue(`/conversations/${chatID}/actStage/`,this.setScenes().newActIndex);
-        this.sentTime = this.getTime();
-          const didascalie = `${this.setScenes().setAct}, ${this.setScenes().setScene}`;
-          let timeBetweenMessages = this.getEllapseTime()
-          let timeData = this.getTimeDatas(timeBetweenMessages)
-          const didascalieTime =`${timeData} passent.`
-          const base = this.getBaseMsg();
-          const didMessage = {
-            ...base,
-            messageType: "did",
-            sentTime: this.sentTime++,
-            didascalie,
-            // didType:this.didType
-          };
-          const didTimeMessage = {
-            ...base,
-            messageType: "didTime",
-            sentTime: this.sentTime++,
-            didascalieTime,
-            // didType:this.didType
-          };
+        setScene = scenes[newSceneIndex];
+        setAct = acts[newActIndex];
+        SCENES_DATA = {
+          setScene,
+          newSceneIndex,
+          setAct,
+          newActIndex,
+          hasChanged,
+        };
+        console.log(SCENES_DATA);
+        return SCENES_DATA;
+      } else if (!sceneExist) {
+        console.log("NO SCENEC");
+        return (SCENES_DATA = {
+          hasChanged: false,
+        });
+        return;
+      }
 
-          this.sendMessage(didMessage);
-          this.sendMessage(didTimeMessage);
-        
-        console.log(this.$getters.listenConversation(chatID).sceneStage,
-        this.$getters.listenConversation(chatID).actStage)
-      }else{
-        return
+      // (`/messages/${messageId}`, message)
+
+      // if(this.getEllapseTime() >= 2000 && nbMessages >=50){
+      //     scene = [0]
+      //     acte = actes[i+1]
+      //     return acte + scene
+      // }else if (this.getEllapseTime() >=10000){
+      //   scene = [0]
+      //     acte = actes[i+1]
+      //     return acte + scene
+      // }
+    },
+    changeScene() {
+      if (this.setScenes().hasChanged == true) {
+        console.log("it was true");
+        let chatID = this.$getters.currentChatID();
+        fb.setValue(
+          `/conversations/${chatID}/sceneStage/`,
+          this.setScenes().newSceneIndex
+        );
+        fb.setValue(
+          `/conversations/${chatID}/actStage/`,
+          this.setScenes().newActIndex
+        );
+        this.sentTime = this.getTime();
+        const didascalie = `${this.setScenes().setAct}, ${
+          this.setScenes().setScene
+        }`;
+        let timeBetweenMessages = this.getEllapseTime();
+        let timeData = this.getTimeDatas(timeBetweenMessages);
+        const didascalieTime = `${timeData} passent.`;
+        const base = this.getBaseMsg();
+        const didMessage = {
+          ...base,
+          messageType: "did",
+          sentTime: this.sentTime++,
+          didascalie,
+          // didType:this.didType
+        };
+        const didTimeMessage = {
+          ...base,
+          messageType: "didTime",
+          sentTime: this.sentTime++,
+          didascalieTime,
+          // didType:this.didType
+        };
+
+        this.sendMessage(didMessage);
+        this.sendMessage(didTimeMessage);
+
+        console.log(
+          this.$getters.listenConversation(chatID).sceneStage,
+          this.$getters.listenConversation(chatID).actStage
+        );
+      } else {
+        return;
       }
     },
     yellowLineHeight() {
-      let timeBetweenMessages = this.getEllapseTime()
-      
-      if(timeBetweenMessages){
-        let timeLineData = Math.floor(timeBetweenMessages / (1000 * 60))
-      let textTime =""
-      if (timeLineData <= 100){
-        textTime =`${timeLineData}m`
-      }else if(timeLineData > 100){
-        textTime =`${Math.floor(timeLineData/60)}h`
-      }else if(timeLineData > 6000){
-        textTime =`${Math.floor(timeLineData/(60*24))}j`
-      }
-      // console.log(timeLineData)
-      // console.log(timeBetweenMessages)
+      let timeBetweenMessages = this.getEllapseTime();
 
-        const calcDays = Math.floor(timeBetweenMessages / (1000 * 60 * 60 * 24));
-        let days = calcDays
-        if(days<1){
+      if (timeBetweenMessages) {
+        let timeLineData = Math.floor(timeBetweenMessages / (1000 * 60));
+        let textTime = "";
+        if (timeLineData <= 100) {
+          textTime = `${timeLineData}m`;
+        } else if (timeLineData > 100) {
+          textTime = `${Math.floor(timeLineData / 60)}h`;
+        } else if (timeLineData > 6000) {
+          textTime = `${Math.floor(timeLineData / (60 * 24))}j`;
+        }
+        // console.log(timeLineData)
+        // console.log(timeBetweenMessages)
+
+        const calcDays = Math.floor(
+          timeBetweenMessages / (1000 * 60 * 60 * 24)
+        );
+        let days = calcDays;
+        if (days < 1) {
           days = 0;
         }
         // console.log(days)
         let height = Math.sqrt(timeBetweenMessages) * 0.015;
-       
+
         const LINE_DATAS = {
           height,
           days,
-          textTime
-        }
+          textTime,
+        };
         return LINE_DATAS;
-
-      }else{
+      } else {
         const LINE_DATAS = {
-          height:2,
-          days:0,
-          textTime:""
-        }
+          height: 2,
+          days: 0,
+          textTime: "",
+        };
 
-          console.log(LINE_DATAS);
-      return LINE_DATAS;
+        console.log(LINE_DATAS);
+        return LINE_DATAS;
       }
 
       // for (let i = 0; i < days; i++) {
@@ -537,7 +573,7 @@ export default {
 
     onElapsedTime() {
       this.$refs.editor.insertElapsedTime();
-      console.log("ELLAPPSSE")
+      console.log("ELLAPPSSE");
       this.requestElapsedTime(2000); // ms
     },
 
@@ -552,7 +588,7 @@ export default {
         outputSignal: "msg",
         outputValue: charAmount,
         inputType: "char",
-        didType:"msg"
+        didType: "msg",
       };
       if (charAmount <= 5 && charAmount >= 1) {
         RESULT.result = "positive";
@@ -564,14 +600,14 @@ export default {
     },
     getEraseAmount() {
       this.deleteKeyCounter++;
-      this.totalErase = this.deleteKeyCounter-1;
+      this.totalErase = this.deleteKeyCounter - 1;
       // console.log("JEFFACE");
       const RESULT = {
         result: "",
         outputSignal: "msg",
         outputValue: this.totalErase,
         inputType: "erase",
-        didType:"msg"
+        didType: "msg",
       };
       // console.log(this.totalErase);
       if (this.totalErase <= 3 && this.totalErase >= 1) {
@@ -579,7 +615,7 @@ export default {
       } else if (this.totalErase >= 10) {
         RESULT.result = "negative";
       }
-      console.log(RESULT)
+      console.log(RESULT);
       return RESULT;
     },
     getWritingTime() {
@@ -595,9 +631,9 @@ export default {
         outputSignal: "msg",
         outputValue: wordsPerMin,
         inputType: "speed",
-        didType:"time"
+        didType: "time",
       };
-      if (wordsPerMin <= 28 && wordsPerMin>= 1) {
+      if (wordsPerMin <= 28 && wordsPerMin >= 1) {
         RESULT.result = "negative";
       } else if (wordsPerMin >= 90) {
         RESULT.result = "positive";
@@ -647,50 +683,49 @@ export default {
       return DATE;
     },
     getEllapseTime() {
-    
-     if (this.conversation && this.conversation.messages) {
+      if (this.conversation && this.conversation.messages) {
         const messageArray = [];
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
-          if(message.messageType == "msg"){
+          if (message.messageType == "msg") {
             // console.log(message)
-            let messagesTime = message.sentTime
-            messageArray.push(messagesTime)
+            let messagesTime = message.sentTime;
+            messageArray.push(messagesTime);
           }
         });
-        let lastMsgID = messageArray[messageArray.length-1];
+        let lastMsgID = messageArray[messageArray.length - 1];
         let beforeLastMsgID = messageArray[messageArray.length - 2];
-        
-        let timeBetweenMessages = lastMsgID-beforeLastMsgID
+
+        let timeBetweenMessages = lastMsgID - beforeLastMsgID;
         // console.log(timeBetweenMessages)
-        return timeBetweenMessages
+        return timeBetweenMessages;
       }
     },
-    
+
     getTimeBetweenMessages() {
       // console.log(this.getEllapseTime())
-      let timeBetweenMessages= this.getEllapseTime();
+      let timeBetweenMessages = this.getEllapseTime();
       const RESULT = {
         result: "",
         outputSignal: "msg",
         outputValue: "",
         inputType: "time",
-        didType:"time"
+        didType: "time",
       };
       let TIME = this.getTimeDatas(timeBetweenMessages);
-          if(timeBetweenMessages <= 1000){
-            RESULT.result ="positive";
-            RESULT.outputValue = "quelques instants"
-          }else if (timeBetweenMessages <= 3000 && timeBetweenMessages >=1001) {
-            RESULT.result = "positive";
-            RESULT.outputValue = TIME;
-          } else if (timeBetweenMessages >= 1000 * 60 * 60) {
-            RESULT.result = "negative";
-            RESULT.outputValue = TIME;
-          } else {
-          }
-          // console.log(RESULT)
-          return RESULT;
+      if (timeBetweenMessages <= 1000) {
+        RESULT.result = "positive";
+        RESULT.outputValue = "quelques instants";
+      } else if (timeBetweenMessages <= 3000 && timeBetweenMessages >= 1001) {
+        RESULT.result = "positive";
+        RESULT.outputValue = TIME;
+      } else if (timeBetweenMessages >= 1000 * 60 * 60) {
+        RESULT.result = "negative";
+        RESULT.outputValue = TIME;
+      } else {
+      }
+      // console.log(RESULT)
+      return RESULT;
     },
     getTimeTrigger() {
       const RESULT = {
@@ -698,7 +733,7 @@ export default {
         outputSignal: "ratio",
         outputValue: "test time",
         inputType: "timeTrigger",
-        didType:"time"
+        didType: "time",
       };
       return RESULT;
     },
@@ -708,27 +743,31 @@ export default {
         outputSignal: "ratio",
         outputValue: "test loca",
         inputType: "timeTrigger",
-        didType:"loca"
+        didType: "loca",
       };
       return RESULT;
     },
 
-
     intimacyLevel() {
       // possibilité de passer d'un level à l'autre avec Time between MSG
       let level = "level1";
-      if(this.name == "Mélanie"&& this.getContactName()== "Jamy"){
+      if (this.name == "Mélanie" && this.getContactName() == "Jamy") {
         level = "level3";
-        return level
-      } else if(this.name == "Mélanie"&& this.getContactName()== "Sébastien"){
+        return level;
+      } else if (
+        this.name == "Mélanie" &&
+        this.getContactName() == "Sébastien"
+      ) {
         level = "level2";
-      }else if(this.name == "Mélanie"&& this.getContactName()== "Mathilde"){
+      } else if (
+        this.name == "Mélanie" &&
+        this.getContactName() == "Mathilde"
+      ) {
         level = "level4";
-      }else if(this.name == "Mélanie"&& this.getContactName()== "Elodie"){
+      } else if (this.name == "Mélanie" && this.getContactName() == "Elodie") {
         level = "level1";
-      }
-       else {
-         level = "level3";
+      } else {
+        level = "level3";
       }
       return level;
     },
@@ -741,10 +780,9 @@ export default {
         const output = shuffledArr[0];
         console.log(output);
         //--> 'positif', 'negatif', ''
-        if (level== "level1"){
-          if(output.result != ""){
-
-            output.result = "positive"
+        if (level == "level1") {
+          if (output.result != "") {
+            output.result = "positive";
           }
         }
         if (output.result == "") {
@@ -763,12 +801,12 @@ export default {
             output.result,
             _case
           );
-          this.didType = output.didType
+          this.didType = output.didType;
           pushDid = did[output.outputSignal][output.inputType][level][
             output.result
           ][_case][index][this.gender]({
             name: this.name,
-            contact:this.contactName,
+            contact: this.contactName,
             outputValue: output.outputValue,
           });
           return pushDid;
@@ -784,7 +822,7 @@ export default {
       if (level == "level1") {
         _case = "case3";
       }
-    
+
       let char = this.getCharAmount();
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
@@ -812,51 +850,50 @@ export default {
         this.sendDidascalie(this.sentTime);
       }
     },
-    sendLocation(){
+    sendLocation() {
       if (navigator.geolocation) {
-      let show = navigator.geolocation.getCurrentPosition(this.showPosition);
-      // console.log(this.showPosition())
-      // return show
-    }
+        let show = navigator.geolocation.getCurrentPosition(this.showPosition);
+        // console.log(this.showPosition())
+        // return show
+      }
       // location.locationData()
       // location.getLocation()
       // console.log(location.getPosition().then(console.log))
       // console.log(location.getLocation().latitude,location.getLocation().longitude)
     },
-    showPosition(position){
-      let lat = position.coords.latitude
-      let lng = position.coords.longitude
+    showPosition(position) {
+      let lat = position.coords.latitude;
+      let lng = position.coords.longitude;
       // let coords = {lat,lng}
-      let lati = 2
-      let coords = {lat:2,lng:2}
-      this.$actions.setUserLocation(this.currentUserID, coords)
+      let lati = 2;
+      // let coords = {lat:2,lng:2}
+      let coords = { lat, lng };
+      // this.$actions.setUserLocation(this.currentUserID, coords)
       // setTimeout(() => {
-        
+
       //   this.sendPos(coords)
       // }, 3000);
       // this.lng = position.coords.longitude
       // this.lat = position.coords.latitude
       // return this.lng
-      // console.log(lat,lng)
+      console.log(coords);
 
       // return lat
     },
-    sendPos(){ 
-      this.sendLocation()
-      
+    sendPos() {
+      this.sendLocation();
+
       // this.$actions.setUser(this.currentUserID,coords)
     },
-    updateCoords(){
-      console.log(this.sendLocation()) 
-    //  let storedCoords = this.$getters.listenUser(this.currentUserID).coords
-    //  console.log(storedCoords)
-    
-          // console.log(storedCoords)
-
-    //   const interval = setInterval(function() {
-    //     console.log(this.showPosition())
-    // }, 50000);
-    // clearInterval(interval); 
+    updateCoords() {
+      // console.log(this.sendLocation())
+      //  let storedCoords = this.$getters.listenUser(this.currentUserID).coords
+      //  console.log(storedCoords)
+      // console.log(storedCoords)
+      //   const interval = setInterval(function() {
+      //     console.log(this.showPosition())
+      // }, 50000);
+      // clearInterval(interval);
     },
 
     getTimeDatas(time) {
@@ -865,8 +902,8 @@ export default {
       const calcMinutes = Math.floor((time / (1000 * 60)) % 60);
       const calcHours = Math.floor((time / (1000 * 60 * 60)) % 24);
       const calcDays = Math.floor(time / (1000 * 60 * 60 * 24));
-      const calcWeeks = Math.floor(time / (1000 * 60 * 60 * 24*7));
-      const calcMonths = Math.floor(time / (1000 * 60 * 60 * 24*30));
+      const calcWeeks = Math.floor(time / (1000 * 60 * 60 * 24 * 7));
+      const calcMonths = Math.floor(time / (1000 * 60 * 60 * 24 * 30));
 
       let seconds = calcSeconds;
       let minutes = calcMinutes;
@@ -880,7 +917,7 @@ export default {
       let d = " jours";
 
       if (calcMinutes < 1 && calcHours < 1 && calcDays < 1) {
-        return `${seconds} secondes`
+        return `${seconds} secondes`;
         minutes = "";
         hours = "";
         days = "";
@@ -889,22 +926,22 @@ export default {
         d = "";
       }
       if (calcHours < 1 && calcDays < 1) {
-        return `${minutes} minutes et ${seconds} secondes`
+        return `${minutes} minutes et ${seconds} secondes`;
         hours = "";
         days = "";
         h = "";
         d = "";
       }
       if (calcDays < 1) {
-        return ` ${hours} heures et ${minutes} minutes`
+        return ` ${hours} heures et ${minutes} minutes`;
         days = "";
         d = "";
       }
       if (calcWeeks < 1) {
-        return `${days} jours et ${hours} heures`
+        return `${days} jours et ${hours} heures`;
       }
       if (calcMonths < 1) {
-        return `${weeks} semaines et ${days} jours`
+        return `${weeks} semaines et ${days} jours`;
       }
       const TIME = {
         seconds,
@@ -914,38 +951,51 @@ export default {
         hours,
         h,
         days,
-        d
-      }
+        d,
+      };
       // const TIME = minutes;
       return TIME;
     },
-    getContactName(){
-      const chatID = this.$getters.listenConversation(this.$getters.currentChatID())
-      const user = chatID.users
+    getContactName() {
+      const chatID = this.$getters.listenConversation(
+        this.$getters.currentChatID()
+      );
+      const user = chatID.users;
       const otherUser = Object.values(user).find((userID) => {
         return userID !== this.$getters.currentUserID();
       });
       const contactName = this.$getters.listenUser(otherUser).name;
       this.contactName = contactName;
-      return this.contactName
+      return this.contactName;
     },
-    setLocationData(){
-      return location.getLocation()
-
-    }
+    setLocationData() {
+      return location.getLocation();
+    },
   },
 
   beforeDestroy() {
     this.removeListener();
   },
+  watch: {
+    "$state.currentCity"(value) {
+      this.cityHasChanged = true;
+    },
+    "$state.currentLocation"(value, oldValue) {
+      if (!oldValue.latitude) return;
+
+      //! distance here
+      // this.cityHasChanged = true;
+      console.log("New location", value, oldValue);
+    },
+  },
   mounted() {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
-    this.setScenes()
-    this.updateCoords()
+    this.setScenes();
+
+    // this.updateCoords()
     // console.log(location.getLocation())
 
-    
     // console.log(location.city)
     // console.log(location.inRange())
     // console.log(location.watchPos())
@@ -953,9 +1003,9 @@ export default {
     // https://gist.github.com/viktorbezdek/3957601
     const currentChat = this.$getters.currentChatID();
     this.conversation = this.$getters.listenConversation(currentChat);
-    
+
     setTimeout(() => {
-      this.afterDelay = true
+      this.afterDelay = true;
     }, 2000);
     setTimeout(() => {
       this.setTimeRatio();
@@ -980,7 +1030,7 @@ export default {
 
 .footerChat {
   width: 100vw;
-  height:13%;
+  height: 13%;
   position: fixed;
   bottom: 0;
   left: 0;
