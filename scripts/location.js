@@ -1,3 +1,6 @@
+import Vue from "vue";
+import * as fb from "./firebase.js";
+
 let lat;
 let lng;
 
@@ -5,10 +8,10 @@ let lng;
 let api_key = "8ccfb399b373416981422103bf030e78";
 let api_url = "https://api.opencagedata.com/geocode/v1/json";
 
-export default{
+// export default{
   
   
-}
+// }
 
 export function getLocation() {
   if (navigator.geolocation) {
@@ -17,17 +20,25 @@ export function getLocation() {
     console.log("Geolocation is not supported by this browser.");
   }
   console.log("get location");
+  // console.log(this.$getters.listenMessage(1653941131024))
   // return (data.results[0].formatted)
 }
 
 export function showPosition(position) {
-  console.log(position.coords);
+  // console.log(position.coords);
+  let currentPos = position.coords
   lat = position.coords.latitude;
   lng = position.coords.longitude;
-
-  console.log("Latitude: " + lat + " Longitude: " + lng);
-  getCity(lat,lng)
-  return lat +lng
+  let currentCoordinates = `Latitude : ${lat}, longitude : ${lng}`
+  console.log(currentCoordinates)
+  // console.log("Latitude: " + lat + " Longitude: " + lng);
+  // getCity(lat,lng)
+ return currentCoordinates
+  // const GEO_DATA = {
+  //   currentPos,
+  //   currentCoordinates
+  // }
+  // return GEO_DATA
   // if(city == true){
   //   getCity(lat,lng)
   // }
@@ -43,7 +54,7 @@ export function getPosition() {
 export function locationData() {
   getPosition().then(console.log);
 }
-export function getCity(lat,lng){
+function getCity(lat,lng){
   let request_url =
     api_url +
     "?" +

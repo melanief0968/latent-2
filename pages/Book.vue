@@ -19,6 +19,7 @@
           ></Didascalies>
  
           <Message
+            
             v-else-if="message.messageType === 'msg'"
             :key="id"
             :messageId="id"
@@ -119,6 +120,7 @@ export default {
     };
   },
   computed: {
+    
     messages() {
       const messages = [];
       if (this.conversation && this.conversation.messages) {
@@ -131,7 +133,10 @@ export default {
       }
       return messages;
     },
-    
+    commentsItalic: function(){
+      
+      return 
+    }
   },
   methods: {
     swipeHandler() {

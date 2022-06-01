@@ -18,6 +18,7 @@ export const state = persist(
     currentContactID: null,
     currentChatID: null,
     currentUserName: null,
+    lastLocation: {},
   }),
   {
     fields: [
@@ -131,6 +132,9 @@ export const actions = {
   },
   setCurrentUserID(id) {
     state.currentUserID = id;
+  },
+  setUserLocation(id, value) {
+    Vue.set(state.lastLocation, id, value);
   },
   setUser(userId, userInfo) {
     Vue.set(state.users, userId, userInfo);

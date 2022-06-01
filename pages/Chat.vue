@@ -1,7 +1,7 @@
 <template>
   <!-- <div v-touch:swipe.left="swipeHandler"> -->
     <div class="chat-container">
-      <div class="message-container" v-chat-scroll>
+      <div class="message-container" v-chat-scroll="{smooth: true, notSmoothOnInit: true, scrollonremoved:true}">
         <template v-for="{ message, id } in messages">
           <Didascalies
             :icon="message.didType"
@@ -33,6 +33,7 @@
           ></YellowLine>
         </template>
       </div>
+
       <footer class="footerChat">
         <InputMessage
           ref="editor"
@@ -91,12 +92,15 @@ export default {
       eraseAmount:0,
       totalErase:0,
       contactName:"",
-      afterDelay:false
+      afterDelay:false,
+      lat: 0,
+      lng: 0
     };
   },
   computed: {
     messages() {
       const messages = [];
+      // this.loadingMsg = true;
       if (this.conversation && this.conversation.messages) {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
@@ -107,9 +111,9 @@ export default {
           //   //   messages.push({ id: messageId, message });
           //   // }
           // }else{
-           
+
             messages.push({ id: messageId, message });
-      
+     
           // }
         });
 
@@ -208,17 +212,67 @@ export default {
       const bookVersion = text.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
-        if (eraseNumber === 1 && elapseNumber < 1) {
-          return "<i>(hésite)</i>";
-        }
         if (eraseNumber === 3) {
-          return "(wtf)";
+          return " <i>(prends un instant pour reformuler)<i> ";
         }
-        // if (eraseNumber === 0 && elapseNumber > 2) {
-        //   return "(wtf)";
-        // }
-        else {
-          return "<i>(it works)</i>";
+        if (eraseNumber === 4) {
+          return " <i>(reformule)<i> ";
+        }
+        if (eraseNumber === 5) {
+          return " <i>(se corrige)<i> ";
+        }
+        if (eraseNumber === 6) {
+          return " <i>(se rectifie)<i> ";
+        }
+        if (eraseNumber === 7) {
+          return " <i>(se reprend)<i> ";
+        }
+        if (eraseNumber === 8) {
+          return " <i>(se ravise, puis continue)<i> ";
+        }
+        if (eraseNumber === 9) {
+          return " <i>(hésite un instant)<i> ";
+        }
+        if (eraseNumber >10) {
+          return " <i>(revient sur ses propos)<i> ";
+        }
+        if (elapseNumber === 3) {
+          return " <i>(s'arrête un instant)<i> ";
+        }
+        if (elapseNumber === 4) {
+          return " <i>(lève la tête avant de continuer)<i> ";
+        }
+        if (elapseNumber === 5) {
+          return " <i>(distrait)<i> ";
+        }
+        if (elapseNumber === 6) {
+          return " <i>(réfléchit)<i> ";
+        }
+        if (elapseNumber === 7) {
+          return " <i>(est hésitant)<i> ";
+        }
+        if (elapseNumber === 8) {
+          return " <i>(reprend ses esprits)<i> ";
+        }
+        if (elapseNumber === 9) {
+          return " <i>(est embarrasé)<i> ";
+        }
+        if (elapseNumber >10) {
+          return " <i>(fait une longue pause)<i> ";
+        }
+        if (eraseNumber === 3 && elapseNumber < 1) {
+            
+          return " <i>(marmone puis continue)</i> ";
+        }
+        if (eraseNumber === 5 && elapseNumber < 2) {
+          return "(décontenancé)";
+        }
+        else if (eraseNumber <1 && elapseNumber < 1) {
+    
+          return " <i>(it works)</i> ";
+        }
+        else{
+          return ""
         }
       });
 
@@ -300,10 +354,10 @@ export default {
       let SCENES_DATA 
         //*CHANGE SCENE
         let sceneExist = this.$getters.listenConversation(chatID).sceneStage
-        // console.log(this.$getters.listenConversation(chatID).sceneStage)
-      if(sceneExist){
+        console.log(this.$getters.listenConversation(chatID).sceneStage)
+      if(sceneExist != undefined){
           console.log("THERE IS SCENES")
-          if(this.getEllapseTime() >= (1000 * 60 * 60 *12)){//1000 * 60 * 60 *12
+          if(this.getEllapseTime() >= (1000)){//1000 * 60 * 60 *12
              hasChanged=true
              newSceneIndex = currentSceneIndex + 1       
              if(newSceneIndex == 10){
@@ -351,6 +405,7 @@ export default {
     },
     changeScene(){
       if(this.setScenes().hasChanged == true){
+        console.log("it was true")
         let chatID = this.$getters.currentChatID()
         fb.setValue(`/conversations/${chatID}/sceneStage/`,this.setScenes().newSceneIndex);
         fb.setValue(`/conversations/${chatID}/actStage/`,this.setScenes().newActIndex);
@@ -470,7 +525,7 @@ export default {
       return startWriting;
     },
     startElapsedTime() {
-      this.requestElapsedTime(3000);
+      this.requestElapsedTime(5000);
     },
 
     requestElapsedTime(millis) {
@@ -758,9 +813,52 @@ export default {
       }
     },
     sendLocation(){
-      console.log(location.getLocation())
+      if (navigator.geolocation) {
+      let show = navigator.geolocation.getCurrentPosition(this.showPosition);
+      // console.log(this.showPosition())
+      // return show
+    }
+      // location.locationData()
+      // location.getLocation()
+      // console.log(location.getPosition().then(console.log))
       // console.log(location.getLocation().latitude,location.getLocation().longitude)
     },
+    showPosition(position){
+      let lat = position.coords.latitude
+      let lng = position.coords.longitude
+      // let coords = {lat,lng}
+      let lati = 2
+      let coords = {lat:2,lng:2}
+      this.$actions.setUserLocation(this.currentUserID, coords)
+      // setTimeout(() => {
+        
+      //   this.sendPos(coords)
+      // }, 3000);
+      // this.lng = position.coords.longitude
+      // this.lat = position.coords.latitude
+      // return this.lng
+      // console.log(lat,lng)
+
+      // return lat
+    },
+    sendPos(){ 
+      this.sendLocation()
+      
+      // this.$actions.setUser(this.currentUserID,coords)
+    },
+    updateCoords(){
+      console.log(this.sendLocation()) 
+    //  let storedCoords = this.$getters.listenUser(this.currentUserID).coords
+    //  console.log(storedCoords)
+    
+          // console.log(storedCoords)
+
+    //   const interval = setInterval(function() {
+    //     console.log(this.showPosition())
+    // }, 50000);
+    // clearInterval(interval); 
+    },
+
     getTimeDatas(time) {
       //hr, min, sec, day, daytime, weekday, month, year, period
       const calcSeconds = Math.floor((time / 1000) % 60);
@@ -844,7 +942,7 @@ export default {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
     this.setScenes()
-  // this.sendLocation()
+    this.updateCoords()
     // console.log(location.getLocation())
 
     

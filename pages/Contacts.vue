@@ -116,7 +116,7 @@ export default {
     setSubtitle(conversation){
       // if (!conversation.sceneStage) return;
       // if (!conversation.actStage) return;
-      console.log(conversation.sceneStage, conversation.actStage)
+      // console.log(conversation.sceneStage, conversation.actStage)
       let scenes = ["scène I", "scène II", "scène III", "scène IV","scène V","scène VI","scène VII","scène VIII","scène IX", "scène X"]
       let acts = ["Acte I", "Acte II", "Acte III", "Acte IV","Acte V","Acte VI","Acte VII","Acte VIII","Acte IX", "Acte X"]
       let act = acts[conversation.actStage]
