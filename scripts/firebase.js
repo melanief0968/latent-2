@@ -43,7 +43,9 @@ const database = getDatabase();
 
 export function listen(path, callback) {
   const dbRef = ref(database, path);
+
   const unsubscribe = onValue(dbRef, (snapshot) => {
+    // console.log('export', snapshot.exportVal());
     callback(snapshot.val());
   });
   return unsubscribe

@@ -126,13 +126,6 @@ export default {
       }
 
       // setTimeout(() => {
-      if (this.afterDelay === true) {
-        if (messages.length === 0) {
-          console.log("no msg");
-          // console.log(messages.length)
-          this.setFirstScene();
-        }
-      }
       // }, 2000);
 
       // console.log(messages.length)
@@ -220,7 +213,7 @@ export default {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
         if (eraseNumber === 3) {
-          return " <i>(prends un instant pour reformuler)<i> ";
+          return " <i>(prends un instant pour reformuler)</i> ";
         }
         if (eraseNumber === 4) {
           return " <i>(reformule)<i> ";
@@ -253,13 +246,13 @@ export default {
           return " <i>(distrait)<i> ";
         }
         if (elapseNumber === 6) {
-          return " <i>(réfléchit)<i> ";
+          return " <i>(réfléchit)</i> ";
         }
         if (elapseNumber === 7) {
           return " <i>(est hésitant)<i> ";
         }
         if (elapseNumber === 8) {
-          return " <i>(reprend ses esprits)<i> ";
+          return " <i>(reprend ses esprits)</i> ";
         }
         if (elapseNumber === 9) {
           return " <i>(est embarrasé)<i> ";
@@ -290,6 +283,10 @@ export default {
 
       const didascalieTime = this.sentTime++;
       // console.log(message, chatVersion);
+
+      const textTime = this.yellowLineHeight().textTime;
+      console.log(textTime);
+
       const textMessage = {
         ...baseMessage,
         sentTime: this.sentTime++,
@@ -300,7 +297,7 @@ export default {
         typingSpeed: this.getWritingSpeed().outputValue,
         coordinates: "",
         messageType: "msg",
-        textTime: this.yellowLineHeight().textTime,
+        textTime,
       };
 
       if (true) this.sendMessage(timeMessage);
@@ -977,6 +974,10 @@ export default {
     this.removeListener();
   },
   watch: {
+    messages(value) {
+      if (value.length === 0) this.setFirstScene();
+    },
+
     "$state.currentCity"(value) {
       this.cityHasChanged = true;
     },

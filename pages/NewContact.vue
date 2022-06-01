@@ -39,11 +39,15 @@ export default {
           this.message = USER_ERROR;
           return;
         }
+
+
         const [firstResult] = Object.entries(results);
         const [userId, props] = firstResult;
         const contactId = userId;
+        console.log(contactId);
         const contactName = props.name;
         const currentUserID = this.$getters.currentUserID();
+
         const userName = this.$getters.currentUserName();
         const chatName = this.chatname;
         const sceneStage = 0
@@ -61,7 +65,6 @@ export default {
 
         fb.createEntry(`/users/${currentUserID}/conversations/`, chatId);
         fb.createEntry(`/users/${contactId}/conversations/`, chatId);
-
 
         this.$router.push({
           path: "/chat",

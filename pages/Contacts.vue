@@ -1,7 +1,7 @@
 <template>
   <div class="contactPage">
     <ListItem
-      v-for="{ conversation, id } in conversations"
+      v-for="{ conversation, id } in sortedConversations"
       :title="itemTitle(conversation)"
       :subtitle="setSubtitle(conversation)"
       :key="id"
@@ -25,6 +25,7 @@ export default {
     return {
       people: [],
       conversations: [],
+      userProps: null,
       removeListener: () => {},
     };
   },
@@ -33,51 +34,81 @@ export default {
     this.removeListener();
   },
 
-  computed: {},
+  computed: {
+    sortedConversations() {
+      return this.conversations
+        .map((entry, index) => {
+          const messages = Object.keys(entry.conversation.messages || {});
+          let lastMessageTime = index;
+
+          if (messages && messages.length > 0) {
+            const lastMessage = messages[messages.length - 1];
+            lastMessageTime = parseInt(lastMessage);
+            // console.log("msgtime", lastMessage);
+          }
+
+          return { ...entry, lastMessageTime };
+        })
+        .sort((a, b) => {
+          return b.lastMessageTime - a.lastMessageTime;
+        });
+      //  let lastMessageTime = 0;
+    },
+  },
 
   mounted() {
     this.conversationList();
   },
+
+  watch: {
+    userProps(value) {
+      // console.log("BOI", value.conversations);
+      if (!value.conversations) return;
+
+      console.log("New conv", Object.keys(value.conversations).length);
+
+      this.conversations = Object.values(value.conversations).map(
+        (conversationId) => {
+          const conversation = this.$getters.listenConversation(conversationId);
+
+          // let lastMessage = this.lastMessageData(conversation.messag);
+
+          // console.log(conversation)
+          // console.log(lastMessage)
+          // lastMessage.sort(function (a, b) {
+          // return parseInt(b[0], 10) - parseInt(a[0], 10);
+          // });
+
+          return { conversation, id: conversationId };
+        }
+      );
+      // .sort((a, b) => {
+      //   return parseInt(b.lastMessageTime) - parseInt(a.lastMessageTime);
+      // });
+    },
+  },
+
   methods: {
     conversationList() {
       const currentUserID = this.$getters.currentUserID();
-      console.log(this.$getters.listenUser(currentUserID));
-      const userProps = this.$getters.user(currentUserID);
-      console.log(userProps);
-      console.log("conversation");
-
-      if (userProps.conversations) {
-        this.conversations = Object.values(userProps.conversations).map(
-          (conversationId) => {
-            const conversation =
-              this.$getters.listenConversation(conversationId);
-            let lastMessage = this.lastMessageData(conversation);
-            // console.log(conversation)
-            // console.log(lastMessage)
-            // lastMessage.sort(function (a, b) {
-            // return parseInt(b[0], 10) - parseInt(a[0], 10);
-            // });
-
-            return { conversation, id: conversationId };
-          }
-        );
-      }
+      this.$getters.listenUser(currentUserID);
+      this.userProps = this.$getters.user(currentUserID);
     },
-    lastMessageData(conversation) {
-      const lastMessages = [];
-      if (conversation.messages) {
-        let messagesArray = Object.keys(conversation.messages);
-        let lastMessage = messagesArray[messagesArray.length - 1];
-        lastMessages.push(lastMessage);
-        //   console.log(lastMessages)
-        lastMessages.sort(function (a, b) {
-          return parseInt(b[0], 10) - parseInt(a[0], 10);
-        });
-        // console.log(lastMessages)
-      }
-      // console.log(lastMessage)
-      return lastMessages;
-    },
+    // lastMessageData(conversation) {
+    //   // const lastMessages = [];
+    //   if (conversation.messages) {
+    //     // let messagesArray = Object.keys(conversation.messages);
+    //     let lastMessage = messagesArray[messagesArray.length - 1];
+    //     lastMessages.push(lastMessage);
+    //     console.log(lastMessages);
+    //     lastMessages.sort(function (a, b) {
+    //       return parseInt(b[0], 10) - parseInt(a[0], 10);
+    //     });
+    //     // console.log(lastMessages)
+    //   }
+    //   // console.log(lastMessage)
+    //   return lastMessages;
+    // },
     onItemClick(chatId) {
       this.$router.push({
         path: "/chat",

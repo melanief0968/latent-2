@@ -2,6 +2,7 @@
 
 import Vue from "vue";
 import persist from "vue-observable-persist";
+import { stateMerge } from "vue-object-merge";
 
 import * as fb from "./firebase.js";
 
@@ -24,7 +25,6 @@ export const state = persist(
   }),
   {
     fields: [
-      "users",
       "isLoggedIn",
       "currentUserID",
       "currentContactID",
@@ -34,6 +34,12 @@ export const state = persist(
   }
 );
 // this.$state.newVariable = 'yejbhskj'
+
+//! to refactor
+function deepFuckingMerge(obj, newObj) {
+  stateMerge(obj, newObj);
+  Vue.set(obj, obj);
+}
 
 export const getters = {
   user(userID) {
@@ -66,7 +72,6 @@ export const getters = {
       const conversation = {};
       actions.setConversation(id, conversation);
       const fbListener = fb.listen(`/conversations/${id}/`, (value) => {
-
         // console.log
 
         if (!value) return;
@@ -86,15 +91,11 @@ export const getters = {
     if (!user) {
       const user = {};
       actions.setUser(id, user);
-      console.log('user changed!');
+      console.log("user changed!");
       const fbListener = fb.listen(`/users/${id}/`, (value) => {
         if (!value) return;
 
-        console.log('user changed!');
-        // store.messages[id].text = value.text;
-        Object.entries(value).forEach(([key, value]) => {
-          Vue.set(state.users[id], key, value);
-        });
+        deepFuckingMerge(state.users[id], value);
       });
 
       Vue.set(state.fbListeners, id, fbListener);
@@ -109,10 +110,11 @@ export const getters = {
       actions.setMessage(id, message);
       const fbListener = fb.listen(`/messages/${id}/`, (value) => {
         if (!value) return;
-        // store.messages[id].text = value.text;
-        Object.entries(value).forEach(([key, value]) => {
-          Vue.set(state.messages[id], key, value);
-        });
+
+        // Object.entries(value).forEach(([key, value]) => {
+        //   Vue.set(state.messages[id], key, value);
+        // });
+        deepFuckingMerge(state.messages[id], value);
       });
 
       Vue.set(state.fbListeners, id, fbListener);
@@ -128,9 +130,10 @@ export const getters = {
       const fbListener = fb.listen(`/didascalies/${id}/`, (value) => {
         if (!value) return;
         // store.messages[id].text = value.text;
-        Object.entries(value).forEach(([key, value]) => {
-          Vue.set(state.didascalies[id], key, value);
-        });
+        // Object.entries(value).forEach(([key, value]) => {
+        //   Vue.set(state.didascalies[id], key, value);
+        // });
+        deepFuckingMerge(state.didascalies[id], value);
       });
 
       Vue.set(state.fbListeners, id, fbListener);

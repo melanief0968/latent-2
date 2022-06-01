@@ -1,10 +1,8 @@
 <template>
   <div class="messageBox" :class="cssClasses">
-    <div class="sentTime">{{sentTime}}</div>
+    <div class="sentTime">{{ sentTime }}</div>
     <div class="messageName" v-if="route === 'Book'">{{ user.name }} –</div>
-    <div :class="switchDisplay" v-if="message">
-      {{ text }}
-    </div>
+    <div :class="switchDisplay" v-if="message" v-html="text"></div>
     <div>{{ $state.test }}</div>
   </div>
 </template>
@@ -26,7 +24,7 @@ export default {
       return this.$route.name;
     },
     user() {
-      return this.$getters.user(this.message.sendingUser) || {}
+      return this.$getters.user(this.message.sendingUser) || {};
     },
     // username() {
     //   return this.user?.name;
@@ -39,7 +37,6 @@ export default {
       if (this.$route.name === "Book") {
         return this.message.bookText;
       }
-
 
       // return this.message.text.replace(/[•|\*]/g, (char) => {
       //   if (char === "•") return '<span class="elapse">•</span>';
