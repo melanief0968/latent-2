@@ -102,6 +102,7 @@ export default {
       lat: 0,
       lng: 0,
       cityHasChanged: false,
+      lastMsgTime :0,
     };
   },
   computed: {
@@ -189,14 +190,16 @@ export default {
         // send message didascalie
         this.cityHasChanged = false;
       }
+      this.lastMsgTime = this.getTime();
 
       this.outputSignal = "msg";
       this.onSignal();
       this.getTimelaps();
 
-      this.changeScene();
+     
       this.stopElapsedTime();
       this.sentTime = this.getTime();
+      console.log("time of msg: " + this.sentTime)
 
       const text = event.value;
       const chatVersion = text;
@@ -280,16 +283,14 @@ export default {
         lineHeight: this.yellowLineHeight().height,
         dotsNum: this.yellowLineHeight().days,
       };
-
-      const didascalieTime = this.sentTime++;
+      const sceneTime = this.sentTime+2;
+      const didascalieTime = this.sentTime+4;
       // console.log(message, chatVersion);
-
       const textTime = this.yellowLineHeight().textTime;
-      console.log(textTime);
-
+      
       const textMessage = {
         ...baseMessage,
-        sentTime: this.sentTime++,
+        sentTime: this.sentTime+5,
         text: chatVersion,
         bookText: bookVersion,
         charAmount: this.charAmount,
@@ -299,9 +300,8 @@ export default {
         messageType: "msg",
         textTime,
       };
-
       if (true) this.sendMessage(timeMessage);
-
+      this.changeScene(sceneTime);
       this.sendDidascalie(didascalieTime);
       this.sendMessage(textMessage);
       // console.log(this.$getters.currentChatID)
@@ -378,8 +378,8 @@ export default {
       let sceneExist = this.$getters.listenConversation(chatID).sceneStage;
       console.log(this.$getters.listenConversation(chatID).sceneStage);
       if (sceneExist != undefined) {
-        console.log("THERE IS SCENES");
-        if (this.getEllapseTime() >= 1000 * 60 * 60 * 12) {
+        // console.log("THERE IS SCENES");
+        if (this.getEllapseTime() >= 1000) {
           //1000 * 60 * 60 *12
           hasChanged = true;
           newSceneIndex = currentSceneIndex + 1;
@@ -425,7 +425,7 @@ export default {
       //     return acte + scene
       // }
     },
-    changeScene() {
+    changeScene(time) {
       if (this.setScenes().hasChanged == true) {
         console.log("it was true");
         let chatID = this.$getters.currentChatID();
@@ -438,6 +438,7 @@ export default {
           this.setScenes().newActIndex
         );
         this.sentTime = this.getTime();
+        console.log("time of scene: " + this.sentTime)
         const didascalie = `${this.setScenes().setAct}, ${
           this.setScenes().setScene
         }`;
@@ -445,21 +446,22 @@ export default {
         let timeData = this.getTimeDatas(timeBetweenMessages);
         const didascalieTime = `${timeData} passent.`;
         const base = this.getBaseMsg();
+        let timeScene = this.sentTime
+        let newTimeScene = timeScene++
         const didMessage = {
           ...base,
           messageType: "did",
-          sentTime: this.sentTime++,
+          sentTime: time,
           didascalie,
           // didType:this.didType
         };
         const didTimeMessage = {
           ...base,
           messageType: "didTime",
-          sentTime: this.sentTime++,
+          sentTime: time+1,
           didascalieTime,
           // didType:this.didType
         };
-
         this.sendMessage(didMessage);
         this.sendMessage(didTimeMessage);
 
@@ -473,16 +475,18 @@ export default {
     },
     yellowLineHeight() {
       let timeBetweenMessages = this.getEllapseTime();
-
       if (timeBetweenMessages) {
-        let timeLineData = Math.floor(timeBetweenMessages / (1000 * 60));
-        let textTime = "";
-        if (timeLineData <= 100) {
-          textTime = `${timeLineData}m`;
-        } else if (timeLineData > 100) {
-          textTime = `${Math.floor(timeLineData / 60)}h`;
-        } else if (timeLineData > 6000) {
-          textTime = `${Math.floor(timeLineData / (60 * 24))}j`;
+        let timeLineData = Math.floor(timeBetweenMessages / (1000));
+        // console.log("temps yellowline" + timeLineData)
+        let textTime = "2h";
+        if (timeLineData <= 60) {
+          textTime = `${timeLineData}sec`;
+        } else if (timeLineData >= 61 && timeLineData <=6000) {
+          textTime = `${Math.floor(timeLineData / 60)}min`;
+        }else if (timeLineData >= 6001 && timeLineData <= 86400){
+          textTime = `${Math.floor(timeLineData / (60*60))}h`;
+        } else if (timeLineData > 86401) {
+          textTime = `${Math.floor(timeLineData / (60*60 * 24))}j`;
         }
         // console.log(timeLineData)
         // console.log(timeBetweenMessages)
@@ -495,6 +499,10 @@ export default {
           days = 0;
         }
         // console.log(days)
+        // let height
+        // for(let i = 0; i< days; i++){
+        // height = ((((i + 1) * height) / (days + 1)) - 25)
+        // }
         let height = Math.sqrt(timeBetweenMessages) * 0.015;
 
         const LINE_DATAS = {
@@ -690,11 +698,12 @@ export default {
             messageArray.push(messagesTime);
           }
         });
-        let lastMsgID = messageArray[messageArray.length - 1];
-        let beforeLastMsgID = messageArray[messageArray.length - 2];
+        // let lastMsgID = messageArray[messageArray.length - 1];
+        let lastMsgID = this.lastMsgTime;
+        let beforeLastMsgID = messageArray[messageArray.length - 1];
 
         let timeBetweenMessages = lastMsgID - beforeLastMsgID;
-        // console.log(timeBetweenMessages)
+        // console.log("TIME ENTRE MSG= " + timeBetweenMessages/1000)
         return timeBetweenMessages;
       }
     },
@@ -828,11 +837,11 @@ export default {
       let timeTrigger = this.getTimeTrigger();
       let locationTrigger = this.getLocationTrigger();
       if (this.outputSignal == "msg") {
-        console.log("ITS A MESSAGE");
+        // console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
         return this.getResult(allOutputs, level, _case);
       } else if (this.outputSignal == "ratio") {
-        console.log("ITS A RATIO");
+        // console.log("ITS A RATIO");
         const allOutputs = [timeTrigger, locationTrigger];
         return this.getResult(allOutputs, level, _case);
       }
