@@ -21,7 +21,7 @@
 
         <YellowLine
           v-if="message.messageType === 'did'"
-          line-height="3"
+          line-height="2"
         ></YellowLine>
 
         <Message
@@ -219,55 +219,55 @@ export default {
           return " <i>(prends un instant pour reformuler)</i> ";
         }
         if (eraseNumber === 4) {
-          return " <i>(reformule)<i> ";
+          return " <i>(reformule)</i> ";
         }
         if (eraseNumber === 5) {
-          return " <i>(se corrige)<i> ";
+          return " <i>(se corrige)</i> ";
         }
         if (eraseNumber === 6) {
-          return " <i>(se rectifie)<i> ";
+          return " <i>(se rectifie)</i> ";
         }
         if (eraseNumber === 7) {
-          return " <i>(se reprend)<i> ";
+          return " <i>(se reprend)</i> ";
         }
         if (eraseNumber === 8) {
-          return " <i>(se ravise, puis continue)<i> ";
+          return " <i>(se ravise, puis continue)</i> ";
         }
         if (eraseNumber === 9) {
-          return " <i>(hésite un instant)<i> ";
+          return " <i>(hésite un instant)</i> ";
         }
         if (eraseNumber > 10) {
-          return " <i>(revient sur ses propos)<i> ";
+          return " <i>(revient sur ses propos)</i> ";
         }
         if (elapseNumber === 3) {
-          return " <i>(s'arrête un instant)<i> ";
+          return " <i>(s'arrête un instant)</i> ";
         }
         if (elapseNumber === 4) {
-          return " <i>(lève la tête avant de continuer)<i> ";
+          return " <i>(lève la tête avant de continuer)</i> ";
         }
         if (elapseNumber === 5) {
-          return " <i>(distrait)<i> ";
+          return " <i>(distrait)</i> ";
         }
         if (elapseNumber === 6) {
           return " <i>(réfléchit)</i> ";
         }
         if (elapseNumber === 7) {
-          return " <i>(est hésitant)<i> ";
+          return " <i>(est hésitant)</i> ";
         }
         if (elapseNumber === 8) {
           return " <i>(reprend ses esprits)</i> ";
         }
         if (elapseNumber === 9) {
-          return " <i>(est embarrasé)<i> ";
+          return " <i>(est embarrasé)</i> ";
         }
         if (elapseNumber > 10) {
-          return " <i>(fait une longue pause)<i> ";
+          return " <i>(fait une longue pause)</i> ";
         }
         if (eraseNumber === 3 && elapseNumber < 1) {
           return " <i>(marmone puis continue)</i> ";
         }
         if (eraseNumber === 5 && elapseNumber < 2) {
-          return "(décontenancé)";
+          return "<i>(décontenancé)</i>";
         } else if (eraseNumber < 1 && elapseNumber < 1) {
           return " <i>(it works)</i> ";
         } else {
@@ -376,11 +376,11 @@ export default {
       let SCENES_DATA;
       //*CHANGE SCENE
       let sceneExist = this.$getters.listenConversation(chatID).sceneStage;
-      console.log(this.$getters.listenConversation(chatID).sceneStage);
+      // console.log(this.$getters.listenConversation(chatID).sceneStage);
       if (sceneExist != undefined) {
         // console.log("THERE IS SCENES");
-        if (this.getEllapseTime() >= 1000) {
-          //1000 * 60 * 60 *12
+        if (this.getEllapseTime() >= 1000 * 60 * 60 *12) {
+          //1000 * 60 * 60 *12 
           hasChanged = true;
           newSceneIndex = currentSceneIndex + 1;
           if (newSceneIndex == 10) {
@@ -503,7 +503,11 @@ export default {
         // for(let i = 0; i< days; i++){
         // height = ((((i + 1) * height) / (days + 1)) - 25)
         // }
-        let height = Math.sqrt(timeBetweenMessages) * 0.015;
+        let height = Math.sqrt(timeBetweenMessages) * 0.009;
+        if(height<=2.5){
+          height=2.6
+        }
+        console.log(height)
 
         const LINE_DATAS = {
           height,
@@ -813,8 +817,9 @@ export default {
           ][_case][index][this.gender]({
             name: this.name,
             contact: this.contactName,
-            outputValue: output.outputValue,
+            outputValue: `<strong>${output.outputValue}</strong>`,
           });
+          console.log(pushDid)
           return pushDid;
         }
       } else {

@@ -59,12 +59,25 @@ Bus.$on("location:citychange", (event) => {
   actions.setUserCity(event);
 });
 
+
 // document.onvisibilitychange = function() {
 //  console.log('dy');
 // };
 
 // actions.setCurrentUserID("-N0KbUzvL5Qrm8BEC10K");
-//if logged in
+
+
+// let bodyColor = document.querySelector("body");
+// if(router.options.routes[i].path){
+//   console.log("youre in");
+//   // $background-color
+// }else{
+//   console.log("fail");
+// }
+
+
+
+
 console.log(state);
 
 if (!state.isLoggedIn) {
@@ -72,3 +85,4 @@ if (!state.isLoggedIn) {
 } else {
   router.replace("/contacts");
 }
+

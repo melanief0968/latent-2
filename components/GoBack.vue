@@ -16,7 +16,7 @@ export default {
     //   });
 
     //   return;
-    console.log("CLICK")
+    // console.log("CLICK")
 
       if (this.$route.name === "Chat") {
         this.$router.push({

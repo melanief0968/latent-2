@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <GoBack v-if="route != 'Login'"></GoBack>
+    <GoBack v-if="route === 'Chat'"></GoBack>
+    <GoBack v-if="route === 'Book'"></GoBack>
+    <GoBack v-if="route === 'Account'"></GoBack>
+    <GoBack v-if="route === 'Index'"></GoBack>
+
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
     <Header v-if="route === 'NewContact'"></Header>
@@ -100,6 +104,7 @@ export default {
 // }
 
 .main {
+  background-color: white;
   flex: 1 1 auto;
   overflow-y: scroll;
 }

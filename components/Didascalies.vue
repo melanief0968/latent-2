@@ -1,7 +1,7 @@
 <template>
   <div class="didascalieBox" :class="{'didBox-book': route ==='Book'}">
-    <img v-if="this.icon !== undefined " :src="iconType" class="didIcon"></img>
-    <div class="didascalie italic" :class="{'did-book': route ==='Book'}">{{text}}</div>
+    <img v-if="this.icon !== undefined " :src="iconType" class="didIcon">
+    <div class="didascalie italic" :class="{'did-book': route ==='Book'}" v-html="text"></div>
   </div>
 </template>
 <script>
@@ -44,7 +44,7 @@ export default {
 <style lang="scss">
 .didascalieBox {
   margin-top: 1.5vh;
-  margin-bottom: 1.5vh;
+  // margin-bottom: 1.5vh;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,7 @@
 <template>
   <header class="header">
       <h1 v-if="route === 'Index'">Index</h1>
-      <h1 v-if="route === 'Contacts'">Échanges</h1>
+      <h1 class="latent" v-if="route === 'Contacts'">LATENT*</h1>
       <h1 v-if="route === 'Account'">Profil</h1>
       <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
         <img class="icone" src="../static/img/add.png">
@@ -64,6 +64,9 @@ export default {
 }
 .icone{
   height: 100%;
+}
+.latent{
+  font-family: $font-italic;
 }
 
 </style>
