@@ -1048,7 +1048,11 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case5: []
+          case5: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }]
         },
       },
       level3: {
@@ -1476,7 +1480,27 @@
         },
       },
     },
+  },
+  initScenes:{
+      scene: [
+          (e)=>`${e.time} passent. Scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+      ],
+      acts:[
+        (e)=>`${e.time} passent.  Act Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+
+      ],
+      firsScene: [
+        (e)=>`${e.time} passent. first scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+
+      ]
   }
 
 };
+
+
 export default didascalies;
+

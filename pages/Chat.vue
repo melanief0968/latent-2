@@ -380,7 +380,7 @@ export default {
       // console.log(this.$getters.listenConversation(chatID).sceneStage);
       if (sceneExist != undefined) {
         // console.log("THERE IS SCENES");
-        if (this.getEllapseTime() >= 1000 * 60 * 60 *12) {
+        if (this.getEllapseTime() >= 1000* 60 * 60 *12 ) {
           //1000 * 60 * 60 *12 
           hasChanged = true;
           newSceneIndex = currentSceneIndex + 1;
@@ -446,6 +446,9 @@ export default {
         let timeBetweenMessages = this.getEllapseTime();
         let timeData = this.getTimeDatas(timeBetweenMessages);
         const didascalieTime = `${timeData} passent.`;
+
+        const sceneSentence = this.getSceneSentence();
+        
         const base = this.getBaseMsg();
       
         const didMessage = {
@@ -455,6 +458,7 @@ export default {
           didascalie,
           // didType:this.didType
         };
+        // console.log(sceneSentence)
         const didTimeMessage = {
           ...base,
           messageType: "didTime",
@@ -462,16 +466,28 @@ export default {
           didascalieTime,
           // didType:this.didType
         };
+                // console.log(sceneSentence)
+
         this.sendMessage(didMessage);
         this.sendMessage(didTimeMessage);
 
-        console.log(
-          this.$getters.listenConversation(chatID).sceneStage,
-          this.$getters.listenConversation(chatID).actStage
-        );
+        // console.log(
+        //   this.$getters.listenConversation(chatID).sceneStage,
+        //   this.$getters.listenConversation(chatID).actStage
+        // );
       } else {
         return;
       }
+    },
+    getSceneSentence(){
+      let pushScene = null;
+      const indexNbr = did["initScenes"]["scene"].length;
+      const index = Math.floor(Math.random() * indexNbr)
+      pushScene = did["initScenes"]["scene"][index]({
+          time: "3 minutes",
+        })
+        // console.log(pushScene);
+      return pushScene
     },
     yellowLineHeight() {
       let timeBetweenMessages = this.getEllapseTime();
