@@ -798,13 +798,31 @@ export default {
       return level;
     },
 
-    getResult(_array, level, _case) {
+    shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+
+      // While there remain elements to shuffle.
+      while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+
+      return array;
+    },
+
+    getResult(_array, level, _case,_counter) {
       if (_array.length > 0) {
         let pushDid = null;
-        const shuffledArr = _array.sort(() => 0.5 - Math.random());
+        this.shuffle(_array);//_array.sort(() => 0.5 - Math.random());
+        const shuffledArr = _array;
         // console.log(_array, shuffledArr);
         const output = shuffledArr[0];
-        console.log(output);
         //--> 'positif', 'negatif', ''
         if (level == "level1") {
           if (output.result != "") {
@@ -813,7 +831,9 @@ export default {
         }
         if (output.result == "") {
           shuffledArr.shift();
-          this.getResult(shuffledArr, level, _case);
+          console.log(shuffledArr);
+          _counter++;
+          return this.getResult(shuffledArr, level, _case,_counter);
         } else {
           const indexNbr =
             did[output.outputSignal][output.inputType][level][output.result][
@@ -835,7 +855,7 @@ export default {
             contact: this.contactName,
             outputValue: `<strong>${output.outputValue}</strong>`,
           });
-          console.log(pushDid)
+          console.log(pushDid);
           return pushDid;
         }
       } else {
@@ -860,8 +880,11 @@ export default {
       if (this.outputSignal == "msg") {
         // console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
-        console.log(this.getResult(allOutputs, level, _case))
-        return this.getResult(allOutputs, level, _case);
+        //!Problem
+        let test_counter = 1;
+        let resultat = this.getResult(allOutputs, level, _case,test_counter)
+        console.log("resultat",resultat);
+        return resultat;//this.getResult(allOutputs, level, _case);
       } else if (this.outputSignal == "ratio") {
         // console.log("ITS A RATIO");
         const allOutputs = [timeTrigger, locationTrigger];
