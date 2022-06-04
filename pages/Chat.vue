@@ -161,6 +161,7 @@ export default {
 
     sendDidascalie(time) {
       const didascalie = this.chooseDidascalie();
+      console.log(didascalie)
       if (!didascalie) {
         return;
       }
@@ -199,7 +200,7 @@ export default {
      
       this.stopElapsedTime();
       this.sentTime = this.getTime();
-      console.log("time of msg: " + this.sentTime)
+      // console.log("time of msg: " + this.sentTime)dfghjkl
 
       const text = event.value;
       const chatVersion = text;
@@ -403,10 +404,10 @@ export default {
           newActIndex,
           hasChanged,
         };
-        console.log(SCENES_DATA);
+        // console.log(SCENES_DATA);
         return SCENES_DATA;
       } else if (!sceneExist) {
-        console.log("NO SCENEC");
+        // console.log("NO SCENEC");
         return (SCENES_DATA = {
           hasChanged: false,
         });
@@ -427,7 +428,7 @@ export default {
     },
     changeScene(time) {
       if (this.setScenes().hasChanged == true) {
-        console.log("it was true");
+        // console.log("it was true");
         let chatID = this.$getters.currentChatID();
         fb.setValue(
           `/conversations/${chatID}/sceneStage/`,
@@ -446,8 +447,7 @@ export default {
         let timeData = this.getTimeDatas(timeBetweenMessages);
         const didascalieTime = `${timeData} passent.`;
         const base = this.getBaseMsg();
-        let timeScene = this.sentTime
-        let newTimeScene = timeScene++
+      
         const didMessage = {
           ...base,
           messageType: "did",
@@ -507,7 +507,7 @@ export default {
         if(height<=2.5){
           height=2.6
         }
-        console.log(height)
+        // console.log(height)
 
         const LINE_DATAS = {
           height,
@@ -624,7 +624,7 @@ export default {
       } else if (this.totalErase >= 10) {
         RESULT.result = "negative";
       }
-      console.log(RESULT);
+      // console.log(RESULT);
       return RESULT;
     },
     getWritingTime() {
@@ -844,6 +844,7 @@ export default {
       if (this.outputSignal == "msg") {
         // console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
+        console.log(this.getResult(allOutputs, level, _case))
         return this.getResult(allOutputs, level, _case);
       } else if (this.outputSignal == "ratio") {
         // console.log("ITS A RATIO");
