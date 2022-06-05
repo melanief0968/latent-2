@@ -75,4 +75,11 @@ h1{
 .white-header{
   background: white !important;
 }
+.header  {
+  > div {
+    &.book-fullscreen {
+      background: red !important;
+    }
+  }
+}
 </style>

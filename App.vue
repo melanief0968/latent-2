@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class=" { 'book-fullscreen' : isFullScreen } ">
     <GoBack v-if="route === 'Chat'"></GoBack>
     <GoBack v-if="route === 'Book'"></GoBack>
     <GoBack v-if="route === 'NewContact'"></GoBack>
@@ -14,7 +14,7 @@
     <!-- <Header v-if="route === 'NewContact'"></Header> -->
     <HeaderChat v-if="route === 'Chat'"></HeaderChat>
     <HeaderChat v-else-if="route === 'Book'"></HeaderChat>
-    <main class="main" :class="{'book-background': route ==='Book'}" >
+    <main @click="toggleMessage" class="main" :class="{'book-background': route ==='Book'}" >
       <transition :name="transitionName">
         <router-view></router-view>
       </transition>
@@ -26,7 +26,7 @@
 </template>
 <script>
 // import { defineComponent } from '@vue/composition-api'
-import GoBack from "./components/GoBack.vue";   
+import GoBack from "./components/GoBack.vue";
 import Bubble from "./components/Bubble.vue";
 import HeaderChat from "./components/HeaderChat.vue";
 import Header from "./components/Header.vue";
@@ -51,6 +51,7 @@ export default {
 
   data() {
     return {
+      isFullScreen: false,
       transitionName: '',
       // pageTitle: "Contacts"
     };
@@ -60,6 +61,9 @@ export default {
     // this.$router.push({ path: "/login" });
   },
   methods: {
+    toggleMessage () {
+     this.$route.name === "Book" ? this.isFullScreen = !this.isFullScreen : this.isFullScreen;
+    },
     update() {
       //   this.myVariable = "you clicked me" + Math.random();
       //   requestAnimationFrame(() => {
@@ -91,6 +95,26 @@ export default {
   // background: $color-dark;
   display: flex;
   flex-direction: column;
+
+  &.book-fullscreen {
+    main {
+      overflow-y: hidden;
+    }
+    header, .footer {
+      transition: all  0.2s linear;
+      background: #F8F6F2 !important;
+      border-bottom: 0.9px solid transparent;
+    }
+    .footer {
+      border-top: 0.9px solid transparent;
+    }
+
+  }
+  &:not(.book-fullscreen) {
+    header, .footer {
+      transition:all  0.2s linear;
+    }
+  }
 }
 
 .hello {

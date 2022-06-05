@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-touch:swipe.right="swipeHandler"> -->
-    <div @click="isFullScreen = !isFullScreen" class="book-container slider" :class=" { 'book-fullscreen' : isFullScreen } ">
+    <div @click="fullScreenSwitch" class="book-container slider">
       <section class="message-book-container slider__content">
           <div class="description-container">Page de descrption personnage</div>
         <template v-for="{ message, id } in messages">
@@ -118,7 +118,7 @@ export default {
     return {
       conversation: null,
       removeListener: () => {},
-      isFullScreen: false,
+
       messageContent: "",
       sentTime: 0,
       firstKeyTime: 0,
@@ -150,6 +150,9 @@ export default {
     }
   },
   methods: {
+    fullScreenSwitch () {
+      this.$emit('click')
+    },
     swipeHandler() {
       this.$router.replace({ path: '/chat' })
     },
