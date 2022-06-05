@@ -18,6 +18,18 @@
           :text="message.didascalie"
           :contact="getContactName()"
         ></Didascalies>
+        <Didascalies
+          v-if="message.messageType === 'didScene'"
+          :key="message.sentTime"
+          :name="message.userName"
+          :text="message.didascalie"
+        ></Didascalies>
+        <Didascalies
+          v-if="message.messageType === 'didSceneSent'"
+          :key="message.sentTime"
+          :name="message.userName"
+          :text="message.sceneSentence"
+        ></Didascalies>
 
         <YellowLine
           v-if="message.messageType === 'did'"
@@ -161,7 +173,7 @@ export default {
 
     sendDidascalie(time) {
       const didascalie = this.chooseDidascalie();
-      console.log(didascalie)
+      // console.log(didascalie)
       if (!didascalie) {
         return;
       }
@@ -285,13 +297,13 @@ export default {
         dotsNum: this.yellowLineHeight().days,
       };
       const sceneTime = this.sentTime+2;
-      const didascalieTime = this.sentTime+4;
+      const didascalieTime = this.sentTime+5;
       // console.log(message, chatVersion);
       const textTime = this.yellowLineHeight().textTime;
       
       const textMessage = {
         ...baseMessage,
-        sentTime: this.sentTime+5,
+        sentTime: this.sentTime+6,
         text: chatVersion,
         bookText: bookVersion,
         charAmount: this.charAmount,
@@ -316,6 +328,8 @@ export default {
     setFirstScene() {
       this.sentTime = this.getTime();
       const didascalie = `Acte I, scène I`;
+      let sentenceType = "firstScene"
+      const sceneSentence = this.getSceneSentence(sentenceType);
       const base = this.getBaseMsg();
       const didMessage = {
         ...base,
@@ -324,8 +338,14 @@ export default {
         didascalie,
         // didType:this.didType
       };
-
+      const sceneSentenceDid = {
+            ...base,
+            messageType: "didSceneSent",
+            sentTime: this.sentTime+2,
+            sceneSentence,
+          };
       this.sendMessage(didMessage);
+      this.sendMessage(sceneSentenceDid);
       //   let chatID = this.$getters.currentChatID()
       //   let conversation = this.$getters.listenConversation(chatID)
       //   const messages = [];
@@ -447,16 +467,16 @@ export default {
         let timeData = this.getTimeDatas(timeBetweenMessages);
         const didascalieTime = `${timeData} passent.`;
 
-        const sceneSentence = this.getSceneSentence();
+        let sentenceType = "scene"
+        const sceneSentence = this.getSceneSentence(sentenceType);
         
         const base = this.getBaseMsg();
       
         const didMessage = {
           ...base,
-          messageType: "did",
+          messageType: "didScene",
           sentTime: time,
           didascalie,
-          // didType:this.didType
         };
         // console.log(sceneSentence)
         const didTimeMessage = {
@@ -464,12 +484,21 @@ export default {
           messageType: "didTime",
           sentTime: time+1,
           didascalieTime,
-          // didType:this.didType
+        };
+        const sceneSentenceDid = {
+          ...base,
+          messageType: "didSceneSent",
+          sentTime: time+2,
+          sceneSentence,
         };
                 // console.log(sceneSentence)
 
         this.sendMessage(didMessage);
         this.sendMessage(didTimeMessage);
+        this.sendMessage(sceneSentenceDid);
+        // console.log("scene: " + didMessage.sentTime);
+        // console.log("ellapsed Time: " + didTimeMessage.sentTime);
+        // console.log("commentaire scène: " + sceneSentenceDid.sentTime);
 
         // console.log(
         //   this.$getters.listenConversation(chatID).sceneStage,
@@ -479,14 +508,11 @@ export default {
         return;
       }
     },
-    getSceneSentence(){
+    getSceneSentence(type){
       let pushScene = null;
-      const indexNbr = did["initScenes"]["scene"].length;
+      const indexNbr = did["initScenes"][type].length;
       const index = Math.floor(Math.random() * indexNbr)
-      pushScene = did["initScenes"]["scene"][index]({
-          time: "3 minutes",
-        })
-        // console.log(pushScene);
+      pushScene = did["initScenes"][type][index]()
       return pushScene
     },
     yellowLineHeight() {
@@ -855,7 +881,7 @@ export default {
             contact: this.contactName,
             outputValue: `<strong>${output.outputValue}</strong>`,
           });
-          console.log(pushDid);
+          // console.log(pushDid);
           return pushDid;
         }
       } else {
@@ -883,7 +909,7 @@ export default {
         //!Problem
         let test_counter = 1;
         let resultat = this.getResult(allOutputs, level, _case,test_counter)
-        console.log("resultat",resultat);
+        // console.log("resultat",resultat);
         return resultat;//this.getResult(allOutputs, level, _case);
       } else if (this.outputSignal == "ratio") {
         // console.log("ITS A RATIO");

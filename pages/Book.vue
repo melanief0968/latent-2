@@ -6,16 +6,26 @@
         <template v-for="{ message, id } in messages">
       
            <Didascalies
+            v-if="message.messageType === 'didScene'"
+            :key="message.sentTime"
+            :text="message.didascalie"
+          ></Didascalies>
+        <Didascalies
+          v-if="message.messageType === 'didSceneSent'"
+          :key="message.sentTime"
+          :name="message.userName"
+          :text="message.sceneSentence"
+        ></Didascalies>
+           <Didascalies
             v-if="message.messageType === 'did'"
             :key="message.sentTime"
             :text="message.didascalie"
-            
           ></Didascalies>
+
            <Didascalies
             v-if="message.messageType === 'didTime'"
             :key="message.sentTime"
             :text="message.didascalieTime"
-            
           ></Didascalies>
  
           <Message
@@ -176,7 +186,7 @@ export default {
 .slider__snap {
   // box-shadow: inset 0px 0px 0 1px black;
   min-width: 100%;
-  height: 100%;
+  height: 90%;
   // padding: 2em;
   scroll-snap-align: start;
   text-align: center;

@@ -1483,19 +1483,19 @@
   },
   initScenes:{
       scene: [
-          (e)=>`${e.time} passent. Scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`${e.time} passent. Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`Scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
       ],
       acts:[
-        (e)=>`${e.time} passent.  Act Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Act Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
 
       ],
-      firsScene: [
-        (e)=>`${e.time} passent. first scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-
+      firstScene: [
+        (e)=>`first scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`first scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
       ]
   }
 
