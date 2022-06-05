@@ -101,12 +101,16 @@ export default {
 </script>
 <style lang="scss">
 .messageBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 1.5vh;
   margin-bottom: 1.5vh;
   display: flex;
   width: 100%;
 
   .message {
+    align-self: start;
     padding: 10px;
     width: 55%;
     max-width: 70%;
@@ -120,7 +124,7 @@ export default {
   }
 
   &.toRight {
-    justify-content: flex-end;
+    align-self: end;
 
     .message {
       border-radius: 10px 0px 10px 10px;
