@@ -1,12 +1,15 @@
 <template>
   <div class="menu">
-    <ListMenus  v-for="(menu, index) in menus"
-      :text="menu.name"
-      :key="index"
-      @click.native="onItemClick(menus.name)"
-    >
-      {{ menu.name }}
-    </ListMenus>
+    <router-link :to="{name:menu.link}" v-for="(menu, index) in menus">
+      <ListMenus
+        :text="menu.name"
+        :key="index"
+        :name="menu.name"
+      >
+  <!--      @click.native="onItemClick(menus.name)"-->
+          {{ menu.name }}
+      </ListMenus>
+    </router-link>
   </div>
 </template>
 <script>
