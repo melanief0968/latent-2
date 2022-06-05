@@ -2,6 +2,7 @@
   <div class="container">
     <GoBack v-if="route === 'Chat'"></GoBack>
     <GoBack v-if="route === 'Book'"></GoBack>
+    <GoBack v-if="route === 'NewContact'"></GoBack>
     <GoBack v-if="route === 'Account'"></GoBack>
     <GoBack v-if="route === 'Index'"></GoBack>
 
