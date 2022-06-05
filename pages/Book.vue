@@ -208,6 +208,14 @@ export default {
   columns: 2;
   column-gap: 0;
   column-width: 100%;
+  .didascalieBox {
+    .didascalie {
+      padding: 10px;
+      width: 90%;
+      max-width: 70%;
+      word-break: break-word;
+    }
+  }
 }
 .description-container{
   height: 100%;
