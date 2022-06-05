@@ -1,7 +1,10 @@
 <template>
   <div class="line-container">
     <div v-if="nbDots && this.$route.name === 'Chat' " class="dotContainer">
-      <div v-for="dot in nbDots" class="dot"></div>
+      <div v-for="dot in nbDots" class="dot">
+        <div v-if="dot === 1">1 jour</div>
+        <div v-else> {{ dot }} jours </div>
+      </div>
     </div>
     <div class="yellowLine" :style="cssStyle"></div>
   </div>
@@ -47,6 +50,13 @@ export default {
   height: 5vw;
   width: 5vw;
   position: relative;
+  div {
+    white-space: nowrap;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 .dot::before {
   content: "";
