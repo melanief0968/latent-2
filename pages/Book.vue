@@ -1,10 +1,10 @@
 <template>
   <!-- <div v-touch:swipe.right="swipeHandler"> -->
-    <div class="book-container slider">
+    <div @click="isFullScreen = !isFullScreen" class="book-container slider" :class=" { 'book-fullscreen' : isFullScreen } ">
       <section class="message-book-container slider__content">
           <div class="description-container">Page de descrption personnage</div>
         <template v-for="{ message, id } in messages">
-      
+
            <Didascalies
             v-if="message.messageType === 'didScene'"
             :key="message.sentTime"
@@ -27,9 +27,9 @@
             :key="message.sentTime"
             :text="message.didascalieTime"
           ></Didascalies>
- 
+
           <Message
-            
+
             v-else-if="message.messageType === 'msg'"
             :key="id"
             :messageId="id"
@@ -118,6 +118,7 @@ export default {
     return {
       conversation: null,
       removeListener: () => {},
+      isFullScreen: false,
       messageContent: "",
       sentTime: 0,
       firstKeyTime: 0,
@@ -130,22 +131,22 @@ export default {
     };
   },
   computed: {
-    
+
     messages() {
       const messages = [];
       if (this.conversation && this.conversation.messages) {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
-          
+
           messages.push({ id: messageId, message });
-          
+
         });
       }
       return messages;
     },
     commentsItalic: function(){
-      
-      return 
+
+      return
     }
   },
   methods: {
@@ -182,6 +183,9 @@ export default {
   scroll-snap-type: x mandatory;
   display: flex;
   overflow-x: scroll;
+}
+.book-fullscreen {
+
 }
 .slider__snap {
   // box-shadow: inset 0px 0px 0 1px black;

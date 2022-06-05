@@ -124,10 +124,11 @@ export default {
   }
 
   &.toRight {
-    align-self: end;
+    align-self: flex-end;
 
     .message {
       border-radius: 10px 0px 10px 10px;
+      align-self: flex-end;
     }
   }
 }
