@@ -69,8 +69,17 @@ export async function getCity() {
   const { latitude, longitude } = position.coords;
 
   const data = await getCityFromCoordsPromise(latitude, longitude);
-
-  return { city: data.results[0].components.town, position };
+  let city;
+  if(data.results[0].components.city){
+    city = data.results[0].components.city
+  }else if(data.results[0].components.town){
+    city = data.results[0].components.town
+  }
+  // {
+  //   city: data.results[0].components.city,
+  //   town: data.results[0].components.town
+  // }
+  return { city: city, position };
 }
 
 function getCityFromCoordsPromise(latitude, longitude) {

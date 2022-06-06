@@ -466,7 +466,6 @@ export default {
         }`;
         let timeBetweenMessages = this.getEllapseTime();
         let timeData = calc.getTimeDatas(timeBetweenMessages);
-        console.log(timeData)
         const didascalieTime = `${timeData} passent.`;
 
         let sentenceType = "scene"
@@ -767,7 +766,6 @@ export default {
         didType: "time",
       };
       let TIME = calc.getTimeDatas(timeBetweenMessages);
-      console.log(TIME)
       if (timeBetweenMessages <= 1000) {
         RESULT.result = "positive";
         RESULT.outputValue = "quelques instants";
@@ -930,51 +928,7 @@ export default {
         this.sendDidascalie(this.sentTime);
       }
     },
-    sendLocation() {
-      if (navigator.geolocation) {
-        let show = navigator.geolocation.getCurrentPosition(this.showPosition);
-        // console.log(this.showPosition())
-        // return show
-      }
-      // location.locationData()
-      // location.getLocation()
-      // console.log(location.getPosition().then(console.log))
-      // console.log(location.getLocation().latitude,location.getLocation().longitude)
-    },
-    showPosition(position) {
-      let lat = position.coords.latitude;
-      let lng = position.coords.longitude;
-      // let coords = {lat,lng}
-      let lati = 2;
-      // let coords = {lat:2,lng:2}
-      let coords = { lat, lng };
-      // this.$actions.setUserLocation(this.currentUserID, coords)
-      // setTimeout(() => {
-
-      //   this.sendPos(coords)
-      // }, 3000);
-      // this.lng = position.coords.longitude
-      // this.lat = position.coords.latitude
-      // return this.lng
-      console.log(coords);
-
-      // return lat
-    },
-    sendPos() {
-      this.sendLocation();
-
-      // this.$actions.setUser(this.currentUserID,coords)
-    },
-    updateCoords() {
-      // console.log(this.sendLocation())
-      //  let storedCoords = this.$getters.listenUser(this.currentUserID).coords
-      //  console.log(storedCoords)
-      // console.log(storedCoords)
-      //   const interval = setInterval(function() {
-      //     console.log(this.showPosition())
-      // }, 50000);
-      // clearInterval(interval);
-    },
+   
 
     getContactName() {
       const chatID = this.$getters.listenConversation(
@@ -1003,6 +957,8 @@ export default {
 
     "$state.currentCity"(value) {
       this.cityHasChanged = true;
+      let city =this.$getters.currentCity(value)
+      console.log(city)
     },
     "$state.currentLocation"(value, oldValue) {
       if (!oldValue.latitude) return;
@@ -1016,7 +972,6 @@ export default {
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
     this.setScenes();
-
     // this.updateCoords()
     // console.log(location.getLocation())
 
