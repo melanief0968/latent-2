@@ -58,3 +58,27 @@ export function getTimeDatas(time) {
     // const TIME = minutes;
     return TIME;
   }
+
+  export function intimacyLevel(name,contact) {
+    // possibilité de passer d'un level à l'autre avec Time between MSG
+    let level = "level1";
+    if (name == "Mélanie" && contact == "Jamy") {
+      level = "level3";
+      return level;
+    } else if (
+      name == "Mélanie" &&
+      contact == "Sébastien"
+    ) {
+      level = "level2";
+    } else if (
+      name == "Mélanie" &&
+      contact == "Mathilde"
+    ) {
+      level = "level4";
+    } else if (name == "Mélanie" && contact == "Elodie") {
+      level = "level1";
+    } else {
+      level = "level3";
+    }
+    return level;
+  }

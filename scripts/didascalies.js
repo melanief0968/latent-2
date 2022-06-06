@@ -1481,6 +1481,122 @@
       },
     },
   },
+  dataChange:{
+    city: {
+      level1: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.city}.l1`,
+            f: (e) => `${e.name} est à ${e.city}.l1`,
+            n: (e) => `${e.name} est à ${e.city}.l1`,
+          }],
+        }
+      },
+      level2: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.city}.l2`,
+            f: (e) => `${e.name} est à ${e.city}.l2`,
+            n: (e) => `${e.name} est à ${e.city}.l2`,
+          }],
+        }
+      },
+      level3: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.city}.l3`,
+            f: (e) => `${e.name} est à ${e.city}.l3`,
+            n: (e) => `${e.name} est à ${e.city}.l3`,
+          }],
+        }
+      },
+      level4: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.city}.l4`,
+            f: (e) => `${e.name} est à ${e.city}.l4`,
+            n: (e) => `${e.name} est à ${e.city}.l4`,
+          }],
+        }
+      }
+    },
+    distance: {
+      level1: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l1`,
+            f: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l1`,
+            n: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l1`,
+          }],
+        }
+      },
+      level2: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l2`,
+            f: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l2`,
+            n: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l2`,
+          }],
+        }
+      },
+      level3: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l3`,
+            f: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l3`,
+            n: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l3`,
+          }],
+        }
+      },
+      level4: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l4`,
+            f: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l4`,
+            n: (e) => `${e.name} est à ${e.distance}km de ${e.contact}.l4`,
+          }],
+        }
+      }
+    },
+    speedMove: {
+      level1: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l1`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l1`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l1`,
+          }],
+        }
+      },
+      level2: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l2`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l2`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l2`,
+          }],
+        }
+      },
+      level3: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l3`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l3`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l3`,
+          }],
+        }
+      },
+      level4: {
+        positive: {
+          case3: [{
+            m: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l4`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l4`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.speedMove}km/h.l4`,
+          }],
+        }
+      }
+    },
+  },
   initScenes:{
       scene: [
           (e)=>`Scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,

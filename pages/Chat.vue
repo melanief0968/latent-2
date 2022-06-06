@@ -574,14 +574,9 @@ export default {
       //   const dot = document.createElement("div");
       //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
       // }
-      // let rHeight = [100, 160, 200, 50, 20, 10];
-      // let random = Math.floor(Math.random() * rHeight.length);
+
     },
-    getNbDots() {
-      // let days = Math.floor(this.timeBetweenMessages / (1000 * 60 * 60 * 24));
-      // console.log(days)
-      return 4;
-    },
+
     sendMessage(message) {
       const messageId = message.sentTime;
       fb.setValue(
@@ -801,29 +796,6 @@ export default {
       return RESULT;
     },
 
-    intimacyLevel() {
-      // possibilité de passer d'un level à l'autre avec Time between MSG
-      let level = "level1";
-      if (this.name == "Mélanie" && this.getContactName() == "Jamy") {
-        level = "level3";
-        return level;
-      } else if (
-        this.name == "Mélanie" &&
-        this.getContactName() == "Sébastien"
-      ) {
-        level = "level2";
-      } else if (
-        this.name == "Mélanie" &&
-        this.getContactName() == "Mathilde"
-      ) {
-        level = "level4";
-      } else if (this.name == "Mélanie" && this.getContactName() == "Elodie") {
-        level = "level1";
-      } else {
-        level = "level3";
-      }
-      return level;
-    },
 
     shuffle(array) {
       let currentIndex = array.length,  randomIndex;
@@ -892,11 +864,11 @@ export default {
 
     chooseDidascalie() {
       let _case = this.randomCase();
-      const level = this.intimacyLevel();
+      const level = calc.intimacyLevel(this.name,this.getContactName());
       if (level == "level1") {
         _case = "case3";
       }
-
+   
       let char = this.getCharAmount();
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
