@@ -75,10 +75,7 @@ export async function getCity() {
   }else if(data.results[0].components.town){
     city = data.results[0].components.town
   }
-  // {
-  //   city: data.results[0].components.city,
-  //   town: data.results[0].components.town
-  // }
+
   return { city: city, position };
 }
 
