@@ -116,6 +116,7 @@ export default {
       lng: 0,
       cityHasChanged: false,
       lastMsgTime :0,
+      city: "default"
     };
   },
   computed: {
@@ -207,7 +208,7 @@ export default {
       this.lastMsgTime = this.getTime();
 
       this.outputSignal = "msg";
-      this.onSignal();
+      // this.onSignal();
       this.getTimelaps();
 
      
@@ -786,14 +787,17 @@ export default {
       return RESULT;
     },
     getLocationTrigger() {
-      const RESULT = {
-        result: "positive",
-        outputSignal: "ratio",
-        outputValue: "test loca",
-        inputType: "timeTrigger",
-        didType: "loca",
-      };
-      return RESULT;
+      let city = this.city
+      console.log("LOCATION IS TRIGGERED")
+        const RESULT = {
+          result: "positive",
+          outputSignal: "dataChange",
+          outputValue: city,
+          inputType: "city",
+          didType: "loca",
+        };
+        console.log(RESULT)
+        return RESULT;
     },
 
 
@@ -873,20 +877,25 @@ export default {
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
       let speed = this.getWritingSpeed();
-
+      console.log(this.outputSignal)
       let timeTrigger = this.getTimeTrigger();
       let locationTrigger = this.getLocationTrigger();
+
       if (this.outputSignal == "msg") {
         // console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
-        //!Problem
         let test_counter = 1;
         let resultat = this.getResult(allOutputs, level, _case,test_counter)
         // console.log("resultat",resultat);
         return resultat;//this.getResult(allOutputs, level, _case);
       } else if (this.outputSignal == "ratio") {
-        // console.log("ITS A RATIO");
-        const allOutputs = [timeTrigger, locationTrigger];
+        console.log("ITS A RATIO");
+        const allOutputs = [timeTrigger];
+        return this.getResult(allOutputs, level, _case);
+      }else if (this.outputSignal == "dataChange") {
+        console.log("ITS A DATACHANGED");
+        const allOutputs = [locationTrigger];
+        _case = "case3"
         return this.getResult(allOutputs, level, _case);
       }
     },
@@ -896,8 +905,27 @@ export default {
         this.sentTime = this.getTime();
         console.log("its happening");
         this.outputSignal = "ratio";
-        //!OK IM LOSTTTTTTTTTTTTTTTTTTTTTTTTTTT
         this.sendDidascalie(this.sentTime);
+      } else if (this.getTimelaps().min == "50") {
+        // console.log("its time");
+        //  console.log(this.$state.currentCity(value));
+        // //  {
+        //     this.cityHasChanged == true
+        //     this.city = this.$getters.currentCity()
+        //     console.log(this.city)
+        //     this.setNewCity()
+
+        // //  }
+      }
+    },
+    setNewCity(){
+      if(this.cityHasChanged == true){
+          this.sentTime = this.getTime();
+          console.log("city changed")
+          this.outputSignal = "dataChange";
+          this.sendDidascalie(this.sentTime);
+      }else if(!this.cityHasChanged){
+        return
       }
     },
    
@@ -929,8 +957,10 @@ export default {
 
     "$state.currentCity"(value) {
       this.cityHasChanged = true;
-      let city =this.$getters.currentCity(value)
-      console.log(city)
+      console.log("CITY HAS CHANGED")
+      this.city = this.$getters.currentCity(value)
+      console.log(this.city)
+      this.setNewCity()
     },
     "$state.currentLocation"(value, oldValue) {
       if (!oldValue.latitude) return;
