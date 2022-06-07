@@ -1,5 +1,6 @@
 <template>
   <div class="accountPage">
+    <div class="item"></div>
     <div class="userprops-container">
       <div class="row">
         <div class="text-basic">Nom d'auteur·ice·x</div>

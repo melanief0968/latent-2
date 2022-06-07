@@ -792,7 +792,7 @@ export default {
       return RESULT;
     },
     getLocationTrigger() {
-      if(this.cityHasChanged == true){
+      // if(this.cityHasChanged == true){
         let city = this.city
         // console.log("LOCATION IS TRIGGERED")
           const RESULT = {
@@ -804,19 +804,19 @@ export default {
           };
           console.log(RESULT)
           return RESULT;
-      }else {
-         let city = this.city
-        // console.log("LOCATION IS TRIGGERED")
-          const RESULT = {
-            result: "",
-            outputSignal: "dataChange",
-            outputValue: "no result",
-            inputType: "city",
-            didType: "loca",
-          };
-          console.log(RESULT)
-          return RESULT;
-      }
+      // }else {
+      //    let city = this.city
+      //   // console.log("LOCATION IS TRIGGERED")
+      //     const RESULT = {
+      //       result: "",
+      //       outputSignal: "dataChange",
+      //       outputValue: "no result",
+      //       inputType: "city",
+      //       didType: "loca",
+      //     };
+      //     console.log(RESULT)
+      //     return RESULT;
+      // }
     },
     distDatas(){
       let distance = this.distance
