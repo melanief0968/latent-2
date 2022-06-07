@@ -16,7 +16,7 @@
           :key="message.sentTime"
           :name="message.userName"
           :text="message.didascalie"
-          :contact="getContactName()"
+          :contact="contactName"
         ></Didascalies>
         <Didascalies
           v-if="message.messageType === 'didScene'"
@@ -110,13 +110,14 @@ export default {
       charAmount: 0,
       eraseAmount: 0,
       totalErase: 0,
-      contactName: "",
+      contactName: this.contactName,
       afterDelay: false,
       lat: 0,
       lng: 0,
       cityHasChanged: false,
       lastMsgTime :0,
-      city: "default"
+      city: this.$getters.currentCity(),
+      distance: "quelques"
     };
   },
   computed: {
@@ -787,19 +788,50 @@ export default {
       return RESULT;
     },
     getLocationTrigger() {
-      let city = this.city
-      console.log("LOCATION IS TRIGGERED")
-        const RESULT = {
+      if(this.cityHasChanged == true){
+        let city = this.city
+        // console.log("LOCATION IS TRIGGERED")
+          const RESULT = {
+            result: "positive",
+            outputSignal: "dataChange",
+            outputValue: city,
+            inputType: "city",
+            didType: "loca",
+          };
+          console.log(RESULT)
+          return RESULT;
+      }else {
+         let city = this.city
+        // console.log("LOCATION IS TRIGGERED")
+          const RESULT = {
+            result: "",
+            outputSignal: "dataChange",
+            outputValue: "no result",
+            inputType: "city",
+            didType: "loca",
+          };
+          console.log(RESULT)
+          return RESULT;
+      }
+    },
+    distDatas(){
+      let distance = this.distance
+      if(distance <1){
+        distance = `${distance*1000}m`
+      }else if (distance>=1){
+        distance = `${distance}km`
+      }
+      console.log(distance)
+      const RESULT = {
           result: "positive",
           outputSignal: "dataChange",
-          outputValue: city,
-          inputType: "city",
+          outputValue: distance,
+          inputType: "distance",
           didType: "loca",
         };
         console.log(RESULT)
         return RESULT;
     },
-
 
     shuffle(array) {
       let currentIndex = array.length,  randomIndex;
@@ -858,7 +890,7 @@ export default {
             contact: this.contactName,
             outputValue: `<strong>${output.outputValue}</strong>`,
           });
-          // console.log(pushDid);
+          console.log(pushDid);
           return pushDid;
         }
       } else {
@@ -868,7 +900,7 @@ export default {
 
     chooseDidascalie() {
       let _case = this.randomCase();
-      const level = calc.intimacyLevel(this.name,this.getContactName());
+      const level = calc.intimacyLevel(this.name,this.contactName);
       if (level == "level1") {
         _case = "case3";
       }
@@ -880,7 +912,8 @@ export default {
       console.log(this.outputSignal)
       let timeTrigger = this.getTimeTrigger();
       let locationTrigger = this.getLocationTrigger();
-
+      let distTrigger = this.distDatas()
+  
       if (this.outputSignal == "msg") {
         // console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
@@ -894,7 +927,7 @@ export default {
         return this.getResult(allOutputs, level, _case);
       }else if (this.outputSignal == "dataChange") {
         console.log("ITS A DATACHANGED");
-        const allOutputs = [locationTrigger];
+        const allOutputs = [locationTrigger,distTrigger];
         _case = "case3"
         return this.getResult(allOutputs, level, _case);
       }
@@ -906,31 +939,52 @@ export default {
         console.log("its happening");
         this.outputSignal = "ratio";
         this.sendDidascalie(this.sentTime);
-      } else if (this.getTimelaps().min == "50") {
-        // console.log("its time");
-        //  console.log(this.$state.currentCity(value));
-        // //  {
-        //     this.cityHasChanged == true
-        //     this.city = this.$getters.currentCity()
-        //     console.log(this.city)
-        //     this.setNewCity()
-
-        // //  }
+      } else if (this.getTimelaps().min == "34") {
+        this.sentTime = this.getTime();
+        console.log("its time");
+        this.outputSignal = "dataChange";
+        this.city = this.$getters.currentCity()
+        this.sendDidascalie(this.sentTime);
       }
     },
     setNewCity(){
       if(this.cityHasChanged == true){
           this.sentTime = this.getTime();
-          console.log("city changed")
+          // console.log("city changed")
           this.outputSignal = "dataChange";
           this.sendDidascalie(this.sentTime);
       }else if(!this.cityHasChanged){
         return
       }
     },
-   
-
-    getContactName() {
+   setDistance(){
+      let chatID = this.$getters.currentChatID();
+      let lastDist = this.$getters.listenConversation(chatID).distance
+      console.log(lastDist)
+      if(!lastDist){
+        lastDist = 10
+      }
+      console.log("i got it");
+      let userCoords = this.$getters.currentLocation()
+      console.log(userCoords)
+      let otherUserCoords = this.$getters.listenUser(this.getOtherUser()).geoLocation
+      console.log(otherUserCoords)
+      let distance = location.calcDist(userCoords, otherUserCoords)/1000
+      let diff = Math.abs(lastDist-distance)
+      console.log(diff)
+      if (diff < 0.005){
+        return
+      } else if (lastDist = "Une certaine distance" || diff >= 0.05){
+        fb.setValue(`/conversations/${chatID}/distance`, distance)
+        console.log(distance)
+        this.distance = Math.round(distance * 100)/100
+        this.outputSignal = "dataChange";
+        this.sentTime = this.getTime()
+        this.sendDidascalie(this.sentTime);
+        return this.distance
+      }
+   },
+    getOtherUser(){
       const chatID = this.$getters.listenConversation(
         this.$getters.currentChatID()
       );
@@ -938,13 +992,15 @@ export default {
       const otherUser = Object.values(user).find((userID) => {
         return userID !== this.$getters.currentUserID();
       });
+      return otherUser
+    },
+    getContactName() {
+      let otherUser = this.getOtherUser()
       const contactName = this.$getters.listenUser(otherUser).name;
       this.contactName = contactName;
       return this.contactName;
     },
-    setLocationData() {
-      return location.getLocation();
-    },
+
   },
 
   beforeDestroy() {
@@ -957,17 +1013,30 @@ export default {
 
     "$state.currentCity"(value) {
       this.cityHasChanged = true;
+      console.log(value)
       console.log("CITY HAS CHANGED")
       this.city = this.$getters.currentCity(value)
-      console.log(this.city)
+      // console.log(this.city)
       this.setNewCity()
     },
     "$state.currentLocation"(value, oldValue) {
       if (!oldValue.latitude) return;
 
       //! distance here
+
       // this.cityHasChanged = true;
-      console.log("New location", value, oldValue);
+      
+      // console.log("New location", value, oldValue);
+      let distance = location.calcDist(value, oldValue)
+      let coords = {
+        latitude: value.latitude,
+        longitude:value.longitude
+      }
+      if(distance >=5){
+        console.log("diff position user " + distance + "m")
+        fb.setValue(`/users/${this.currentUserID}/geoLocation`, coords)
+        this.setDistance();
+      }
     },
   },
   mounted() {
@@ -975,8 +1044,8 @@ export default {
     this.gender = this.$getters.user(this.currentUserID).gender;
     this.setScenes();
     // this.updateCoords()
-    // console.log(location.getLocation())
-
+    // this.setDistance()
+    this.getContactName()
     // console.log(location.city)
     // console.log(location.inRange())
     // console.log(location.watchPos())

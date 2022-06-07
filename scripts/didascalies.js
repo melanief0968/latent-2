@@ -1524,36 +1524,36 @@
       level1: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l1`,
-            f: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l1`,
-            n: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l1`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l1`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l1`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l1`,
           }],
         }
       },
       level2: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l2`,
-            f: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l2`,
-            n: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l2`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l2`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l2`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l2`,
           }],
         }
       },
       level3: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l3`,
-            f: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l3`,
-            n: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l3`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l3`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l3`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l3`,
           }],
         }
       },
       level4: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l4`,
-            f: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l4`,
-            n: (e) => `${e.name} est à ${e.outputValue}km de ${e.contact}.l4`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l4`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l4`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l4`,
           }],
         }
       }

@@ -84,6 +84,7 @@ export default {
               gender:this.gender,
               psw:this.psw,
               conversations:[],
+              geoLocation:{latitude:"", longitude:""}
           }
 
           const id = fb.createEntry("/users/", accountDatas);

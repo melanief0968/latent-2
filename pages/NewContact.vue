@@ -52,9 +52,10 @@ export default {
         const chatName = this.chatname;
         const sceneStage = 0
         const actStage = 0
+        const distance = "Une certaine distance"
 
         const chatId = fb.createEntry("/conversations/", {
-          chatName, sceneStage,actStage
+          chatName, sceneStage,actStage,distance
         });
        
         this.$actions.setCurrentChatId(chatId);

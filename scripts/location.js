@@ -170,10 +170,10 @@ function getCityFromCoords(lat, lng, callback) {
 export function calcDist(coords1, coords2) {
   // earth
   var R = 6371, // km
-    lat1 = parseFloat(coords1.lat),
-    lat2 = parseFloat(coords2.lat),
-    lon1 = parseFloat(coords1.lng),
-    lon2 = parseFloat(coords2.lng);
+    lat1 = parseFloat(coords1.latitude),
+    lat2 = parseFloat(coords2.latitude),
+    lon1 = parseFloat(coords1.longitude),
+    lon2 = parseFloat(coords2.longitude);
 
   // deg2rad
   lat1 = (lat1 / 180) * Math.PI;
