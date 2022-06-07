@@ -1,6 +1,7 @@
 <template>
   <!-- <div v-touch:swipe.left="swipeHandler"> -->
   <div class="chat-container">
+    
     <div
       class="message-container"
       v-chat-scroll="{
@@ -9,6 +10,7 @@
         scrollonremoved: true,
       }"
     >
+      <div class="item"></div>
       <template v-for="{ message, id } in messages">
         <Didascalies
           :icon="message.didType"
@@ -51,6 +53,7 @@
           :nbDots="message.dotsNum"
         ></YellowLine>
       </template>
+      <div class="item2"></div>
     </div>
 
     <footer class="footerChat">
@@ -121,6 +124,7 @@ export default {
     };
   },
   computed: {
+    
     messages() {
       const messages = [];
       // this.loadingMsg = true;
@@ -1065,7 +1069,7 @@ export default {
 </script>
 <style lang="scss">
 .chat-container {
-  height: 88%;
+  height: 100%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -1077,7 +1081,18 @@ export default {
 .message-container {
   overflow: scroll;
 }
+.item2{
+    width: 90%;
+  height: 15vh;
+  margin: auto;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 2%;
+  padding-bottom: 4%;
 
+  display: flex;
+  flex-direction: column;
+}
 .footerChat {
   width: 100vw;
   height: 13%;

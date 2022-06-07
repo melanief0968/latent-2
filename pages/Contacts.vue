@@ -1,5 +1,6 @@
 <template>
   <div class="contactPage">
+    <div class="item"></div>
     <ListItem
       v-for="{ conversation, id } in sortedConversations"
       :title="itemTitle(conversation)"
@@ -40,7 +41,6 @@ export default {
         .map((entry, index) => {
           const messages = Object.keys(entry.conversation.messages || {});
           let lastMessageTime = index;
-
           if (messages && messages.length > 0) {
             const lastMessage = messages[messages.length - 1];
             lastMessageTime = parseInt(lastMessage);
@@ -70,7 +70,6 @@ export default {
       this.conversations = Object.values(value.conversations).map(
         (conversationId) => {
           const conversation = this.$getters.listenConversation(conversationId);
-
           // let lastMessage = this.lastMessageData(conversation.messag);
 
           // console.log(conversation)
@@ -177,6 +176,18 @@ export default {
 };
 </script>
 <style lang="scss">
+.item{
+  width: 90%;
+  height: 11vh;
+  margin: auto;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 2%;
+  padding-bottom: 4%;
+
+  display: flex;
+  flex-direction: column;
+}
 .contactPage {
   width: 100%;
   height: 100%;

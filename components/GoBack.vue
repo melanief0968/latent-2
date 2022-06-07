@@ -36,15 +36,13 @@ export default {
 </script>
 <style scoped>
 .go-back {
-    top: 3.7vh;
-    left: .5vw;
-    position: absolute;
   cursor: pointer;
   z-index:100;
   height:25px
 }
 button {
   border: 0;
+  padding: 0;
 }
 .icone-back{
   height:100%;

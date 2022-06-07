@@ -1,8 +1,10 @@
 <template>
   <header class="header" :class="{'white-header': route==='Book'}">
+    <div class="insideHeaderConv">
       <!-- <h1 v-if="route === 'Index'">Index</h1>
       <h1 v-if="route === 'Contacts'">Échanges</h1> -->
       <!-- <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
+      <GoBack></GoBack>
       <h1 v-if="route === 'Chat'">{{contactName}}</h1>
       <h1 v-if="route === 'Book'">{{chatName}}</h1>
       <toggle-button
@@ -14,12 +16,16 @@
       />
 <!--      <router-link v-if="route === 'Chat'" to="/book">Book</router-link>-->
 <!--      <router-link v-if="route === 'Book'" to="/chat">Chat</router-link>-->
+  </div>
   </header>
 </template>
 <script>
 
-
+import GoBack from "../components/GoBack.vue";
 export default {
+  components:{
+    GoBack
+  },
   // props: {
   //   contactName: {
   //     default: "Loading...",
@@ -33,7 +39,7 @@ export default {
   data(){
     return{
       toggleWidth: 50,
-      toggleHeight: 30,
+      toggleHeight: 25,
        chatName: "Loading...",
        contactName: "Loading...",
     }
@@ -70,10 +76,21 @@ export default {
 <style lang="scss">
 h1{
   font-weight: normal;
-  margin-left: 7%;
+  // margin-left: 7%;
+}
+.insideHeaderConv{
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 90%;
+  text-align: left;
+  font-family: $font-main;
+  // background: red;
+  justify-content: space-between;
+  align-items: center;
 }
 .white-header{
-  background: white !important;
+  background: linear-gradient(0deg, rgba(241,236,226,1) 0%, rgba(255,255,255,1) 100%) !important;
 }
 .header  {
   > div {

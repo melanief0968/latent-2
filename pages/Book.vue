@@ -177,7 +177,7 @@ export default {
 .book-container {
   height: 95%;
   width: 90%;
-  background-color: #F8F6F2;
+  background-color: $background-book;
 }
 
 .slider {
@@ -256,7 +256,7 @@ export default {
 }
 
 .book-background{
-  background-color: #F8F6F2;
+  background-color: $background-book;
 }
 
 </style>
