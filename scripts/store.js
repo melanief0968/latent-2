@@ -37,6 +37,7 @@ export const state = persist(
 
 //! to refactor
 function deepFuckingMerge(obj, newObj) {
+  // stateMerge(obj, newObj, null, true);
   stateMerge(obj, newObj);
   Vue.set(obj, obj);
 }
@@ -95,6 +96,17 @@ export const getters = {
       const fbListener = fb.listen(`/users/${id}/`, (value) => {
         if (!value) return;
 
+        if (!value.unreadchats) value.unreadchats = null;
+        else {
+          const oldUnread = state.users[id].unreadchats || {};
+
+          Object.keys(oldUnread).forEach((chatId) => {
+            if (!value.unreadchats[chatId]) value.unreadchats[chatId] = null;
+            // console.log(chatId);
+          });
+        }
+
+        // console.log();
         deepFuckingMerge(state.users[id], value);
       });
 

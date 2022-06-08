@@ -1,7 +1,6 @@
 <template>
   <!-- <div v-touch:swipe.left="swipeHandler"> -->
   <div class="chat-container">
-    
     <div
       class="message-container"
       v-chat-scroll="{
@@ -80,7 +79,7 @@ import InputMessage from "../components/InputMessage.vue";
 import { countCharOccurance } from "@/utils/string.js";
 import * as location from "@/scripts/location.js";
 import { getAttributes } from "@tiptap/core";
-import * as calc from "@/scripts/calc.js"
+import * as calc from "@/scripts/calc.js";
 
 export default {
   components: {
@@ -118,13 +117,12 @@ export default {
       lat: 0,
       lng: 0,
       cityHasChanged: false,
-      lastMsgTime :0,
+      lastMsgTime: 0,
       city: this.$getters.currentCity(),
-      distance: "quelques"
+      distance: "quelques",
     };
   },
   computed: {
-    
     messages() {
       const messages = [];
       // this.loadingMsg = true;
@@ -214,7 +212,6 @@ export default {
       // this.onSignal();
       this.getTimelaps();
 
-     
       this.stopElapsedTime();
       this.sentTime = this.getTime();
       // console.log("time of msg: " + this.sentTime)dfghjkl
@@ -301,14 +298,14 @@ export default {
         lineHeight: this.yellowLineHeight().height,
         dotsNum: this.yellowLineHeight().days,
       };
-      const sceneTime = this.sentTime+2;
-      const didascalieTime = this.sentTime+5;
+      const sceneTime = this.sentTime + 2;
+      const didascalieTime = this.sentTime + 5;
       // console.log(message, chatVersion);
       const textTime = this.yellowLineHeight().textTime;
-      
+
       const textMessage = {
         ...baseMessage,
-        sentTime: this.sentTime+6,
+        sentTime: this.sentTime + 6,
         text: chatVersion,
         bookText: bookVersion,
         charAmount: this.charAmount,
@@ -333,7 +330,7 @@ export default {
     setFirstScene() {
       this.sentTime = this.getTime();
       const didascalie = `Acte I, scène I`;
-      let sentenceType = "firstScene"
+      let sentenceType = "firstScene";
       const sceneSentence = this.getSceneSentence(sentenceType);
       const base = this.getBaseMsg();
       const didMessage = {
@@ -344,11 +341,11 @@ export default {
         // didType:this.didType
       };
       const sceneSentenceDid = {
-            ...base,
-            messageType: "didSceneSent",
-            sentTime: this.sentTime+2,
-            sceneSentence,
-          };
+        ...base,
+        messageType: "didSceneSent",
+        sentTime: this.sentTime + 2,
+        sceneSentence,
+      };
       this.sendMessage(didMessage);
       this.sendMessage(sceneSentenceDid);
       //   let chatID = this.$getters.currentChatID()
@@ -405,8 +402,8 @@ export default {
       // console.log(this.$getters.listenConversation(chatID).sceneStage);
       if (sceneExist != undefined) {
         // console.log("THERE IS SCENES");
-        if (this.getEllapseTime() >= 1000* 60 * 60 *12 ) {
-          //1000 * 60 * 60 *12 
+        if (this.getEllapseTime() >= 1000 * 60 * 60 * 12) {
+          //1000 * 60 * 60 *12
           hasChanged = true;
           newSceneIndex = currentSceneIndex + 1;
           if (newSceneIndex == 10) {
@@ -464,7 +461,7 @@ export default {
           this.setScenes().newActIndex
         );
         this.sentTime = this.getTime();
-        console.log("time of scene: " + this.sentTime)
+        console.log("time of scene: " + this.sentTime);
         const didascalie = `${this.setScenes().setAct}, ${
           this.setScenes().setScene
         }`;
@@ -472,11 +469,11 @@ export default {
         let timeData = calc.getTimeDatas(timeBetweenMessages);
         const didascalieTime = `${timeData} passent.`;
 
-        let sentenceType = "scene"
+        let sentenceType = "scene";
         const sceneSentence = this.getSceneSentence(sentenceType);
-        
+
         const base = this.getBaseMsg();
-      
+
         const didMessage = {
           ...base,
           messageType: "didScene",
@@ -487,16 +484,16 @@ export default {
         const didTimeMessage = {
           ...base,
           messageType: "didTime",
-          sentTime: time+1,
+          sentTime: time + 1,
           didascalieTime,
         };
         const sceneSentenceDid = {
           ...base,
           messageType: "didSceneSent",
-          sentTime: time+2,
+          sentTime: time + 2,
           sceneSentence,
         };
-                // console.log(sceneSentence)
+        // console.log(sceneSentence)
 
         this.sendMessage(didMessage);
         this.sendMessage(didTimeMessage);
@@ -513,27 +510,27 @@ export default {
         return;
       }
     },
-    getSceneSentence(type){
+    getSceneSentence(type) {
       let pushScene = null;
       const indexNbr = did["initScenes"][type].length;
-      const index = Math.floor(Math.random() * indexNbr)
-      pushScene = did["initScenes"][type][index]()
-      return pushScene
+      const index = Math.floor(Math.random() * indexNbr);
+      pushScene = did["initScenes"][type][index]();
+      return pushScene;
     },
     yellowLineHeight() {
       let timeBetweenMessages = this.getEllapseTime();
       if (timeBetweenMessages) {
-        let timeLineData = Math.floor(timeBetweenMessages / (1000));
+        let timeLineData = Math.floor(timeBetweenMessages / 1000);
         // console.log("temps yellowline" + timeLineData)
         let textTime = "2h";
         if (timeLineData <= 60) {
           textTime = `${timeLineData}sec`;
-        } else if (timeLineData >= 61 && timeLineData <=6000) {
+        } else if (timeLineData >= 61 && timeLineData <= 6000) {
           textTime = `${Math.floor(timeLineData / 60)}min`;
-        }else if (timeLineData >= 6001 && timeLineData <= 86400){
-          textTime = `${Math.floor(timeLineData / (60*60))}h`;
+        } else if (timeLineData >= 6001 && timeLineData <= 86400) {
+          textTime = `${Math.floor(timeLineData / (60 * 60))}h`;
         } else if (timeLineData > 86401) {
-          textTime = `${Math.floor(timeLineData / (60*60 * 24))}j`;
+          textTime = `${Math.floor(timeLineData / (60 * 60 * 24))}j`;
         }
         // console.log(timeLineData)
         // console.log(timeBetweenMessages)
@@ -551,8 +548,8 @@ export default {
         // height = ((((i + 1) * height) / (days + 1)) - 25)
         // }
         let height = Math.sqrt(timeBetweenMessages) * 0.009;
-        if(height<=2.5){
-          height=2.6
+        if (height <= 2.5) {
+          height = 2.6;
         }
         // console.log(height)
 
@@ -578,15 +575,22 @@ export default {
       //   const dot = document.createElement("div");
       //   dotContainer.style.top = ((((i + 1) * height) / (days + 1)) - 25) + "px";
       // }
-
     },
 
     sendMessage(message) {
       const messageId = message.sentTime;
+      const chatId = this.$getters.currentChatID()
       fb.setValue(
-        `/conversations/${this.$getters.currentChatID()}/messages/${messageId}`,
+        `/conversations/${chatId}/messages/${messageId}`,
         ""
       );
+
+      fb.setValue(
+        `/users/${this.getOtherUser()}/unreadchats/${chatId}/${messageId}`,
+        ""
+      );
+
+      console.log(this.getOtherUser());
       fb.setValue(`/messages/${messageId}`, message);
     },
     onSignal() {
@@ -791,17 +795,17 @@ export default {
     },
     getLocationTrigger() {
       // if(this.cityHasChanged == true){
-        let city = this.city
-        // console.log("LOCATION IS TRIGGERED")
-          const RESULT = {
-            result: "positive",
-            outputSignal: "dataChange",
-            outputValue: city,
-            inputType: "city",
-            didType: "loca",
-          };
-          console.log(RESULT)
-          return RESULT;
+      let city = this.city;
+      // console.log("LOCATION IS TRIGGERED")
+      const RESULT = {
+        result: "positive",
+        outputSignal: "dataChange",
+        outputValue: city,
+        inputType: "city",
+        didType: "loca",
+      };
+      console.log(RESULT);
+      return RESULT;
       // }else {
       //    let city = this.city
       //   // console.log("LOCATION IS TRIGGERED")
@@ -816,47 +820,49 @@ export default {
       //     return RESULT;
       // }
     },
-    distDatas(){
-      let distance = this.distance
-      if(distance <1){
-        distance = `${distance*1000}m`
-      }else if (distance>=1){
-        distance = `${distance}km`
+    distDatas() {
+      let distance = this.distance;
+      if (distance < 1) {
+        distance = `${distance * 1000}m`;
+      } else if (distance >= 1) {
+        distance = `${distance}km`;
       }
-      console.log(distance)
+      console.log(distance);
       const RESULT = {
-          result: "positive",
-          outputSignal: "dataChange",
-          outputValue: distance,
-          inputType: "distance",
-          didType: "loca",
-        };
-        console.log(RESULT)
-        return RESULT;
+        result: "positive",
+        outputSignal: "dataChange",
+        outputValue: distance,
+        inputType: "distance",
+        didType: "loca",
+      };
+      console.log(RESULT);
+      return RESULT;
     },
 
     shuffle(array) {
-      let currentIndex = array.length,  randomIndex;
+      let currentIndex = array.length,
+        randomIndex;
 
       // While there remain elements to shuffle.
       while (currentIndex != 0) {
-
         // Pick a remaining element.
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]];
+          array[randomIndex],
+          array[currentIndex],
+        ];
       }
 
       return array;
     },
 
-    getResult(_array, level, _case,_counter) {
+    getResult(_array, level, _case, _counter) {
       if (_array.length > 0) {
         let pushDid = null;
-        this.shuffle(_array);//_array.sort(() => 0.5 - Math.random());
+        this.shuffle(_array); //_array.sort(() => 0.5 - Math.random());
         const shuffledArr = _array;
         // console.log(_array, shuffledArr);
         const output = shuffledArr[0];
@@ -870,7 +876,7 @@ export default {
           shuffledArr.shift();
           console.log(shuffledArr);
           _counter++;
-          return this.getResult(shuffledArr, level, _case,_counter);
+          return this.getResult(shuffledArr, level, _case, _counter);
         } else {
           const indexNbr =
             did[output.outputSignal][output.inputType][level][output.result][
@@ -902,35 +908,35 @@ export default {
 
     chooseDidascalie() {
       let _case = this.randomCase();
-      const level = calc.intimacyLevel(this.name,this.contactName);
+      const level = calc.intimacyLevel(this.name, this.contactName);
       if (level == "level1") {
         _case = "case3";
       }
-   
+
       let char = this.getCharAmount();
       let erase = this.getEraseAmount();
       let time = this.getTimeBetweenMessages();
       let speed = this.getWritingSpeed();
-      console.log(this.outputSignal)
+      console.log(this.outputSignal);
       let timeTrigger = this.getTimeTrigger();
       let locationTrigger = this.getLocationTrigger();
-      let distTrigger = this.distDatas()
-  
+      let distTrigger = this.distDatas();
+
       if (this.outputSignal == "msg") {
         // console.log("ITS A MESSAGE");
         const allOutputs = [char, erase, time, speed];
         let test_counter = 1;
-        let resultat = this.getResult(allOutputs, level, _case,test_counter)
+        let resultat = this.getResult(allOutputs, level, _case, test_counter);
         // console.log("resultat",resultat);
-        return resultat;//this.getResult(allOutputs, level, _case);
+        return resultat; //this.getResult(allOutputs, level, _case);
       } else if (this.outputSignal == "ratio") {
         console.log("ITS A RATIO");
         const allOutputs = [timeTrigger];
         return this.getResult(allOutputs, level, _case);
-      }else if (this.outputSignal == "dataChange") {
+      } else if (this.outputSignal == "dataChange") {
         console.log("ITS A DATACHANGED");
-        const allOutputs = [locationTrigger,distTrigger];
-        _case = "case3"
+        const allOutputs = [locationTrigger, distTrigger];
+        _case = "case3";
         return this.getResult(allOutputs, level, _case);
       }
     },
@@ -945,48 +951,50 @@ export default {
         this.sentTime = this.getTime();
         console.log("its time");
         this.outputSignal = "dataChange";
-        this.city = this.$getters.currentCity()
+        this.city = this.$getters.currentCity();
         this.sendDidascalie(this.sentTime);
       }
     },
-    setNewCity(){
-      if(this.cityHasChanged == true){
-          this.sentTime = this.getTime();
-          // console.log("city changed")
-          this.outputSignal = "dataChange";
-          this.sendDidascalie(this.sentTime);
-      }else if(!this.cityHasChanged){
-        return
+    setNewCity() {
+      if (this.cityHasChanged == true) {
+        this.sentTime = this.getTime();
+        // console.log("city changed")
+        this.outputSignal = "dataChange";
+        this.sendDidascalie(this.sentTime);
+      } else if (!this.cityHasChanged) {
+        return;
       }
     },
-   setDistance(){
+    setDistance() {
       let chatID = this.$getters.currentChatID();
-      let lastDist = this.$getters.listenConversation(chatID).distance
-      console.log(lastDist)
-      if(!lastDist){
-        lastDist = 10
+      let lastDist = this.$getters.listenConversation(chatID).distance;
+      console.log(lastDist);
+      if (!lastDist) {
+        lastDist = 10;
       }
       console.log("i got it");
-      let userCoords = this.$getters.currentLocation()
-      console.log(userCoords)
-      let otherUserCoords = this.$getters.listenUser(this.getOtherUser()).geoLocation
-      console.log(otherUserCoords)
-      let distance = location.calcDist(userCoords, otherUserCoords)/1000
-      let diff = Math.abs(lastDist-distance)
-      console.log(diff)
-      if (diff < 0.005){
-        return
-      } else if (lastDist = "Une certaine distance" || diff >= 0.05){
-        fb.setValue(`/conversations/${chatID}/distance`, distance)
-        console.log(distance)
-        this.distance = Math.round(distance * 100)/100
+      let userCoords = this.$getters.currentLocation();
+      console.log(userCoords);
+      let otherUserCoords = this.$getters.listenUser(
+        this.getOtherUser()
+      ).geoLocation;
+      console.log(otherUserCoords);
+      let distance = location.calcDist(userCoords, otherUserCoords) / 1000;
+      let diff = Math.abs(lastDist - distance);
+      console.log(diff);
+      if (diff < 0.005) {
+        return;
+      } else if ((lastDist = "Une certaine distance" || diff >= 0.05)) {
+        fb.setValue(`/conversations/${chatID}/distance`, distance);
+        console.log(distance);
+        this.distance = Math.round(distance * 100) / 100;
         this.outputSignal = "dataChange";
-        this.sentTime = this.getTime()
+        this.sentTime = this.getTime();
         this.sendDidascalie(this.sentTime);
-        return this.distance
+        return this.distance;
       }
-   },
-    getOtherUser(){
+    },
+    getOtherUser() {
       const chatID = this.$getters.listenConversation(
         this.$getters.currentChatID()
       );
@@ -994,15 +1002,14 @@ export default {
       const otherUser = Object.values(user).find((userID) => {
         return userID !== this.$getters.currentUserID();
       });
-      return otherUser
+      return otherUser;
     },
     getContactName() {
-      let otherUser = this.getOtherUser()
+      let otherUser = this.getOtherUser();
       const contactName = this.$getters.listenUser(otherUser).name;
       this.contactName = contactName;
       return this.contactName;
     },
-
   },
 
   beforeDestroy() {
@@ -1015,11 +1022,11 @@ export default {
 
     "$state.currentCity"(value) {
       this.cityHasChanged = true;
-      console.log(value)
-      console.log("CITY HAS CHANGED")
-      this.city = this.$getters.currentCity(value)
+      console.log(value);
+      console.log("CITY HAS CHANGED");
+      this.city = this.$getters.currentCity(value);
       // console.log(this.city)
-      this.setNewCity()
+      this.setNewCity();
     },
     "$state.currentLocation"(value, oldValue) {
       if (!oldValue.latitude) return;
@@ -1027,33 +1034,37 @@ export default {
       //! distance here
 
       // this.cityHasChanged = true;
-      
+
       // console.log("New location", value, oldValue);
-      let distance = location.calcDist(value, oldValue)
+      let distance = location.calcDist(value, oldValue);
       let coords = {
         latitude: value.latitude,
-        longitude:value.longitude
-      }
-      if(distance >=5){
-        console.log("diff position user " + distance + "m")
-        fb.setValue(`/users/${this.currentUserID}/geoLocation`, coords)
+        longitude: value.longitude,
+      };
+      if (distance >= 5) {
+        console.log("diff position user " + distance + "m");
+        fb.setValue(`/users/${this.currentUserID}/geoLocation`, coords);
         this.setDistance();
       }
     },
   },
   mounted() {
+    const currentChat = this.$getters.currentChatID();
+
+    fb.setValue(`/users/${this.currentUserID}/unreadchats/${currentChat}`, null);
+
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
     this.setScenes();
     // this.updateCoords()
     // this.setDistance()
-    this.getContactName()
+    this.getContactName();
     // console.log(location.city)
     // console.log(location.inRange())
     // console.log(location.watchPos())
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
     // https://gist.github.com/viktorbezdek/3957601
-    const currentChat = this.$getters.currentChatID();
+    
     this.conversation = this.$getters.listenConversation(currentChat);
 
     setTimeout(() => {
@@ -1079,8 +1090,8 @@ export default {
 .message-container {
   overflow: scroll;
 }
-.item2{
-    width: 90%;
+.item2 {
+  width: 90%;
   height: 15vh;
   margin: auto;
   box-sizing: border-box;

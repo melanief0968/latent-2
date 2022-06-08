@@ -6,9 +6,9 @@
       :title="itemTitle(conversation)"
       :subtitle="setSubtitle(conversation)"
       :key="id"
+      :unread="checkReadMessages(conversation.messages, id)"
       @click.native="onItemClick(id)"
     >
-      <div class="unread"></div>
     </ListItem>
 
     <!-- <button>Add new conversation</button> -->
@@ -67,9 +67,13 @@ export default {
 
       console.log("New conv", Object.keys(value.conversations).length);
 
+      const oldConversations = this.conversations;
+
       this.conversations = Object.values(value.conversations).map(
         (conversationId) => {
           const conversation = this.$getters.listenConversation(conversationId);
+
+          // console.log(JSON.stringify(conversation))
           // let lastMessage = this.lastMessageData(conversation.messag);
 
           // console.log(conversation)
@@ -90,10 +94,29 @@ export default {
   },
 
   methods: {
+    checkReadMessages(conversationMessages, id) {
+      // const userProps = this.$getters.user(currentUserID);
+      console.log(this.userProps);
+      const unreadmessages = Object.keys(
+        this.userProps.unreadchats?.[id] || {}
+      );
+      console.log(this.userProps.unreadchats);
+      const messages = Object.keys(conversationMessages || {});
+
+      const unread = unreadmessages.some((messageId) => {
+        return messages.includes(messageId);
+      });
+
+      // console.log(unread);
+
+      // console.log('updating', conversation);
+      // console.log(this.userProps.unreadmessages);
+      return unread;
+    },
     conversationList() {
       const currentUserID = this.$getters.currentUserID();
-      this.$getters.listenUser(currentUserID);
-      this.userProps = this.$getters.user(currentUserID);
+      this.userProps = this.$getters.listenUser(currentUserID);
+      // this.userProps = this.$getters.user(currentUserID);
     },
     // lastMessageData(conversation) {
     //   // const lastMessages = [];
@@ -178,7 +201,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.item{
+.item {
   width: 90%;
   height: 11vh;
   margin: auto;
