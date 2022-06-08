@@ -4,15 +4,15 @@ on:
     branches:
       - main
 env:
-  VITE_APIKEY: AIzaSyDyAYYnPngX2knUnb_KYnXKbReHZW-by7A
-  VITE_AUTHDOMAIN: latent-2022.firebaseapp.com
-  VITE_DATABASEURL: https://latent-2022-default-rtdb.firebaseio.com
-  VITE_PROJECTID: latent-2022
-  VITE_STORAGEBUCKET: latent-2022.appspot.com
-  VITE_MESSAGINGSENDERID: 527260667934
-  VITE_APPID: 1:527260667934:web:d73363bed96200e3ac5e0f
-  VITE_LOCATION_API_KEY: 8ccfb399b373416981422103bf030e78
-  VITE_LOCATION_API_URL: https://api.opencagedata.com/geocode/v1/json
+  VITE_APIKEY: ${{ secrets.VITE_APIKEY }}
+  VITE_AUTHDOMAIN: ${{ secrets.VITE_AUTHDOMAIN }}
+  VITE_DATABASEURL: ${{ secrets.VITE_DATABASEURL }}
+  VITE_PROJECTID: ${{ secrets.VITE_PROJECTID }}
+  VITE_STORAGEBUCKET: ${{ secrets.VITE_STORAGEBUCKET }}
+  VITE_MESSAGINGSENDERID: ${{ secrets.VITE_MESSAGINGSENDERID }}
+  VITE_APPID: ${{ secrets.VITE_APPID }}
+  VITE_LOCATION_API_KEY: ${{ secrets.VITE_LOCATION_API_KEY }}
+  VITE_LOCATION_API_URL: ${{ secrets.VITE_LOCATION_API_URL }}
 permissions: 
   contents: write
 jobs:
