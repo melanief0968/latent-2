@@ -92,7 +92,6 @@ export default {
       // });
     },
   },
-  
 
   methods: {
     checkReadMessages(conversationMessages, id) {
