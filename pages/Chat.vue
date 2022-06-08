@@ -58,6 +58,7 @@
     <footer class="footerChat">
       <InputMessage
         ref="editor"
+        :placeholder="placeholder"
         @submit="onSubmit"
         @delete="getEraseAmount"
         @keydown="keysCount"
@@ -91,6 +92,7 @@ export default {
   },
   data() {
     return {
+      placeholder: 'Ecrire',
       // messageIds: {},
       conversation: null,
       removeListener: () => {},
@@ -201,6 +203,8 @@ export default {
       }
     },
     onSubmit(event) {
+      //TODO EDIT RANDOM PLACEHOLDER
+      this.placeholder = 'Ecrire';
       // console.log('City has changed', value);
       if (this.cityHasChanged) {
         // send message didascalie
@@ -579,11 +583,8 @@ export default {
 
     sendMessage(message) {
       const messageId = message.sentTime;
-      const chatId = this.$getters.currentChatID()
-      fb.setValue(
-        `/conversations/${chatId}/messages/${messageId}`,
-        ""
-      );
+      const chatId = this.$getters.currentChatID();
+      fb.setValue(`/conversations/${chatId}/messages/${messageId}`, "");
 
       fb.setValue(
         `/users/${this.getOtherUser()}/unreadchats/${chatId}/${messageId}`,
@@ -1051,7 +1052,10 @@ export default {
   mounted() {
     const currentChat = this.$getters.currentChatID();
 
-    fb.setValue(`/users/${this.currentUserID}/unreadchats/${currentChat}`, null);
+    fb.setValue(
+      `/users/${this.currentUserID}/unreadchats/${currentChat}`,
+      null
+    );
 
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
@@ -1064,7 +1068,7 @@ export default {
     // console.log(location.watchPos())
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
     // https://gist.github.com/viktorbezdek/3957601
-    
+
     this.conversation = this.$getters.listenConversation(currentChat);
 
     setTimeout(() => {

@@ -9,12 +9,13 @@
         />  -->
     <editor-content class="inputMsg__editor" :editor="editor" />
     <button type="submit" @click="submit" class="inputMsg__btn">
-      <img class="icone send" src="/img/send.png">
+      <img class="icone send" src="/img/send.png" />
     </button>
   </form>
 </template>
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-2";
+import { Placeholder } from "/scripts/tiptap-placeholder.js";
 import KeydownRegister from "@/scripts/KeydownRegister.js";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -23,6 +24,10 @@ const ZERO_WIDTH_NO_BREAK_SPACE = "\uFEFF";
 
 export default {
   props: {
+    placeholder: {
+      type: String,
+      default: "Ecrire",
+    },
     eraseChar: {
       type: String,
       // default: '–' || ZERO_WIDTH_SPACE,
@@ -55,6 +60,11 @@ export default {
       // content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
       extensions: [
         StarterKit,
+        Placeholder.configure({
+          placeholder: () => {
+            return this.placeholder;
+          },
+        }),
         KeydownRegister.configure({
           eraseChar: this.eraseChar,
           elapsedTimeChar: this.elapsedTimeChar,
@@ -70,7 +80,6 @@ export default {
         }),
       ],
     });
-
   },
   methods: {
     onSubmit(event) {
@@ -84,7 +93,7 @@ export default {
     },
     focus(event) {
       this.editor.commands.focus(); //
-      this.$emit("focus",event);
+      this.$emit("focus", event);
     },
 
     blur() {
@@ -110,7 +119,6 @@ export default {
 };
 </script>
 <style lang="scss">
-
 .inputMsg {
   display: flex;
   justify-content: space-between;
@@ -123,27 +131,32 @@ export default {
 
   // BEM syntax css
   &__editor {
-    width:100%;
+    width: 100%;
+
+    [data-placeholder]:before {
+      content: attr(data-placeholder);
+      float: left;
+      color: #adb5bd;
+      pointer-events: none;
+      height: 0;
+    }
   }
 }
-.ProseMirror{
-border: .9px solid $contrast-color;
-border-radius: 7px;
-width: 90%;
-background-color: white;
-padding-left: 10px;
-
-
+.ProseMirror {
+  border: 0.9px solid $contrast-color;
+  border-radius: 7px;
+  width: 90%;
+  background-color: white;
+  padding-left: 10px;
 }
-.ProseMirror:focus{
-/* height: fit-content;*/
-outline: none !important;
-border:2px solid $color-main;
+.ProseMirror:focus {
+  /* height: fit-content;*/
+  outline: none !important;
+  border: 2px solid $color-main;
 }
-.contenteditable{
-
+.contenteditable {
 }
-.send{
+.send {
   height: 35px;
 }
 </style>
