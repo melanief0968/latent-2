@@ -1,11 +1,13 @@
 import Vue from "vue";
 import * as fb from "./firebase.js";
 
+const env = import.meta.env;
+
 let lat;
 let lng;
 
-let api_key = "8ccfb399b373416981422103bf030e78";
-let api_url = "https://api.opencagedata.com/geocode/v1/json";
+let api_key = env.VITE_LOCATION_API_KEY;
+let api_url = env.VITE_LOCATION_API_URL;
 
 // export default{
 
@@ -70,10 +72,10 @@ export async function getCity() {
 
   const data = await getCityFromCoordsPromise(latitude, longitude);
   let city;
-  if(data.results[0].components.city){
-    city = data.results[0].components.city
-  }else if(data.results[0].components.town){
-    city = data.results[0].components.town
+  if (data.results[0].components.city) {
+    city = data.results[0].components.city;
+  } else if (data.results[0].components.town) {
+    city = data.results[0].components.town;
   }
 
   return { city: city, position };

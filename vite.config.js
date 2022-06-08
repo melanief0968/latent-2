@@ -6,6 +6,8 @@ module.exports = {
   plugins: [createVuePlugin(), mkcert.default()],
   server: {
     https: true,
+    host: true,
+    // base: "/latent/"
   },
   css: {
     preprocessorOptions: {
