@@ -22,7 +22,7 @@ export default {
       if (this.icon === undefined) {
         return ""
       } else {
-        return "./../../static/img/" + this.icon + ".png"
+        return "/img/" + this.icon + ".png"
       }
     }
   },

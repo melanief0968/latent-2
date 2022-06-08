@@ -24,7 +24,7 @@
        <div class="italic userProps">{{userProps.name}} est ....</div>
      </div>
      <a class="text-basic deco" @click="disconnect">
-       <img class="icone-deco" src="../static/img/deco.png"> Se déconnecter</a>
+       <img class="icone-deco" src="/img/deco.png"> Se déconnecter</a>
      
      
 

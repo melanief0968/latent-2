@@ -6,7 +6,7 @@
         <h1 class="latent italic" v-if="route === 'Contacts'">LATENT*</h1>
         <h1 v-if="route === 'Account'">Profil</h1>
         <!-- <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
-          <img class="icone" src="../static/img/add.png">
+          <img class="icone" src="/img/add.png">
         </router-link> -->
         <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1>
         <!-- <h1 v-if="route === 'Chat'">{{contactName}}</h1> -->

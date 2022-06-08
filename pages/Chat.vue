@@ -138,9 +138,7 @@ export default {
           //   //   messages.push({ id: messageId, message });
           //   // }
           // }else{
-
           messages.push({ id: messageId, message });
-
           // }
         });
       }

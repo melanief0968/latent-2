@@ -1,6 +1,6 @@
 <template>
   <button class="go-back" @click="goBack">
-    <img class="icone-back" src="../static/img/back.png"></button>
+    <img class="icone-back" src="/img/back.png"></button>
 </template>
 
 <script>

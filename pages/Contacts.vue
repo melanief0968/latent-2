@@ -81,6 +81,8 @@ export default {
           return { conversation, id: conversationId };
         }
       );
+
+      // console.log(this.conversations);
       // .sort((a, b) => {
       //   return parseInt(b.lastMessageTime) - parseInt(a.lastMessageTime);
       // });
