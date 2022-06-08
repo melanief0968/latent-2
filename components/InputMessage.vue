@@ -6,7 +6,7 @@
           v-model="messageContent"
           @keydown="keysCount"
           @keydown.delete="deleteCount"
-        /> -->
+        />  -->
     <editor-content class="inputMsg__editor" :editor="editor" />
     <button type="submit" @click="submit" class="inputMsg__btn">
       <img class="icone send" src="/img/send.png">
