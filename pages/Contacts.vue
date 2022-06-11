@@ -65,7 +65,7 @@ export default {
       // console.log("BOI", value.conversations);
       if (!value.conversations) return;
 
-      console.log("New conv", Object.keys(value.conversations).length);
+      // console.log("New conv", Object.keys(value.conversations).length);
 
       const oldConversations = this.conversations;
 
@@ -96,11 +96,11 @@ export default {
   methods: {
     checkReadMessages(conversationMessages, id) {
       // const userProps = this.$getters.user(currentUserID);
-      console.log(this.userProps);
+      // console.log(this.userProps);
       const unreadmessages = Object.keys(
         this.userProps.unreadchats?.[id] || {}
       );
-      console.log(this.userProps.unreadchats);
+      // console.log(this.userProps.unreadchats);
       const messages = Object.keys(conversationMessages || {});
 
       const unread = unreadmessages.some((messageId) => {

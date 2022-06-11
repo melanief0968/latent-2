@@ -57,7 +57,9 @@ export default {
   },
   methods: {
     onSubmit(ev) {
-      //! filter entries you MUST add a rule in firebase https://console.firebase.google.com/project/latent-2022/database/latent-2022-default-rtdb/rules
+
+  
+      // //! filter entries you MUST add a rule in firebase https://console.firebase.google.com/project/latent-2022/database/latent-2022-default-rtdb/rules
       fb.filterEntries("users", "username", this.username).then((results) => {
         if (results != null) {
           this.message = USER_NAME_ERROR;
