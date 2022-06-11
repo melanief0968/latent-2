@@ -38,7 +38,7 @@ export default {
 .go-back {
   cursor: pointer;
   z-index:100;
-  height:25px
+  height:18px
 }
 button {
   border: 0;

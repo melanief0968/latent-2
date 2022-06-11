@@ -53,9 +53,10 @@ export default {
         const sceneStage = 0
         const actStage = 0
         const distance = "Une certaine distance"
+        const type = this.playtype()
 
         const chatId = fb.createEntry("/conversations/", {
-          chatName, sceneStage,actStage,distance
+          chatName, sceneStage,actStage,distance,type
         });
        
         this.$actions.setCurrentChatId(chatId);
@@ -80,6 +81,12 @@ export default {
       // console.log(currentUserID,contactId)
       });
       //   console.log(this.username, this.password);
+    },
+    playtype(){
+      let types = ["Drame", "Comédie", "Comédie musicale","Farce", "Mélodrame", "Tragédie", "Tragi-comédie", "Satire", "Romance", "Vaudeville", "Improvisation"]
+      let random = Math.floor(Math.random() * types.length);
+      const type = types[random];
+      return type
     },
   },
   mounted(){

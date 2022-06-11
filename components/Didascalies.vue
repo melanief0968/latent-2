@@ -70,10 +70,13 @@ export default {
 
   .did-book{
     text-align: left;
+     padding-left:0 !important
   }
 }
 .didBox-book{
-  align-items: left ;
+  margin-top: 0;
+  align-items: left;
+ 
 }
 
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div class="container" :class=" { 'book-fullscreen' : isFullScreen } ">
+  <!-- <div class="container" :class=" { 'book-fullscreen' : isFullScreen } "> -->
+  <div class="container">
 
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>

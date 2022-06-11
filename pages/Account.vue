@@ -112,14 +112,14 @@
           <option>le vin</option>
           <option>la destruction de sa famille</option>
           <option>l'amour de la cuisine</option>
-          <option>la tisane</option>
+          <option>sa passion de la tisane</option>
         </select> dans l'espoir
         <select class="attributs" v-model="prop8">
           <option disabled value="">............</option>
           <option>de prouver sa valeur</option>
           <option>de trouver le bonheur</option>
           <option>d'être moins seul</option>
-          <option>de devnir riche</option>
+          <option>de devenir riche</option>
           <option>d'être enfin puissant</option>
           <option>d'atteindre la sérénité</option>
         </select>.
@@ -180,7 +180,6 @@ export default {
       } else if (g == "n") {
         gender = "Non binaire";
       }
-      console.log(gender);
 
       const userProps = {
         userName: userName,

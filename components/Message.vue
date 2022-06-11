@@ -1,5 +1,6 @@
 <template>
   <div class="messageBox" :class="cssClasses">
+    <!--  'leftAlign': route ==='Book' -->
     <div class="sentTime">{{ sentTime }}</div>
     <div class="messageName" v-if="route === 'Book'">{{ user.name }} –</div>
     <div :class="switchDisplay" v-if="message" v-html="text"></div>
@@ -49,8 +50,15 @@ export default {
       if (this.$route.name === "Chat") {
         return {
           toRight: this.message.sendingUser === userID,
+          // leftAlign: (this.isBook = false)
+        };
+      } else {
+        return {
+          leftAlign: (this.isBook = true)
+
         };
       }
+
     },
     switchDisplay() {
       if (this.$route.name === "Book") {
@@ -132,6 +140,10 @@ export default {
     }
   }
 }
+  .leftAlign{
+    flex-direction: row;
+    align-items: flex-start;
+  }
 
 // .messageBox {
 //   margin-top: 1.5vh;
@@ -141,18 +153,20 @@ export default {
 
 .sentence {
   padding: 10px;
-  width: 90%;
+  // width: 90%;
   max-width: 70%;
   word-break: break-word;
   color: black;
   font-size: $msg-size;
-  font-family: $font-main;
+  font-family: $font-light;
 }
 // }
 .messageName {
   padding: 10px 0 10px 10px;
   font-size: $msg-size;
-  font-family: $font-main;
+  font-family: $font-medium;
+  font-weight: 400;
   text-transform: uppercase;
+  min-width: fit-content;
 }
 </style>

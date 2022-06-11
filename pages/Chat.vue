@@ -333,7 +333,7 @@ export default {
 
     setFirstScene() {
       this.sentTime = this.getTime();
-      const didascalie = `Acte I, scène I`;
+      const didascalie = "ACTE I, SCÈNE I";
       let sentenceType = "firstScene";
       const sceneSentence = this.getSceneSentence(sentenceType);
       const base = this.getBaseMsg();
@@ -363,33 +363,33 @@ export default {
       //     }
       //   });
       // }else{
-      //   //send didascalie Acte I scene I
+      //   //send didascalie ACTE I scene I
       // }
     },
     setScenes() {
       let scenes = [
-        "scène I",
-        "scène II",
-        "scène III",
-        "scène IV",
-        "scène V",
-        "scène VI",
-        "scène VII",
-        "scène VIII",
-        "scène IX",
-        "scène X",
+        "SCÈNE I",
+        "SCÈNE II",
+        "SCÈNE III",
+        "SCÈNE IV",
+        "SCÈNE V",
+        "SCÈNE VI",
+        "SCÈNE VII",
+        "SCÈNE VIII",
+        "SCÈNE IX",
+        "SCÈNE X",
       ];
       let acts = [
-        "Acte I",
-        "Acte II",
-        "Acte III",
-        "Acte IV",
-        "Acte V",
-        "Acte VI",
-        "Acte VII",
-        "Acte VIII",
-        "Acte IX",
-        "Acte X",
+        "ACTE I",
+        "ACTE II",
+        "ACTE III",
+        "ACTE IV",
+        "ACTE V",
+        "ACTE VI",
+        "ACTE VII",
+        "ACTE VIII",
+        "ACTE IX",
+        "ACTE X",
       ];
       let chatID = this.$getters.currentChatID();
       let currentSceneIndex =
@@ -504,7 +504,7 @@ export default {
         this.sendMessage(sceneSentenceDid);
         // console.log("scene: " + didMessage.sentTime);
         // console.log("ellapsed Time: " + didTimeMessage.sentTime);
-        // console.log("commentaire scène: " + sceneSentenceDid.sentTime);
+        // console.log("commentaire SCÈNE: " + sceneSentenceDid.sentTime);
 
         // console.log(
         //   this.$getters.listenConversation(chatID).sceneStage,
