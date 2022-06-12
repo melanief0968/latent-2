@@ -78,6 +78,7 @@ export default {
 .status-icon {
   // width: 1em;
   // height: 1em;
+ 
   right: 8%;
   top: 20%;
   height: 14px;
@@ -87,6 +88,7 @@ export default {
 
   &.unread {
     background-color: $color-main;
+    //  background-image:  url("/img/notif.png");
   }
 }
 </style>
