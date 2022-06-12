@@ -4,13 +4,12 @@
     <div class="login-description italic">
       L'espace de conversation sur mesure.
     </div>
-    <YellowLine></YellowLine>
+    <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     <form @submit.prevent="onSubmit">
-      <div class="text-basic">Créer un compte</div>
       <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
       <input type="text" placeholder="Prénom" v-model="name" />
       <input type="text" placeholder="Nom" v-model="surname" />
-      <select v-model="gender">
+      <select class="select" v-model="gender">
         <option disabled value="">Genre</option>
         <option>Femme</option>
         <option>Homme</option>
@@ -23,10 +22,11 @@
         placeholder="Confirmation du mot de passe"
         v-model="psw2"
       />
-      <button type="submit">→</button>
-      <div class="text-basic">{{ message }}</div>
+      <button type="submit" class="text-basic connect">Créer un compte</button>
+      <!-- <button type="submit">→</button> -->
+      <div v-show="messageDiv" class="errorMessage italic">{{ message }}</div>
     </form>
-    <YellowLine></YellowLine>
+    <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     <router-link to="/login" class="text-basic">Se connecter</router-link>
   </div>
 </template>
@@ -34,9 +34,9 @@
 import * as fb from "@/scripts/firebase";
 import YellowLine from "@/components/YellowLine.vue";
 
-const USER_NAME_ERROR = "Le nom d'auteur existe déjà";
-const USER_PSW_ERROR = "Les mots de passe ne correspondent pas";
-const USER_EMPTY_ERROR = "Il faut remplir tous les champs";
+const USER_NAME_ERROR = "* Le nom d'auteur existe déjà";
+const USER_PSW_ERROR = "* Les mots de passe ne correspondent pas";
+const USER_EMPTY_ERROR = "* Il faut remplir tous les champs";
 export default {
   components: {
     YellowLine,
@@ -50,26 +50,34 @@ export default {
       psw: "",
       psw2: "",
       message: "",
+      messageDiv: false,
     };
   },
   mounted() {
 
   },
   methods: {
+     yellowLineHeight(){
+      let height = 6
+      return height;
+    },
     onSubmit(ev) {
 
   
       // //! filter entries you MUST add a rule in firebase https://console.firebase.google.com/project/latent-2022/database/latent-2022-default-rtdb/rules
       fb.filterEntries("users", "username", this.username).then((results) => {
         if (results != null) {
+          this.messageDiv = true
           this.message = USER_NAME_ERROR;
           return;
         }
       });
       //prettier-ignore
       if(this.username === "" || this.name === "" || this.gender === "" || this.psw === ""){
+          this.messageDiv = true
           this.message = USER_EMPTY_ERROR;
       }else if(this.psw != this.psw2){
+            this.messageDiv = true
             this.message = USER_PSW_ERROR;
       }else{
           if (this.gender === "Femme"){
@@ -120,11 +128,13 @@ export default {
 
 .yellowLine {
   height: 10%;
+    min-height: 10%;
 }
 .title {
-  text-align: center;
+ text-align: center;
   font-size: 250%;
-  margin: $margin-5 0;
+  margin: $margin-5 0 0 0;
+   padding: 5% 0 5%  0;
 }
 .login-description {
   font-size: $italic-size;
@@ -133,5 +143,33 @@ export default {
 }
 .text-basic {
   text-align: center;
+   padding: 5% 0 5%  0;
+   font-size: $msg-size ;
+   font-display: $font-main;
+   color: black;
 }
+.select{
+  width: 80%;
+  text-align: center;
+  text-align-last:center;
+  padding-left: 30%;
+
+  //  -webkit-appearance: none; /* turn off drop-down arrow*/
+  //   -moz-appearance: none;
+  // direction: ltr;
+  color: gray;
+
+}
+.connect{
+   margin:0;
+  font-weight: 100;
+}
+.errorMessage{
+  padding: 0;
+  margin: 0;
+  color: $color-main;
+  font-size: $msg-size;
+
+}
+
 </style>

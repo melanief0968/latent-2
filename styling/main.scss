@@ -62,14 +62,14 @@ form{
 input{
   outline: none;
   box-sizing: border-box;
-  border: .9px solid $contrast-color;
+  border: 1.2px solid $contrast-color;
   background-color: white;
   text-align: center;
   border-radius: $radius5;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-  width:50%;
+  width:80%;
   font-family: $font-main;
   font-size: $msg-size;
   margin:0 0 $margin-5 0;
@@ -78,23 +78,28 @@ input{
 input:focus{
   border:2px solid $color-main;
   border-radius: $radius5;
-  background-color: $background-color;
+  // background-color: $background-color;
 }
 select{
   box-sizing: border-box;
-  border: .9px solid $contrast-color;
-  background-color: $background-color;
+  border: 1.2px solid $contrast-color;
+  background-color: white;
   text-align: center;
   border-radius: $radius5;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-
+  color: black;
   font-family: $font-main;
   font-size: $msg-size;
   width: 50%;
   margin:0 0 $margin-5 0;
   padding: 1.5%;
+}
+select:focus{
+  border:2px solid $color-main;
+  border-radius: $radius5;
+  // background-color: $background-color;
 }
 button{
   border: none;

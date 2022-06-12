@@ -6,11 +6,11 @@
     </div>
     <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     <form @submit.prevent="onSubmit">
-      <div class="text-basic">Qui est-ce ?</div>
+      <div class="text-basic who">Qui est-ce ?</div>
       <input type="text" autocomplete="username" placeholder="Nom d'auteur·ice·x" v-model="username" />
       <input type="password" autocomplete="current-password" placeholder="Mot de passe" v-model="password" />
-      <button type="submit">→</button>
-      <div class="text-basic">{{ message }}</div>
+      <button class="text-basic connect" type="submit">Se connecter</button>
+      <div v-show="messageDiv" class="errorMessage italic" >{{ message }}</div>
     </form>
     <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     <router-link to="/signin" class="text-basic">Créer un compte</router-link>
@@ -20,7 +20,7 @@
 import * as fb from "@/scripts/firebase";
 import YellowLine from "@/components/YellowLine.vue";
 
-const USER_LOGIN_ERROR = "nom ou mot de passe invalide";
+const USER_LOGIN_ERROR = "* nom ou mot de passe invalide";
 
 export default {
   components: {
@@ -31,6 +31,7 @@ export default {
       username: "",
       password: "",
       message: "",
+      messageDiv: false,
     };
   },
   methods: {
@@ -41,6 +42,7 @@ export default {
     onSubmit(ev) {
       fb.filterEntries("users", "username", this.username).then((results) => {
         if (results === null) {
+          this.messageDiv = true
           this.message = USER_LOGIN_ERROR;
           return;
         }
@@ -66,11 +68,17 @@ export default {
           // console.log(firstResult);
         } else {
           //   console.log("Wrong Password!");
+          this.messageDiv = true
           this.message = USER_LOGIN_ERROR;
         }
       });
       //   console.log(this.username, this.password);
     },
+    // noDisplay(){
+    //   if(this.messageDiv == true){
+    //     console.log("wrong");
+    //   }
+    // }
   },
 };
 </script>
@@ -94,7 +102,8 @@ export default {
 .title {
   text-align: center;
   font-size: 250%;
-  margin: $margin-5 0;
+  // margin: $margin-5 0;
+  margin: $margin-5 0 0 0;
    padding: 5% 0 5%  0;
 }
 .login-description {
@@ -105,6 +114,9 @@ export default {
 .text-basic {
   text-align: center;
    padding: 5% 0 5%  0;
+   font-size: $msg-size ;
+   font-display: $font-main;
+   color: black;
 }
 button {
   font-size: 30px;
@@ -112,5 +124,18 @@ button {
   background-color: transparent;
   // margin-bottom: 8px;
   cursor: pointer;
+}
+.errorMessage{
+   padding: 0;
+  margin: 0;
+  color: $color-main;
+  font-size: $msg-size;
+}
+.connect{
+  margin:0;
+  font-weight: 100;
+}
+.who{
+  margin-top: 0;
 }
 </style>

@@ -333,7 +333,7 @@ export default {
 
     setFirstScene() {
       this.sentTime = this.getTime();
-      const didascalie = "ACTE I, SCÈNE I";
+      const didascalie = "Acte I, scène I";
       let sentenceType = "firstScene";
       const sceneSentence = this.getSceneSentence(sentenceType);
       const base = this.getBaseMsg();
@@ -363,33 +363,33 @@ export default {
       //     }
       //   });
       // }else{
-      //   //send didascalie ACTE I scene I
+      //   //send didascalie Acte I scene I
       // }
     },
     setScenes() {
       let scenes = [
-        "SCÈNE I",
-        "SCÈNE II",
-        "SCÈNE III",
-        "SCÈNE IV",
-        "SCÈNE V",
-        "SCÈNE VI",
-        "SCÈNE VII",
-        "SCÈNE VIII",
-        "SCÈNE IX",
-        "SCÈNE X",
+        "scène I",
+        "scène II",
+        "scène III",
+        "scène IV",
+        "scène V",
+        "scène VI",
+        "scène VII",
+        "scène VIII",
+        "scène IX",
+        "scène X",
       ];
       let acts = [
-        "ACTE I",
-        "ACTE II",
-        "ACTE III",
-        "ACTE IV",
-        "ACTE V",
-        "ACTE VI",
-        "ACTE VII",
-        "ACTE VIII",
-        "ACTE IX",
-        "ACTE X",
+        "Acte I",
+        "Acte II",
+        "Acte III",
+        "Acte IV",
+        "Acte V",
+        "Acte VI",
+        "Acte VII",
+        "Acte VIII",
+        "Acte IX",
+        "Acte X",
       ];
       let chatID = this.$getters.currentChatID();
       let currentSceneIndex =
