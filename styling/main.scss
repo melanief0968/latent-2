@@ -216,3 +216,12 @@ a{
 .loadingLogoActive{
   opacity: 1 !important;
 }
+.fade-preloader-enter-active,
+.fade-preloader-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-preloader-enter-from,
+.fade-preloader-leave-to {
+  opacity: 0;
+}

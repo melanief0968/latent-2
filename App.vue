@@ -1,7 +1,8 @@
 <template>
   <!-- <div class="container" :class=" { 'book-fullscreen' : isFullScreen } "> -->
   <div class="container">
-      <div class="preloader" v-if="this.preloader === true" :class="{ 'preloader-fade': preloaderFade }">
+    <transition name="fade-preloader">
+      <div class="preloader" v-if="this.preloader === true">
         <div id="loadingContainer">
           <div id="loadingBox">
             <div id="loadingYellowLine" :class="{ 'loadingYellowLineActive': loadingYL }">
@@ -14,7 +15,7 @@
           </div>
         </div>
       </div>
-
+    </transition>
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
     <Header v-if="route === 'NewContact'"></Header>
@@ -66,7 +67,6 @@ export default {
       isFullScreen: false,
       preloader: true,
       loadingYL: false,
-      preloaderFade: false,
       loadingWB: false,
       loadingLogo: false,
       transitionName: '',
@@ -92,7 +92,6 @@ export default {
       this.loadingYL = false
     }.bind(this), 3500);
     setTimeout(function() {
-      this.preloaderFade = true
       this.preloader = false
     }.bind(this), 4800);
   },
