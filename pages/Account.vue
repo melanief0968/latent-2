@@ -161,7 +161,7 @@ export default {
   data() {
     return {
       psw: "*******",
-      userGender: "m",
+      userGender: "f",
       prop1:"",
       prop2:"",
       prop3:"",
@@ -199,7 +199,7 @@ export default {
         userName: userName,
         name: name,
         names: names,
-        gender: gender,
+        g: gender,
       };
       return userProps;
     },
@@ -209,7 +209,6 @@ export default {
     // userGender = userProps().gender
     // console.log(userProps())
     // const userProps = this.$getters.user(currentUserID);
-    console.log(this.$state);
   },
   methods: {
      onSubmit(ev) {
