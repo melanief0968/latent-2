@@ -1,6 +1,11 @@
 <template>
   <div class="line-container">
+    <div v-if="grayDots && this.$route.name === 'Chat' " class="dotContainer">
+      <div v-for="dot in grayDots" class="grayDot">
+    </div>
+    </div>
     <div v-if="nbDots && this.$route.name === 'Chat' " class="dotContainer">
+
       <div v-for="dot in nbDots" class="dot">
         <div class="sentTime" v-if="dot === 1">1 jour</div>
         <div class="sentTime" v-else> {{ dot }} jours </div>
@@ -12,7 +17,7 @@
 <script>
 
 export default {
-  props: ['lineHeight', 'nbDots'],
+  props: ['lineHeight', 'nbDots', 'grayDots'],
   computed: {
     cssStyle() {
       return { height: this.lineHeight + "vh" };
@@ -43,6 +48,31 @@ export default {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+.grayDot {
+  display: block;
+  height: 1vw;
+  width: 1vw;
+  position: relative;
+  div {
+    white-space: nowrap;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.grayDot::before {
+  content: "";
+  background: lightgray;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
 }
 .dot {
   background: white;

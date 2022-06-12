@@ -50,6 +50,7 @@
           :key="message.sentTime"
           :line-height="message.lineHeight"
           :nbDots="message.dotsNum"
+          :grayDots= "message.grayDot"
         ></YellowLine>
       </template>
       <div class="item2"></div>
@@ -301,6 +302,7 @@ export default {
         sentTime: this.sentTime++, //! to have unique id, even if same time
         lineHeight: this.yellowLineHeight().height,
         dotsNum: this.yellowLineHeight().days,
+        grayDot: 4,
       };
       const sceneTime = this.sentTime + 2;
       const didascalieTime = this.sentTime + 5;
