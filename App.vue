@@ -1,6 +1,19 @@
 <template>
   <!-- <div class="container" :class=" { 'book-fullscreen' : isFullScreen } "> -->
   <div class="container">
+      <div class="preloader" v-if="this.preloader === true" :class="{ 'preloader-fade': preloaderFade }">
+        <div id="loadingContainer">
+          <div id="loadingBox">
+            <div id="loadingYellowLine" :class="{ 'loadingYellowLineActive': loadingYL }">
+            </div>
+            <div id="loadingWhiteBox" :class="{ 'loadingWhiteBoxActive': loadingWB }">
+            </div>
+            <div id="loadingLogo" :class="{ 'loadingLogoActive': loadingLogo }">
+              LATENT*
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
@@ -43,19 +56,47 @@ export default {
     route() {
       return this.$route.name;
     },
+    animation() {
+
+    }
   },
 
   data() {
     return {
       isFullScreen: false,
+      preloader: true,
+      loadingYL: false,
+      preloaderFade: false,
+      loadingWB: false,
+      loadingLogo: false,
       transitionName: '',
       // pageTitle: "Contacts"
     };
   },
+
   mounted() {
     // console.log(this.$router);
-    // this.$router.push({ path: "/login" });
+    // this.$router.push({ path: "/login" }); setTimeout(function() {
+    // this.computed.animation()
+    setTimeout(function() {
+      this.loadingYL = true
+    }.bind(this), 500);
+    setTimeout(function() {
+      this.loadingWB = true
+      console.log(this.loadingWB)
+    }.bind(this), 1000);
+    setTimeout(function() {
+      this.loadingLogo = true
+    }.bind(this), 1800);
+    setTimeout(function() {
+      this.loadingYL = false
+    }.bind(this), 3500);
+    setTimeout(function() {
+      this.preloaderFade = true
+      this.preloader = false
+    }.bind(this), 4800);
   },
+
   methods: {
     toggleMessage () {
      this.$route.name === "Book" ? this.isFullScreen = !this.isFullScreen : this.isFullScreen;
