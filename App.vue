@@ -1,9 +1,8 @@
 <template>
   <!-- <div class="container" :class=" { 'book-fullscreen' : isFullScreen } "> -->
   <div class="container">
-    <transition name="fade-preloader">
       <div class="preloader" v-if="this.preloader === true">
-        <div id="loadingContainer">
+        <div id="loadingContainer" :class="{ 'preloader-fade': preloaderOpacity }">
           <div id="loadingBox">
             <div id="loadingYellowLine" :class="{ 'loadingYellowLineActive': loadingYL }">
             </div>
@@ -15,7 +14,6 @@
           </div>
         </div>
       </div>
-    </transition>
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
     <Header v-if="route === 'NewContact'"></Header>
@@ -24,11 +22,11 @@
     <!-- <Header v-if="route === 'NewContact'"></Header> -->
     <HeaderChat v-if="route === 'Chat'"></HeaderChat>
     <HeaderChat v-else-if="route === 'Book'"></HeaderChat>
-    <main @click="toggleMessage" class="main" :class="{'book-background': route ==='Book'}" >
-      <transition :name="transitionName">
-        <router-view></router-view>
-      </transition>
-    </main>
+      <main @click="toggleMessage" class="main" :class="{'book-background': route ==='Book'}" >
+        <transition :name="transitionName">
+          <router-view></router-view>
+        </transition>
+      </main>
     <Footer v-if="route === 'Contacts'"></Footer>
 
     <!-- <FooterChat v-if="route === 'Chat'"></FooterChat> -->
@@ -69,6 +67,7 @@ export default {
       loadingYL: false,
       loadingWB: false,
       loadingLogo: false,
+      preloaderOpacity: false,
       transitionName: '',
       // pageTitle: "Contacts"
     };
@@ -92,8 +91,11 @@ export default {
       this.loadingYL = false
     }.bind(this), 3500);
     setTimeout(function() {
+      this.preloaderOpacity = true
+    }.bind(this), 5200);
+    setTimeout(function() {
       this.preloader = false
-    }.bind(this), 4800);
+    }.bind(this), 7900);
   },
 
   methods: {

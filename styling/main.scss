@@ -146,8 +146,12 @@ a{
   bottom: 0;
   transition: opacity 1s linear;
 }
+.loadingContainer {
+  transition: 1s ease;
+  opacity: 1;
+}
 .preloader-fade {
-  transition: opacity 1s linear;
+  transition: 1s ease;
   opacity: 0;
 }
 #loadingContainer{
@@ -159,8 +163,6 @@ a{
   width: 100vw;
   height: 100vh;
   background: white;
-  transition: 1s ease;
-  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,7 +220,7 @@ a{
 }
 .fade-preloader-enter-active,
 .fade-preloader-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease;
 }
 
 .fade-preloader-enter-from,
