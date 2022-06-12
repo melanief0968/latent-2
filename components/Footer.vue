@@ -1,16 +1,16 @@
 <template>
   <footer class="footer classic">
     <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/index">
-      <img class="icone" src="/img/index.png">
-      <div>Index</div>
+      <img class="icone" src="/img/icone.png">
+      <!-- <div>Index</div> -->
     </router-link>
-    <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
-          <img class="icone" src="/img/add.png">
+    <router-link class="buttonIcone add" v-if="route === 'Contacts'" to="/newcontact">
+          <img class="icone" src="/img/add-2.png">
           <!-- <div>Nouveau dialogue</div> -->
         </router-link>
     <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/account">
-      <img class="icone" src="/img/profil.png">
-      <div>Profil</div> 
+      <img class="icone" src="/img/account.png">
+      <!-- <div>Profil</div>  -->
     </router-link>
 
     <!-- <router-link buttonIcone v-if="route === 'Contacts'" to="/login">
@@ -45,6 +45,10 @@ export default {
    padding: 0 5%;
 }
 .classic{
-  //  height: 4%;
+  justify-content: space-around;
+}
+.add{
+      height: 80%;
+    margin-bottom: 20%;
 }
 </style>

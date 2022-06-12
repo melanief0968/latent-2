@@ -2,8 +2,8 @@
   <div class="line-container">
     <div v-if="nbDots && this.$route.name === 'Chat' " class="dotContainer">
       <div v-for="dot in nbDots" class="dot">
-        <div v-if="dot === 1">1 jour</div>
-        <div v-else> {{ dot }} jours </div>
+        <div class="sentTime" v-if="dot === 1">1 jour</div>
+        <div class="sentTime" v-else> {{ dot }} jours </div>
       </div>
     </div>
     <div class="yellowLine" :style="cssStyle"></div>

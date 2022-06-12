@@ -543,6 +543,7 @@ export default {
           timeBetweenMessages / (1000 * 60 * 60 * 24)
         );
         let days = calcDays;
+        let hours = 1;
         if (days < 1) {
           days = 0;
         }
@@ -561,6 +562,7 @@ export default {
           height,
           days,
           textTime,
+          hours
         };
         return LINE_DATAS;
       } else {
@@ -568,6 +570,7 @@ export default {
           height: 2,
           days: 0,
           textTime: "",
+          hours
         };
 
         console.log(LINE_DATAS);

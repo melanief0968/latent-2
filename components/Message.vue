@@ -1,7 +1,7 @@
 <template>
   <div class="messageBox" :class="cssClasses">
     <!--  'leftAlign': route ==='Book' -->
-    <div class="sentTime">{{ sentTime }}</div>
+    <div class="sentTime italic">{{ sentTime }}</div>
     <div class="messageName" v-if="route === 'Book'">{{ user.name }} –</div>
     <div :class="switchDisplay" v-if="message" v-html="text"></div>
     <div>{{ $state.test }}</div>
@@ -168,5 +168,9 @@ export default {
   font-weight: 400;
   text-transform: uppercase;
   min-width: fit-content;
+}
+.sentTime{
+  font-size: $small-size;
+  margin-bottom: 5px
 }
 </style>

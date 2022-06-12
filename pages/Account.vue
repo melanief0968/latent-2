@@ -1,6 +1,6 @@
 <template>
   <div class="accountPage">
-    <div class="item"></div>
+    <div class="itemA"></div>
     <div class="userprops-container">
       <div class="row">
         <div class="text-basic">Nom d'auteur·ice·x</div>
@@ -281,8 +281,27 @@ export default {
   font-weight:500 ;
 }
 .save{
-  
+  margin:0;
+  font-weight: 100;
   padding:0;
   width:100%;
+}
+.text-basic {
+
+   color: black;
+}
+.itemA{
+
+  width: 90%;
+  height: 8vh;
+  margin: auto;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 2%;
+  padding-bottom: 4%;
+
+  display: flex;
+  flex-direction: column;
+
 }
 </style>

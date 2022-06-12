@@ -75,7 +75,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 30%;
+  height: 50%;
 }
 .icone{
   height: 100%;

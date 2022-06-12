@@ -1,11 +1,13 @@
 <template>
   <div class="contactContent">
     <div class="contactName">{{ textShown }}</div>
-    <div class="description italic">{{ subtitle }}</div>
+    <div class="description-listItem italic">{{ subtitle }}</div>
     <!-- <button :disabled="unread">{{textShown}}
         </button> -->
-    <div :class="iconClasses"></div>
-    <slot></slot>
+    <div :class="iconClasses">
+    </div>
+      <!-- <img  src="/img/notif.png" :class="iconClasses"> -->
+    <!-- <slot></slot> -->
     <!-- <hr /> -->
   </div>
 </template>
@@ -59,12 +61,14 @@ export default {
   flex-direction: column;
   
 }
-.description{
+.description-listItem{
   font-size: 15px;
+  text-align: left;
 }
 .contactName {
   font-family: $font-main;
-  font-size: $title-size;
+  font-size: $medium-size;
+  text-transform: capitalize;
 }
 .lastItalic {
   font-size: $msg-size;
