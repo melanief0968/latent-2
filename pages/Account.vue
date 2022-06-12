@@ -161,7 +161,7 @@ export default {
   data() {
     return {
       psw: "*******",
-      userGender: "f",
+      userGender: this.currentUserGender(),
       prop1:"",
       prop2:"",
       prop3:"",
@@ -211,6 +211,10 @@ export default {
     // const userProps = this.$getters.user(currentUserID);
   },
   methods: {
+    currentUserGender() {
+      const currentUserID = this.$getters.currentUserID();
+      return this.$getters.listenUser(currentUserID).gender;
+    },
      onSubmit(ev) {
       //prettier-ignore
       if(this.prop1 === "" || this.prop2 === "" || this.prop3 === "" || this.prop4 === "" || this.prop5 === "" || this.prop6 === "" || this.prop7 === "" || this.prop8 === ""){
