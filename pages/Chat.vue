@@ -570,7 +570,7 @@ export default {
           height: 2,
           days: 0,
           textTime: "",
-          hours
+          // hours
         };
 
         console.log(LINE_DATAS);

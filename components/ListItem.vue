@@ -59,7 +59,7 @@ export default {
   border-bottom: 2px solid $color-main;
   display: flex;
   flex-direction: column;
-  
+
 }
 .description-listItem{
   font-size: 15px;
@@ -78,7 +78,7 @@ export default {
 .status-icon {
   // width: 1em;
   // height: 1em;
- 
+
   right: 8%;
   top: 20%;
   height: 14px;
@@ -87,8 +87,11 @@ export default {
   position: absolute;
 
   &.unread {
-    background-color: $color-main;
-    //  background-image:  url("/img/notif.png");
+    //background-color: $color-main;
+    background-image:  url("./img/notif.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 </style>
