@@ -23,7 +23,7 @@
       <div class="text-basic">Description</div>
       <div class="italic">
         {{ userProps.name }} est
-        <select class="attributs" v-model="prop1">
+        <select class="attributs" v-model="prop1"  v-if="userGender === 'm' ">
           <option disabled value="">............</option>
           <option>petit</option>
           <option>fort</option>
@@ -35,8 +35,22 @@
           <option>riche</option>
           <option>perdu</option>
           <option>dépressif</option>
-       
-        </select>,
+
+        </select>
+        <select class="attributs" v-model="prop1"  v-else-if="userGender === 'f' ">
+          <option disabled value="">............</option>
+          <option>petite</option>
+          <option>forte</option>
+          <option>laide</option>
+          <option>beau-parleur</option>
+          <option>courbée</option>
+          <option>élancée</option>
+          <option>sympathique</option>
+          <option>riche</option>
+          <option>perdue</option>
+          <option>dépressifve</option>
+        </select>
+        ,
         <select class="attributs" v-model="prop2">
           <option disabled value="">............</option>
           <option>grand</option>
@@ -88,7 +102,7 @@
           <option>généreux</option>
           <option>opitimiste</option>
           <option>patient</option>
-        </select>, constamment 
+        </select>, constamment
         <select class="attributs" v-model="prop6">
           <option disabled value="">............</option>
           <option>fatigué</option>
@@ -147,7 +161,7 @@ export default {
   data() {
     return {
       psw: "*******",
-      userGender: "f",
+      userGender: "m",
       prop1:"",
       prop2:"",
       prop3:"",
@@ -213,12 +227,12 @@ export default {
               prop6:this.prop6,
               prop7:this.prop7,
               prop8:this.prop8,
-             
+
           }
           let userID = this.$getters.currentUserID()
           const userAttributs = fb.setValue(`/users/${userID}/attributs`, userAttr);
           console.log(userAttributs);
-         
+
           // this.$actions.setCurrentUserID(id);
           // console.log(this.$state);
 
