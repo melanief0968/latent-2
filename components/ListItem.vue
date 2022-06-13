@@ -88,7 +88,7 @@ export default {
 
   &.unread {
     //background-color: $color-main;
-    background-image:  url("./img/notif.png");
+    background-image:  url("/img/notif.png");
     background-size: cover;
     -webkit-background-size: cover;
     background-repeat: no-repeat;
