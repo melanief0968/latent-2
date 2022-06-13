@@ -81,8 +81,8 @@ Bus.$on("location:citychange", (event) => {
 console.log(state);
 
 if (!state.isLoggedIn) {
-  // router.replace("/login");
+  router.replace("/login");
 } else {
-  // router.replace("/contacts");
+  router.replace("/contacts");
 }
 
