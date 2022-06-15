@@ -1113,7 +1113,7 @@ export default {
 }
 .footerChat {
   width: 100vw;
-  height: 13%;
+  //max-height: 13%;
   position: fixed;
   bottom: 0;
   left: 0;

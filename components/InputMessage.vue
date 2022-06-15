@@ -121,9 +121,9 @@ export default {
 <style lang="scss">
 .inputMsg {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: row;
-  width: 90%;
+  width: 100%;
   margin-left: 5%;
 
   &__btn {
@@ -131,7 +131,7 @@ export default {
 
   // BEM syntax css
   &__editor {
-    width: 100%;
+    width: 80%;
 
     [data-placeholder]:before {
       content: attr(data-placeholder);
@@ -139,6 +139,11 @@ export default {
       color: #adb5bd;
       pointer-events: none;
       height: 0;
+    }
+    p {
+      max-height: 75px;
+      min-height: 25px;
+      overflow: scroll;
     }
   }
 }
@@ -148,6 +153,7 @@ export default {
   width: 90%;
   background-color: white;
   padding-left: 10px;
+  padding-right: 10px;
 }
 .ProseMirror:focus {
   /* height: fit-content;*/
