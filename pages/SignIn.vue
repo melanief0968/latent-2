@@ -98,6 +98,24 @@ export default {
           }
 
           const id = fb.createEntry("/users/", accountDatas);
+          
+       
+
+          const chatName = "Introduction"
+          const sceneStage = 0
+          const actStage = 0
+          const type = "Manuel d'instruction"
+          const distance = "Une certaine distance"
+          const messageIndex = 0
+          const demoConvID = fb.createEntry("/conversations/", {
+            chatName, sceneStage,actStage,distance,type, messageIndex
+          });
+          const demoID = "-N4T2UM-9P5zeNlZwlrQ"
+          fb.createEntry(`/conversations/${demoConvID}/users`, id);
+          fb.createEntry(`/conversations/${demoConvID}/users`, demoID);
+          fb.createEntry(`/users/${id}/conversations/`, demoConvID);
+          fb.createEntry(`/users/${demoID}/conversations/`, demoConvID);
+
           console.log(id, accountDatas);
           this.$router.push({
             path: "/contacts",

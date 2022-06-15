@@ -1,6 +1,7 @@
 <template>
   <div class="contactPage">
     <div class="item"></div>
+    
     <ListItem
       v-for="{ conversation, id } in sortedConversations"
       :title="itemTitle(conversation)"
@@ -17,9 +18,10 @@
 <script>
 import ListItem from "@/components/ListItem.vue";
 
+
 export default {
   components: {
-    ListItem,
+    ListItem
   },
 
   data() {

@@ -21,10 +21,13 @@ export const state = persist(
     currentChatID: null,
     currentUserName: null,
     lastLocation: {},
+    guideMessageIndex: 0,
     currentLocation: {},
+    
   }),
   {
     fields: [
+      "guideMessageIndex",
       "isLoggedIn",
       "currentUserID",
       "currentContactID",

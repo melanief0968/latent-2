@@ -22,6 +22,7 @@
     <!-- <Header v-if="route === 'NewContact'"></Header> -->
     <HeaderChat v-if="route === 'Chat'"></HeaderChat>
     <HeaderChat v-else-if="route === 'Book'"></HeaderChat>
+    <HeaderChat v-else-if="route === 'ChatDemo'"></HeaderChat>
       <main @click="toggleMessage" class="main" :class="{'book-background': route ==='Book'}" >
         <transition :name="transitionName">
           <router-view></router-view>

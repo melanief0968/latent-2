@@ -749,8 +749,8 @@
             n: (e) => `La sieste de ${e.name} a du se prolonger.`,
           },{
             m: (e) => `Overbooké, ${e.name} passe son temps avec ses amis.`,
-            f: (e) => `Overbooké, ${e.name} passe son temps avec ses amis.`,
-            n: (e) => `Overbooké, ${e.name} passe son temps avec ses amis.`,
+            f: (e) => `Overbookée, ${e.name} passe son temps avec ses amis.`,
+            n: (e) => `Overbookéx, ${e.name} passe son temps avec ses amis.`,
           },{
             m: (e) => `${e.name} s’est peut être fait voler son téléphone. Il en a un nouveau.`,
             f: (e) => `${e.name} s’est peut être fait voler son téléphone. Elle en a un nouveau.`,
