@@ -82,6 +82,7 @@ import { countCharOccurance } from "@/utils/string.js";
 import * as location from "@/scripts/location.js";
 import { getAttributes } from "@tiptap/core";
 import * as calc from "@/scripts/calc.js";
+// import * as bot from "@/scripts/botMsg.js";
 import bot from "@/scripts/botMsg.js";
 
 const GUIDE_BOT_ID = "-N4T2UM-9P5zeNlZwlrQ"
@@ -93,7 +94,7 @@ export default {
     InputMessage,
     did,
     YellowLine,
-    bot
+    bot,
   },
   data() {
     return {
@@ -1053,6 +1054,7 @@ export default {
       let time = this.getTime()
       let currentIndex = this.$getters.listenConversation(this.currentChatID).messageIndex;
       let botArray = bot.BOT_MSG
+     
       // let msgText = botArray[currentIndex].text
 
       let newIndex 
@@ -1060,6 +1062,8 @@ export default {
       console.log(currentIndex,botArray.length)
       for(let i = 0; i<botArray.length; i++){
         let msgText = botArray[i].text
+        let type = botArray[i].type
+        let height = botArray[i].height
         const botMsg = {
           sendingUser: this.getOtherUser(),
           userName: this.$getters.user(this.currentUserID).name,
@@ -1077,43 +1081,49 @@ export default {
           messageType: "did",
           sentTime: time++,
         }
+        const botTimeMsg = {
+        sendingUser: this.getOtherUser(),
+        userName: this.$getters.user(this.currentUserID).name,
+        messageType: "time",
+        sentTime: time++,
+        lineHeight: height,
+        dotsNum: 0,
+        grayDot: 0,
+      }
         newIndex = botArray[i]
         console.log(newIndex, i)
         msgText = newIndex.text
         console.log(msgText)
+
         if(botArray[i].waitForResp){
           console.log("I STOPPED", msgText);
-          if(this.userSubmit == true){
-            if(botArray[i].type == "msg"){
-              console.log("HEEEEEEEEEEEE", botArray[i].type)
-              this.sendMessage(botMsg);
-              console.log("Delayed for 1 second.");
-            }else if (botArray[i].type == "did"){
-              console.log("DIIIIIIIIIIIIIIE", botArray[i].type)
-                this.sendMessage(botDid);
+            if(!this.userSubmit){
+              }else if(this.userSubmit){
+              this.sendBotMessage(type, botMsg, botDid,botTimeMsg)
+              this.userSubmit = false
             }
-            this.userSubmit = false
-          }
         }else if (!botArray[i].waitForResp){
-          if(botArray[i].type == "msg"){
-            console.log("HEEEEEEEEEEEE", botArray[i].type)
-              this.sendMessage(botMsg);
-              console.log("Delayed for 1 second.");
-          }else if (botArray[i].type == "did"){
-             console.log("DIIIIIIIIIIIIIIE", botArray[i].type)
-              this.sendMessage(botDid);
-          }
+          this.sendBotMessage(type, botMsg, botDid,botTimeMsg)
+
         }
         // console.log(newIndex)
         fb.setValue(`/conversations/${this.currentChatID}/messageIndex`, i)
       }
-      // if(index == 0){
-      //     index = 0
-      //     this.sendMessage(botMsg);
-      // }else{
-      //   index++
-      //   this.sendMessage(botMsg);
-      // }
+
+    },
+    sendBotMessage(type, botMsg, botDid,botTimeMsg){
+      if(type == "msg"){
+        console.log("HEEEEEEEEEEEE", type)
+          this.sendMessage(botMsg);
+          console.log("Delayed for 1 second.");
+      }else if (type == "did"){
+          console.log("DIIIIIIIIIIIIIIE", type)
+          this.sendMessage(botDid);
+      } else if (type == "time"){
+          console.log("TIIIIIME", type)
+      
+          this.sendMessage(botTimeMsg);
+      }
     }
   },
 
