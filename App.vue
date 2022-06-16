@@ -91,12 +91,15 @@ export default {
     setTimeout(function() {
       this.loadingYL = false
     }.bind(this), 3500);
+     setTimeout(function() {
+      this.loadingLogo = false
+    }.bind(this), 4000);
     setTimeout(function() {
       this.preloaderOpacity = true
-    }.bind(this), 5200);
+    }.bind(this), 4500);
     setTimeout(function() {
       this.preloader = false
-    }.bind(this), 7900);
+    }.bind(this), 5000);
   },
 
   methods: {
