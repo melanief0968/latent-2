@@ -108,7 +108,7 @@
 	    </div>
       <!-- <footer class="footerBook"> -->
         <!-- <FooterBook></FooterBook> -->
-    </footer>
+    <!-- </footer> -->
    </div>
   <!-- </div> -->
 </template>
