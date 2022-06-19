@@ -7,6 +7,7 @@
             <div class="space"></div>
             <div class="bookTitle italic">{{bookTitle}}</div>
             <div class="description">{{playtype}}</div>
+            <div class="space2"></div>
             <div class="perso">{{name1}}</div>
             <div class="description">{{description1}}</div>
             <div class="perso">{{name2}}</div>
@@ -110,7 +111,7 @@
 	    </div>
       <!-- <footer class="footerBook"> -->
         <!-- <FooterBook></FooterBook> -->
-    </footer>
+    <!-- </footer> -->
    </div>
   <!-- </div> -->
 </template>
@@ -155,7 +156,9 @@ export default {
       if (this.conversation && this.conversation.messages) {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
-
+              if(message.messageType == "didScene"){
+                console.log(message)
+              }
           messages.push({ id: messageId, message });
 
         });
@@ -168,6 +171,14 @@ export default {
     }
   },
   methods: {
+    left(){
+      if (this.$route.name === "Book") {
+              return {
+                leftDid,
+
+              };
+      }
+    },
     fullScreenSwitch () {
       this.$emit('click')
     },
@@ -243,7 +254,7 @@ export default {
       }
       if(attr2){
         let descriptions2 = [`${g2} ${attr2.prop1}, provenant ${attr2.prop4}, ${attr2.prop2}`,`${g2} ${attr2.prop5}, toujours ${attr2.prop6}, dans l'espoir ${attr2.prop8}`,`${g2} vivant pour ${attr2.prop7}, semblant toujours très ${attr2.prop5}`,`${g2} ${attr2.prop1}, ${attr2.prop2}, mais ${attr2.prop3}`]
-        let random = Math.floor(Math.random() * descriptions1.length);
+        let random = Math.floor(Math.random() * descriptions2.length);
         const description2 = descriptions2[random];
         this.description2= description2
       }else if(!attr2){
@@ -259,6 +270,8 @@ export default {
     this.getPlayInfos()
     this.userInfos()
     console.log(currentChat, this.conversation)
+
+  
 
   },
 };
@@ -371,7 +384,15 @@ export default {
   font-family: $font-light;
 }
 .space{
-  height: 30%;
+  height: 20%;
 }
+.space2{
+  height: 10%;
+}
+
+
+  .left{
+    text-align: left;
+  }
 
 </style>

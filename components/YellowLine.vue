@@ -51,8 +51,9 @@ export default {
 }
 .grayDot {
   display: block;
-  height: 1vw;
-  width: 1vw;
+  height: 2vw;
+  width: 2vw;
+  background: white;
   position: relative;
   div {
     white-space: nowrap;

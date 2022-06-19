@@ -201,14 +201,16 @@ export default {
         names: names,
         g: gender,
       };
+
       return userProps;
     },
   },
 
   mounted() {
-    // userGender = userProps().gender
-    // console.log(userProps())
-    // const userProps = this.$getters.user(currentUserID);
+    const currentUserID = this.$getters.currentUserID();
+    Object.entries(this.$getters.listenUser(currentUserID).attributs).forEach(([propKey, value]) => {
+      this[propKey] = value
+    });
   },
   methods: {
     currentUserGender() {

@@ -1,7 +1,7 @@
 <template>
   <footer class="footer classic">
     <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/index">
-      <img class="icone" src="/img/icone.png">
+      <img class="icone info" src="/img/info.png">
       <!-- <div>Index</div> -->
     </router-link>
     <router-link class="buttonIcone add" v-if="route === 'Contacts'" to="/newcontact">
@@ -50,5 +50,8 @@ export default {
 .add{
       height: 80%;
     margin-bottom: 20%;
+}
+.info{
+  height: 80%;
 }
 </style>

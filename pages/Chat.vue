@@ -50,7 +50,7 @@
           :key="message.sentTime"
           :line-height="message.lineHeight"
           :nbDots="message.dotsNum"
-          :grayDots= "message.grayDot"
+          :grayDots="message.grayDot"
         ></YellowLine>
       </template>
       <div class="item2"></div>
@@ -82,6 +82,10 @@ import { countCharOccurance } from "@/utils/string.js";
 import * as location from "@/scripts/location.js";
 import { getAttributes } from "@tiptap/core";
 import * as calc from "@/scripts/calc.js";
+// import * as bot from "@/scripts/botMsg.js";
+import bot from "@/scripts/botMsg.js";
+
+const GUIDE_BOT_ID = "-N4T2UM-9P5zeNlZwlrQ"
 
 export default {
   components: {
@@ -90,10 +94,11 @@ export default {
     InputMessage,
     did,
     YellowLine,
+    bot,
   },
   data() {
     return {
-      placeholder: 'Ecrire',
+      placeholder: 'Écrire',
       // messageIds: {},
       conversation: null,
       removeListener: () => {},
@@ -122,7 +127,9 @@ export default {
       cityHasChanged: false,
       lastMsgTime: 0,
       city: this.$getters.currentCity(),
-      distance: "quelques",
+      distance: "quelques mètres",
+      chatID:"",
+      userSubmit: false
     };
   },
   computed: {
@@ -203,9 +210,15 @@ export default {
         return (this.firstKeyTime = this.getTime());
       }
     },
+    randomInput() {
+      let inputs = ["Écrire", "Répondre", "Répliquer", "Rétorquer", "Nouvelle réplique", "S'exclamer", "S'indigner"];
+      let random = Math.floor(Math.random() * inputs.length);
+      const inputText = inputs[random];
+      return inputText;
+    },
     onSubmit(event) {
-      //TODO EDIT RANDOM PLACEHOLDER
-      this.placeholder = 'Ecrire';
+   
+      this.placeholder = this.randomInput()
       // console.log('City has changed', value);
       if (this.cityHasChanged) {
         // send message didascalie
@@ -302,7 +315,7 @@ export default {
         sentTime: this.sentTime++, //! to have unique id, even if same time
         lineHeight: this.yellowLineHeight().height,
         dotsNum: this.yellowLineHeight().days,
-        grayDot: 4,
+        grayDot: this.yellowLineHeight().hours,
       };
       const sceneTime = this.sentTime + 2;
       const didascalieTime = this.sentTime + 5;
@@ -322,11 +335,13 @@ export default {
         textTime,
       };
       if (true) this.sendMessage(timeMessage);
-      this.changeScene(sceneTime);
-      this.sendDidascalie(didascalieTime);
+      if(this.getOtherUser() != GUIDE_BOT_ID){
+        this.changeScene(sceneTime);
+        this.sendDidascalie(didascalieTime);
+      }
       this.sendMessage(textMessage);
       // console.log(this.$getters.currentChatID)
-
+      this.userSubmit = true
       this.deleteKeyCounter = 0;
       this.keyDownCounter = 0;
       this.isChosen = false;
@@ -338,10 +353,13 @@ export default {
       const didascalie = "Acte I, scène I";
       let sentenceType = "firstScene";
       const sceneSentence = this.getSceneSentence(sentenceType);
+      const userName = this.$getters.user(this.currentUserID).name
+      const firstConnexion = `${this.getDate().getDate()} ${this.getTimelaps().monthName} ${this.getTimelaps().year}`
+      const introBot = `${userName} arrive pour la première fois le ${firstConnexion}.`;
       const base = this.getBaseMsg();
       const didMessage = {
         ...base,
-        messageType: "did",
+        messageType: "didScene",
         sentTime: this.sentTime,
         didascalie,
         // didType:this.didType
@@ -352,8 +370,21 @@ export default {
         sentTime: this.sentTime + 2,
         sceneSentence,
       };
+      const introDidBot = {
+        ...base,
+        messageType: "didScene",
+        sentTime: this.sentTime + 2,
+        didascalie:introBot,
+      };
+      
       this.sendMessage(didMessage);
-      this.sendMessage(sceneSentenceDid);
+
+      if(this.getOtherUser() == GUIDE_BOT_ID){
+        this.sendMessage(introDidBot);
+      }else{
+        this.sendMessage(sceneSentenceDid);
+      }
+
       //   let chatID = this.$getters.currentChatID()
       //   let conversation = this.$getters.listenConversation(chatID)
       //   const messages = [];
@@ -500,10 +531,11 @@ export default {
           sceneSentence,
         };
         // console.log(sceneSentence)
-
-        this.sendMessage(didMessage);
-        this.sendMessage(didTimeMessage);
-        this.sendMessage(sceneSentenceDid);
+        if(this.getOtherUser() != GUIDE_BOT_ID){
+          this.sendMessage(didMessage);
+          this.sendMessage(didTimeMessage);
+          this.sendMessage(sceneSentenceDid);
+        }
         // console.log("scene: " + didMessage.sentTime);
         // console.log("ellapsed Time: " + didTimeMessage.sentTime);
         // console.log("commentaire SCÈNE: " + sceneSentenceDid.sentTime);
@@ -544,8 +576,18 @@ export default {
         const calcDays = Math.floor(
           timeBetweenMessages / (1000 * 60 * 60 * 24)
         );
+          const calcHours = Math.floor(
+          timeBetweenMessages / (1000 * 60 * 60)
+        );
         let days = calcDays;
-        let hours = 1;
+        let hours = calcHours;
+        if(days >= 1){
+          hours = 0
+        }
+        if(calcHours>=10){
+          hours = 10;
+        }
+
         if (days < 1) {
           days = 0;
         }
@@ -572,7 +614,7 @@ export default {
           height: 2,
           days: 0,
           textTime: "",
-          // hours
+          hours: 0,
         };
 
         console.log(LINE_DATAS);
@@ -948,56 +990,69 @@ export default {
     },
 
     setTimeRatio() {
-      if (this.getTimelaps().min == "58") {
-        this.sentTime = this.getTime();
-        console.log("its happening");
-        this.outputSignal = "ratio";
-        this.sendDidascalie(this.sentTime);
-      } else if (this.getTimelaps().min == "34") {
-        this.sentTime = this.getTime();
-        console.log("its time");
-        this.outputSignal = "dataChange";
-        this.city = this.$getters.currentCity();
-        this.sendDidascalie(this.sentTime);
+      if(this.getOtherUser() != GUIDE_BOT_ID){
+        if (this.getTimelaps().min == "02" || this.getTimelaps().min == "06" || this.getTimelaps().min == "10" || this.getTimelaps().min == "13") {
+          this.sentTime = this.getTime();
+          console.log("its happening");
+          this.outputSignal = "ratio";
+          this.sendDidascalie(this.sentTime);
+        } else if (this.getTimelaps().min == "34") {
+          this.sentTime = this.getTime();
+          console.log("its time");
+          this.outputSignal = "dataChange";
+          this.city = this.$getters.currentCity();
+          this.sendDidascalie(this.sentTime);
+        }
       }
     },
     setNewCity() {
-      if (this.cityHasChanged == true) {
-        this.sentTime = this.getTime();
-        // console.log("city changed")
-        this.outputSignal = "dataChange";
-        this.sendDidascalie(this.sentTime);
-      } else if (!this.cityHasChanged) {
-        return;
+      if(this.getOtherUser() != GUIDE_BOT_ID){
+                 console.log("this is not bot");
+        if (this.cityHasChanged == true) {
+          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"){
+            console.log("THERE IS TIME FOR CITY")
+          this.sentTime = this.getTime();
+          console.log("city changed")
+          this.outputSignal = "dataChange";
+          this.sendDidascalie(this.sentTime);
+          }
+        } else if (!this.cityHasChanged) {
+          return;
+        }
       }
     },
     setDistance() {
-      let chatID = this.$getters.currentChatID();
-      let lastDist = this.$getters.listenConversation(chatID).distance;
-      console.log(lastDist);
-      if (!lastDist) {
-        lastDist = 10;
-      }
-      console.log("i got it");
-      let userCoords = this.$getters.currentLocation();
-      console.log(userCoords);
-      let otherUserCoords = this.$getters.listenUser(
-        this.getOtherUser()
-      ).geoLocation;
-      console.log(otherUserCoords);
-      let distance = location.calcDist(userCoords, otherUserCoords) / 1000;
-      let diff = Math.abs(lastDist - distance);
-      console.log(diff);
-      if (diff < 0.005) {
-        return;
-      } else if ((lastDist = "Une certaine distance" || diff >= 0.05)) {
-        fb.setValue(`/conversations/${chatID}/distance`, distance);
-        console.log(distance);
-        this.distance = Math.round(distance * 100) / 100;
-        this.outputSignal = "dataChange";
-        this.sentTime = this.getTime();
-        this.sendDidascalie(this.sentTime);
-        return this.distance;
+      if(this.getOtherUser() != GUIDE_BOT_ID){
+        let chatID = this.$getters.currentChatID();
+        let lastDist = this.$getters.listenConversation(chatID).distance;
+        console.log(lastDist);
+        if (!lastDist) {
+          lastDist = 10;
+        }
+        let userCoords = this.$getters.currentLocation();
+        console.log(userCoords);
+        let otherUserCoords = this.$getters.listenUser(
+          this.getOtherUser()
+        ).geoLocation;
+        console.log(otherUserCoords);
+        let distance = location.calcDist(userCoords, otherUserCoords) / 1000;
+        let diff = Math.abs(lastDist - distance);
+        console.log(diff);
+        if (diff < 0.005) {
+          return;
+        } else if ((lastDist = "Une certaine distance" || diff >= 0.05)) {
+           if (this.getTimelaps().min=="01" || this.getTimelaps().min=="04" || this.getTimelaps().min=="07" || this.getTimelaps().min=="09" || this.getTimelaps().min=="12" || this.getTimelaps().min=="15"){
+            //  this.getTimelaps().sec == "30" && 
+             console.log("THERE IS TIME FOR DISTACNE")
+          fb.setValue(`/conversations/${chatID}/distance`, distance);
+          console.log(distance);
+          this.distance = Math.round(distance * 100) / 100;
+          this.outputSignal = "dataChange";
+          this.sentTime = this.getTime();
+          this.sendDidascalie(this.sentTime);
+          return this.distance;
+           }
+        }
       }
     },
     getOtherUser() {
@@ -1016,6 +1071,82 @@ export default {
       this.contactName = contactName;
       return this.contactName;
     },
+    sendMessgageBot(){
+      const textTime = this.yellowLineHeight().textTime;
+      let time = this.getTime()
+      let currentIndex = this.$getters.listenConversation(this.currentChatID).messageIndex;
+      let botArray = bot.BOT_MSG
+     
+      // let msgText = botArray[currentIndex].text
+
+      let newIndex 
+      if(currentIndex >= botArray.length-1) return
+      console.log(currentIndex,botArray.length)
+      for(let i = 0; i<botArray.length; i++){
+        let msgText = botArray[i].text
+        let type = botArray[i].type
+        let height = botArray[i].height
+        const botMsg = {
+          sendingUser: this.getOtherUser(),
+          userName: this.$getters.user(this.currentUserID).name,
+          text: msgText,
+          bookText: msgText,
+          messageType: "msg",
+          sentTime: time++,
+          // textTime,
+        }
+        const botDid = {
+          sendingUser: this.getOtherUser(),
+          userName: this.$getters.user(this.currentUserID).name,
+          didascalie: msgText,
+          bookText: msgText,
+          messageType: "did",
+          sentTime: time++,
+        }
+        const botTimeMsg = {
+        sendingUser: this.getOtherUser(),
+        userName: this.$getters.user(this.currentUserID).name,
+        messageType: "time",
+        sentTime: time++,
+        lineHeight: height,
+        dotsNum: 0,
+        grayDot: 0,
+      }
+        newIndex = botArray[i]
+        console.log(newIndex, i)
+        msgText = newIndex.text
+        console.log(msgText)
+
+        if(botArray[i].waitForResp){
+          console.log("I STOPPED", msgText);
+            if(!this.userSubmit){
+              }else if(this.userSubmit){
+              this.sendBotMessage(type, botMsg, botDid,botTimeMsg)
+              this.userSubmit = false
+            }
+        }else if (!botArray[i].waitForResp){
+          this.sendBotMessage(type, botMsg, botDid,botTimeMsg)
+
+        }
+        // console.log(newIndex)
+        fb.setValue(`/conversations/${this.currentChatID}/messageIndex`, i)
+      }
+
+    },
+    sendBotMessage(type, botMsg, botDid,botTimeMsg){
+      if(type == "msg"){
+        console.log("HEEEEEEEEEEEE", type)
+          this.sendMessage(botMsg);
+          console.log("Delayed for 1 second.");
+      }else if (type == "did"){
+          console.log("DIIIIIIIIIIIIIIE", type)
+          this.sendMessage(botDid);
+      } else if (type == "time"){
+          console.log("TIIIIIME", type)
+      
+          this.sendMessage(botTimeMsg);
+      }
+    }
   },
 
   beforeDestroy() {
@@ -1024,6 +1155,9 @@ export default {
   watch: {
     messages(value) {
       if (value.length === 0) this.setFirstScene();
+      if (this.getOtherUser() == GUIDE_BOT_ID){
+        console.log("its empty & bot")
+      }
     },
 
     "$state.currentCity"(value) {
@@ -1051,19 +1185,30 @@ export default {
         console.log("diff position user " + distance + "m");
         fb.setValue(`/users/${this.currentUserID}/geoLocation`, coords);
         this.setDistance();
+      }else{
+        console.log("not enough distance")
       }
     },
   },
   mounted() {
-    const currentChat = this.$getters.currentChatID();
-
+    this.currentChatID = this.$getters.currentChatID();
     fb.setValue(
-      `/users/${this.currentUserID}/unreadchats/${currentChat}`,
+      `/users/${this.currentUserID}/unreadchats/${this.currentChatID}`,
       null
     );
 
     this.name = this.$getters.user(this.currentUserID).name;
     this.gender = this.$getters.user(this.currentUserID).gender;
+
+    
+    if(this.getOtherUser() == GUIDE_BOT_ID){
+      this.sendMessgageBot()
+      console.log("this is demo")
+      console.log (bot.BOT_MSG[0], bot.BOT_DID)
+      console.log()
+      // console.log(this.getDate().getDate(), this.getTimelaps().monthName, this.getTimelaps().year)
+      // return
+    }
     this.setScenes();
     // this.updateCoords()
     // this.setDistance()
@@ -1074,7 +1219,7 @@ export default {
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
     // https://gist.github.com/viktorbezdek/3957601
 
-    this.conversation = this.$getters.listenConversation(currentChat);
+    this.conversation = this.$getters.listenConversation(this.currentChatID);
 
     setTimeout(() => {
       this.afterDelay = true;

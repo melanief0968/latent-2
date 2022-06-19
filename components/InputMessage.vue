@@ -163,6 +163,6 @@ export default {
 .contenteditable {
 }
 .send {
-  height: 35px;
+  height: 28px;
 }
 </style>

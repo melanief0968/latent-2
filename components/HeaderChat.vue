@@ -7,6 +7,7 @@
       <!-- <h1 v-if="route === 'NewContact'">Nouveau Dialogue</h1> -->
       <GoBack></GoBack>
       <h1 v-if="route === 'Chat'">{{contactName}}</h1>
+      <h1 v-if="route === 'ChatDemo'">{{guide}}</h1>
       <h1 class="book-title" v-if="route === 'Book'">{{chatName}}</h1>
       <toggle-button
           :value="false"
@@ -43,6 +44,7 @@ export default {
       toggleHeight: 25,
        chatName: "Loading...",
        contactName: "Loading...",
+       guide: "Guide"
     }
   },
   methods: {

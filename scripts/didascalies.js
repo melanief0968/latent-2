@@ -749,8 +749,8 @@
             n: (e) => `La sieste de ${e.name} a du se prolonger.`,
           },{
             m: (e) => `Overbooké, ${e.name} passe son temps avec ses amis.`,
-            f: (e) => `Overbooké, ${e.name} passe son temps avec ses amis.`,
-            n: (e) => `Overbooké, ${e.name} passe son temps avec ses amis.`,
+            f: (e) => `Overbookée, ${e.name} passe son temps avec ses amis.`,
+            n: (e) => `Overbookéx, ${e.name} passe son temps avec ses amis.`,
           },{
             m: (e) => `${e.name} s’est peut être fait voler son téléphone. Il en a un nouveau.`,
             f: (e) => `${e.name} s’est peut être fait voler son téléphone. Elle en a un nouveau.`,
@@ -1239,9 +1239,13 @@
             f: (e) => `La coupure au doigt de ${e.name} freine sa dextérité.`,
             n: (e) => `La coupure au doigt de ${e.name} freine sa dextérité.`,
           },{
-            m: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Elle ne peut plus d’écrire à la vitesse qu’elle souhaite.`,
+            m: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Il ne peut plus d’écrire à la vitesse qu'il souhaite.`,
             f: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Elle ne peut plus d’écrire à la vitesse qu’elle souhaite.`,
-            n: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Elle ne peut plus d’écrire à la vitesse qu’elle souhaite.`,
+            n: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Iel ne peut plus d’écrire à la vitesse qu’iel souhaite.`,
+          }, {
+            m: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, il reprend la conversation.`,
+            f: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, elle reprend la conversation.`,
+            n: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, iel reprend la conversation.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1352,18 +1356,18 @@
             n: (e) => `to do`,
           }],
           case2: [{
-            m: (e) => `Puisque ${e.name} s’ennuie à son bureau, il envoie un message.`,
-            f: (e) => `Puisque ${e.name} s’ennuie à son bureau, elle envoie un message.`,
-            n: (e) => `Puisque ${e.name} s’ennuie à son bureau, iel envoie un message.`,
+            m: (e) => `Puisque ${e.name} s’ennuie à son bureau, il regarde par la fenêtre.`,
+            f: (e) => `Puisque ${e.name} s’ennuie à son bureau, elle regarde par la fenêtre.`,
+            n: (e) => `Puisque ${e.name} s’ennuie à son bureau, iel regarde par la fenêtre.`,
           }],
           case3: [{
-            m: (e) => `${e.name} reçoit un grand nombre de notifications dernièrement, mais choisit de répondre à ${e.contact}.`,
-            f: (e) => `${e.name} reçoit un grand nombre de notifications dernièrement, mais choisit de répondre à ${e.contact}.`,
-            n: (e) => `${e.name} reçoit un grand nombre de notifications dernièrement, mais choisit de répondre à ${e.contact}.`,
+            m: (e) => `${e.name} reçoit un grand nombre de notifications dernièrement, mais choisit de relire des derniers messages avec ${e.contact}.`,
+            f: (e) => `${e.name} reçoit un grand nombre de notifications dernièrement, mais choisit de relire des derniers messages avec ${e.contact}.`,
+            n: (e) => `${e.name} reçoit un grand nombre de notifications dernièrement, mais choisit de relire des derniers messages avec ${e.contact}.`,
           },{
-            m: (e) => `${e.name} profite probablement de sa promenade dans les couloirs pour répondre à ${e.contact}.`,
-            f: (e) => `${e.name} profite probablement de sa promenade dans les couloirs pour répondre à ${e.contact}.`,
-            n: (e) => `${e.name} profite probablement de sa promenade dans les couloirs pour répondre à ${e.contact}.`,
+            m: (e) => `${e.name} profite probablement de sa promenade dans les couloirs pour regarder sa conversation avec ${e.contact}.`,
+            f: (e) => `${e.name} profite probablement de sa promenade dans les couloirs pour regarder sa conversation avec ${e.contact}.`,
+            n: (e) => `${e.name} profite probablement de sa promenade dans les couloirs pour regarder sa conversation avec ${e.contact}.`,
           },{
             m: (e) => `Par cette journée tranquille, ${e.name} prend le temps d’agrémenter la conversation.`,
             f: (e) => `Par cette journée tranquille, ${e.name} prend le temps d’agrémenter la conversation.`,

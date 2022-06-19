@@ -171,6 +171,8 @@ export default {
 }
 .sentTime{
   font-size: $small-size;
-  margin-bottom: 5px
+  margin-bottom: 5px;
+  font-family: $font-italic;
+  font-style: italic;
 }
 </style>
