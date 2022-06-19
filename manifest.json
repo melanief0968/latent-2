@@ -1,5 +1,12 @@
 {
-  "name": "Latent",
-  "display": "standalone"
+  "name": "Latent*",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "public/img/logoLatent.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
   
 }
