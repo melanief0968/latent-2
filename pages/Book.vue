@@ -156,9 +156,7 @@ export default {
       if (this.conversation && this.conversation.messages) {
         Object.keys(this.conversation.messages).forEach((messageId) => {
           const message = this.$getters.listenMessage(messageId);
-              if(message.messageType == "didScene"){
-                console.log(message)
-              }
+
           messages.push({ id: messageId, message });
 
         });

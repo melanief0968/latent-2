@@ -19,7 +19,7 @@ const BOT_MSG = [
     {text:"La version théâtrale du dialogue se déclanche grâce au toggle en haut à droite.", delay: 400, waitForResp:false, type: "did"},
     {text:"LATENT* t'invite à découvrir tes échanges sous une forme théâtrale, selon le temps passé et le changement de position, la pièce évolue et change de scène ou d'acte.", delay: 400, waitForResp:false, type: "did"},
     {text:"Selon le mode dans lequel tu es, le texte est interprêté différemment.", delay: 400, waitForResp:false, type: "msg"},
-    {text:"tu peux maintenant créer ta propre conversation !", delay: 400, waitForResp:false, type: "msg"},
+    {text:"tu peux maintenant créer ta propre conversation et n'oublie pas d'aller créer ton personnage dans ton profil! !", delay: 400, waitForResp:false, type: "msg"},
     
     // {text:"salut3", delay: 400, waitForResp:false, type: "msg"},
     // {text:"did4", delay: 400, waitForResp:false, type: "did"},
