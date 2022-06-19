@@ -1603,19 +1603,29 @@
   },
   initScenes:{
       scene: [
-          (e)=>`Scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
           (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+          (e)=>`Un salon. Une grande pièce carrée au centre de laquelle trône un canapé ancien. En face du canapé crépite un feu de cheminée allumé il y a maintenant quelques heures. ${e.name}, sur le canapé, laisse vagabonder son regard entre son téléphone et le feu.`,
+          (e)=>`Dans un grand parc se trouve un banc. Les oiseaux chantent autour de ${e.name}. Au loin, des cris d'enfants se font entrendre. Le soleil est haut dans le ciel mais l'air est doux. Une petite brise vient carresser les cheveux de ${e.name}.`,
+          (e)=>`La nuit tombe doucement sur ${e.name}. Une assiette à moitié vide trône sur la table aux côtés d'un verre de vin déjà bien entammé. La télévision dans la salle à côté ne produit qu'un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
+          (e)=>`Le réveil sonne alors que ${e.name} ouvre difficilement les yeux. Un fin rayon de soleil passe au travers des volets et vient éclairer un coin de la chambre. Les habits de la veille trainent encore à côté du lit. ${e.name} tente de profiter des ses derniers instants dans son lit puis se décide enfin à prendre son téléphone.`,
+          (e)=>`Au milieu de la scène, un fauteuil. ${e.name} se démène pour retrouver une chaussette manquante. `,
+          (e)=>`Une gare, il est 10h30. ${e.name} attend.`,
+          (e)=>`${e.name} s'avance d'un pas décidé et s'arrête au centre de la scène.`,
+          (e)=>`Des arbres, ${e.name} marche.`,
       ],
       acts:[
-        (e)=>`Act Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Le temps passe. Au premier plan se trouve plusieurs chaises. Des bruits résonnent depuis la cours extérieur. Une fenêtre ouverte en arrière plan laisse passer un courant d'air qui soulève les photos au mur. Sur la droite, une porte s'ouvre doucement pour laisser entrer ${e.name}. ${e.name} déhambule devant les photos avant de prendre place au premier plan.`,
+        (e)=>`La pluie ruisselle silencieusement sur la fenêtre de train. De discussions se font vaguement entendre dans le wagon. En dehors, des champs s'étendent à parte de vue. Des arbres se font appercevoir par ci par là. On peut distinguer quelques troupeaux parsemés au milieu des champs. La distance entre ${e.name} et ${e.contact} se fait de plus en plus ressentir.`,
+
 
       ],
       firstScene: [
-        (e)=>`first scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-        (e)=>`first scene Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Devant un bâtiment, un grand arbre donne de l'ombre à plusieurs bancs. Un couple rigole gentiment. Sur le banc d'à côté, ${e.name} lit <i>La mouette</i> De Tcheckov. L'attente se fait longue au fil du temps qui passe.`,
+        (e)=>`La chambre de ${e.name}.`,
+        (e)=>`Le bureau de ${e.name}. Dans une pièce exigüe, un grand bureau se tient fier et droit. A gauche du bureau se trouve une bibliothèque. Elle est pleine de livres tous plus divers les uns des autres. ${e.name} entre et va choisir un livre.`,
+        (e)=>`Une lampe éclair la pièce. ${e.name} entre.`,
       ]
   }
 
