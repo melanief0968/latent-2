@@ -18,12 +18,14 @@
             v-if="message.messageType === 'didScene'"
             :key="message.sentTime"
             :text="message.didascalie"
+            class="centered-did"
           ></Didascalies>
         <Didascalies
           v-if="message.messageType === 'didSceneSent'"
           :key="message.sentTime"
           :name="message.userName"
           :text="message.sceneSentence"
+          class="centered-did"
         ></Didascalies>
            <Didascalies
             v-if="message.messageType === 'did'"
@@ -35,6 +37,7 @@
             v-if="message.messageType === 'didTime'"
             :key="message.sentTime"
             :text="message.didascalieTime"
+            class="centered-did"
           ></Didascalies>
 
           <Message
@@ -228,7 +231,7 @@ export default {
       let g1 = this.getGender(userID)
       let g2 = this.getGender(this.getOtherUser())
       console.log(g1)
-     
+
       if(attr1){
         let descriptions1 = [`${g1} ${attr1.prop1}, provenant ${attr1.prop4}, ${attr1.prop2}`,`${g1} ${attr1.prop5}, toujours ${attr1.prop6}, dans l'espoir ${attr1.prop8}`,`${g1} vivant pour ${attr1.prop7}, semblant toujours très ${attr1.prop5}`,`${g1} ${attr1.prop1}, ${attr1.prop2}, mais ${attr1.prop3}`]
         let random = Math.floor(Math.random() * descriptions1.length);

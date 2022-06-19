@@ -72,11 +72,17 @@ export default {
     text-align: left;
      padding-left:0 !important
   }
+  &.centered-did {
+    div {
+      margin-right: 0 !important;
+      text-align: center;
+    }
+  }
 }
 .didBox-book{
   margin-top: 0;
   align-items: left;
- 
+
 }
 
 </style>
