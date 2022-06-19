@@ -98,7 +98,7 @@ export default {
   },
   data() {
     return {
-      placeholder: 'Ecrire',
+      placeholder: 'Écrire',
       // messageIds: {},
       conversation: null,
       removeListener: () => {},
@@ -127,7 +127,7 @@ export default {
       cityHasChanged: false,
       lastMsgTime: 0,
       city: this.$getters.currentCity(),
-      distance: "quelques",
+      distance: "quelques mètres",
       chatID:"",
       userSubmit: false
     };
@@ -210,9 +210,15 @@ export default {
         return (this.firstKeyTime = this.getTime());
       }
     },
+    randomInput() {
+      let inputs = ["Écrire", "Répondre", "Répliquer", "Rétorquer", "Nouvelle réplique", "S'exclamer", "S'indigner"];
+      let random = Math.floor(Math.random() * inputs.length);
+      const inputText = inputs[random];
+      return inputText;
+    },
     onSubmit(event) {
-      //TODO EDIT RANDOM PLACEHOLDER
-      this.placeholder = 'Ecrire';
+   
+      this.placeholder = this.randomInput()
       // console.log('City has changed', value);
       if (this.cityHasChanged) {
         // send message didascalie
@@ -975,7 +981,7 @@ export default {
 
     setTimeRatio() {
       if(this.getOtherUser() != GUIDE_BOT_ID){
-        if (this.getTimelaps().min == "58") {
+        if (this.getTimelaps().min == "02" || this.getTimelaps().min == "06" || this.getTimelaps().min == "10" || this.getTimelaps().min == "13") {
           this.sentTime = this.getTime();
           console.log("its happening");
           this.outputSignal = "ratio";
@@ -993,10 +999,13 @@ export default {
       if(this.getOtherUser() != GUIDE_BOT_ID){
                  console.log("this is not bot");
         if (this.cityHasChanged == true) {
+          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"){
+            console.log("THERE IS TIME FOR CITY")
           this.sentTime = this.getTime();
           console.log("city changed")
           this.outputSignal = "dataChange";
           this.sendDidascalie(this.sentTime);
+          }
         } else if (!this.cityHasChanged) {
           return;
         }
@@ -1010,7 +1019,6 @@ export default {
         if (!lastDist) {
           lastDist = 10;
         }
-        console.log("i got it");
         let userCoords = this.$getters.currentLocation();
         console.log(userCoords);
         let otherUserCoords = this.$getters.listenUser(
@@ -1023,6 +1031,9 @@ export default {
         if (diff < 0.005) {
           return;
         } else if ((lastDist = "Une certaine distance" || diff >= 0.05)) {
+           if (this.getTimelaps().min=="01" || this.getTimelaps().min=="04" || this.getTimelaps().min=="07" || this.getTimelaps().min=="09" || this.getTimelaps().min=="12" || this.getTimelaps().min=="15"){
+            //  this.getTimelaps().sec == "30" && 
+             console.log("THERE IS TIME FOR DISTACNE")
           fb.setValue(`/conversations/${chatID}/distance`, distance);
           console.log(distance);
           this.distance = Math.round(distance * 100) / 100;
@@ -1030,6 +1041,7 @@ export default {
           this.sentTime = this.getTime();
           this.sendDidascalie(this.sentTime);
           return this.distance;
+           }
         }
       }
     },
@@ -1163,6 +1175,8 @@ export default {
         console.log("diff position user " + distance + "m");
         fb.setValue(`/users/${this.currentUserID}/geoLocation`, coords);
         this.setDistance();
+      }else{
+        console.log("not enough distance")
       }
     },
   },
