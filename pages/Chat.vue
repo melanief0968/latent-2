@@ -50,7 +50,7 @@
           :key="message.sentTime"
           :line-height="message.lineHeight"
           :nbDots="message.dotsNum"
-          :grayDots= "message.grayDot"
+          :grayDots="message.grayDot"
         ></YellowLine>
       </template>
       <div class="item2"></div>
@@ -315,7 +315,7 @@ export default {
         sentTime: this.sentTime++, //! to have unique id, even if same time
         lineHeight: this.yellowLineHeight().height,
         dotsNum: this.yellowLineHeight().days,
-        grayDot: 4,
+        grayDot: this.yellowLineHeight().hours,
       };
       const sceneTime = this.sentTime + 2;
       const didascalieTime = this.sentTime + 5;
@@ -576,8 +576,18 @@ export default {
         const calcDays = Math.floor(
           timeBetweenMessages / (1000 * 60 * 60 * 24)
         );
+          const calcHours = Math.floor(
+          timeBetweenMessages / (1000 * 60 * 60)
+        );
         let days = calcDays;
-        let hours = 1;
+        let hours = calcHours;
+        if(days >= 1){
+          hours = 0
+        }
+        if(calcHours>=10){
+          hours = 10;
+        }
+
         if (days < 1) {
           days = 0;
         }
@@ -604,7 +614,7 @@ export default {
           height: 2,
           days: 0,
           textTime: "",
-          // hours
+          hours: 0,
         };
 
         console.log(LINE_DATAS);
