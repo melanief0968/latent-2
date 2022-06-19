@@ -100,7 +100,7 @@
           <option>indifférent</option>
           <option>ambitieux</option>
           <option>généreux</option>
-          <option>opitimiste</option>
+          <option>optimiste</option>
           <option>patient</option>
         </select>, constamment
         <select class="attributs" v-model="prop6">
