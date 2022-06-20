@@ -1071,12 +1071,20 @@ export default {
       this.contactName = contactName;
       return this.contactName;
     },
+    // randomTimeText(){
+    //   let timeTexts = ["2sec","4sec","6sec","10sec","1sec","30sec"]
+    //   let random = Math.floor(Math.random() * timeTexts.length);
+    //   const textTime = timeTexts[random];
+    //   //console.log(_case)
+    //   return textTime;
+    // },
     sendMessgageBot(){
       const textTime = this.yellowLineHeight().textTime;
       let time = this.getTime()
       let currentIndex = this.$getters.listenConversation(this.currentChatID).messageIndex;
       let botArray = bot.BOT_MSG
-     
+      
+      
       // let msgText = botArray[currentIndex].text
 
       let newIndex 
@@ -1086,25 +1094,39 @@ export default {
         let msgText = botArray[i].text
         let type = botArray[i].type
         let height = botArray[i].height
+        let sendingUsr = botArray[i].usr
+        let didType = botArray[i].icone
+        let timeText = botArray[i].time
+        let icone = "";
+        if(didType){
+          icone = didType
+        }else{icone= null}
+        let user = "";
+        if( sendingUsr == "bot"){
+          user = this.getOtherUser()
+        }else if (sendingUsr == "person"){
+          user = this.currentUserID
+        }
         const botMsg = {
-          sendingUser: this.getOtherUser(),
+          sendingUser: user,
           userName: this.$getters.user(this.currentUserID).name,
           text: msgText,
           bookText: msgText,
           messageType: "msg",
           sentTime: time++,
-          // textTime,
+          textTime: timeText,
         }
         const botDid = {
-          sendingUser: this.getOtherUser(),
+          sendingUser: user,
           userName: this.$getters.user(this.currentUserID).name,
           didascalie: msgText,
           bookText: msgText,
           messageType: "did",
           sentTime: time++,
+          didType: icone
         }
         const botTimeMsg = {
-        sendingUser: this.getOtherUser(),
+        sendingUser: user,
         userName: this.$getters.user(this.currentUserID).name,
         messageType: "time",
         sentTime: time++,
@@ -1136,6 +1158,7 @@ export default {
     sendBotMessage(type, botMsg, botDid,botTimeMsg){
       if(type == "msg"){
         console.log("HEEEEEEEEEEEE", type)
+        console.log(botMsg)
           this.sendMessage(botMsg);
           console.log("Delayed for 1 second.");
       }else if (type == "did"){

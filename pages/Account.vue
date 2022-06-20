@@ -16,15 +16,15 @@
       </div>
       <div class="row">
         <div class="text-basic">Genre</div>
-        <div class="italic userProps">{{ userProps.gender }}</div>
+        <div class="italic userProps">{{ userGender }}</div>
       </div>
     </div>
     <form @submit.prevent="onSubmit" class="userAttributs-container">
       <div class="text-basic">Description</div>
       <div class="italic">
         {{ userProps.name }} est
-        <select class="attributs" v-model="prop1"  v-if="userGender === 'm' ">
-          <option disabled value="">............</option>
+        <select class="attributs" v-model="prop1"  v-if="currentUserGender() === 'm' ">
+          <option disabled value=""></option>
           <option>petit</option>
           <option>fort</option>
           <option>laid</option>
@@ -37,8 +37,8 @@
           <option>dépressif</option>
 
         </select>
-        <select class="attributs" v-model="prop1"  v-else-if="userGender === 'f' ">
-          <option disabled value="">............</option>
+        <select class="attributs" v-model="prop1"  v-else-if="currentUserGender() === 'f' ">
+          <option disabled value=""></option>
           <option>petite</option>
           <option>forte</option>
           <option>laide</option>
@@ -48,11 +48,11 @@
           <option>sympathique</option>
           <option>riche</option>
           <option>perdue</option>
-          <option>dépressifve</option>
+          <option>dépressive</option>
         </select>
         ,
-        <select class="attributs" v-model="prop2">
-          <option disabled value="">............</option>
+        <select class="attributs" v-model="prop2"  v-if="currentUserGender() === 'm' ">
+          <option disabled value=""></option>
           <option>grand</option>
           <option>jeune</option>
           <option>barbu</option>
@@ -60,12 +60,26 @@
           <option>courbé</option>
           <option>élancé</option>
           <option>troublé</option>
-          <option>naif</option>
+          <option>naïf</option>
           <option>timide</option>
           <option>têtu</option>
-        </select> mais
-        <select class="attributs" v-model="prop3">
-          <option disabled value="">............</option>
+        </select> 
+        <select class="attributs" v-model="prop2"  v-if="currentUserGender() === 'f' ">
+          <option disabled value=""></option>
+          <option>grande</option>
+          <option>jeune</option>
+          <option>poilue</option>
+          <option>courtoise</option>
+          <option>courbée</option>
+          <option>élancée</option>
+          <option>troublée</option>
+          <option>naive</option>
+          <option>timide</option>
+          <option>têtue</option>
+        </select>
+        mais
+        <select class="attributs" v-model="prop3"  v-if="currentUserGender() === 'm' ">
+          <option disabled value=""></option>
           <option>vieux</option>
           <option>beau</option>
           <option>humble</option>
@@ -79,12 +93,28 @@
           <option>drôle</option>
           <option>intriguant</option>
           <option>très pauvre</option>
+        </select>
+        <select class="attributs" v-model="prop3"  v-if="currentUserGender() === 'f' ">
+          <option disabled value=""></option>
+          <option>vieille</option>
+          <option>belle</option>
+          <option>humble</option>
+          <option>impolie</option>
+          <option>agréable</option>
+          <option>imposante</option>
+          <option>sarcastique</option>
+          <option>parle beaucoup</option>
+          <option>c'est une femme aux multiples talents</option>
+          <option>a un grand coeur</option>
+          <option>drôle</option>
+          <option>intriguante</option>
+          <option>très pauvre</option>
         </select>.
       </div>
       <div class="italic">
         {{ userProps.name }} fait partie
         <select class="attributs" v-model="prop4">
-          <option disabled value="">............</option>
+          <option disabled value=""></option>
           <option>de la haute bourgeoisie</option>
           <option>de l'élite sociale</option>
           <option>d'un club secret</option>
@@ -93,8 +123,8 @@
           <option>des saltimbanques</option>
           <option>des fans de Marvel</option>
         </select> et se montre toujours
-        <select class="attributs" v-model="prop5">
-          <option disabled value="">............</option>
+        <select class="attributs" v-model="prop5"  v-if="currentUserGender() === 'm' ">
+          <option disabled value=""></option>
           <option>avenant</option>
           <option>prétentieux</option>
           <option>indifférent</option>
@@ -102,9 +132,19 @@
           <option>généreux</option>
           <option>optimiste</option>
           <option>patient</option>
+        </select>
+        <select class="attributs" v-model="prop5"  v-if="currentUserGender() === 'f' ">
+          <option disabled value=""></option>
+          <option>avenante</option>
+          <option>prétentieuse</option>
+          <option>indifférente</option>
+          <option>ambitieuse</option>
+          <option>généreuse</option>
+          <option>optimiste</option>
+          <option>patiente</option>
         </select>, constamment
-        <select class="attributs" v-model="prop6">
-          <option disabled value="">............</option>
+        <select class="attributs" v-model="prop6"  v-if="currentUserGender() === 'm' ">
+          <option disabled value=""></option>
           <option>fatigué</option>
           <option>étrange</option>
           <option>attentionné</option>
@@ -112,12 +152,22 @@
           <option>désillusionné</option>
           <option>respecteux</option>
           <option>énergique</option>
+        </select>
+        <select class="attributs" v-model="prop6"  v-if="currentUserGender() === 'f' ">
+          <option disabled value=""></option>
+          <option>fatiguée</option>
+          <option>étrange</option>
+          <option>attentionnée</option>
+          <option>fascinée</option>
+          <option>désillusionnée</option>
+          <option>respecteuse</option>
+          <option>énergique</option>
         </select>.
       </div>
       <div class="italic">
         {{ userProps.name }} vis pour
         <select class="attributs" v-model="prop7">
-          <option disabled value="">............</option>
+          <option disabled value=""></option>
           <option>accomplir son rêve</option>
           <option>l'aventure</option>
           <option>la quête de la découverte</option>
@@ -129,7 +179,7 @@
           <option>sa passion de la tisane</option>
         </select> dans l'espoir
         <select class="attributs" v-model="prop8">
-          <option disabled value="">............</option>
+          <option disabled value=""></option>
           <option>de prouver sa valeur</option>
           <option>de trouver le bonheur</option>
           <option>d'être moins seul</option>
@@ -139,7 +189,7 @@
         </select>.
       </div>
       <div class="text-basic">{{ message }}</div>
-      <button class="text-basic save" type="submit">Enregistrer</button>
+      <button class="text-basic save" type="submit">{{enregistrer}}</button>
     </form>
     <a class="text-basic deco" @click="disconnect">
       <!-- <img class="icone-deco" src="/img/deco.png" /> -->
@@ -161,7 +211,7 @@ export default {
   data() {
     return {
       psw: "*******",
-      userGender: this.currentUserGender(),
+      userGender: "Loading...",
       prop1:"",
       prop2:"",
       prop3:"",
@@ -170,7 +220,8 @@ export default {
       prop6:"",
       prop7:"",
       prop8:"",
-      message:""
+      message:"",
+      enregistrer: "Enregistrer"
     };
   },
 
@@ -194,7 +245,7 @@ export default {
       } else if (g == "n") {
         gender = "Non binaire";
       }
-
+      this.userGender = gender
       const userProps = {
         userName: userName,
         name: name,
@@ -215,7 +266,8 @@ export default {
   methods: {
     currentUserGender() {
       const currentUserID = this.$getters.currentUserID();
-      return this.$getters.listenUser(currentUserID).gender;
+      let gender = this.$getters.listenUser(currentUserID).gender
+      return gender;
     },
      onSubmit(ev) {
       //prettier-ignore
@@ -236,6 +288,7 @@ export default {
           }
           let userID = this.$getters.currentUserID()
           const userAttributs = fb.setValue(`/users/${userID}/attributs`, userAttr);
+          this.enregistrer = "Enregistré !"
           console.log(userAttributs);
 
           // this.$actions.setCurrentUserID(id);
@@ -290,14 +343,17 @@ export default {
   text-align: center;
  }
 .attributs{
-  margin: 0;
-  background-color: white;
-  border: 0px solid var(--contrast-color);
-  text-align: left;
-  width: auto;
-  font-family: $font-italic;
-  font-style: italic;
-  font-weight:500 ;
+    margin: 0;
+    padding-bottom: 0;
+    margin-bottom: 1.5vh;
+    background-color: white;
+    border: 0px solid var(--contrast-color);
+    border-bottom: 1px dashed;
+    text-align: center;    
+    width: auto;
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 500;
 }
 .save{
   margin:0;
