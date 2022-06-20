@@ -1,15 +1,16 @@
 <template>
   <div class="newContactPage">
-    <YellowLine :lineHeight="10"></YellowLine>
-    <form @submit.prevent="onSubmit">
+    <!-- <div class="item3"></div> -->
+    <form class= "newContact" @submit.prevent="onSubmit">
+    <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
       <div class="text-basic">Avec Qui ?</div>
       <input type="text" placeholder="Nom d'auteur·ice·x" v-model="username" />
-      <div class="text-basic">Pour la bibliothèque...</div>
-      <input type="text" placeholder="Titre du texte" v-model="chatname" />
-      <button type="submit">→</button>
+      <div class="text-basic">Titre de la conversation</div>
+      <input type="text" placeholder='"En attendant Godot"' v-model="chatname" />
+      <button class="text-basic connect" type="submit">Créer</button>
       <div class="text-basic">{{ message }}</div>
+    <YellowLine :lineHeight="yellowLineHeight()"></YellowLine>
     </form>
-    <YellowLine></YellowLine>
   </div>
   <!-- <div v-for="index of 100">new contact {{index}}</div>     -->
 </template>
@@ -31,6 +32,10 @@ export default {
     };
   },
   methods: {
+     yellowLineHeight(){
+      let height = 12
+      return height;
+    },
     onSubmit(ev) {
       fb.filterEntries("users", "username", this.username).then((results) => {
         console.log(this.username);
@@ -104,9 +109,28 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+
 }
 .yellowLine {
-  height: 30%;
+  height: 20%;
+  min-height: 10%;
 }
+.item3 {
+  width: 90%;
+  height: 11vh;
+  // margin: auto;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 2%;
+  padding-bottom: 4%;
+
+  display: flex;
+  flex-direction: column;
+}
+.connect{
+  margin:0;
+  font-weight: 100;
+}
+
 </style>

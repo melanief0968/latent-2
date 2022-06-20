@@ -42,7 +42,7 @@
           <option>petite</option>
           <option>forte</option>
           <option>laide</option>
-          <option>beau-parleur</option>
+          <option>baratineuse</option>
           <option>courbée</option>
           <option>élancée</option>
           <option>sympathique</option>

@@ -1,9 +1,9 @@
 <template>
   <footer class="footer classic">
-    <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/index">
+    <div class="buttonIcone" @click="infos()">
       <img class="icone info" src="/img/info.png">
       <!-- <div>Index</div> -->
-    </router-link>
+    </div>
     <router-link class="buttonIcone add" v-if="route === 'Contacts'" to="/newcontact">
           <img class="icone" src="/img/add-2.png">
           <!-- <div>Nouveau dialogue</div> -->
@@ -28,6 +28,20 @@ export default {
       return this.$route.name;
     },
   },
+  methods:{
+    infos(){
+      const currentUserID = this.$getters.currentUserID();
+      let chatBotID = this.$getters.listenUser(currentUserID).chatBotID;
+      console.log(chatBotID)
+       this.$router.push({
+            path: "/chat",
+            query: {
+              // userId,
+            },
+          });
+      this.$actions.setCurrentChatId(chatBotID);
+    }
+  }
 };
 </script>
 <style lang="scss">

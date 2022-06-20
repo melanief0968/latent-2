@@ -115,6 +115,7 @@ export default {
           fb.createEntry(`/conversations/${demoConvID}/users`, demoID);
           fb.createEntry(`/users/${id}/conversations/`, demoConvID);
           fb.createEntry(`/users/${demoID}/conversations/`, demoConvID);
+          fb.setValue(`/users/${id}/chatBotID/`, demoConvID);
 
           console.log(id, accountDatas);
           this.$router.push({
@@ -124,7 +125,7 @@ export default {
             },
           });
           this.$actions.setCurrentUserID(id);
-          // console.log(this.$state);
+          console.log(this.$state);
 
 
       }
