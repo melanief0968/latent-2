@@ -235,8 +235,10 @@ export default {
       this.name1 = this.$getters.currentUserName()
       let userID = this.$getters.currentUserID()
       this.name2 = this.getContactName()
-      let attr2 = this.getOtherUser().attributs
+      let otherUser= this.getOtherUser()
+      let attr2 = this.$getters.listenUser(otherUser).attributs
       let attr1 = this.$getters.listenUser(this.$getters.currentUserID()).attributs
+      console.log(attr2)
       let g1 = this.getGender(userID)
       let g2 = this.getGender(this.getOtherUser())
       console.log(g1)

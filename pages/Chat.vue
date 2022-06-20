@@ -991,7 +991,7 @@ export default {
 
     setTimeRatio() {
       if(this.getOtherUser() != GUIDE_BOT_ID){
-        if (this.getTimelaps().min == "02" || this.getTimelaps().min == "06" || this.getTimelaps().min == "10" || this.getTimelaps().min == "13") {
+        if (this.getTimelaps().min == "02" || this.getTimelaps().min == "06" || this.getTimelaps().min=="08"|| this.getTimelaps().min == "10" || this.getTimelaps().min == "13"|| this.getTimelaps().min=="16") {
           this.sentTime = this.getTime();
           console.log("its happening");
           this.outputSignal = "ratio";
@@ -1009,7 +1009,7 @@ export default {
       if(this.getOtherUser() != GUIDE_BOT_ID){
                  console.log("this is not bot");
         if (this.cityHasChanged == true) {
-          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"){
+          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"|| this.getTimelaps().min=="11"|| this.getTimelaps().min=="14"|| this.getTimelaps().min=="17"){
             console.log("THERE IS TIME FOR CITY")
           this.sentTime = this.getTime();
           console.log("city changed")
@@ -1041,7 +1041,7 @@ export default {
         if (diff < 0.005) {
           return;
         } else if ((lastDist = "Une certaine distance" || diff >= 0.05)) {
-           if (this.getTimelaps().min=="01" || this.getTimelaps().min=="04" || this.getTimelaps().min=="07" || this.getTimelaps().min=="09" || this.getTimelaps().min=="12" || this.getTimelaps().min=="15"){
+           if (this.getTimelaps().min=="01" || this.getTimelaps().min=="04" || this.getTimelaps().min=="07" || this.getTimelaps().min=="09" || this.getTimelaps().min=="12" || this.getTimelaps().min=="15"|| this.getTimelaps().min=="18"|| this.getTimelaps().min=="20"|| this.getTimelaps().min=="22"){
             //  this.getTimelaps().sec == "30" && 
              console.log("THERE IS TIME FOR DISTACNE")
           fb.setValue(`/conversations/${chatID}/distance`, distance);
@@ -1079,7 +1079,6 @@ export default {
     //   return textTime;
     // },
     sendMessgageBot(){
-      const textTime = this.yellowLineHeight().textTime;
       let time = this.getTime()
       let currentIndex = this.$getters.listenConversation(this.currentChatID).messageIndex;
       let botArray = bot.BOT_MSG
@@ -1088,7 +1087,8 @@ export default {
       // let msgText = botArray[currentIndex].text
 
       let newIndex 
-      if(currentIndex >= botArray.length-1) return
+      if(currentIndex >= 1) return
+      // if(currentIndex >= botArray.length-1) return
       console.log(currentIndex,botArray.length)
       for(let i = 0; i<botArray.length; i++){
         let msgText = botArray[i].text
@@ -1226,9 +1226,7 @@ export default {
     
     if(this.getOtherUser() == GUIDE_BOT_ID){
       this.sendMessgageBot()
-      console.log("this is demo")
-      console.log (bot.BOT_MSG[0], bot.BOT_DID)
-      console.log()
+
       // console.log(this.getDate().getDate(), this.getTimelaps().monthName, this.getTimelaps().year)
       // return
     }
