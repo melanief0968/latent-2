@@ -4,8 +4,6 @@
     char: {
       level1: {
         positive: {
-          case1: [],
-          case2: [],
           case3: [{
             m: (e) => `${e.name} condense ses dires en ${e.outputValue} lettres.`,
             f: (e) => `${e.name} condense ses dires en ${e.outputValue} lettres.`,
@@ -234,6 +232,10 @@
             m: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
             f: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
             n: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
+          },{
+            m: (e) => `Malgré le fait qu'il soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
+            f: (e) => `Malgré le fait qu'elle soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
+            n: (e) => `Malgré le fait qu'iel soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
           }],
           case4:[{
             m: (e) => `À la recherche des bons mots, ${e.name} continue cette discussion qui lui tient à coeur.`,
@@ -452,11 +454,15 @@
             m: (e) => `${e.name} prend la peine de bien choisir ses mots et n’hésite pas à revenir plusieurs fois sur ses dires.`,
             f: (e) => `${e.name} prend la peine de bien choisir ses mots et n’hésite pas à revenir plusieurs fois sur ses dires.`,
             n: (e) => `${e.name} prend la peine de bien choisir ses mots et n’hésite pas à revenir plusieurs fois sur ses dires.`,
+          },{
+            m: (e) => `L'hésitation s'empare de ${e.name}.`,
+            f: (e) => `L'hésitation s'empare de ${e.name}.`,
+            n: (e) => `L'hésitation s'empare de ${e.name}.`,
           }],
-          case4: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+          case4: [  {
+            m: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
+            f: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
+            n: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -497,7 +503,7 @@
             m: (e) => `Une flemme assez probable habite ${e.name}, qui ne revient pas sur son message avant de l'envoyer.`,
             f: (e) => `Une flemme assez probable habite ${e.name}, qui ne revient pas sur son message avant de l'envoyer.`,
             n: (e) => `Une flemme assez probable habite ${e.name}, qui ne revient pas sur son message avant de l'envoyer.`,
-          }],
+          },],
           case4: [{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -608,10 +614,10 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+          case3: [  {
+            m: (e) => `Le doute prend ${e.name} qui s'empresse de se reprendre.`,
+            f: (e) => `Le doute prend ${e.name} qui s'empresse de se reprendre.`,
+            n: (e) => `Le doute prend ${e.name} qui s'empresse de se reprendre.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -730,10 +736,10 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case2: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+          case2: [  {
+            m: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
+            f: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
+            n: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
           }],
           case3: [{
             m: (e) => `${e.name} semble avoir eu une coupure de réseau.`,
@@ -763,6 +769,10 @@
             m: (e) => `${e.name} prend son temps pour répondre. Y a-t-il un message entre les lignes à faire passer à ${e.contact} ?`,
             f: (e) => `${e.name} prend son temps pour répondre. Y a-t-il un message entre les lignes à faire passer à ${e.contact} ?`,
             n: (e) => `${e.name} prend son temps pour répondre. Y a-t-il un message entre les lignes à faire passer à ${e.contact} ?`,
+          },{
+            m: (e) => `${e.name} prend le temps de relire tous ses mots avant d'envoyer.`,
+            f: (e) => `${e.name} prend le temps de relire tous ses mots avant d'envoyer.`,
+            n: (e) => `${e.name} prend le temps de relire tous ses mots avant d'envoyer.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -871,6 +881,14 @@
             m: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Il a probablement enfin terminé la dernière saison de Game of Thrones.`,
             f: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Elle a probablement enfin terminé la dernière saison de Game of Thrones.`,
             n: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Iel a probablement enfin terminé la dernière saison de Game of Thrones.`,
+          },{
+            m: (e) => `Après avoir remis en question le sens de la vie, ${e.name} se décide à envoyer un message.`,
+            f: (e) => `Après avoir remis en question le sens de la vie, ${e.name} se décide à envoyer un message.`,
+            n: (e) => `Après avoir remis en question le sens de la vie, ${e.name} se décide à envoyer un message.`,
+          },  {
+            m: (e) => `Faisant une pause dans sa lecture, ${e.name} attrape son téléphone.`,
+            f: (e) => `Faisant une pause dans sa lecture, ${e.name} attrape son téléphone.`,
+            n: (e) => `Faisant une pause dans sa lecture, ${e.name} attrape son téléphone.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -896,10 +914,10 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+          case3: [  {
+            m: (e) => `${e.name} ne veut pas laisser le temps à ${e.contact} de répondre.`,
+            f: (e) => `${e.name} ne veut pas laisser le temps à ${e.contact} de répondre.`,
+            n: (e) => `${e.name} ne veut pas laisser le temps à ${e.contact} de répondre.`,
           }],
           case4:[{
             m: (e) => `${e.name} se synchronise à l’échange, y a-t-il des sentiments dans l’air?`,
@@ -923,10 +941,14 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+          case3: [  {
+            m: (e) => `Maintenant que ${e.name} a fini de bouder, il se décide à répondre.`,
+            f: (e) => `Maintenant que ${e.name} a fini de bouder, elle se décide à répondre.`,
+            n: (e) => `Maintenant que ${e.name} a fini de bouder, iel se décide à répondre.`,
+          },{
+            m: (e) => `Une crise existentielle prend ${e.name} aux tripes.`,
+            f: (e) => `Une crise existentielle prend ${e.name} aux tripes.`,
+            n: (e) => `Une crise existentielle prend ${e.name} aux tripes.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -991,7 +1013,11 @@
             f: (e) => `Énervée, ${e.name} compose rapidement son message.`,
             n: (e) => `Énervéx, ${e.name} compose rapidement son message.`,
           }],
-          case3: [{
+          case3: [  {
+            m: (e) => `Rien n'est plus rapide que les doigts de ${e.name} sur son clavier.`,
+            f: (e) => `Rien n'est plus rapide que les doigts de ${e.name} sur son clavier.`,
+            n: (e) => `Rien n'est plus rapide que les doigts de ${e.name} sur son clavier.`,
+          },{
             m: (e) => `${e.name} manie les lettres aussi vite que court Usain Bolt.`,
             f: (e) => `${e.name} manie les lettres aussi vite que court Usain Bolt.`,
             n: (e) => `${e.name} manie les lettres aussi vite que court Usain Bolt.`,
@@ -1246,6 +1272,14 @@
             m: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, il reprend la conversation.`,
             f: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, elle reprend la conversation.`,
             n: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, iel reprend la conversation.`,
+          },{
+            m: (e) => `La fatigue atteint ${e.name} qui tape à la vitesse d'un escargot.`,
+            f: (e) => `La fatigue atteint ${e.name} qui tape à la vitesse d'un escargot.`,
+            n: (e) => `La fatigue atteint ${e.name} qui tape à la vitesse d'un escargot.`,
+          },{
+            m: (e) => `${e.name} se met à écrire aussi vite qu'une personne en maison de retraite.`,
+            f: (e) => `${e.name} se met à écrire aussi vite qu'une personne en maison de retraite.`,
+            n: (e) => `${e.name} se met à écrire aussi vite qu'une personne en maison de retraite.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1268,23 +1302,18 @@
           case1: [],
           case2: [],
           case3: [{
-            m: (e) => `À ${e.outputValue} ${e.name} répond.`,
-            f: (e) => `À ${e.outputValue} ${e.name} répond.`,
-            n: (e) => `À ${e.outputValue} ${e.name} répond.`,
+            m: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            f: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            n: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
           },{
             m: (e) => `En ce ${e.outputValue}, ${e.name} envoie un nouveau message.`,
             f: (e) => `En ce ${e.outputValue}, ${e.name} envoie un nouveau message.`,
             n: (e) => `En ce ${e.outputValue}, ${e.name} envoie un nouveau message.`,
-          },{
-            m: (e) => `${e.name} poursuit l’échange à ${e.outputValue}, le ${e.outputValue}`,
-            f: (e) => `${e.name} poursuit l’échange à ${e.outputValue}, le ${e.outputValue}`,
-            n: (e) => `${e.name} poursuit l’échange à ${e.outputValue}, le ${e.outputValue}`,
           }],
           case4: [],
           case5: []
         },
         negative: {
-          //jamais de negative
           case1: [],
           case2: [],
           case3: [],
@@ -1305,9 +1334,17 @@
             n: (e) => `to do`,
           }],
           case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+            m: (e) => `Il est ${e.outputValue} et ${e.name} ne s'est toujours pas lavé les dents.`,
+            f: (e) => `Il est ${e.outputValue} et ${e.name} ne s'est toujours pas lavé les dents.`,
+            n: (e) => `Il est ${e.outputValue} et ${e.name} ne s'est toujours pas lavé les dents.`,
+          },{
+            m: (e) => `Les oiseaux chantent, le soleil brille.`,
+            f: (e) => `Les oiseaux chantent, le soleil brille.`,
+            n: (e) => `Les oiseaux chantent, le soleil brille.`,
+          },{
+            m: (e) => `Le ciel est bleu, le ciel brille.`,
+            f: (e) => `Le ciel est bleu, le ciel brille.`,
+            n: (e) => `Le ciel est bleu, le ciel brille.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1439,10 +1476,14 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+          case3: [  {
+            m: (e) => `De la musique résonne dans les oreilles de ${e.name}.`,
+            f: (e) => `De la musique résonne dans les oreilles de ${e.name}.`,
+            n: (e) => `De la musique résonne dans les oreilles de ${e.name}.`,
+          },{
+            m: (e) => `On entend un chat qui ronronne à côté de ${e.name}.`,
+            f: (e) => `On entend un chat qui ronronne à côté de ${e.name}.`,
+            n: (e) => `On entend un chat qui ronronne à côté de ${e.name}.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1490,36 +1531,45 @@
       level1: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}.l1`,
-            f: (e) => `${e.name} est à ${e.outputValue}.l1`,
-            n: (e) => `${e.name} est à ${e.outputValue}.l1`,
+            m: (e) => `${e.name} est à ${e.outputValue}.`,
+            f: (e) => `${e.name} est à ${e.outputValue}.`,
+            n: (e) => `${e.name} est à ${e.outputValue}.`,
           }],
         }
       },
       level2: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}.l2`,
-            f: (e) => `${e.name} est à ${e.outputValue}.l2`,
-            n: (e) => `${e.name} est à ${e.outputValue}.l2`,
+            m: (e) => `${e.name} est à ${e.outputValue}.`,
+            f: (e) => `${e.name} est à ${e.outputValue}.`,
+            n: (e) => `${e.name} est à ${e.outputValue}.`,
           }],
         }
       },
       level3: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}.l3`,
-            f: (e) => `${e.name} est à ${e.outputValue}.l3`,
-            n: (e) => `${e.name} est à ${e.outputValue}.l3`,
-          }],
+            m: (e) => `${e.name} est à ${e.outputValue}.`,
+            f: (e) => `${e.name} est à ${e.outputValue}.`,
+            n: (e) => `${e.name} est à ${e.outputValue}.`,
+          },{
+            m: (e) => `La température paraît peu clémente à ${e.outputValue}.`,
+            f: (e) => `La température paraît peu clémente à ${e.outputValue}.`,
+            n: (e) => `La température paraît peu clémente à ${e.outputValue}.`,
+          }
+        ],
         }
       },
       level4: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue}.l4`,
-            f: (e) => `${e.name} est à ${e.outputValue}.l4`,
-            n: (e) => `${e.name} est à ${e.outputValue}.l4`,
+            m: (e) => `${e.name} est à ${e.outputValue}.`,
+            f: (e) => `${e.name} est à ${e.outputValue}.`,
+            n: (e) => `${e.name} est à ${e.outputValue}.`,
+          },{
+            m: (e) => `Une visite de ${e.outputValue} s'impose pour ${e.name}.`,
+            f: (e) => `Une visite de ${e.outputValue} s'impose pour ${e.name}.`,
+            n: (e) => `Une visite de ${e.outputValue} s'impose pour ${e.name}.`,
           }],
         }
       }
@@ -1528,36 +1578,41 @@
       level1: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l1`,
-            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l1`,
-            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l1`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
           }],
         }
       },
       level2: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l2`,
-            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l2`,
-            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l2`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
           }],
         }
       },
       level3: {
         positive: {
-          case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l3`,
-            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l3`,
-            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l3`,
+          case3: [  
+            {
+            m: (e) => `${e.name} semble pressé et dévore la distance entre lui et ${e.contact}.`,
+            f: (e) => `${e.name} semble pressée et dévore la distance entre elle et ${e.contact}.`,
+            n: (e) => `${e.name} semble presséx et dévore la distance entre ellui et ${e.contact}.`,
+          },{
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
           }],
         }
       },
       level4: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l4`,
-            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l4`,
-            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.l4`,
+            m: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            f: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
+            n: (e) => `${e.name} est à ${e.outputValue} de ${e.contact}.`,
           }],
         }
       }
@@ -1566,36 +1621,36 @@
       level1: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l1`,
-            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l1`,
-            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l1`,
+            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
           }],
         }
       },
       level2: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l2`,
-            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l2`,
-            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l2`,
+            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
           }],
         }
       },
       level3: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l3`,
-            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l3`,
-            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l3`,
+            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
           }],
         }
       },
       level4: {
         positive: {
           case3: [{
-            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l4`,
-            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l4`,
-            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.l4`,
+            m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
+            n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
           }],
         }
       }

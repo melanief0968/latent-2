@@ -46,6 +46,7 @@ export default {
 </script>
 <style lang="scss">
 .footer {
+  z-index: 1000;
   flex: 0 0 auto;
   height: 11%;
   display: flex;

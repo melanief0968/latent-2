@@ -516,6 +516,8 @@ export default {
           messageType: "didScene",
           sentTime: time,
           didascalie,
+          // name: this.name,
+          // contact: this.contactName,
         };
         // console.log(sceneSentence)
         const didTimeMessage = {
@@ -523,12 +525,16 @@ export default {
           messageType: "didTime",
           sentTime: time + 1,
           didascalieTime,
+          // name: this.name,
+          // contact: this.contactName,
         };
         const sceneSentenceDid = {
           ...base,
           messageType: "didSceneSent",
           sentTime: time + 2,
           sceneSentence,
+          //   name: this.name,
+          // contact: this.contactName,
         };
         // console.log(sceneSentence)
         if(this.getOtherUser() != GUIDE_BOT_ID){
@@ -552,7 +558,10 @@ export default {
       let pushScene = null;
       const indexNbr = did["initScenes"][type].length;
       const index = Math.floor(Math.random() * indexNbr);
-      pushScene = did["initScenes"][type][index]();
+      pushScene = did["initScenes"][type][index]({
+            name: this.name,
+            contact: this.contactName,
+          });
       return pushScene;
     },
     yellowLineHeight() {
@@ -835,7 +844,7 @@ export default {
       const RESULT = {
         result: "positive",
         outputSignal: "ratio",
-        outputValue: "test time",
+        outputValue: "24 juin",
         inputType: "timeTrigger",
         didType: "time",
       };
@@ -955,7 +964,8 @@ export default {
     },
 
     chooseDidascalie() {
-      let _case = this.randomCase();
+      // let _case = this.randomCase();
+      let _case = "case3"
       const level = calc.intimacyLevel(this.name, this.contactName);
       if (level == "level1") {
         _case = "case3";
@@ -991,7 +1001,7 @@ export default {
 
     setTimeRatio() {
       if(this.getOtherUser() != GUIDE_BOT_ID){
-        if (this.getTimelaps().min == "02" || this.getTimelaps().min == "06" || this.getTimelaps().min=="08"|| this.getTimelaps().min == "10" || this.getTimelaps().min == "13"|| this.getTimelaps().min=="16") {
+        if (this.getTimelaps().min == "02" || this.getTimelaps().min == "06" || this.getTimelaps().min=="08"|| this.getTimelaps().min == "10" || this.getTimelaps().min == "13"|| this.getTimelaps().min=="16"|| this.getTimelaps().min=="19" || this.getTimelaps().min=="23"|| this.getTimelaps().min=="55"|| this.getTimelaps().min=="56"|| this.getTimelaps().min=="57"|| this.getTimelaps().min=="58"|| this.getTimelaps().min=="59"|| this.getTimelaps().min=="01") {
           this.sentTime = this.getTime();
           console.log("its happening");
           this.outputSignal = "ratio";
@@ -1009,7 +1019,7 @@ export default {
       if(this.getOtherUser() != GUIDE_BOT_ID){
                  console.log("this is not bot");
         if (this.cityHasChanged == true) {
-          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"|| this.getTimelaps().min=="11"|| this.getTimelaps().min=="14"|| this.getTimelaps().min=="17"){
+          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"|| this.getTimelaps().min=="11"|| this.getTimelaps().min=="14"|| this.getTimelaps().min=="17"|| this.getTimelaps().min=="21"|| this.getTimelaps().min=="57"|| this.getTimelaps().min=="59"|| this.getTimelaps().min=="00"){
             console.log("THERE IS TIME FOR CITY")
           this.sentTime = this.getTime();
           console.log("city changed")
@@ -1041,7 +1051,7 @@ export default {
         if (diff < 0.005) {
           return;
         } else if ((lastDist = "Une certaine distance" || diff >= 0.05)) {
-           if (this.getTimelaps().min=="01" || this.getTimelaps().min=="04" || this.getTimelaps().min=="07" || this.getTimelaps().min=="09" || this.getTimelaps().min=="12" || this.getTimelaps().min=="15"|| this.getTimelaps().min=="18"|| this.getTimelaps().min=="20"|| this.getTimelaps().min=="22"){
+           if (this.getTimelaps().min=="01" || this.getTimelaps().min=="04" || this.getTimelaps().min=="07" || this.getTimelaps().min=="09" || this.getTimelaps().min=="12" || this.getTimelaps().min=="15"|| this.getTimelaps().min=="18"|| this.getTimelaps().min=="20"|| this.getTimelaps().min=="22"|| this.getTimelaps().min=="26"|| this.getTimelaps().min=="58"|| this.getTimelaps().min=="55"){
             //  this.getTimelaps().sec == "30" && 
              console.log("THERE IS TIME FOR DISTACNE")
           fb.setValue(`/conversations/${chatID}/distance`, distance);
