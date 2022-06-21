@@ -72,6 +72,10 @@
             m: (e) => `Il est inutile de s’attendre à de grandes déclarations, ${e.name} a mieux à faire et fait preuve de limpidité.`,
             f: (e) => `Il est inutile de s’attendre à de grandes déclarations, ${e.name} a mieux à faire et fait preuve de limpidité.`,
             n: (e) => `Il est inutile de s’attendre à de grandes déclarations, ${e.name} a mieux à faire et fait preuve de limpidité.`,
+          }, {
+            m: (e) => `${e.outputValue} lettres, c'est exactement ce qu'il faut à ${e.name} pour exprimer ce qu'il a sur le coeur.`,
+            f: (e) => `${e.outputValue} lettres, c'est exactement ce qu'il faut à ${e.name} pour exprimer ce qu'elle a sur le coeur.`,
+            n: (e) => `${e.outputValue} lettres, c'est exactement ce qu'il faut à ${e.name} pour exprimer ce qu'iel a sur le coeur.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -111,8 +115,11 @@
             m: (e) => `${e.name} semble vouloir commencer un débat.`,
             f: (e) => `${e.name} semble vouloir commencer un débat.`,
             n: (e) => `${e.name} semble vouloir commencer un débat.`,
-          }],
-          case4: [{
+          },{
+            m: (e) => `${e.name} résume sa pensée en ${e.outputValue} caractères.`,
+            f: (e) => `${e.name} résume sa pensée en ${e.outputValue} caractères.`,
+            n: (e) => `${e.name} résume sa pensée en ${e.outputValue} caractères.`,
+          },{
             m: (e) => `Plus que concentré, ${e.name} prend le temps de rédiger des messages consistants.`,
             f: (e) => `Plus que concentrée, ${e.name} prend le temps de rédiger des messages consistants.`,
             n: (e) => `Plus que concentréx, ${e.name} prend le temps de rédiger des messages consistants.`,
@@ -124,6 +131,11 @@
             m: (e) => `${e.name} semble avoir une affinité particulière pour ${e.contact}.`,
             f: (e) => `${e.name} semble avoir une affinité particulière pour ${e.contact}.`,
             n: (e) => `${e.name} semble avoir une affinité particulière pour ${e.contact}.`,
+          }],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -154,6 +166,10 @@
             n: (e) => `to do`,
           }],
           case3: [{
+            m: (e) => `${e.name} se montre extrêmement concis et se contente de ${e.outputValue} lettres.`,
+            f: (e) => `${e.name} se montre extrêmement concise et se contente de ${e.outputValue} lettres..`,
+            n: (e) => `${e.name} se montre extrêmement concisex et se contente de ${e.outputValue} lettres..`,
+          },{
             m: (e) => `${e.name} est peut être timide.`,
             f: (e) => `${e.name} est peut être timide.`,
             n:(e) => `${e.name} est peut être timidex.`,
@@ -185,8 +201,7 @@
             m: (e) => `${e.name} communique de manière expéditive.  Aurait-il une préférence pour les télégrammes ?`,
             f: (e) => `${e.name} communique de manière expéditive.  Aurait-elle une préférence pour les télégrammes ?`,
             n: (e) => `${e.name} communique de manière expéditive.  Aurait-iel une préférence pour les télégrammes ?`,
-          }],
-          case4: [{
+          },{
             m: (e) => `D’excellente humeur, ${e.name}, s’emballe pour décrire sa journée.`,
             f: (e) => `D’excellente humeur, ${e.name}, s’emballe pour décrire sa journée.`,
             n: (e) => `D’excellente humeur, ${e.name}, s’emballe pour décrire sa journée.`,
@@ -194,6 +209,15 @@
             m: (e) => `${e.name} s’exprime de manière limpide, semblant savoir ce qu'il veut. Une assurance non dissimulée.`,
             f: (e) => `${e.name} s’exprime de manière limpide, semblant savoir ce qu’elle veut. Une assurance non dissimulée.`,
             n: (e) => `${e.name} s’exprime de manière limpide, semblant savoir ce qu’iel veut. Une assurance non dissimulée.`,
+          },{
+            m: (e) => `${e.name} est à un évènement important est paraît nerveux.`,
+            f: (e) => `${e.name} est à un évènement important est paraît nerveuse.`,
+            n: (e) => `${e.name} est à un évènement important est paraît nerveuxex.`,
+          }],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -203,11 +227,32 @@
         },
         negative: {
           case1: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case2: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case3: [{
+            m: (e) => `${e.name} souhaite apparemment partager les nombreux événements de sa journée dans le plus grand des détails.`,
+            f: (e) => `${e.name} souhaite apparemment partager les nombreux événements de sa journée dans le plus grand des détails.`,
+            n: (e) => `${e.name} souhaite apparemment partager les nombreux événements de sa journée dans le plus grand des détails.`,
+          },{
+            m: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
+            f: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
+            n: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
+          },{
+            m: (e) => `Malgré le fait qu'il soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
+            f: (e) => `Malgré le fait qu'elle soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
+            n: (e) => `Malgré le fait qu'iel soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
+          },{
             m: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
             f: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
             n: (e) => `${e.name} semble vouloir partager ses profondes pensées.`,
-          }],
-          case2: [{
+          },{
             m: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
             f: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
             n: (e) => `${e.name} n’a pas l’air d’avoir la langue dans sa poche.`,
@@ -223,24 +268,15 @@
             m: (e) => `Frustré par ce qui vient d’arriver, ${e.name} décrit avec précision ce qu’il a sur le coeur.`,
             f: (e) => `Frustrée par ce qui vient d’arriver, ${e.name} décrit avec précision ce qu’elle a sur le coeur.`,
             n: (e) => `Frustréx par ce qui vient d’arriver, ${e.name} décrit avec précision ce qu’iel a sur le coeur.`,
-          }],
-          case3: [{
-            m: (e) => `${e.name} souhaite apparemment partager les nombreux événements de sa journée dans le plus grand des détails.`,
-            f: (e) => `${e.name} souhaite apparemment partager les nombreux événements de sa journée dans le plus grand des détails.`,
-            n: (e) => `${e.name} souhaite apparemment partager les nombreux événements de sa journée dans le plus grand des détails.`,
           },{
-            m: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
-            f: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
-            n: (e) => `En quête de précision, ${e.name} ne se prive pas d’écrire tout un roman.`,
-          },{
-            m: (e) => `Malgré le fait qu'il soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
-            f: (e) => `Malgré le fait qu'elle soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
-            n: (e) => `Malgré le fait qu'iel soit au travail, cela ne semble pas empêcher ${e.name} d'écrire le roman de sa vie.`,
-          }],
-          case4:[{
             m: (e) => `À la recherche des bons mots, ${e.name} continue cette discussion qui lui tient à coeur.`,
             f: (e) => `À la recherche des bons mots, ${e.name} continue cette discussion qui lui tient à coeur.`,
             n: (e) => `À la recherche des bons mots, ${e.name} continue cette discussion qui lui tient à coeur.`,
+          }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -255,24 +291,28 @@
             m: (e) => `${e.name} souhaite-il écourter la discussion ? Son bref message laisse planer le doute… Il s'apprête à sauter en parachute.`,
             f: (e) => `${e.name} souhaite-elle écourter la discussion ? Son bref message laisse planer le doute… Elle s'apprête à sauter en parachute.`,
             n: (e) => `${e.name} souhaite-iel écourter la discussion ? Son bref message laisse planer le doute… Iel s'apprête à sauter en parachute.`,
-          }],
-          case2: [{
-            m: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
-            f: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
-            n:(e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
-          }],
-          case3: [{
-            m: (e) => `Sans tergiverser, ${e.name} répond succinctement. Il est parfois compliqué d'être à l'heure quand on est en vacances.`,
-            f: (e) => `Sans tergiverser, ${e.name} répond succinctement. Il est parfois compliqué d'être à l'heure quand on est en vacances.`,
-            n: (e) => `Sans tergiverser, ${e.name} répond succinctement. Il est parfois compliqué d'être à l'heure quand on est en vacances.`,
-          },{
-            m: (e) => `${e.name} n’a probablement pas beaucoup de temps à dédier à cette conversation, il doit réserver ses billets pour Bali.`,
-            f: (e) => `${e.name} n’a probablement pas beaucoup de temps à dédier à cette conversation, elle doit réserver ses billets pour Bali.`,
-            n: (e) => `${e.name} n’a probablement pas beaucoup de temps à dédier à cette conversation, iel doit réserver ses billets pour Bali.`,
           },{
             m: (e) => `${e.name} doit probablement être en train de conduire et reste bref.`,
             f: (e) => `${e.name} doit probablement être en train de conduire et reste brève.`,
             n: (e) => `${e.name} doit probablement être en train de conduire et reste brefx.`,
+          },{
+            m: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand il faut secourir une vielle dame se faisant voler son sac.`,
+            f: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand il faut secourir une vielle dame se faisant voler son sac.`,
+            n: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand il faut secourir une vielle dame se faisant voler son sac.`,
+          }],
+          case2: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          }],
+          case3: [{
+            m: (e) => `Sans tergiverser, ${e.name} répond succinctement. Il est parfois compliqué d'être à l'heure quand on est en vacances... ou presque.`,
+            f: (e) => `Sans tergiverser, ${e.name} répond succinctement. Il est parfois compliqué d'être à l'heure quand on est en vacances... ou presque.`,
+            n: (e) => `Sans tergiverser, ${e.name} répond succinctement. Il est parfois compliqué d'être à l'heure quand on est en vacances... ou presque.`,
+          },{
+            m: (e) => `${e.name} n’a probablement pas beaucoup de temps à dédier à cette conversation, il doit réserver ses billets pour Bali.`,
+            f: (e) => `${e.name} n’a probablement pas beaucoup de temps à dédier à cette conversation, elle doit réserver ses billets pour Bali.`,
+            n: (e) => `${e.name} n’a probablement pas beaucoup de temps à dédier à cette conversation, iel doit réserver ses billets pour Bali.`,
           },{
             m: (e) => `À court de batterie, ${e.name} communique de manière synthétique.`,
             f: (e) => `À court de batterie, ${e.name} communique de manière synthétique.`,
@@ -290,13 +330,25 @@
             f: (e) => `Cette simple réponse laisse transparaitre un manque d’éloquence de la part de ${e.name}.`,
             n: (e) => `Cette simple réponse laisse transparaitre un manque d’éloquence de la part de ${e.name}.`,
           },{
-            m: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand il faut secourir une vielle dame se faisant voler son sac.`,
-            f: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand il faut secourir une vielle dame se faisant voler son sac.`,
-            n: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand il faut secourir une vielle dame se faisant voler son sac.`,
+            m: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand quelqu'un regarde au-dessus de son épaule.`,
+            f: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand quelqu'un regarde au-dessus de son épaule.`,
+            n: (e) => `Voici une réplique bien fugace de ${e.name}, il est inutile de tergiverser quand quelqu'un regarde au-dessus de son épaule.`,
           },{
             m: (e) => `${e.name} reste brève, il n’a pas de temps à perdre face à la tonne de notifications Instagram qui l'appellent.`,
             f: (e) => `${e.name} reste brève, elle n’a pas de temps à perdre face à la tonne de notifications Instagram qui l'appellent.`,
             n: (e) => `${e.name} reste brève, iel n'a pas de temps à perdre face à la tonne de notifications Instagram qui l'appellent.`,
+          },{
+            m: (e) => `${e.name} souhaite-il écourter la discussion ? Son bref message laisse planer le doute… Il pense à son prochain saut en parachute.`,
+            f: (e) => `${e.name} souhaite-elle écourter la discussion ? Son bref message laisse planer le doute… Elle pense à son prochain saut en parachute.`,
+            n: (e) => `${e.name} souhaite-iel écourter la discussion ? Son bref message laisse planer le doute… Iel pense à son prochain saut en parachute.`,
+          },{
+            m: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
+            f: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
+            n: (e) => `La conversation n’ayant pas grand intérêt, ${e.name} se contente de s’exprimer de manière synthétique.`,
+          },{
+            m: (e) => `Expéditif dans ses dires tandis qu’il pense à la tonne de vaisselle qui l'attend, ${e.name} répond abruptement.`,
+            f: (e) => `Expéditive dans ses dires tandis qu’elle pense à la tonne de vaisselle qui l'attend, ${e.name} répond abruptement.`,
+            n: (e) => `Expéditivex dans ses dires tandis qu’iel pense à la tonne de vaisselle qui l'attend, ${e.name} répond abruptement.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -324,11 +376,15 @@
             m: (e) => `Plus que concentré, ${e.name} prend le temps de rédiger des messages consistants.`,
             f: (e) => `Plus que concentrée, ${e.name} prend le temps de rédiger des messages consistants.`,
             n: (e) => `Plus que concentréx, ${e.name} prend le temps de rédiger des messages consistants.`,
-          }],
-          case4: [{
+          },{
             m: (e) => `D’excellente humeur, ${e.name} s’emballe pour décrire sa journée.`,
             f: (e) => `D’excellente humeur, ${e.name} s’emballe pour décrire sa journée.`,
             n: (e) => `D’excellente humeur, ${e.name} s’emballe pour décrire sa journée.`,
+          }],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -427,6 +483,10 @@
             m: (e) => `L’auto-correcteur est le meilleur ami de ${e.name}, ce qui limite les erreurs.`,
             f: (e) => `L’auto-correcteur est le meilleur ami de ${e.name}, ce qui limite les erreurs.`,
             n: (e) => `L’auto-correcteur est le meilleur ami de ${e.name}, ce qui limite les erreurs.`,
+          },{
+            m: (e) => `${e.name} revient sur ses dires ${e.outputValue} fois.`,
+            f: (e) => `${e.name} revient sur ses dires ${e.outputValue} fois.`,
+            n: (e) => `${e.name} revient sur ses dires ${e.outputValue} fois.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -458,11 +518,15 @@
             m: (e) => `L'hésitation s'empare de ${e.name}.`,
             f: (e) => `L'hésitation s'empare de ${e.name}.`,
             n: (e) => `L'hésitation s'empare de ${e.name}.`,
-          }],
-          case4: [  {
+          },{
             m: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
             f: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
             n: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
+          }],
+          case4: [ {
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -522,22 +586,14 @@
             n: (e) => `to do`,
           }],
           case2: [{
-            m: (e) => `${e.name} paraît hésitant et semble avoir des difficultés à exprimer ses sentiments.`,
-            f: (e) => `${e.name} paraît hésitante et semble avoir des difficultés à exprimer ses sentiments.`,
-            n: (e) => `${e.name} paraît hésitantx et semble avoir des difficultés à exprimer ses sentiments.`,
-          },{
-            m: (e) => `${e.name} semble frustré par les évènements du jour et répond de manière confuse.`,
-            f: (e) => `${e.name} semble frustrée par les évènements du jour et répond de manière confuse.`,
-            n: (e) => `${e.name} semble frustréx par les évènements du jour et répond de manière confuse.`,
-          },{
-            m: (e) => `${e.name} hésite, et semble déçu par la dernière réplique.`,
-            f: (e) => `${e.name} hésite, et semble déçue par la dernière réplique.`,
-            n: (e) => `${e.name} hésite, et semble déçux par la dernière réplique.`,
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case3: [{
-            m: (e) => `${e.name} montre hésitant et a l’air troublé.`,
-            f: (e) => `${e.name} montre hésitante et a l’air troublée.`,
-            n: (e) => `${e.name} montre hésitantx et a l’air troubléx.`,
+            m: (e) => `${e.name} se montre hésitant et a l’air troublé.`,
+            f: (e) => `${e.name} se montre hésitante et a l’air troublée.`,
+            n: (e) => `${e.name} se montre hésitantx et a l’air troubléx.`,
           },{
             m: (e) => `${e.name} paraît indécis et change sans cesse d’avis. La conversation avec ${e.contact} semble lui faire de l’effet.`,
             f: (e) => `${e.name} paraît indécise et change sans cesse d’avis. La conversation avec ${e.contact} semble lui faire de l’effet.`,
@@ -562,6 +618,18 @@
             m: (e) => `${e.name} ne paraît par vraiment concentré, il est sûrement en train de s'activer à une autre tâche plus importante.`,
             f: (e) => `${e.name} ne paraît par vraiment concentrée, elle est sûrement en train de s'activer à une autre tâche plus importante.`,
             n: (e) => `${e.name} ne paraît par vraiment concentréx, iel est sûrement en train de s'activer à une autre tâche plus importante.`,
+          },{
+            m: (e) => `${e.name} paraît hésitant et semble avoir des difficultés à exprimer ses sentiments.`,
+            f: (e) => `${e.name} paraît hésitante et semble avoir des difficultés à exprimer ses sentiments.`,
+            n: (e) => `${e.name} paraît hésitantx et semble avoir des difficultés à exprimer ses sentiments.`,
+          },{
+            m: (e) => `${e.name} semble frustré par les évènements du jour et répond de manière confuse.`,
+            f: (e) => `${e.name} semble frustrée par les évènements du jour et répond de manière confuse.`,
+            n: (e) => `${e.name} semble frustréx par les évènements du jour et répond de manière confuse.`,
+          },{
+            m: (e) => `${e.name} hésite, et semble déçu par la dernière réplique.`,
+            f: (e) => `${e.name} hésite, et semble déçue par la dernière réplique.`,
+            n: (e) => `${e.name} hésite, et semble déçux par la dernière réplique.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -578,9 +646,9 @@
       level4: {
         positive: {
           case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+            m: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
+            f: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
+            n: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
           }],
           case2: [{
             m: (e) => `to do`,
@@ -588,9 +656,25 @@
             n: (e) => `to do`,
           }],
           case3: [{
-            m: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
-            f: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
-            n: (e) => `Sans faire attention à son orthographe, ${e.name} doit s’empresser de secourir un chaton coincé en hauteur.`,
+            m: (e) => `${e.name} se montre confiant et a très sûr de lui.`,
+            f: (e) => `${e.name} se montre confiante et a très sure d'elle.`,
+            n: (e) => `${e.name} se montre confiantx et a très sur d'elui.`,
+          },{
+            m: (e) => `${e.name} paraît déterminé et se montre précis dans ses propos.`,
+            f: (e) => `${e.name} paraît déterminée et se montre précise dans ses propos.`,
+            n: (e) => `${e.name} paraît déterminéx et se montre précisex dans ses propos.`,
+          },{
+            m: (e) => `${e.name} paraît guilleret, enfin remis de sa cuite du weekend dernier.`,
+            f: (e) => `${e.name} paraît guillerette, enfin remis de sa cuite du weekend dernier.`,
+            n: (e) => `${e.name} paraît guilleretx, enfin remis de sa cuite du weekend dernier.`,
+          },{
+            m: (e) => `${e.name} a finalement réparé son écran et peu à nouveau s'exprimer de manière exacte.`,
+            f: (e) => `${e.name} a finalement réparé son écran et peu à nouveau s'exprimer de manière exacte.`,
+            n: (e) => `${e.name} a finalement réparé son écran et peu à nouveau s'exprimer de manière exacte.`,
+          },{
+            m: (e) => `${e.name} paraît concentré, il est sûrement en train de réfléchir au sens profond de la relation qu'il entretient avec ${e.contact}.`,
+            f: (e) => `${e.name} paraît concentrée, elle est sûrement en train de réfléchir au sens profond de la relation qu'elle entretient avec ${e.contact}.`,
+            n: (e) => `${e.name} paraît concentréx, iel est sûrement en train de réfléchir au sens profond de la relation qu'iel entretient avec ${e.contact}.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -618,6 +702,10 @@
             m: (e) => `Le doute prend ${e.name} qui s'empresse de se reprendre.`,
             f: (e) => `Le doute prend ${e.name} qui s'empresse de se reprendre.`,
             n: (e) => `Le doute prend ${e.name} qui s'empresse de se reprendre.`,
+          },{
+            m: (e) => `L’échange continue, même si ${e.name} semble peu sûr de lui.`,
+            f: (e) => `L’échange continue, même si ${e.name} semble peu sure d'elle.`,
+            n: (e) => `L’échange continue, même si ${e.name} semble peu sûr d'ellui.`,
           }],
           case4: [{
             m: (e) => `to do`,
