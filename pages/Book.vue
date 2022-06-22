@@ -12,6 +12,7 @@
             <div class="description">{{description1}}</div>
             <div class="perso">{{name2}}</div>
             <div class="description">{{description2}}</div>
+            <div class="space"></div>
           </div>
         <template v-for="{ message, id } in messages">
 
@@ -289,6 +290,7 @@ export default {
   scroll-snap-type: x mandatory;
   display: flex;
   overflow-x: scroll;
+  
 }
 .book-fullscreen {
 
@@ -395,4 +397,14 @@ export default {
     text-align: left;
   }
 
+// ::-webkit-scrollbar-track {
+//   background: red;
+// }
+::-webkit-scrollbar {
+  width: 1px;
+  height: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: $color-main;
+}
 </style>

@@ -42,6 +42,15 @@ export default {
 };
 </script>
 <style lang="scss">
+   @keyframes taadaa { 
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
 .didascalieBox {
   margin-top: 1.5vh;
   // margin-bottom: 1.5vh;
@@ -61,6 +70,7 @@ export default {
     color: black;
     font-size: $italic-size;
     position: relative;
+    animation: taadaa 2s ;
   }
   .didIcon {
     display: block;

@@ -541,7 +541,11 @@
             m: (e) => `to do`,
             f: (e) => `to do`,
             n: (e) => `to do`,
-          }],
+          },{
+            m: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par ce froid ambiant qui congèle ses mains ?`,
+            f: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par ce froid ambiant qui congèle ses mains ?`,
+            n: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par ce froid ambiant qui congèle ses mains ?`,
+        }],
           case2: [{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -552,9 +556,9 @@
             f: (e) => `${e.name} semble vouloir partager ses pensées les plus profondes.`,
             n: (e) => `${e.name} semble vouloir partager ses pensées les plus profondes.`,
           },{
-            m: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par froid ambiant qui congèle ses mains ?`,
-            f: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par froid ambiant qui congèle ses mains ?`,
-            n: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par froid ambiant qui congèle ses mains ?`,
+            m: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par cette chaleur ambiante qui fait suer ses mains ?`,
+            f: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par cette chaleur ambiante qui fait suer ses mains ?`,
+            n: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par cette chaleur ambiante qui fait suer ses mains ?`,
           },{
             m: (e) => `${e.name} envoie son texte d’une traite, sans presqu’aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
             f: (e) => `${e.name} envoie son texte d’une traite, sans presqu’aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
@@ -959,9 +963,9 @@
             f: (e) => `${e.name} se réjouit de l'échange, elle attend probablement une réponse croustillante !`,
             n: (e) => `${e.name} se réjouit de l'échange, iel attend probablement une réponse croustillante !`,
           },{
-            m: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'il discute aec ${e.contact}.`,
-            f: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'elle discute aec ${e.contact}.`,
-            n: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'iel discute aec ${e.contact}.`,
+            m: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'il discute avec ${e.contact}.`,
+            f: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'elle discute avec ${e.contact}.`,
+            n: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'iel discute avec ${e.contact}.`,
           }],
           case4:[,{
             m: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
@@ -1198,6 +1202,10 @@
             m: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
             f: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
             n: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
+          },{
+            m: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
+            f: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
+            n: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
           }],
           case2: [{
             m: (e) => `to do`,
@@ -1209,9 +1217,9 @@
             f: (e) => `${e.name} a les mains qui tremblent.`,
             n: (e) => `${e.name} a les mains qui tremblent.`,
           },{
-            m: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
-            f: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
-            n: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
+            m: (e) => `Les doigts suintant par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
+            f: (e) => `Les doigts suintant par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
+            n: (e) => `Les doigts suintant par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
           },{
             m: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
             f: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
@@ -1489,6 +1497,10 @@
             m: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
             f: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
             n: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+          },{
+            m: (e) => `${e.name} est à <strong>Renens</strong> et trouve la ville sympa, mais sans plus.`,
+            f: (e) => `${e.name} est à <strong>Renens</strong> et trouve la ville sympa, mais sans plus.`,
+            n: (e) => `${e.name} est à <strong>Renens</strong> et trouve la ville sympa, mais sans plus.`,
           }],
           case4: [],
           case5: []
@@ -1529,6 +1541,14 @@
             m: (e) => `La tension est à son comble.`,
             f: (e) => `La tension est à son comble.`,
             n: (e) => `La tension est à son comble.`,
+          },{
+            m: (e) => `${e.name} est à <strong>ECAL</strong> et rêve d'un café supplémentaire.`,
+            f: (e) => `${e.name} est à <strong>ECAL</strong> et rêve d'un café supplémentaire.`,
+            n: (e) => `${e.name} est à <strong>ECAL</strong> et rêve d'un café supplémentaire.`,
+          },{
+            m: (e) => `${e.name} est à <strong>quelques mètres</strong> de ${e.contact}.`,
+            f: (e) => `${e.name} est à <strong>quelques mètres</strong> de ${e.contact}.`,
+            n: (e) => `${e.name} est à <strong>quelques mètres</strong> de ${e.contact}.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1916,7 +1936,7 @@
       firstScene: [
         (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
         (e)=>`La chambre de ${e.name}.`,
-        (e)=>`Une lampe éclair la pièce. ${e.name} entre.`,
+        (e)=>`Une lampe éclaire la pièce. ${e.name} entre.`,
         (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
         (e)=>`Les lumières sont bleues, une ambiance pesente règne.`,
         (e)=>`Dans un grand bâtiment, où une sensation d'étouffement se fait ressentir. Les oiseaux chantent au loin. ${e.name} est en quête de sa liberté.`,

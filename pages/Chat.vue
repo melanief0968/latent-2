@@ -244,7 +244,7 @@ export default {
       this.charAmount = text
         .replace(/[•|\–]+/g, "") // remove special chars
         .replace(/\s/g, "").length; // remove all spaces
-
+        //Fièrement, solennellement, d'un ton grave/ a voix basse, dans sa barbe, chuchotant/ en Aparté, au public, a elle même/ crescendo / fou de rage, s'énervant/ impatiente, cassant, glacial/
       const bookVersion = text.replace(/[•|\–]+/g, (string) => {
         const { "–": eraseNumber = 0, "•": elapseNumber = 0 } =
           countCharOccurance(string);
@@ -255,7 +255,7 @@ export default {
           return " <i>(reformule)</i> ";
         }
         if (eraseNumber === 5) {
-          return " <i>(se corrige)</i> ";
+          return " <i>(se racle la gorge)</i> ";
         }
         if (eraseNumber === 6) {
           return " <i>(se rectifie)</i> ";
@@ -264,7 +264,7 @@ export default {
           return " <i>(se reprend)</i> ";
         }
         if (eraseNumber === 8) {
-          return " <i>(se ravise, puis continue)</i> ";
+          return " <i>(se ravise, puis continue impatiente)</i> ";
         }
         if (eraseNumber === 9) {
           return " <i>(hésite un instant)</i> ";
@@ -829,7 +829,8 @@ export default {
       if (timeBetweenMessages <= 1000) {
         RESULT.result = "positive";
         RESULT.outputValue = "quelques instants";
-      } else if (timeBetweenMessages <= 3000 && timeBetweenMessages >= 1001) {
+      } else if (timeBetweenMessages <= 9500 && timeBetweenMessages >= 1001) {
+        console.log("cétait entre 1 et 3 sec");
         RESULT.result = "positive";
         RESULT.outputValue = TIME;
       } else if (timeBetweenMessages >= 1000 * 60 * 60) {
@@ -861,7 +862,7 @@ export default {
         inputType: "city",
         didType: "loca",
       };
-      console.log(RESULT);
+      // console.log(RESULT);
       return RESULT;
       // }else {
       //    let city = this.city
@@ -892,7 +893,7 @@ export default {
         inputType: "distance",
         didType: "loca",
       };
-      console.log(RESULT);
+      // console.log(RESULT);
       return RESULT;
     },
 
