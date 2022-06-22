@@ -814,6 +814,10 @@
             m: (e) => `Durant ${e.outputValue}, l’échange s’interrompt, avant que ${e.name} ne réponde.`,
             f: (e) => `Durant ${e.outputValue}, l’échange s’interrompt, avant que ${e.name} ne réponde.`,
             n: (e) => `Durant ${e.outputValue}, l’échange s’interrompt, avant que ${e.name} ne réponde.`,
+          },{
+            m: (e) => `${e.name} a l'air de se dandiner sur place.`,
+            f: (e) => `${e.name} a l'air de se dandiner sur place.`,
+            n: (e) => `${e.name} a l'air de se dandiner sur place.`,
           }],
           case4: [{
             m: (e) => `to do`,

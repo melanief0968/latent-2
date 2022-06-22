@@ -110,7 +110,7 @@ export default {
           const demoConvID = fb.createEntry("/conversations/", {
             chatName, sceneStage,actStage,distance,type, messageIndex
           });
-          const demoID = "-N4T2UM-9P5zeNlZwlrQ"
+          const demoID = "-N59WhgxWfT0yIBIq3by"
           fb.createEntry(`/conversations/${demoConvID}/users`, id);
           fb.createEntry(`/conversations/${demoConvID}/users`, demoID);
           fb.createEntry(`/users/${id}/conversations/`, demoConvID);

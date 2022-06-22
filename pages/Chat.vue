@@ -85,7 +85,7 @@ import * as calc from "@/scripts/calc.js";
 // import * as bot from "@/scripts/botMsg.js";
 import bot from "@/scripts/botMsg.js";
 
-const GUIDE_BOT_ID = "-N4T2UM-9P5zeNlZwlrQ"
+const GUIDE_BOT_ID = "-N59WhgxWfT0yIBIq3by"
 
 export default {
   components: {
@@ -967,9 +967,9 @@ export default {
       // let _case = this.randomCase();
       let _case = "case3"
       const level = calc.intimacyLevel(this.name, this.contactName);
-      if (level == "level1") {
-        _case = "case3";
-      }
+      // if (level == "level1") {
+      //   _case = "case3";
+      // }
 
       let char = this.getCharAmount();
       let erase = this.getEraseAmount();
@@ -1167,16 +1167,10 @@ export default {
     },
     sendBotMessage(type, botMsg, botDid,botTimeMsg){
       if(type == "msg"){
-        console.log("HEEEEEEEEEEEE", type)
-        console.log(botMsg)
           this.sendMessage(botMsg);
-          console.log("Delayed for 1 second.");
       }else if (type == "did"){
-          console.log("DIIIIIIIIIIIIIIE", type)
           this.sendMessage(botDid);
       } else if (type == "time"){
-          console.log("TIIIIIME", type)
-      
           this.sendMessage(botTimeMsg);
       }
     }
@@ -1189,7 +1183,6 @@ export default {
     messages(value) {
       if (value.length === 0) this.setFirstScene();
       if (this.getOtherUser() == GUIDE_BOT_ID){
-        console.log("its empty & bot")
       }
     },
 

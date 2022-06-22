@@ -58,27 +58,54 @@ export function getTimeDatas(time) {
     // const TIME = minutes;
     return TIME;
   }
+  function randomLevel2(){
+    let levels = ["level1", "level2", "level2", "level3", "level3","level2",];
+    let random = Math.floor(Math.random() * levels.length);
+    const level = levels[random];
+    //console.log(level)
+    return level;
+  }
+  function randomLevel3(){
+    let levels = ["level2", "level3", "level3", "level4", "level2","level3","level1"];
+    let random = Math.floor(Math.random() * levels.length);
+    const level = levels[random];
+    //console.log(level)
+    return level;
+  }
+  function randomLevel4(){
+    let levels = ["level2", "level4", "level4", "level2", "level4","level3",];
+    let random = Math.floor(Math.random() * levels.length);
+    const level = levels[random];
+    //console.log(level)
+    return level;
+  }
 
   export function intimacyLevel(name,contact) {
     // possibilité de passer d'un level à l'autre avec Time between MSG
     let level = "level1";
     if (name == "Mélanie" && contact == "Jamy") {
-      level = "level3";
+      level = randomLevel4();
       return level;
     } else if (
       name == "Mélanie" &&
       contact == "Sébastien"
     ) {
-      level = "level2";
+      level = randomLevel2();
     } else if (
       name == "Mélanie" &&
       contact == "Mathilde"
     ) {
-      level = "level4";
+      level = randomLevel4();;
     } else if (name == "Mélanie" && contact == "Elodie") {
-      level = "level1";
-    } else {
-      level = "level3";
+      level = randomLevel2();
+    } else if (name == "Mélanie" && contact == "Achille") {
+      level = randomLevel4();
+    } else if (name == "Pauline" && contact == "Jessica") {
+      level = randomLevel3();
+    }else if (name == "Ersin" && contact == "Elodie") {
+      level = randomLevel2();
+    }else{
+      level = randomLevel3();;
     }
     return level;
   }
