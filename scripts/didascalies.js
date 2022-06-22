@@ -806,6 +806,14 @@
             m: (e) => `L’attention de ${e.name} semble entièrement focalisé sur l’échange, il répond hâtivement.`,
             f: (e) => `L’attention de ${e.name} semble entièrement focalisée sur l’échange, elle répond hâtivement.`,
             n: (e) => `L’attention de ${e.name} semble entièrement focaliséx sur l’échange, iel répond hâtivement.`,
+          },{
+            m: (e) => `${e.name} attend seulement ${e.outputValue} avant de répliquer`,
+            f: (e) => `${e.name} attend seulement ${e.outputValue} avant de répliquer`,
+            n: (e) => `${e.name} attend seulement ${e.outputValue} avant de répliquer`,
+          },{
+            m: (e) => `Durant ${e.outputValue}, l’échange s’interrompt, avant que ${e.name} ne réponde.`,
+            f: (e) => `Durant ${e.outputValue}, l’échange s’interrompt, avant que ${e.name} ne réponde.`,
+            n: (e) => `Durant ${e.outputValue}, l’échange s’interrompt, avant que ${e.name} ne réponde.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -824,11 +832,11 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case2: [  {
-            m: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
-            f: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
-            n: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
-          }],
+          case2: [ {
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
+          } ],
           case3: [{
             m: (e) => `${e.name} semble avoir eu une coupure de réseau.`,
             f: (e) => `${e.name} semble avoir eu une coupure de réseau.`,
@@ -861,6 +869,10 @@
             m: (e) => `${e.name} prend le temps de relire tous ses mots avant d'envoyer.`,
             f: (e) => `${e.name} prend le temps de relire tous ses mots avant d'envoyer.`,
             n: (e) => `${e.name} prend le temps de relire tous ses mots avant d'envoyer.`,
+          },{
+            m: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
+            f: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
+            n: (e) => `Malgré sa vie bien remplie, ${e.name} prend le temps de répondre.`,
           }],
           case4: [{
             m: (e) => `to do`,
@@ -885,14 +897,6 @@
             m: (e) => `Probablement ennuyé par son trajet, ${e.name} s’échappe grâce aux merveilleuses choses qu’il échange avec ${e.contact}.`,
             f: (e) => `Probablement ennuyé par son trajet, ${e.name} s’échappe grâce aux merveilleuses choses qu’elle échange avec ${e.contact}.`,
             n: (e) => `Probablement ennuyé par son trajet, ${e.name} s’échappe grâce aux merveilleuses choses qu’iel échange avec ${e.contact}.`,
-          },{
-            m: (e) => `${e.name} se réfugie sur son téléphone pour évacuer le stress qu’il éprouve dans son entourage bruyant.`,
-            f: (e) => `${e.name} se réfugie sur son téléphone pour évacuer le stress qu’elle éprouve dans son entourage bruyant.`,
-            n: (e) => `${e.name} se réfugie sur son téléphone pour évacuer le stress qu’iel éprouve dans son entourage bruyant.`,
-          },{
-            m: (e) => `Le temps déprimant du jour conduit ${e.name} à se réfugier dans la conversation.`,
-            f: (e) => `Le temps déprimant du jour conduit ${e.name} à se réfugier dans la conversation.`,
-            n: (e) => `Le temps déprimant du jour conduit ${e.name} à se réfugier dans la conversation.`,
           }],
           case3: [{
             m: (e) => `Les messages s’enchaînent en peu de temps, ${e.name} doit apprécier cet échange !`,
@@ -910,8 +914,15 @@
             m: (e) => `${e.name} cherche une distraction en s’attachant à la discussion.`,
             f: (e) => `${e.name} cherche une distraction en s’attachant à la discussion.`,
             n: (e) => `${e.name} cherche une distraction en s’attachant à la discussion.`,
-          }],
-          case4:[{
+          },{
+            m: (e) => `${e.name} se réfugie sur son téléphone pour évacuer le stress qu’il éprouve dans son entourage bruyant.`,
+            f: (e) => `${e.name} se réfugie sur son téléphone pour évacuer le stress qu’elle éprouve dans son entourage bruyant.`,
+            n: (e) => `${e.name} se réfugie sur son téléphone pour évacuer le stress qu’iel éprouve dans son entourage bruyant.`,
+          },{
+            m: (e) => `Le temps déprimant du jour conduit ${e.name} à se réfugier dans la conversation.`,
+            f: (e) => `Le temps déprimant du jour conduit ${e.name} à se réfugier dans la conversation.`,
+            n: (e) => `Le temps déprimant du jour conduit ${e.name} à se réfugier dans la conversation.`,
+          },{
             m: (e) => `Empressé, ${e.name} semble excité par l’échange.`,
             f: (e) => `Empressée, ${e.name} semble excitée par l’échange.`,
             n: (e) => `Empresséx, ${e.name} semble excitéx par l’échange.`,
@@ -932,10 +943,6 @@
             f: (e) => `Rien ne semble l’interrompre, ${e.name} a l’air de rayonner lorsqu’elle écrit.`,
             n: (e) => `Rien ne semble l’interrompre, ${e.name} a l’air de rayonner lorsqu’iel écrit.`,
           },{
-            m: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
-            f: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
-            n: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
-          },{
             m: (e) => `${e.name} a l’air de passer du bon temps, il ne lâche plus son téléphone !`,
             f: (e) => `${e.name} a l’air de passer du bon temps, elle ne lâche plus son téléphone !`,
             n: (e) => `${e.name} a l’air de passer du bon temps, iel ne lâche plus son téléphone !`,
@@ -943,7 +950,16 @@
             m: (e) => `${e.name} se réjouit de l'échange, il attend probablement une réponse croustillante !`,
             f: (e) => `${e.name} se réjouit de l'échange, elle attend probablement une réponse croustillante !`,
             n: (e) => `${e.name} se réjouit de l'échange, iel attend probablement une réponse croustillante !`,
+          },{
+            m: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'il discute aec ${e.contact}.`,
+            f: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'elle discute aec ${e.contact}.`,
+            n: (e) => `Puisque ${e.name} s'ennuie, un soudain entrain le prend lorsqu'iel discute aec ${e.contact}.`,
           }],
+          case4:[,{
+            m: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
+            f: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
+            n: (e) => `Probablement au fond de son canapé, ${e.name} a l’air de s’ennuyer et profite de passer du temps sur cette conversation.`,
+          },],
           case5:[{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -956,15 +972,11 @@
             f: (e) => `to do`,
             n: (e) => `to do`,
           }],
-          case2: [{
-            m: (e) => `La conversation ne plaît peut-être pas tant à ${e.name}.`,
-            f: (e) => `La conversation ne plaît peut-être pas tant à ${e.name}.`,
-            n: (e) => `La conversation ne plaît peut-être pas tant à ${e.name}.`,
-          }],
+          case2: [],
           case3: [{
-            m: (e) => `${e.name} doit se remettre de sa cuite avant d’enfin répondre.`,
-            f: (e) => `${e.name} doit se remettre de sa cuite avant d’enfin répondre.`,
-            n: (e) => `${e.name} doit se remettre de sa cuite avant d’enfin répondre.`,
+            m: (e) => `${e.name} doit se remettre de sa cuite d'hier avant d’enfin répondre.`,
+            f: (e) => `${e.name} doit se remettre de sa cuite d'hier avant d’enfin répondre.`,
+            n: (e) => `${e.name} doit se remettre de sa cuite d'hier avant d’enfin répondre.`,
           },{
             m: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Il a probablement enfin terminé la dernière saison de Game of Thrones.`,
             f: (e) => `${e.name} a plein de choses à faire et profite d’un moment pour répondre. Elle a probablement enfin terminé la dernière saison de Game of Thrones.`,
@@ -977,6 +989,14 @@
             m: (e) => `Faisant une pause dans sa lecture, ${e.name} attrape son téléphone.`,
             f: (e) => `Faisant une pause dans sa lecture, ${e.name} attrape son téléphone.`,
             n: (e) => `Faisant une pause dans sa lecture, ${e.name} attrape son téléphone.`,
+          },{
+            m: (e) => `La conversation ne plaît peut-être pas tant à ${e.name}.`,
+            f: (e) => `La conversation ne plaît peut-être pas tant à ${e.name}.`,
+            n: (e) => `La conversation ne plaît peut-être pas tant à ${e.name}.`,
+          },{
+            m: (e) => `${e.name} se manifeste finalement ${e.outputValue} plus tard.`,
+            f: (e) => `${e.name} se manifeste finalement ${e.outputValue} plus tard.`,
+            n: (e) => `${e.name} se manifeste finalement ${e.outputValue} plus tard.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1006,11 +1026,15 @@
             m: (e) => `${e.name} ne veut pas laisser le temps à ${e.contact} de répondre.`,
             f: (e) => `${e.name} ne veut pas laisser le temps à ${e.contact} de répondre.`,
             n: (e) => `${e.name} ne veut pas laisser le temps à ${e.contact} de répondre.`,
-          }],
-          case4:[{
+          },{
             m: (e) => `${e.name} se synchronise à l’échange, y a-t-il des sentiments dans l’air?`,
             f: (e) => `${e.name} se synchronise à l’échange, y a-t-il des sentiments dans l’air?`,
             n: (e) => `${e.name} se synchronise à l’échange, y a-t-il des sentiments dans l’air?`,
+          }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5:[{
             m: (e) => `to do`,
@@ -1117,15 +1141,23 @@
             m: (e) => `Avec un tel entraînement, le record du monde de dactylo est presque franchi par ${e.name}.`,
             f: (e) => `Avec un tel entraînement, le record du monde de dactylo est presque franchi par ${e.name}.`,
             n: (e) => `Avec un tel entraînement, le record du monde de dactylo est presque franchi par ${e.name}.`,
-          }],
-          case4:[{
+          },{
+            m: (e) => `${e.name} écrit à une vitesse de ${e.outputValue} mots par minute.`,
+            f: (e) => `${e.name} écrit à une vitesse de ${e.outputValue} mots par minute.`,
+            n:(e) => `${e.name} écrit à une vitesse de ${e.outputValue} mots par minute.`,
+          },{
             m: (e) => `La rapidité de ${e.name} atteste son intérêt pour la conversation.`,
             f: (e) => `La rapidité de ${e.name} atteste son intérêt pour la conversation.`,
             n: (e) => `La rapidité de ${e.name} atteste son intérêt pour la conversation.`,
           },{
-            m: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’ensemble des personnages se demande d’ou provient cette dextérité.`,
-            f: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’ensemble des personnages se demande d’ou provient cette dextérité.`,
-            n: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’ensemble des personnages se demande d’ou provient cette dextérité.`,
+            m: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’assemblée se demande d’ou provient cette dextérité.`,
+            f: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’assemblée se demande d’ou provient cette dextérité.`,
+            n: (e) => `${e.name} rédige son message avec une impressionnante agilité. L’assemblée se demande d’ou provient cette dextérité.`,
+          }],
+          case4:[{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5:[{
             m: (e) => `to do`,
@@ -1135,9 +1167,9 @@
         },
         negative: {
           case1: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+            m: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
+            f: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
+            n: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
           }],
           case2: [{
             m: (e) => `to do`,
@@ -1153,9 +1185,9 @@
             f: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
             n: (e) => `Les doigts congelés par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
           },{
-            m: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
-            f: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
-            n: (e) => `Il fait froid aujourd'hui. Il est difficile de converser les doigts congelés.`,
+            m: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
+            f: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
+            n: (e) => `En une minute, ${e.name} rédige en moyenne ${e.outputValue} mots.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1172,18 +1204,14 @@
       level3: {
         positive: {
           case1: [{
-            m: (e) => `Cette fréquence de frappe doit certainement signifier que la conversation plaît à ${e.name}.`,
-            f: (e) => `Cette fréquence de frappe doit certainement signifier que la conversation plaît à ${e.name}.`,
-            n:(e) => `Cette fréquence de frappe doit certainement signifier que la conversation plaît à ${e.name}.`,
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case2: [{
-            m: (e) => `${e.name} doit probablement s’ennuyer. À passer trop de temps sur son téléphone, il écrit aussi vite que l’éclair.`,
-            f: (e) => `${e.name} doit probablement s’ennuyer. À passer trop de temps sur son téléphone, elle écrit aussi vite que l’éclair.`,
-            n: (e) => `${e.name} doit probablement s’ennuyer. À passer trop de temps sur son téléphone, iel écrit aussi vite que l’éclair.`,
-          },{
-            m: (e) => `Il semble que ${e.name} veut mettre un terme à la conversation. Sa réponse parait hâtive.`,
-            f: (e) => `Il semble que ${e.name} veut mettre un terme à la conversation. Sa réponse parait hâtive.`,
-            n: (e) => `Il semble que ${e.name} veut mettre un terme à la conversation. Sa réponse parait hâtive.`,
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case3: [{
             m: (e) => `La rapidité avec laquelle ${e.name} rédige son message est sûrement dû à son usage intensif du smartphone.`,
@@ -1205,8 +1233,19 @@
             m: (e) => `${e.name} écrit rapidement, mais ne fait peut être pas réellement attention à son orthographe.`,
             f: (e) => `${e.name} écrit rapidement, mais ne fait peut être pas réellement attention à son orthographe.`,
             n: (e) => `${e.name} écrit rapidement, mais ne fait peut être pas réellement attention à son orthographe.`,
-          }],
-          case4: [{
+          },{
+            m: (e) => `${e.name} doit probablement s’ennuyer. À passer trop de temps sur son téléphone, il écrit aussi vite que l’éclair.`,
+            f: (e) => `${e.name} doit probablement s’ennuyer. À passer trop de temps sur son téléphone, elle écrit aussi vite que l’éclair.`,
+            n: (e) => `${e.name} doit probablement s’ennuyer. À passer trop de temps sur son téléphone, iel écrit aussi vite que l’éclair.`,
+          },{
+            m: (e) => `Il semble que ${e.name} veut mettre un terme à la conversation. Sa réponse parait hâtive.`,
+            f: (e) => `Il semble que ${e.name} veut mettre un terme à la conversation. Sa réponse parait hâtive.`,
+            n: (e) => `Il semble que ${e.name} veut mettre un terme à la conversation. Sa réponse parait hâtive.`,
+          },{
+            m: (e) => `Cette fréquence de frappe doit certainement signifier que la conversation plaît à ${e.name}.`,
+            f: (e) => `Cette fréquence de frappe doit certainement signifier que la conversation plaît à ${e.name}.`,
+            n:(e) => `Cette fréquence de frappe doit certainement signifier que la conversation plaît à ${e.name}.`,
+          },{
             m: (e) => `Plus rien autour n’a l’air d’importer, ${e.name} a l’air tout emoustillé par la conversation.`,
             f: (e) => `Plus rien autour n’a l’air d’importer, ${e.name} a l’air tout emoustillé par la conversation.`,
             n:(e) => `Plus rien autour n’a l’air d’importer, ${e.name} a l’air tout emoustillé par la conversation.`,
@@ -1226,6 +1265,11 @@
             m: (e) => `${e.name} a bien besoin d’une sieste, mais l’excitation de la conversation semble le garder alerte.`,
             f: (e) => `${e.name} a bien besoin d’une sieste, mais l’excitation de la conversation semble la garder alerte.`,
             n: (e) => `${e.name} a bien besoin d’une sieste, mais l’excitation de la conversation semble iel garder alerte.`,
+          }],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5:[{
             m: (e) => `to do`,
@@ -1248,9 +1292,9 @@
             n: (e) => `Encercléx et oppressée dans le métro, ${e.name} prend son temps pour rédiger son message.`,
           }],
           case2: [{
-            m: (e) => `${e.name} cherche ses mots et son expression semble troublée.`,
-            f: (e) => `${e.name} cherche ses mots et son expression semble troublée.`,
-            n: (e) => `${e.name} cherche ses mots et son expression semble troublée.`,
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case3: [{
             m: (e) => `${e.name} paraît constamment dérangé par le brouhaha autour et peine à se concentrer pour écrire.`,
@@ -1292,11 +1336,27 @@
             m: (e) => `L'oiseau qui vient de passer par dessus ${e.name} a dû très certainement le distraire.`,
             f: (e) => `L'oiseau qui vient de passer par dessus ${e.name} a dû très certainement la distraire.`,
             n: (e) => `L'oiseau qui vient de passer par dessus ${e.name} a dû très certainement lea distraire.`,
-          }],
-          case4: [{
+          },{
+            m: (e) => `${e.name} semble époustouflé par ce qui se déroule devant lui et prend son temps pour écrire.`,
+            f: (e) => `${e.name} semble époustouflée par ce qui se déroule devant elle et prend son temps pour écrire.`,
+            n: (e) => `${e.name} semble époustoufléx par ce qui se déroule devant ellui et prend son temps pour écrire.`,
+          },{
+            m: (e) => `Dans l’étreinte de la foule qui le bouscule, ${e.name} a des difficultés à écrire.`,
+            f: (e) => `Dans l’étreinte de la foule qui la bouscule, ${e.name} a des difficultés à écrire.`,
+            n: (e) => `Dans l’étreinte de la foule qui lea bouscule, ${e.name} a des difficultés à écrire.`,
+          },{
+            m: (e) => `${e.name} cherche ses mots et son expression semble troublée.`,
+            f: (e) => `${e.name} cherche ses mots et son expression semble troublée.`,
+            n: (e) => `${e.name} cherche ses mots et son expression semble troublée.`,
+          },{
             m: (e) => `${e.name} prend soin de choisir ses mots, cette discussion doit lui tenir à coeur.`,
             f: (e) => `${e.name} prend soin de choisir ses mots, cette discussion doit lui tenir à coeur.`,
             n:(e) => `${e.name} prend soin de choisir ses mots, cette discussion doit lui tenir à coeur.`,
+          }],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `${e.name} tient à répondre, même si il doit interrompre le film passionnant qu’il est en train de regarder.`,
@@ -1313,23 +1373,27 @@
             n: (e) => `to do`,
           }],
           case2: [{
-            m: (e) => `${e.name} s’empresse d’écrire afin de mettre un terme à la conversation.`,
-            f: (e) => `${e.name} s’empresse d’écrire afin de mettre un terme à la conversation.`,
-            n: (e) => `${e.name} s’empresse d’écrire afin de mettre un terme à la conversation.`,
-          },{
             m: (e) => `${e.name} paraît énervé par le mauvais café qu’on lui sert, et compose rapidement son message.`,
             f: (e) => `${e.name} paraît énervée par le mauvais café qu’on lui sert, et compose rapidement son message.`,
             n: (e) => `${e.name} paraît énervéx par le mauvais café qu’on lui sert, et compose rapidement son message.`,
           }],
           case3: [{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
-          }],
-          case4: [{
+            m: (e) => `${e.name} s’empresse d’écrire afin de mettre un terme à la conversation.`,
+            f: (e) => `${e.name} s’empresse d’écrire afin de mettre un terme à la conversation.`,
+            n: (e) => `${e.name} s’empresse d’écrire afin de mettre un terme à la conversation.`,
+          },{
+            m: (e) => `${e.name} paraît énervé par le mauvais café qu’on lui a servi ce matin, et compose rapidement son message.`,
+            f: (e) => `${e.name} paraît énervée par le mauvais café qu’on lui a servi ce matin, et compose rapidement son message.`,
+            n: (e) => `${e.name} paraît énervéx par le mauvais café qu’on lui a servi ce matin, et compose rapidement son message.`,
+          },{
             m: (e) => `Plus rien autour n’a l’air d’importer, ${e.name} est tout émoustillé par la conversation.`,
             f: (e) => `Plus rien autour n’a l’air d’importer, ${e.name} est tout émoustillée par la conversation.`,
             n: (e) => `Plus rien autour n’a l’air d’importer, ${e.name} est tout émoustilléx par la conversation.`,
+          }],
+          case4: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
           case5: [{
             m: (e) => `to do`,
@@ -1357,9 +1421,9 @@
             f: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Elle ne peut plus d’écrire à la vitesse qu’elle souhaite.`,
             n: (e) => `Le téléphone de ${e.name} tombe dans les toilettes. Iel ne peut plus d’écrire à la vitesse qu’iel souhaite.`,
           }, {
-            m: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, il reprend la conversation.`,
-            f: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, elle reprend la conversation.`,
-            n: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, iel reprend la conversation.`,
+            m: (e) => `${e.name} se tape le gros orteil contre le coin de la table. Après quelques jurons, il reprend la conversation.`,
+            f: (e) => `${e.name} se tape le gros orteil contre le coin de la table. Après quelques jurons, elle reprend la conversation.`,
+            n: (e) => `${e.name} se tape le gros orteil contre le coin de la table. Après quelques jurons, iel reprend la conversation.`,
           },{
             m: (e) => `La fatigue atteint ${e.name} qui tape à la vitesse d'un escargot.`,
             f: (e) => `La fatigue atteint ${e.name} qui tape à la vitesse d'un escargot.`,
@@ -1375,9 +1439,9 @@
             n: (e) => `to do`,
           }],
           case5:[{
-            m: (e) => `to do`,
-            f: (e) => `to do`,
-            n: (e) => `to do`,
+            m: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, il reprend la conversation.`,
+            f: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, elle reprend la conversation.`,
+            n: (e) => `${e.name} se tape le gros orteil contre le pied du lit. Après quelques jurons, iel reprend la conversation.`,
           }]
         },
       },
@@ -1390,13 +1454,13 @@
           case1: [],
           case2: [],
           case3: [{
-            m: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
-            f: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
-            n: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            m: (e) => `À l'instant, ${e.name} se rend sur l'échange.`,
+            f: (e) => `À l'instant, ${e.name} se rend sur l'échange.`,
+            n: (e) => `À l'instant, ${e.name} se rend sur l'échange.`,
           },{
-            m: (e) => `En ce ${e.outputValue}, ${e.name} envoie un nouveau message.`,
-            f: (e) => `En ce ${e.outputValue}, ${e.name} envoie un nouveau message.`,
-            n: (e) => `En ce ${e.outputValue}, ${e.name} envoie un nouveau message.`,
+            m: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+            f: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+            n: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
           }],
           case4: [],
           case5: []
@@ -1433,6 +1497,10 @@
             m: (e) => `Le ciel est bleu, le ciel brille.`,
             f: (e) => `Le ciel est bleu, le ciel brille.`,
             n: (e) => `Le ciel est bleu, le ciel brille.`,
+          },{
+            m: (e) => `La tension est à son comble.`,
+            f: (e) => `La tension est à son comble.`,
+            n: (e) => `La tension est à son comble.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1517,6 +1585,18 @@
             m: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
             f: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
             n: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
+          },{
+            m: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            f: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            n: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+          },{
+            m: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+            f: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+            n: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+          },{
+            m: (e) => `Puisque ${e.name} s’ennuie, il regarde par la fenêtre.`,
+            f: (e) => `Puisque ${e.name} s’ennuie, elle regarde par la fenêtre.`,
+            n: (e) => `Puisque ${e.name} s’ennuie, iel regarde par la fenêtre.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1572,6 +1652,14 @@
             m: (e) => `On entend un chat qui ronronne à côté de ${e.name}.`,
             f: (e) => `On entend un chat qui ronronne à côté de ${e.name}.`,
             n: (e) => `On entend un chat qui ronronne à côté de ${e.name}.`,
+          },{
+            m: (e) => `À l'instant ${e.name} se rend sur l'échange.`,
+            f: (e) => `À l'instant ${e.name} se rend sur l'échange.`,
+            n: (e) => `À l'instant ${e.name} se rend sur l'échange.`,
+          },{
+            m: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+            f: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
+            n: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
           }],
           case4:[{
             m: (e) => `to do`,
@@ -1644,6 +1732,10 @@
             m: (e) => `La température paraît peu clémente à ${e.outputValue}.`,
             f: (e) => `La température paraît peu clémente à ${e.outputValue}.`,
             n: (e) => `La température paraît peu clémente à ${e.outputValue}.`,
+          },{
+            m: (e) => `${e.name} est arrivé à ${e.outputValue}.`,
+            f: (e) => `${e.name} est arrivée à ${e.outputValue}.`,
+            n: (e) => `${e.name} est arrivéx à ${e.outputValue}.`,
           }
         ],
         }
@@ -1747,17 +1839,23 @@
   initScenes:{
       scene: [
           (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-          (e)=>`Un salon. Une grande pièce carrée au centre de laquelle trône un canapé ancien. En face du canapé crépite un feu de cheminée allumé il y a maintenant quelques heures. ${e.name}, sur le canapé, laisse vagabonder son regard entre son téléphone et le feu.`,
-          (e)=>`Dans un grand parc se trouve un banc. Les oiseaux chantent autour de ${e.name}. Au loin, des cris d'enfants se font entrendre. Le soleil est haut dans le ciel mais l'air est doux. Une petite brise vient carresser les cheveux de ${e.name}.`,
-          (e)=>`La nuit tombe doucement sur ${e.name}. Une assiette à moitié vide trône sur la table aux côtés d'un verre de vin déjà bien entammé. La télévision dans la salle à côté ne produit qu'un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
-          (e)=>`Le réveil sonne alors que ${e.name} ouvre difficilement les yeux. Un fin rayon de soleil passe au travers des volets et vient éclairer un coin de la chambre. Les habits de la veille trainent encore à côté du lit. ${e.name} tente de profiter des ses derniers instants dans son lit puis se décide enfin à prendre son téléphone.`,
+          (e)=>`Les lumières sont bleues, une ambiance pesente règne.`,
+          (e)=>`Dans un grand bâtiment, où une sensation d'étouffement se fait ressentir. Les oiseaux chantent au loin. ${e.name} est en quête de sa liberté.`,
+          (e)=>`Le jour est levé du côté de ${e.name}. Des tables disposées de manière structurée. On entend un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
           (e)=>`Au milieu de la scène, un fauteuil. ${e.name} se démène pour retrouver une chaussette manquante. `,
-          (e)=>`Une gare, il est 10h30. ${e.name} attend.`,
+          (e)=>`Une grande pièce, il est passé 9h. ${e.name} attend.`,
           (e)=>`${e.name} s'avance d'un pas décidé et s'arrête au centre de la scène.`,
-          (e)=>`Des arbres, ${e.name} marche.`,
+          (e)=>`Le réveil était difficile pour ${e.name}. Les yeux encore collés malgré l'heure avancée, ${e.name} se lance à la recherche d ${e.contact}.`,
+          // (e)=>`Un salon. Une grande pièce carrée au centre de laquelle trône un canapé ancien. En face du canapé crépite un feu de cheminée allumé il y a maintenant quelques heures. ${e.name}, sur le canapé, laisse vagabonder son regard entre son téléphone et le feu.`,
+          // (e)=>`Dans un grand parc se trouve un banc. Les oiseaux chantent autour de ${e.name}. Au loin, des cris d'enfants se font entrendre. Le soleil est haut dans le ciel mais l'air est doux. Une petite brise vient carresser les cheveux de ${e.name}.`,
+          // (e)=>`La nuit tombe doucement sur ${e.name}. Une assiette à moitié vide trône sur la table aux côtés d'un verre de vin déjà bien entammé. La télévision dans la salle à côté ne produit qu'un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
+          // (e)=>`Une gare, il est 10h30. ${e.name} attend.`,
+          // (e)=>`Le réveil sonne alors que ${e.name} ouvre difficilement les yeux. Un fin rayon de soleil passe au travers des volets et vient éclairer un coin de la chambre. Les habits de la veille trainent encore à côté du lit. ${e.name} tente de profiter des ses derniers instants dans son lit puis se décide enfin à poser les pieds sur le sol.`,
+          // (e)=>`Des arbres, ${e.name} marche.`,
       ],
       acts:[
         (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Changement de décor, un spot illumine le centre de la pièce, ${e.name} se etrouve seul sur scène, l'air perdu.`,
         (e)=>`Le temps passe. Au premier plan se trouve plusieurs chaises. Des bruits résonnent depuis la cours extérieur. Une fenêtre ouverte en arrière plan laisse passer un courant d'air qui soulève les photos au mur. Sur la droite, une porte s'ouvre doucement pour laisser entrer ${e.name}. ${e.name} déhambule devant les photos avant de prendre place au premier plan.`,
         (e)=>`La pluie ruisselle silencieusement sur la fenêtre de train. De discussions se font vaguement entendre dans le wagon. En dehors, des champs s'étendent à parte de vue. Des arbres se font appercevoir par ci par là. On peut distinguer quelques troupeaux parsemés au milieu des champs. La distance entre ${e.name} et ${e.contact} se fait de plus en plus ressentir.`,
 
@@ -1769,6 +1867,20 @@
         (e)=>`La chambre de ${e.name}.`,
         (e)=>`Le bureau de ${e.name}. Dans une pièce exigüe, un grand bureau se tient fier et droit. A gauche du bureau se trouve une bibliothèque. Elle est pleine de livres tous plus divers les uns des autres. ${e.name} entre et va choisir un livre.`,
         (e)=>`Une lampe éclair la pièce. ${e.name} entre.`,
+        (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
+        (e)=>`Les lumières sont bleues, une ambiance pesente règne.`,
+        (e)=>`Dans un grand bâtiment, où une sensation d'étouffement se fait ressentir. Les oiseaux chantent au loin. ${e.name} est en quête de sa liberté.`,
+        (e)=>`Le jour est levé du côté de ${e.name}. Des tables disposées de manière structurée. On entend un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
+        (e)=>`Au milieu de la scène, un fauteuil. ${e.name} se démène pour retrouver une chaussette manquante. `,
+        (e)=>`Une grande pièce, il est passé 9h. ${e.name} attend.`,
+        (e)=>`${e.name} s'avance d'un pas décidé et s'arrête au centre de la scène.`,
+        (e)=>`Le réveil était difficile pour ${e.name}. Les yeux encore collés malgré l'heure avancée, ${e.name} se lance à la recherche d ${e.contact}.`,
+        (e)=>`Un salon. Une grande pièce carrée au centre de laquelle trône un canapé ancien. En face du canapé crépite un feu de cheminée allumé il y a maintenant quelques heures. ${e.name}, sur le canapé, laisse vagabonder son regard entre son téléphone et le feu.`,
+        (e)=>`Dans un grand parc se trouve un banc. Les oiseaux chantent autour de ${e.name}. Au loin, des cris d'enfants se font entrendre. Le soleil est haut dans le ciel mais l'air est doux. Une petite brise vient carresser les cheveux de ${e.name}.`,
+        (e)=>`La nuit tombe doucement sur ${e.name}. Une assiette à moitié vide trône sur la table aux côtés d'un verre de vin déjà bien entammé. La télévision dans la salle à côté ne produit qu'un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
+        (e)=>`Une gare, il est 10h30. ${e.name} attend.`,
+        (e)=>`Le réveil sonne alors que ${e.name} ouvre difficilement les yeux. Un fin rayon de soleil passe au travers des volets et vient éclairer un coin de la chambre. Les habits de la veille trainent encore à côté du lit. ${e.name} tente de profiter des ses derniers instants dans son lit puis se décide enfin à poser les pieds sur le sol.`,
+        (e)=>`Des arbres, ${e.name} marche.`,
       ]
   }
 
