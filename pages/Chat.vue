@@ -1145,9 +1145,7 @@ export default {
         grayDot: 0,
       }
         newIndex = botArray[i]
-        console.log(newIndex, i)
         msgText = newIndex.text
-        console.log(msgText)
 
         if(botArray[i].waitForResp){
           console.log("I STOPPED", msgText);

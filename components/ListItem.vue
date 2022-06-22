@@ -68,7 +68,7 @@ export default {
 .contactName {
   font-family: $font-main;
   font-size: $medium-size;
-  text-transform: capitalize;
+  // text-transform: capitalize;
 }
 .lastItalic {
   font-size: $msg-size;

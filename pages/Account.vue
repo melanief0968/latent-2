@@ -35,6 +35,8 @@
           <option>riche</option>
           <option>perdu</option>
           <option>dépressif</option>
+          <option>facinant</option>
+          <option>attachant</option>
 
         </select>
         <select class="attributs" v-model="prop1"  v-else-if="currentUserGender() === 'f' ">
@@ -49,6 +51,8 @@
           <option>riche</option>
           <option>perdue</option>
           <option>dépressive</option>
+          <option>facinante</option>
+          <option>attachante</option>
         </select>
         ,
         <select class="attributs" v-model="prop2"  v-if="currentUserGender() === 'm' ">
@@ -58,11 +62,13 @@
           <option>barbu</option>
           <option>courtois</option>
           <option>courbé</option>
-          <option>élancé</option>
+          <option>fragile</option>
           <option>troublé</option>
           <option>naïf</option>
           <option>timide</option>
           <option>têtu</option>
+          <option>éblouissant</option>
+          <option>agréable</option>
         </select> 
         <select class="attributs" v-model="prop2"  v-if="currentUserGender() === 'f' ">
           <option disabled value=""></option>
@@ -71,11 +77,13 @@
           <option>poilue</option>
           <option>courtoise</option>
           <option>courbée</option>
-          <option>élancée</option>
+          <option>fragile</option>
           <option>troublée</option>
           <option>naive</option>
           <option>timide</option>
           <option>têtue</option>
+          <option>éblouissante</option>
+          <option>agréable</option>
         </select>
         mais
         <select class="attributs" v-model="prop3"  v-if="currentUserGender() === 'm' ">
@@ -93,6 +101,8 @@
           <option>drôle</option>
           <option>intriguant</option>
           <option>très pauvre</option>
+          <option>remarquable</option>
+          <option>charmant</option>
         </select>
         <select class="attributs" v-model="prop3"  v-if="currentUserGender() === 'f' ">
           <option disabled value=""></option>
@@ -109,6 +119,8 @@
           <option>drôle</option>
           <option>intriguante</option>
           <option>très pauvre</option>
+          <option>remarquable</option>
+          <option>charmante</option>
         </select>.
       </div>
       <div class="italic">
@@ -120,6 +132,10 @@
           <option>d'un club secret</option>
           <option>d'une équipe sportive</option>
           <option>d'une riche famille</option>
+          <option>d'un groupe de métal</option>
+          <option>d'une association de geeks</option>
+          <option>des meilleurs</option>
+          <option>des suspects de l'enquête en cours</option>
           <option>des saltimbanques</option>
           <option>des fans de Marvel</option>
         </select> et se montre toujours
@@ -142,7 +158,7 @@
           <option>généreuse</option>
           <option>optimiste</option>
           <option>patiente</option>
-        </select>, constamment
+        </select>, et paraît constamment
         <select class="attributs" v-model="prop6"  v-if="currentUserGender() === 'm' ">
           <option disabled value=""></option>
           <option>fatigué</option>
@@ -171,9 +187,10 @@
           <option>accomplir son rêve</option>
           <option>l'aventure</option>
           <option>la quête de la découverte</option>
+          <option>les autres</option>
           <option>le théâtre</option>
           <option>la découverte de son grand amour</option>
-          <option>le vin</option>
+          <option>son osbession pour le vin</option>
           <option>la destruction de sa famille</option>
           <option>l'amour de la cuisine</option>
           <option>sa passion de la tisane</option>

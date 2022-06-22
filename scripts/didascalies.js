@@ -706,7 +706,11 @@
             m: (e) => `L’échange continue, même si ${e.name} semble peu sûr de lui.`,
             f: (e) => `L’échange continue, même si ${e.name} semble peu sure d'elle.`,
             n: (e) => `L’échange continue, même si ${e.name} semble peu sûr d'ellui.`,
-          }],
+          },{
+            m: (e) => `Une fois son message envoyé, ${e.name} a soudainement besoin de s'aérer l'esprit.`,
+            f: (e) => `Une fois son message envoyé, ${e.name} a soudainement besoin de s'aérer l'esprit.`,
+            n: (e) => `Une fois son message envoyé, ${e.name} a soudainement besoin de s'aérer l'esprit.`,
+            }],
           case4: [{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -975,8 +979,16 @@
             m: (e) => `to do`,
             f: (e) => `to do`,
             n: (e) => `to do`,
+          },{
+            f: (e) => `Après ${e.outputValue} de vol, l'avion de ${e.name} atterrit enfin. Il peut finalement réactiver ses données cellulaires.`,
+            f: (e) => `Après ${e.outputValue} de vol, l'avion de ${e.name} atterrit enfin. elle peut finalement réactiver ses données cellulaires.`,
+            n: (e) => `Après ${e.outputValue} de vol, l'avion de ${e.name} atterrit enfin. Iel peut finalement réactiver ses données cellulaires.`,
+            }],
+          case2: [{
+            m: (e) => `to do`,
+            f: (e) => `to do`,
+            n: (e) => `to do`,
           }],
-          case2: [],
           case3: [{
             m: (e) => `${e.name} doit se remettre de sa cuite d'hier avant d’enfin répondre.`,
             f: (e) => `${e.name} doit se remettre de sa cuite d'hier avant d’enfin répondre.`,
@@ -1001,7 +1013,11 @@
             m: (e) => `${e.name} se manifeste finalement ${e.outputValue} plus tard.`,
             f: (e) => `${e.name} se manifeste finalement ${e.outputValue} plus tard.`,
             n: (e) => `${e.name} se manifeste finalement ${e.outputValue} plus tard.`,
-          }],
+          },{
+            m: (e) => `${e.name} aperçoit un papillon et hésite à lui courir après, mais il se tourne finalement vers ${e.contact}.`,
+            f: (e) => `${e.name} aperçoit un papillon et hésite à lui courir après, mais elle se tourne finalement vers ${e.contact}.`,
+            n: (e) => `${e.name} aperçoit un papillon et hésite à lui courir après, mais iel se tourne finalement vers ${e.contact}.`,
+            }],
           case4:[{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -1065,7 +1081,15 @@
             m: (e) => `Une crise existentielle prend ${e.name} aux tripes.`,
             f: (e) => `Une crise existentielle prend ${e.name} aux tripes.`,
             n: (e) => `Une crise existentielle prend ${e.name} aux tripes.`,
-          }],
+          },{
+            m: (e) => `${e.name} réalise soudainement que son porte-monnaie a disparu, mais réalise aussitôt qu'il se trouve dans une petite poche de sa veste.`,
+            f: (e) => `${e.name} réalise soudainement que son porte-monnaie a disparu, mais réalise aussitôt qu'il se trouve dans une petite poche de sa veste.`,
+            n: (e) => `${e.name} réalise soudainement que son porte-monnaie a disparu, mais réalise aussitôt qu'il se trouve dans une petite poche de sa veste.`,
+            },{
+              m: (e) => `Manquant de sucre pour son café, ${e.name} va sonner chez sa vieille voisine. Il passera ${e.outputValue} à boire le thé avec elle. Il rentrera finalement chez lui, oubliant de prendre le sucre.`,
+              f: (e) => `Manquant de sucre pour son café, ${e.name} va sonner chez sa vieille voisine. Elle passera ${e.outputValue} à boire le thé avec elle. Elle rentrera finalement chez lui, oubliant de prendre le sucre.`,
+              n: (e) => `Manquant de sucre pour son café, ${e.name} va sonner chez sa vieille voisine. Iel passera ${e.outputValue} à boire le thé avec elle. Iel rentrera finalement chez lui, oubliant de prendre le sucre.`,
+              }],
           case4:[{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -1490,9 +1514,9 @@
             n: (e) => `to do`,
           }],
           case3: [{
-            m: (e) => `Il est ${e.outputValue} et ${e.name} ne s'est toujours pas lavé les dents.`,
-            f: (e) => `Il est ${e.outputValue} et ${e.name} ne s'est toujours pas lavé les dents.`,
-            n: (e) => `Il est ${e.outputValue} et ${e.name} ne s'est toujours pas lavé les dents.`,
+            m: (e) => `Il est passé 9h et ${e.name} ne s'est toujours pas lavé les dents.`,
+            f: (e) => `Il est passé 9h et ${e.name} ne s'est toujours pas lavé les dents.`,
+            n: (e) => `Il est passé 9h et ${e.name} ne s'est toujours pas lavé les dents.`,
           },{
             m: (e) => `Les oiseaux chantent, le soleil brille.`,
             f: (e) => `Les oiseaux chantent, le soleil brille.`,
@@ -1664,7 +1688,11 @@
             m: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
             f: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
             n: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
-          }],
+          },{
+            m: (e) => `Pris d'une envie urgente, ${e.name} décide d'utiliser les toilettes publics les plus proches. Ce n'est que plus tard que ${e.name} remarquera qu'il avait du papier toilette collé à sa chaussure.`,
+            f: (e) => `Prise d'une envie urgente, ${e.name} décide d'utiliser les toilettes publics les plus proches. Ce n'est que plus tard que ${e.name} remarquera qu'elle avait du papier toilette collé à sa chaussure.`,
+            n: (e) => `Pris d'une envie urgente, ${e.name} décide d'utiliser les toilettes publics les plus proches. Ce n'est que plus tard que ${e.name} remarquera qu'iel avait du papier toilette collé à sa chaussure.`,
+            }],
           case4:[{
             m: (e) => `to do`,
             f: (e) => `to do`,
@@ -1740,6 +1768,10 @@
             m: (e) => `${e.name} est arrivé à ${e.outputValue}.`,
             f: (e) => `${e.name} est arrivée à ${e.outputValue}.`,
             n: (e) => `${e.name} est arrivéx à ${e.outputValue}.`,
+          },{
+            m: (e) => `${e.name} est à ${e.outputValue} et rêve d'un café.`,
+            f: (e) => `${e.name} est à ${e.outputValue} et rêve d'un café.`,
+            n: (e) => `${e.name} est à ${e.outputValue} et rêve d'un café.`,
           }
         ],
         }
@@ -1754,7 +1786,11 @@
             m: (e) => `Une visite de ${e.outputValue} s'impose pour ${e.name}.`,
             f: (e) => `Une visite de ${e.outputValue} s'impose pour ${e.name}.`,
             n: (e) => `Une visite de ${e.outputValue} s'impose pour ${e.name}.`,
-          }],
+          },{
+            m: (e) => `Son sens de l'orientation lui faisant défaut, ${e.name} se perdra 5 fois avant d'arriver à ${e.outputValue}`,
+            f: (e) => `Son sens de l'orientation lui faisant défaut, ${e.name} se perdra 5 fois avant d'arriver à ${e.outputValue}`,
+            n: (e) => `Son sens de l'orientation lui faisant défaut, ${e.name} se perdra 5 fois avant d'arriver à ${e.outputValue}`,
+            }],
         }
       }
     },
@@ -1826,7 +1862,15 @@
             m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
             f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
             n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
-          }],
+          },{
+            m: (e) => `${e.name} réalise qu'il manque de lait pour finir son gâteau. ${e.name} enfile une paire de claquettes et cours à l'épicerie du coin.`,
+            f: (e) => `${e.name} réalise qu'elle manque de lait pour finir son gâteau. ${e.name} enfile une paire de claquettes et cours à l'épicerie du coin.`,
+            n: (e) => `${e.name} réalise qu'iel manque de lait pour finir son gâteau. ${e.name} enfile une paire de claquettes et cours à l'épicerie du coin.`,
+          },{
+            m: (e) => `${e.name} court pour avoir son train. Malheureusement ${e.name} se trompe de quai et voit son train partir sous ses yeux.`,
+            f: (e) => `${e.name} court pour avoir son train. Malheureusement ${e.name} se trompe de quai et voit son train partir sous ses yeux.`,
+            n: (e) => `${e.name} court pour avoir son train. Malheureusement ${e.name} se trompe de quai et voit son train partir sous ses yeux.`,
+            }],
         }
       },
       level4: {
@@ -1835,7 +1879,11 @@
             m: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
             f: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
             n: (e) => `${e.name} se déplace à une vitese de ${e.outputValue}km/h.`,
-          }],
+          },{
+            m: (e) => `Après plusieurs pintes de blonde, ${e.name} décide de rentrer à pieds chez lui en titubant.`,
+            f: (e) => `Après plusieurs pintes de blonde, ${e.name} décide de rentrer à pieds chez elle en titubant.`,
+            n: (e) => `Après plusieurs pintes de blonde, ${e.name} décide de rentrer à pieds chez ellui en titubant.`,
+            }],
         }
       }
     },
@@ -1867,24 +1915,24 @@
       ],
       firstScene: [
         (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
-        (e)=>`Devant un bâtiment, un grand arbre donne de l'ombre à plusieurs bancs. Un couple rigole gentiment. Sur le banc d'à côté, ${e.name} lit <i>La mouette</i> De Tcheckov. L'attente se fait longue au fil du temps qui passe.`,
         (e)=>`La chambre de ${e.name}.`,
-        (e)=>`Le bureau de ${e.name}. Dans une pièce exigüe, un grand bureau se tient fier et droit. A gauche du bureau se trouve une bibliothèque. Elle est pleine de livres tous plus divers les uns des autres. ${e.name} entre et va choisir un livre.`,
         (e)=>`Une lampe éclair la pièce. ${e.name} entre.`,
         (e)=>`Plateau vide, les projecteurs s’allument, les protagonistes s’avancent sur la scène.`,
         (e)=>`Les lumières sont bleues, une ambiance pesente règne.`,
         (e)=>`Dans un grand bâtiment, où une sensation d'étouffement se fait ressentir. Les oiseaux chantent au loin. ${e.name} est en quête de sa liberté.`,
         (e)=>`Le jour est levé du côté de ${e.name}. Des tables disposées de manière structurée. On entend un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
-        (e)=>`Au milieu de la scène, un fauteuil. ${e.name} se démène pour retrouver une chaussette manquante. `,
         (e)=>`Une grande pièce, il est passé 9h. ${e.name} attend.`,
+        // (e)=>`Au milieu de la scène, un fauteuil. ${e.name} se démène pour retrouver une chaussette manquante. `,
         (e)=>`${e.name} s'avance d'un pas décidé et s'arrête au centre de la scène.`,
         (e)=>`Le réveil était difficile pour ${e.name}. Les yeux encore collés malgré l'heure avancée, ${e.name} se lance à la recherche d ${e.contact}.`,
-        (e)=>`Un salon. Une grande pièce carrée au centre de laquelle trône un canapé ancien. En face du canapé crépite un feu de cheminée allumé il y a maintenant quelques heures. ${e.name}, sur le canapé, laisse vagabonder son regard entre son téléphone et le feu.`,
-        (e)=>`Dans un grand parc se trouve un banc. Les oiseaux chantent autour de ${e.name}. Au loin, des cris d'enfants se font entrendre. Le soleil est haut dans le ciel mais l'air est doux. Une petite brise vient carresser les cheveux de ${e.name}.`,
-        (e)=>`La nuit tombe doucement sur ${e.name}. Une assiette à moitié vide trône sur la table aux côtés d'un verre de vin déjà bien entammé. La télévision dans la salle à côté ne produit qu'un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
-        (e)=>`Une gare, il est 10h30. ${e.name} attend.`,
-        (e)=>`Le réveil sonne alors que ${e.name} ouvre difficilement les yeux. Un fin rayon de soleil passe au travers des volets et vient éclairer un coin de la chambre. Les habits de la veille trainent encore à côté du lit. ${e.name} tente de profiter des ses derniers instants dans son lit puis se décide enfin à poser les pieds sur le sol.`,
-        (e)=>`Des arbres, ${e.name} marche.`,
+        // (e)=>`Un salon. Une grande pièce carrée au centre de laquelle trône un canapé ancien. En face du canapé crépite un feu de cheminée allumé il y a maintenant quelques heures. ${e.name}, sur le canapé, laisse vagabonder son regard entre son téléphone et le feu.`,
+        // (e)=>`Dans un grand parc se trouve un banc. Les oiseaux chantent autour de ${e.name}. Au loin, des cris d'enfants se font entrendre. Le soleil est haut dans le ciel mais l'air est doux. Une petite brise vient carresser les cheveux de ${e.name}.`,
+        // (e)=>`La nuit tombe doucement sur ${e.name}. Une assiette à moitié vide trône sur la table aux côtés d'un verre de vin déjà bien entammé. La télévision dans la salle à côté ne produit qu'un bourdonnement indistinct. Le bruit ne semble pas déranger ${e.name}.`,
+        // (e)=>`Une gare, il est 10h30. ${e.name} attend.`,
+        // (e)=>`Le réveil sonne alors que ${e.name} ouvre difficilement les yeux. Un fin rayon de soleil passe au travers des volets et vient éclairer un coin de la chambre. Les habits de la veille trainent encore à côté du lit. ${e.name} tente de profiter des ses derniers instants dans son lit puis se décide enfin à poser les pieds sur le sol.`,
+        // (e)=>`Des arbres, ${e.name} marche.`,
+        // (e)=>`Le bureau de ${e.name}. Dans une pièce exigüe, un grand bureau se tient fier et droit. A gauche du bureau se trouve une bibliothèque. Elle est pleine de livres tous plus divers les uns des autres. ${e.name} entre et va choisir un livre.`,
+        // (e)=>`Devant un bâtiment, un grand arbre donne de l'ombre à plusieurs bancs. Un couple rigole gentiment. Sur le banc d'à côté, ${e.name} lit <i>La mouette</i> De Tcheckov. L'attente se fait longue au fil du temps qui passe.`,
       ]
   }
 

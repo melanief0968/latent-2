@@ -307,7 +307,7 @@ export default {
   top: 0;
   left: 0;
   width: calc(100% * 2);
-  height: 80%;
+  height: 85%;
   columns: 2;
   column-gap: 0;
   column-width: 100%;
