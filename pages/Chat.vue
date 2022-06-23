@@ -830,7 +830,7 @@ export default {
         RESULT.result = "positive";
         RESULT.outputValue = "quelques instants";
       } else if (timeBetweenMessages <= 9500 && timeBetweenMessages >= 1001) {
-        console.log("cétait entre 1 et 3 sec");
+
         RESULT.result = "positive";
         RESULT.outputValue = TIME;
       } else if (timeBetweenMessages >= 1000 * 60 * 60) {
@@ -932,7 +932,7 @@ export default {
         }
         if (output.result == "") {
           shuffledArr.shift();
-          console.log(shuffledArr);
+          // console.log(shuffledArr);
           _counter++;
           return this.getResult(shuffledArr, level, _case, _counter);
         } else {
@@ -1020,7 +1020,7 @@ export default {
       if(this.getOtherUser() != GUIDE_BOT_ID){
                  console.log("this is not bot");
         if (this.cityHasChanged == true) {
-          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"|| this.getTimelaps().min=="11"|| this.getTimelaps().min=="14"|| this.getTimelaps().min=="17"|| this.getTimelaps().min=="21"|| this.getTimelaps().min=="57"|| this.getTimelaps().min=="59"|| this.getTimelaps().min=="00"){
+          if (this.getTimelaps().min=="03" || this.getTimelaps().min=="05" || this.getTimelaps().min=="06" || this.getTimelaps().min=="08" || this.getTimelaps().min=="12"|| this.getTimelaps().min=="11"|| this.getTimelaps().min=="14"|| this.getTimelaps().min=="17"|| this.getTimelaps().min=="21"|| this.getTimelaps().min=="57"|| this.getTimelaps().min=="59"|| this.getTimelaps().min=="00"){
             console.log("THERE IS TIME FOR CITY")
           this.sentTime = this.getTime();
           console.log("city changed")
@@ -1190,7 +1190,7 @@ export default {
       console.log(value);
       console.log("CITY HAS CHANGED");
       this.city = this.$getters.currentCity(value);
-      // console.log(this.city)
+      console.log(this.city)
       this.setNewCity();
     },
     "$state.currentLocation"(value, oldValue) {

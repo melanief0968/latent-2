@@ -55,7 +55,7 @@ function onPose(event) {
 }
 
 Bus.$on("location:citychange", (event) => {
-  // console.log("Current City: ", event);
+  console.log("Current City: ", event);
   actions.setUserCity(event);
 });
 

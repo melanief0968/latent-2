@@ -73,6 +73,7 @@ export default {
         }
       });
       //   console.log(this.username, this.password);
+      console.log(this.$state);
     },
     // noDisplay(){
     //   if(this.messageDiv == true){

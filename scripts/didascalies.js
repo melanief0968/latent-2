@@ -560,9 +560,9 @@
             f: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par cette chaleur ambiante qui fait suer ses mains ?`,
             n: (e) => `${e.name} semble n’apporter que peu d’importance à la syntaxe de sa phrase, est-ce par cette chaleur ambiante qui fait suer ses mains ?`,
           },{
-            m: (e) => `${e.name} envoie son texte d’une traite, sans presqu’aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
-            f: (e) => `${e.name} envoie son texte d’une traite, sans presqu’aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
-            n: (e) => `${e.name} envoie son texte d’une traite, sans presqu’aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
+            m: (e) => `${e.name} envoie son texte d’une traite, sans presque aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
+            f: (e) => `${e.name} envoie son texte d’une traite, sans presque aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
+            n: (e) => `${e.name} envoie son texte d’une traite, sans presque aucune correction, sa coupe de cheveux lui donne probablement de l’assurance.`,
           },{
             m: (e) => `Le peu d’erreurs commises par ${e.name} laissent transparaître une précision minutieuse, une bonne nuit de sommeil est toujours réparatrice.`,
             f: (e) => `Le peu d’erreurs commises par ${e.name} laissent transparaître une précision minutieuse, une bonne nuit de sommeil est toujours réparatrice.`,
@@ -676,6 +676,10 @@
             f: (e) => `${e.name} a finalement réparé son écran et peu à nouveau s'exprimer de manière exacte.`,
             n: (e) => `${e.name} a finalement réparé son écran et peu à nouveau s'exprimer de manière exacte.`,
           },{
+            m: (e) => `L'excitation se fait ressentir chez ${e.name}. Il montre une habileté sans faille.`,
+            f: (e) => `L'excitation se fait ressentir chez ${e.name}. Elle montre une habileté sans faille.`,
+            n: (e) => `L'excitation se fait ressentir chez ${e.name}. Iel montre une habileté sans faille.`,
+          },{
             m: (e) => `${e.name} paraît concentré, il est sûrement en train de réfléchir au sens profond de la relation qu'il entretient avec ${e.contact}.`,
             f: (e) => `${e.name} paraît concentrée, elle est sûrement en train de réfléchir au sens profond de la relation qu'elle entretient avec ${e.contact}.`,
             n: (e) => `${e.name} paraît concentréx, iel est sûrement en train de réfléchir au sens profond de la relation qu'iel entretient avec ${e.contact}.`,
@@ -714,7 +718,15 @@
             m: (e) => `Une fois son message envoyé, ${e.name} a soudainement besoin de s'aérer l'esprit.`,
             f: (e) => `Une fois son message envoyé, ${e.name} a soudainement besoin de s'aérer l'esprit.`,
             n: (e) => `Une fois son message envoyé, ${e.name} a soudainement besoin de s'aérer l'esprit.`,
-            }],
+            },{
+            m: (e) => `${e.name} semble fatigué et se montre indécis.`,
+            f: (e) => `${e.name} semble fatigué et se montre indécise.`,
+            n: (e) => `${e.name} semble fatigué et se montre indécisx.`,
+            },{
+            m: (e) => `L'excitation se fait ressentir chez ${e.name}. Il n'est pas capable de s'exprimer sans bafouiller.`,
+            f: (e) => `L'excitation se fait ressentir chez ${e.name}. Il n'est pas capable de s'exprimer sans bafouiller.`,
+            n: (e) => `L'excitation se fait ressentir chez ${e.name}. Il n'est pas capable de s'exprimer sans bafouiller.`,
+          }],
           case4: [{
             m: (e) => `to do`,
             f: (e) => `to do`,
