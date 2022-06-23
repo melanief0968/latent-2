@@ -522,6 +522,14 @@
             m: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
             f: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
             n: (e) => `Après avoir enfin trouvé ses mots, ${e.name} trouve le courage de s'exprimer.`,
+          },{
+            m: (e) => `${e.name} est prudent dans le choix de ses mots.`,
+            f: (e) => `${e.name} est prudent dans le choix de ses mots.`,
+            n: (e) => `${e.name} est prudent dans le choix de ses mots.`,
+          },{
+            m: (e) => `${e.name} balbutie avant d'enfin s'exprimer.`,
+            f: (e) => `${e.name} balbutie avant d'enfin s'exprimer.`,
+            n: (e) => `${e.name} balbutie avant d'enfin s'exprimer.`,
           }],
           case4: [ {
             m: (e) => `to do`,
@@ -1228,6 +1236,10 @@
             m: (e) => `${e.name} a les mains qui tremblent.`,
             f: (e) => `${e.name} a les mains qui tremblent.`,
             n: (e) => `${e.name} a les mains qui tremblent.`,
+          },{
+            m: (e) => `L'excès de caféine fait trembler les mains de ${e.name}.`,
+            f: (e) => `L'excès de caféine fait trembler les mains de ${e.name}.`,
+            n: (e) => `L'excès de caféine fait trembler les mains de ${e.name}.`,
           },{
             m: (e) => `Les doigts suintant par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
             f: (e) => `Les doigts suintant par la chaleur ambiante, ${e.name} tente de d’écrire au plus vite, non sans difficultés.`,
