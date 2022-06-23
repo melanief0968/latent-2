@@ -1646,9 +1646,9 @@
             f: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
             n: (e) => `Par ce jour ordinaire, ${e.name} semble prendre l’habitude d’écrire à ${e.contact}.`,
           },{
-            m: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
-            f: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
-            n: (e) => `À ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            m: (e) => `En ce ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            f: (e) => `En ce ${e.outputValue} ${e.name} se rend sur l'échange.`,
+            n: (e) => `En ce ${e.outputValue} ${e.name} se rend sur l'échange.`,
           },{
             m: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
             f: (e) => `En ce ${e.outputValue}, ${e.name} vient guigner du côté de ${e.contact}.`,
