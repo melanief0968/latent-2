@@ -7,7 +7,6 @@
       :title="itemTitle(conversation)"
       :subtitle="setSubtitle(conversation)"
       :key="id"
-      :unread="checkReadMessages(conversation.messages, id)"
       @click.native="onItemClick(id)"
     >
     </ListItem>
@@ -17,7 +16,7 @@
 </template>
 <script>
 import ListItem from "@/components/ListItem.vue";
-
+import * as fb from "@/scripts/firebase";
 
 export default {
   components: {
@@ -39,7 +38,6 @@ export default {
 
   computed: {
     sortedConversations() {
-      console.log(this.conversations)
       return this.conversations
         .map((entry, index) => {
           const messages = Object.keys(entry.conversation.messages || {});
@@ -66,109 +64,79 @@ export default {
   watch: {
     userProps(value) {
       // console.log("BOI", value.conversations);
-      if (!value.conversations) return;
+      // if (!value.conversations) return;
 
-      // console.log("New conv", Object.keys(value.conversations).length);
-
-      const oldConversations = this.conversations;
-
-      this.conversations = Object.values(value.conversations).map(
+      this.conversations = Object.values(value).map(
         (conversationId) => {
           const conversation = this.$getters.listenConversation(conversationId);
-
-          // console.log(JSON.stringify(conversation))
-          // let lastMessage = this.lastMessageData(conversation.messag);
-
-          // console.log(conversation)
-          // console.log(lastMessage)
-          // lastMessage.sort(function (a, b) {
-          // return parseInt(b[0], 10) - parseInt(a[0], 10);
-          // });
 
           return { conversation, id: conversationId };
         }
       );
 
-      // console.log(this.conversations);
-      // .sort((a, b) => {
-      //   return parseInt(b.lastMessageTime) - parseInt(a.lastMessageTime);
-      // });
     },
   },
 
   methods: {
-    checkReadMessages(conversationMessages, id) {
-      // const userProps = this.$getters.user(currentUserID);
-      // console.log(this.userProps);
-      const unreadmessages = Object.keys(
-        this.userProps.unreadchats?.[id] || {}
-      );
-      // console.log(this.userProps.unreadchats);
-      const messages = Object.keys(conversationMessages || {});
+    // checkReadMessages(conversationMessages, id) {
+    //   // const userProps = this.$getters.user(currentUserID);
+    //   // console.log(this.userProps);
+    //   const unreadmessages = Object.keys(
+    //     this.userProps.unreadchats?.[id] || {}
+    //   );
+    //   // console.log(this.userProps.unreadchats);
+    //   const messages = Object.keys(conversationMessages || {});
 
-      const unread = unreadmessages.some((messageId) => {
-        return messages.includes(messageId);
-      });
+    //   const unread = unreadmessages.some((messageId) => {
+    //     return messages.includes(messageId);
+    //   });
 
-      // console.log(unread);
 
-      // console.log('updating', conversation);
-      // console.log(this.userProps.unreadmessages);
-      return unread;
-    },
-    conversationList() {
-      const currentUserID = this.$getters.currentUserID();
-      this.userProps = this.$getters.listenUser(currentUserID);
-      // this.userProps = this.$getters.user(currentUserID);
-    },
-    // lastMessageData(conversation) {
-    //   // const lastMessages = [];
-    //   if (conversation.messages) {
-    //     // let messagesArray = Object.keys(conversation.messages);
-    //     let lastMessage = messagesArray[messagesArray.length - 1];
-    //     lastMessages.push(lastMessage);
-    //     console.log(lastMessages);
-    //     lastMessages.sort(function (a, b) {
-    //       return parseInt(b[0], 10) - parseInt(a[0], 10);
-    //     });
-    //     // console.log(lastMessages)
-    //   }
-    //   // console.log(lastMessage)
-    //   return lastMessages;
+    //   return unread;
     // },
+    conversationList() {
+      fb.listen(`conversations`, value=>{
+        let chatIds = Object.keys(value)
+        this.userProps = chatIds
+      })
+
+    },
+
     onItemClick(chatId) {
       this.$router.push({
-        path: "/chat",
+        path: "/web",
         query: {
           // chatId,
         },
       });
       this.$actions.setCurrentChatId(chatId);
     },
-    randomBoolean() {
-      return Boolean(Math.round(Math.random()));
-    },
 
     itemTitlePerso(conversation) {
       if (!conversation.users) return;
-
       const otherUserID = Object.values(conversation.users).find((userID) => {
         return userID !== this.$getters.currentUserID();
       });
-      return this.$getters.listenUser(otherUserID).name;
+      const UserID = Object.values(conversation.users).find((otherID) => {
+        return otherID !== otherUserID;
+      });
+  
+      const name1 = this.$getters.listenUser(otherUserID).name
+      const name2 = this.$getters.listenUser(UserID).name
+      const names = {name1, name2}
+      return names;
 
-      // $getters.user(conversation.users);
     },
+ 
     itemTitle(conversation) {
+
       if (!conversation.users) return;
       const TITLE = conversation.chatName;
       return TITLE;
       // $getters.user(conversation.users);
     },
     setSubtitle(conversation) {
-      // if (!conversation.sceneStage) return;
-      // if (!conversation.actStage) return;
-      // console.log(conversation.sceneStage, conversation.actStage)
+
       let scenes = [
         "scène I",
         "scène II",
@@ -195,8 +163,8 @@ export default {
       ];
       let act = acts[conversation.actStage];
       let scene = scenes[conversation.sceneStage];
-      let otherUser = this.itemTitlePerso(conversation);
-      let user = this.$getters.currentUserName();
+      let otherUser = this.itemTitlePerso(conversation).name1;
+      let user = this.itemTitlePerso(conversation).name2;
       const subtitle = `${act}, ${scene}, ${otherUser} et ${user}`;
       return subtitle;
     },

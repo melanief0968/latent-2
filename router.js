@@ -7,6 +7,8 @@ import Chat from "./pages/Chat.vue";
 import Index from "./pages/Index.vue";
 import Book from "./pages/Book.vue";
 import Account from "./pages/Account.vue";
+import AllConversations from "./pages/AllConversations.vue";
+import WebVersion from "./pages/WebVersion.vue";
 
 const router = new Router({
   mode: "history",
@@ -22,6 +24,8 @@ const router = new Router({
     { path: "/index", name: "Index", component: Index },
     { path: "/book", name: "Book", component: Book },
     { path: "/account", name: "Account", component: Account },
+    { path: "/allconversations", name: "AllConversations", component: AllConversations },
+    { path: "/web", name: "WebVersion", component: WebVersion },
   ],
 });
 

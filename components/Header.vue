@@ -4,6 +4,7 @@
         <GoBack v-if="route != 'Contacts'"></GoBack>
         <h1 v-if="route === 'Index'">Index</h1>
         <h1 class="latent italic" v-if="route === 'Contacts'">LATENT*</h1>
+        <h1 class="latent italic" v-if="route === 'AllConversations'">ARCHIVES</h1>
         <h1 v-if="route === 'Account'">Profil</h1>
         <!-- <router-link class="buttonIcone" v-if="route === 'Contacts'" to="/newcontact">
           <img class="icone" src="/img/add.png">

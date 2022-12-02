@@ -3,6 +3,7 @@
     <!--  'leftAlign': route ==='Book' -->
     <div class="sentTime italic">{{ sentTime }}</div>
     <div class="messageName" v-if="route === 'Book'">{{ user.name }} –</div>
+    <div class="messageName" v-if="route === 'WebVersion'">{{ user.name }} –</div>
     <div :class="switchDisplay" v-if="message" v-html="text"></div>
     <div>{{ $state.test }}</div>
   </div>
@@ -38,6 +39,9 @@ export default {
       if (this.$route.name === "Book") {
         return this.message.bookText;
       }
+      if (this.$route.name === "WebVersion") {
+        return this.message.bookText;
+      }
 
       // return this.message.text.replace(/[•|\*]/g, (char) => {
       //   if (char === "•") return '<span class="elapse">•</span>';
@@ -61,7 +65,7 @@ export default {
 
     },
     switchDisplay() {
-      if (this.$route.name === "Book") {
+      if (this.$route.name === "Book" || this.$route.name === "WebVersion") {
         return {
           sentence: (this.isBook = true),
           message: (this.isChat = false),
@@ -79,6 +83,8 @@ export default {
     changeDisplay() {
       if (this.$route.name === "Book") {
         this.isBook = true;
+      } else if (this.$route.name === "WebVersion"){
+                this.isBook = true;
       } else {
       }
     },

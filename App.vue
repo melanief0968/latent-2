@@ -16,6 +16,7 @@
       </div>
     <!-- <Header v-bind:pageTitle="pageTitle"></Header> -->
     <Header v-if="route === 'Contacts'"></Header>
+    <Header v-if="route === 'AllConversations'"></Header>
     <Header v-if="route === 'NewContact'"></Header>
     <Header v-if="route === 'Index'"></Header>
     <Header v-if="route === 'Account'"></Header>

@@ -40,6 +40,7 @@ export default {
       return height;
     },
     onSubmit(ev) {
+
       fb.filterEntries("users", "username", this.username).then((results) => {
         if (results === null) {
           this.messageDiv = true
@@ -52,13 +53,21 @@ export default {
         const [userId, props] = firstResult;
 
         if (props.psw === this.password) {
-          // console.log("MATCH");
-          this.$router.push({
-            path: "/contacts",
-            query: {
-              // userId,
-            },
-          });
+          if(this.username != "Archive"){
+            this.$router.push({
+              path: "/contacts",
+              query: {
+                // userId,
+              },
+            });
+
+          }else if (this.username == "Archive"){
+              this.$router.push({
+              path: "/allconversations",
+              query: {
+              },
+            });
+          }
 
           // console.log(this.$state);
           this.$actions.setCurrentUserID(userId);

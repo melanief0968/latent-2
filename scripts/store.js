@@ -118,6 +118,7 @@ export const getters = {
 
     return state.users[id];
   },
+
   listenMessage(id) {
     const message = state.messages[id];
     if (!message) {
