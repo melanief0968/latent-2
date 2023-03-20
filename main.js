@@ -39,6 +39,7 @@ watchPos(onPose);
 
 document.addEventListener("visibilitychange", () => {
   // console.log(document.visibilityState);
+  //console.log(test sync vercel)
   if (document.visibilityState === "visible") {
     watchPos(onPose);
 
