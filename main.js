@@ -6,7 +6,7 @@ import Vue from "vue";
 import VueChatScroll from "vue-chat-scroll";
 //doc https://www.npmjs.com/package/vue2-touch-events
 import Vue2TouchEvents from "vue2-touch-events";
-
+import moment from 'moment';
 import ToggleButton from "vue-js-toggle-button";
 
 import * as FIREBASE from "./scripts/firebase.js";
@@ -77,7 +77,7 @@ Bus.$on("location:citychange", (event) => {
 
 
 
-
+console.log(moment().format());
 console.log(state);
 
 if (!state.isLoggedIn) {
